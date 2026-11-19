@@ -3,20 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <title>Unsupervised phenotyping · MIFflow</title>
 <link rel="stylesheet" href="../../../guide.css">
+<script defer src="../../../guide.js"></script>
 </head>
 <body>
 <a class="skip" href="#guide">Skip to guide</a>
-<header class="site-bar">
-  <nav class="site-width" aria-label="Documentation">
-    <a class="brand" href="../../../index.html">MIFflow</a>
-    <a href="../../../index.html#analysis-stages">Analysis stages</a>
-    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/phenotyping/unsupervised.md">View source</a>
-  </nav>
-</header>
-<main id="guide" class="site-width">
+<aside class="library">
+  <header class="masthead">
+    <a class="brand" href="../../../index.html">MIFflow <span>Documentation</span></a>
+    <button class="menu" type="button" aria-controls="contents" aria-expanded="false">Guides</button>
+  </header>
+  <nav id="contents" aria-label="Guide library"><a href="../../../index.html">Overview</a>
+<h2>Getting started</h2>
+<details><summary>Installation</summary><div>
+<a href="../../../docs/stages/installation-and-build/software.html">Software setup</a>
+<a href="../../../docs/stages/installation-and-build/building-and-releasing.html">Build and release MIFflow</a>
+<a href="../../../docs/stages/installation-and-build/native-extension.html">The MIFflow extension for QuPath</a>
+</div></details>
+<details><summary>Analysis setup</summary><div>
+<a href="../../../docs/stages/setup/analysis.html">Create an analysis and add samples</a>
+<a href="../../../docs/stages/setup/configuration.html">Analysis and software settings</a>
+<a href="../../../docs/stages/setup/analysis-folder.html">Analysis-folder contents</a>
+<a href="../../../docs/stages/setup/command-line.html">Command-line guide</a>
+<a href="../../../docs/stages/setup/references.html">File-format and implementation references</a>
+<a href="../../../docs/stages/setup/computing.html">Local and cluster computing</a>
+<a href="../../../docs/stages/setup/memory-and-threads.html">Memory during processing</a>
+<a href="../../../docs/stages/setup/python-api.html">Python interfaces</a>
+<a href="../../../docs/stages/setup/source-layout.html">Source layout</a>
+</div></details>
+<details><summary>Running an analysis</summary><div>
+<a href="../../../docs/stages/run/index.html">Run, review and continue an analysis</a>
+<a href="../../../docs/stages/run/saving-and-recovery.html">Analysis files, version selection and recovery</a>
+<a href="../../../docs/stages/run/execution.html">Execution, scheduling and result reuse</a>
+<a href="../../../docs/stages/run/program-execution.html">Python, Groovy and Java during processing</a>
+<a href="../../../docs/stages/run/qupath-review.html">Review annotations and predictions in QuPath</a>
+<a href="../../../docs/stages/run/interactive-viewing.html">Viewing images and cells in QuPath</a>
+</div></details>
+<h2>Analysis stages</h2>
+<details><summary>Images and channels</summary><div>
+<a href="../../../docs/stages/images/index.html">Images and channel assignments</a>
+<a href="../../../docs/stages/images/processing.html">Image processing</a>
+<a href="../../../docs/stages/images/storage.html">Multichannel image storage and regional access</a>
+</div></details>
+<a href="../../../docs/stages/cyclic-if-methods/index.html">Cyclic fluorescence</a>
+<details><summary>Spectral unmixing</summary><div>
+<a href="../../../docs/stages/unmixing/index.html">Spectral unmixing and component preparation</a>
+<a href="../../../docs/stages/unmixing/library-from-images.html">Creating a library from images</a>
+</div></details>
+<a href="../../../docs/stages/tissue/index.html">Tissue detection</a>
+<a href="../../../docs/stages/alignment/index.html">Paired-image alignment</a>
+<details><summary>Tissue classification</summary><div>
+<a href="../../../docs/stages/tissue-classification/index.html">Tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/kronos.html">KRONOS tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/model-execution.html">Model execution and Java–Python interfaces</a>
+</div></details>
+<details><summary>Cell segmentation</summary><div>
+<a href="../../../docs/stages/cells/index.html">Cell segmentation</a>
+<a href="../../../docs/stages/cells/processing.html">Segmentation processing and measurements</a>
+</div></details>
+<a href="../../../docs/stages/cell-measurements/index.html">Cell measurements</a>
+<details open><summary>Phenotyping</summary><div>
+<a href="../../../docs/stages/phenotyping/index.html">Cell phenotyping</a>
+<a href="../../../docs/stages/phenotyping/marker-rules.html">Marker thresholds and phenotype rules</a>
+<a href="../../../docs/stages/phenotyping/nimbus.html">Nimbus</a>
+<a href="../../../docs/stages/phenotyping/supervised.html">Supervised cell phenotypes</a>
+<a href="../../../docs/stages/phenotyping/unsupervised.html" aria-current="page">Unsupervised phenotyping</a>
+</div></details>
+<a href="../../../docs/stages/secondary-structures/index.html">Secondary structures</a>
+<details><summary>Results and export</summary><div>
+<a href="../../../docs/stages/results/index.html">Results and export</a>
+<a href="../../../docs/stages/results/figures.html">Classifier, cell and structure summaries</a>
+</div></details>
+<h2>Reference</h2>
+<a href="../../../docs/stages/classifier-methods/index.html">Classifier methods</a>
+<details><summary>Data formats</summary><div>
+<a href="../../../docs/reference/data-formats.html">Saved image, model and cell data</a>
+<a href="../../../docs/reference/cell-storage.html">Cell datasets and spatial queries</a>
+</div></details>
+<details><summary>Example images</summary><div>
+<a href="../../../docs/data/public-image-sources.html">Public image sources</a>
+<a href="../../../docs/data/luca.html">LuCa example image</a>
+</div></details>
+<details><summary>Licences</summary><div>
+<a href="../../../docs/third-party/pcre2-license.html">PCRE2</a>
+<a href="../../../docs/third-party/md4c-license.html">MD4C</a>
+</div></details>
+<a href="../../../docs/troubleshooting.html">Troubleshooting</a></nav>
+</aside>
+<div class="reading-pane">
+  <header class="context">
+    <span class="location">Analysis stages / Phenotyping</span>
+    <div class="tools"><details class="outline"><summary>On this page</summary><nav aria-label="On this page"><a href="#choose-how-to-fit-slides">Choose how to fit slides</a><a href="#choose-the-clustering-method">Choose the clustering method</a><a href="#select-features-and-weights">Select features and weights</a><a href="#phenograph">PhenoGraph</a><a href="#flowsom">FlowSOM</a><a href="#interpret-groups">Interpret groups</a><a href="#name-merge-or-recluster-groups">Name, merge or recluster groups</a><a href="#accept-and-export">Accept and export</a></nav></details><a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/phenotyping/unsupervised.md">View source</a></div>
+  </header>
+  <main id="guide" class="site-width" tabindex="-1">
 <h1 id="unsupervised-phenotyping">Unsupervised phenotyping</h1>
 <p><a href="../../../index.html#analysis-stages">Analysis stages</a></p>
 <p><a id="user-guide-clustering"></a> <a id="user-guide-clustering--cluster-cells-and-assign-biological-labels"></a></p>
@@ -235,6 +316,7 @@ d(u,v)=\sqrt{\sum_j(c_{uj}-c_{vj})^2}.
 
 <hr />
 <p><strong>Continue:</strong> <a href="../secondary-structures/index.html">Secondary structures</a>.</p>
-</main>
+  </main>
+</div>
 </body>
 </html>

@@ -3,66 +3,120 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<title>Phenotyping methods and included cells · MIFflow</title>
+<meta name="color-scheme" content="dark">
+<title>Cell phenotyping · MIFflow</title>
 <link rel="stylesheet" href="../../../guide.css">
+<script defer src="../../../guide.js"></script>
 </head>
 <body>
 <a class="skip" href="#guide">Skip to guide</a>
-<header class="site-bar">
-  <nav class="site-width" aria-label="Documentation">
-    <a class="brand" href="../../../index.html">MIFflow</a>
-    <a href="../../../index.html#analysis-stages">Analysis stages</a>
-    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/phenotyping/index.md">View source</a>
-  </nav>
-</header>
-<main id="guide" class="site-width">
-<h1 id="phenotyping-methods-and-included-cells">Phenotyping methods and included cells</h1>
+<aside class="library">
+  <header class="masthead">
+    <a class="brand" href="../../../index.html">MIFflow <span>Documentation</span></a>
+    <button class="menu" type="button" aria-controls="contents" aria-expanded="false">Guides</button>
+  </header>
+  <nav id="contents" aria-label="Guide library"><a href="../../../index.html">Overview</a>
+<h2>Getting started</h2>
+<details><summary>Installation</summary><div>
+<a href="../../../docs/stages/installation-and-build/software.html">Software setup</a>
+<a href="../../../docs/stages/installation-and-build/building-and-releasing.html">Build and release MIFflow</a>
+<a href="../../../docs/stages/installation-and-build/native-extension.html">The MIFflow extension for QuPath</a>
+</div></details>
+<details><summary>Analysis setup</summary><div>
+<a href="../../../docs/stages/setup/analysis.html">Create an analysis and add samples</a>
+<a href="../../../docs/stages/setup/configuration.html">Analysis and software settings</a>
+<a href="../../../docs/stages/setup/analysis-folder.html">Analysis-folder contents</a>
+<a href="../../../docs/stages/setup/command-line.html">Command-line guide</a>
+<a href="../../../docs/stages/setup/references.html">File-format and implementation references</a>
+<a href="../../../docs/stages/setup/computing.html">Local and cluster computing</a>
+<a href="../../../docs/stages/setup/memory-and-threads.html">Memory during processing</a>
+<a href="../../../docs/stages/setup/python-api.html">Python interfaces</a>
+<a href="../../../docs/stages/setup/source-layout.html">Source layout</a>
+</div></details>
+<details><summary>Running an analysis</summary><div>
+<a href="../../../docs/stages/run/index.html">Run, review and continue an analysis</a>
+<a href="../../../docs/stages/run/saving-and-recovery.html">Analysis files, version selection and recovery</a>
+<a href="../../../docs/stages/run/execution.html">Execution, scheduling and result reuse</a>
+<a href="../../../docs/stages/run/program-execution.html">Python, Groovy and Java during processing</a>
+<a href="../../../docs/stages/run/qupath-review.html">Review annotations and predictions in QuPath</a>
+<a href="../../../docs/stages/run/interactive-viewing.html">Viewing images and cells in QuPath</a>
+</div></details>
+<h2>Analysis stages</h2>
+<details><summary>Images and channels</summary><div>
+<a href="../../../docs/stages/images/index.html">Images and channel assignments</a>
+<a href="../../../docs/stages/images/processing.html">Image processing</a>
+<a href="../../../docs/stages/images/storage.html">Multichannel image storage and regional access</a>
+</div></details>
+<a href="../../../docs/stages/cyclic-if-methods/index.html">Cyclic fluorescence</a>
+<details><summary>Spectral unmixing</summary><div>
+<a href="../../../docs/stages/unmixing/index.html">Spectral unmixing and component preparation</a>
+<a href="../../../docs/stages/unmixing/library-from-images.html">Creating a library from images</a>
+</div></details>
+<a href="../../../docs/stages/tissue/index.html">Tissue detection</a>
+<a href="../../../docs/stages/alignment/index.html">Paired-image alignment</a>
+<details><summary>Tissue classification</summary><div>
+<a href="../../../docs/stages/tissue-classification/index.html">Tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/kronos.html">KRONOS tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/model-execution.html">Model execution and Java–Python interfaces</a>
+</div></details>
+<details><summary>Cell segmentation</summary><div>
+<a href="../../../docs/stages/cells/index.html">Cell segmentation</a>
+<a href="../../../docs/stages/cells/processing.html">Segmentation processing and measurements</a>
+</div></details>
+<a href="../../../docs/stages/cell-measurements/index.html">Cell measurements</a>
+<details open><summary>Phenotyping</summary><div>
+<a href="../../../docs/stages/phenotyping/index.html" aria-current="page">Cell phenotyping</a>
+<a href="../../../docs/stages/phenotyping/marker-rules.html">Marker thresholds and phenotype rules</a>
+<a href="../../../docs/stages/phenotyping/nimbus.html">Nimbus</a>
+<a href="../../../docs/stages/phenotyping/supervised.html">Supervised cell phenotypes</a>
+<a href="../../../docs/stages/phenotyping/unsupervised.html">Unsupervised phenotyping</a>
+</div></details>
+<a href="../../../docs/stages/secondary-structures/index.html">Secondary structures</a>
+<details><summary>Results and export</summary><div>
+<a href="../../../docs/stages/results/index.html">Results and export</a>
+<a href="../../../docs/stages/results/figures.html">Classifier, cell and structure summaries</a>
+</div></details>
+<h2>Reference</h2>
+<a href="../../../docs/stages/classifier-methods/index.html">Classifier methods</a>
+<details><summary>Data formats</summary><div>
+<a href="../../../docs/reference/data-formats.html">Saved image, model and cell data</a>
+<a href="../../../docs/reference/cell-storage.html">Cell datasets and spatial queries</a>
+</div></details>
+<details><summary>Example images</summary><div>
+<a href="../../../docs/data/public-image-sources.html">Public image sources</a>
+<a href="../../../docs/data/luca.html">LuCa example image</a>
+</div></details>
+<details><summary>Licences</summary><div>
+<a href="../../../docs/third-party/pcre2-license.html">PCRE2</a>
+<a href="../../../docs/third-party/md4c-license.html">MD4C</a>
+</div></details>
+<a href="../../../docs/troubleshooting.html">Troubleshooting</a></nav>
+</aside>
+<div class="reading-pane">
+  <header class="context">
+    <span class="location">Analysis stages / Phenotyping</span>
+    <div class="tools"><details class="outline"><summary>On this page</summary><nav aria-label="On this page"><a href="#choose-a-phenotyping-method">Choose a phenotyping method</a><a href="#how-the-methods-use-cell-measurements-and-images">How the methods use cell measurements and images</a></nav></details><a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/phenotyping/index.md">View source</a></div>
+  </header>
+  <main id="guide" class="site-width" tabindex="-1">
+<h1 id="cell-phenotyping">Cell phenotyping</h1>
 <p><a href="../../../index.html#analysis-stages">Analysis stages</a></p>
-<p><a id="user-guide-cell-phenotyping"></a></p>
-<p><a id="user-guide-cell-phenotyping--choose-a-cell-phenotyping-method"></a></p>
-<p><strong>Open:</strong> <strong>Run → Cell phenotyping → Open review</strong>.</p>
-<p>Cell phenotyping assigns biological labels to segmented cells using their measurements or marker images. Marker rules define phenotypes through combinations of marker states, supervised classifiers learn from labelled reference cells, and unsupervised methods group cells by their measurements for subsequent naming.</p>
-<p><strong>On this page:</strong> <a href="#select-cells-to-phenotype">Select cells</a> · <a href="#phenotyping-methods">Choose a method</a> · <a href="#choose-the-saved-measurements-to-use">Choose measurements</a>.</p>
-<p><a id="user-guide-cell-phenotyping--select-the-numerical-inputs"></a> <a id="select-the-numerical-inputs"></a> <a id="select-cells-and-measurements"></a> <a id="user-guide-cell-phenotyping--choose-cells-for-marker-phenotyping"></a></p>
-<h2 id="select-cells-to-phenotype">Select cells to phenotype</h2>
-<p>Cell phenotyping initially includes all segmented cells from the accepted analysis regions. To analyse only particular primary tissue classes, enable <strong>Restrict to selected regions</strong> and select the classes to include.</p>
-<p>We include cells whose centres lie inside a selected region or on its boundary, counting each cell once even where regions overlap. Other cells remain <strong>Not phenotyped</strong>. When comparing phenotype frequencies across images, check that each image includes the intended regions. An image with no regions of the selected classes contributes no cells to the comparison.</p>
-<p>The saved measurements record which tissue and primary tissue regions contain each cell. After changing those regions, recalculate the affected measurements before using the new regions to select cells. <a href="../run/index.html#change-a-completed-decision">Changing a completed step</a> explains how to review the affected results.</p>
+<p><a id="phenotyping-methods-and-included-cells"></a> <a id="user-guide-cell-phenotyping"></a> <a id="user-guide-cell-phenotyping--choose-a-cell-phenotyping-method"></a></p>
+<p>Cell phenotyping assigns biological labels to segmented cells from their staining and, for some classifiers, their shape. Open <strong>Run → Cell phenotyping → Open review</strong> to choose a method.</p>
 <p><a id="user-guide-cell-phenotyping--follow-the-selected-route"></a> <a id="phenotyping-methods"></a> <a id="follow-the-selected-route"></a></p>
 <h2 id="choose-a-phenotyping-method">Choose a phenotyping method</h2>
-<p>Choose <strong>Marker rules</strong>, <strong>Supervised classification</strong> or <strong>Unsupervised phenotyping</strong> according to how you will define the phenotypes.</p>
-<div class="table-scroll"><table>
-<thead>
-<tr class="header">
-<th>Method</th>
-<th>Inputs and decisions</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="marker-rules.html#user-guide-marker-rules">Marker thresholds and rules</a></td>
-<td>Set a positive/negative decision for each marker, then combine markers into phenotype rules.</td>
-</tr>
-<tr class="even">
-<td><a href="supervised.html#user-guide-supervised-phenotyping">Supervised cell phenotypes</a></td>
-<td>Label reference cells and fit RF, SVM or LR using their measurements or KRONOS image embeddings.</td>
-</tr>
-<tr class="odd">
-<td><a href="unsupervised.html#user-guide-clustering">Unsupervised phenotyping</a></td>
-<td>Group cells with similar marker measurements, then assign phenotype names from their profiles and staining.</td>
-</tr>
-</tbody>
-</table></div>
-<p><a id="choose-the-saved-measurements-to-use"></a></p>
-<h2 id="choose-the-phenotyping-inputs">Choose the phenotyping inputs</h2>
-<p>The selected method determines whether phenotyping uses saved <strong>Cell measurements</strong> or features calculated from <strong>cell images and outlines</strong>.</p>
-<p>Marker thresholds and unsupervised phenotyping use saved <strong>Mean</strong> or <strong>Median</strong> marker intensities. Supervised RF, SVM and LR classifiers can also use the other saved intensity statistics and cell or nuclear shape measurements. To use a measurement that has not been calculated, return to <a href="../cell-measurements/index.html#choose-cell-measurements">Cell measurements</a>, revise its choices and calculate the additional result before continuing phenotyping.</p>
-<p>The image-based routes use the staining around each segmented cell. For supervised classification, <strong>KRONOS</strong> encodes the masked marker images into features that the classifier can learn from the labelled reference cells. For marker rules, <strong>Nimbus</strong> uses the marker image and cell mask to estimate an expression score. Neither model needs saved intensity or shape measurements to calculate its output. For Nimbus review, we also retrieve the saved Mean or Median to <a href="marker-rules.html#review-an-intensity-distillation">compare the scores with cell intensity and optionally fit an intensity gate</a>.</p>
-<p><a href="../../assets/figures/phenotyping-routes.svg"><img src="../../assets/figures/phenotyping-routes.svg" alt="Selected cells form one measurement matrix. Marker columns feed rules, supervised classification or unsupervised grouping; shape columns also feed supervised classification. Separate image paths supply Nimbus scores or KRONOS embeddings. One chosen route assigns phenotypes to the same cell IDs." width="650"></a></p>
-<p><em>Schematic of the shared cell-by-measurement matrix, its three phenotyping routes and the Nimbus and KRONOS image inputs. One chosen route assigns phenotypes to the same cell IDs.</em></p>
+<p>Choose the method according to what you already know about the phenotypes in your tissue.</p>
+<p><strong>Marker rules</strong> suit phenotypes defined by known combinations of positive and negative markers. Set the threshold for each marker, then specify which combination identifies each phenotype. The <a href="marker-rules.html">marker thresholds and rules guide</a> explains how to review the cutoffs against staining in tissue and how to order rules when a cell matches more than one rule.</p>
+<p><strong>Supervised classification</strong> suits phenotypes you can recognise in individual cells. Label reference cells for each phenotype in QuPath and use them to train a classifier to predict the labels of other cells. The <a href="supervised.html">supervised phenotyping guide</a> explains how to select references and assess the predictions on held-out subjects.</p>
+<p><strong>Unsupervised phenotyping</strong> suits analyses in which you want to discover which staining patterns recur across cells. PhenoGraph or FlowSOM groups cells with similar marker profiles. You then inspect each group’s staining to decide whether it represents a distinct phenotype. The <a href="unsupervised.html">unsupervised phenotyping guide</a> explains how to compare groups in tissue and when to combine or subdivide them.</p>
+<p><a id="choose-the-phenotyping-inputs"></a> <a id="choose-the-saved-measurements-to-use"></a></p>
+<h2 id="how-the-methods-use-cell-measurements-and-images">How the methods use cell measurements and images</h2>
+<p><strong>Saved cell measurements.</strong> Marker thresholds and unsupervised phenotyping use the mean or median marker intensity measured within the selected part of each cell, such as its nucleus or whole-cell outline. Supervised classifiers can also use other intensity statistics and measurements of cell or nuclear shape. If a measurement you want to use is missing, calculate it in <a href="../cell-measurements/index.html#choose-cell-measurements">Cell measurements</a> before fitting.</p>
+<p><strong>Features from cell images and outlines.</strong> For marker rules, Nimbus uses the marker image and segmented outlines to estimate an expression score for each cell. You can threshold this score directly or <a href="marker-rules.html#review-an-intensity-distillation">fit an intensity threshold to the reviewed Nimbus decisions</a>. For supervised classification, KRONOS encodes the staining within each reference cell’s outline across the selected channels. The classifier learns to predict phenotype labels from these features and uses the same encoder for the cells it will classify.</p>
+<p><a href="../../assets/figures/phenotyping-routes.svg"><img src="../../assets/figures/phenotyping-routes.svg" alt="Six cells with measured CD3, CD20 and CD68 staining, area and circularity. Arrows connect the measurements and image inputs to the three phenotyping methods and the resulting cell labels." width="650"></a></p>
+<p><em>Each row contains the measurements for one cell. Read across a row to see the marker intensities used to define a rule or group cells by their staining. A supervised classifier can also use the shape measurements in the last two columns. The side arrows show where image-derived inputs enter the analysis. Nimbus supplies marker scores for rules, and KRONOS supplies features for the classifier. The cell IDs link the phenotype assignments at the bottom back to the original rows.</em></p>
 <hr />
 <p><strong>Next:</strong> <a href="../secondary-structures/index.html">Secondary structures</a>.</p>
-</main>
+  </main>
+</div>
 </body>
 </html>

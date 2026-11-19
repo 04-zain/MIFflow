@@ -3,20 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <title>Classifier methods · MIFflow</title>
 <link rel="stylesheet" href="../../../guide.css">
+<script defer src="../../../guide.js"></script>
 </head>
 <body>
 <a class="skip" href="#guide">Skip to guide</a>
-<header class="site-bar">
-  <nav class="site-width" aria-label="Documentation">
-    <a class="brand" href="../../../index.html">MIFflow</a>
-    <a href="../../../index.html#analysis-stages">Analysis stages</a>
-    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/classifier-methods/index.md">View source</a>
-  </nav>
-</header>
-<main id="guide" class="site-width">
+<aside class="library">
+  <header class="masthead">
+    <a class="brand" href="../../../index.html">MIFflow <span>Documentation</span></a>
+    <button class="menu" type="button" aria-controls="contents" aria-expanded="false">Guides</button>
+  </header>
+  <nav id="contents" aria-label="Guide library"><a href="../../../index.html">Overview</a>
+<h2>Getting started</h2>
+<details><summary>Installation</summary><div>
+<a href="../../../docs/stages/installation-and-build/software.html">Software setup</a>
+<a href="../../../docs/stages/installation-and-build/building-and-releasing.html">Build and release MIFflow</a>
+<a href="../../../docs/stages/installation-and-build/native-extension.html">The MIFflow extension for QuPath</a>
+</div></details>
+<details><summary>Analysis setup</summary><div>
+<a href="../../../docs/stages/setup/analysis.html">Create an analysis and add samples</a>
+<a href="../../../docs/stages/setup/configuration.html">Analysis and software settings</a>
+<a href="../../../docs/stages/setup/analysis-folder.html">Analysis-folder contents</a>
+<a href="../../../docs/stages/setup/command-line.html">Command-line guide</a>
+<a href="../../../docs/stages/setup/references.html">File-format and implementation references</a>
+<a href="../../../docs/stages/setup/computing.html">Local and cluster computing</a>
+<a href="../../../docs/stages/setup/memory-and-threads.html">Memory during processing</a>
+<a href="../../../docs/stages/setup/python-api.html">Python interfaces</a>
+<a href="../../../docs/stages/setup/source-layout.html">Source layout</a>
+</div></details>
+<details><summary>Running an analysis</summary><div>
+<a href="../../../docs/stages/run/index.html">Run, review and continue an analysis</a>
+<a href="../../../docs/stages/run/saving-and-recovery.html">Analysis files, version selection and recovery</a>
+<a href="../../../docs/stages/run/execution.html">Execution, scheduling and result reuse</a>
+<a href="../../../docs/stages/run/program-execution.html">Python, Groovy and Java during processing</a>
+<a href="../../../docs/stages/run/qupath-review.html">Review annotations and predictions in QuPath</a>
+<a href="../../../docs/stages/run/interactive-viewing.html">Viewing images and cells in QuPath</a>
+</div></details>
+<h2>Analysis stages</h2>
+<details><summary>Images and channels</summary><div>
+<a href="../../../docs/stages/images/index.html">Images and channel assignments</a>
+<a href="../../../docs/stages/images/processing.html">Image processing</a>
+<a href="../../../docs/stages/images/storage.html">Multichannel image storage and regional access</a>
+</div></details>
+<a href="../../../docs/stages/cyclic-if-methods/index.html">Cyclic fluorescence</a>
+<details><summary>Spectral unmixing</summary><div>
+<a href="../../../docs/stages/unmixing/index.html">Spectral unmixing and component preparation</a>
+<a href="../../../docs/stages/unmixing/library-from-images.html">Creating a library from images</a>
+</div></details>
+<a href="../../../docs/stages/tissue/index.html">Tissue detection</a>
+<a href="../../../docs/stages/alignment/index.html">Paired-image alignment</a>
+<details><summary>Tissue classification</summary><div>
+<a href="../../../docs/stages/tissue-classification/index.html">Tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/kronos.html">KRONOS tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/model-execution.html">Model execution and Java–Python interfaces</a>
+</div></details>
+<details><summary>Cell segmentation</summary><div>
+<a href="../../../docs/stages/cells/index.html">Cell segmentation</a>
+<a href="../../../docs/stages/cells/processing.html">Segmentation processing and measurements</a>
+</div></details>
+<a href="../../../docs/stages/cell-measurements/index.html">Cell measurements</a>
+<details><summary>Phenotyping</summary><div>
+<a href="../../../docs/stages/phenotyping/index.html">Cell phenotyping</a>
+<a href="../../../docs/stages/phenotyping/marker-rules.html">Marker thresholds and phenotype rules</a>
+<a href="../../../docs/stages/phenotyping/nimbus.html">Nimbus</a>
+<a href="../../../docs/stages/phenotyping/supervised.html">Supervised cell phenotypes</a>
+<a href="../../../docs/stages/phenotyping/unsupervised.html">Unsupervised phenotyping</a>
+</div></details>
+<a href="../../../docs/stages/secondary-structures/index.html">Secondary structures</a>
+<details><summary>Results and export</summary><div>
+<a href="../../../docs/stages/results/index.html">Results and export</a>
+<a href="../../../docs/stages/results/figures.html">Classifier, cell and structure summaries</a>
+</div></details>
+<h2>Reference</h2>
+<a href="../../../docs/stages/classifier-methods/index.html" aria-current="page">Classifier methods</a>
+<details><summary>Data formats</summary><div>
+<a href="../../../docs/reference/data-formats.html">Saved image, model and cell data</a>
+<a href="../../../docs/reference/cell-storage.html">Cell datasets and spatial queries</a>
+</div></details>
+<details><summary>Example images</summary><div>
+<a href="../../../docs/data/public-image-sources.html">Public image sources</a>
+<a href="../../../docs/data/luca.html">LuCa example image</a>
+</div></details>
+<details><summary>Licences</summary><div>
+<a href="../../../docs/third-party/pcre2-license.html">PCRE2</a>
+<a href="../../../docs/third-party/md4c-license.html">MD4C</a>
+</div></details>
+<a href="../../../docs/troubleshooting.html">Troubleshooting</a></nav>
+</aside>
+<div class="reading-pane">
+  <header class="context">
+    <span class="location">Reference / Classifier methods</span>
+    <div class="tools"><details class="outline"><summary>On this page</summary><nav aria-label="On this page"><a href="#feature-rows-and-fitted-transformations">Feature rows and fitted transformations</a><a href="#random-forest">Random forest</a><a href="#support-vector-machine">Support vector machine</a><a href="#logistic-regression">Logistic regression</a><a href="#use-scores-in-result-review">Use scores in result review</a><a href="#implementation-and-saved-models">Implementation and saved models</a></nav></details><a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/classifier-methods/index.md">View source</a></div>
+  </header>
+  <main id="guide" class="site-width" tabindex="-1">
 <h1 id="classifier-methods">Classifier methods</h1>
 <p><a href="../../../index.html#analysis-stages">Analysis stages</a> · <a href="../tissue/index.html">Tissue detection</a> · <a href="../tissue-classification/index.html">Tissue classification</a> · <a href="../phenotyping/supervised.html">Supervised cell phenotypes</a></p>
 <p>In tissue classification, we use labelled pixels or image patches to train a random forest (<strong>RF</strong>) or a support vector machine (<strong>SVM</strong>) to recognize tissue compartments. In supervised cell phenotyping, we train RF, SVM or logistic regression (<strong>LR</strong>) on individual cells whose phenotypes we have labelled. Each labelled pixel, patch or cell supplies one row of numerical features and its reference class.</p>
@@ -164,6 +245,7 @@ s_k(x)=\frac{p_k(x)}{\sum_{\ell=1}^{M}p_\ell(x)}.
 <h2 id="implementation-and-saved-models">Implementation and saved models</h2>
 <p>When we apply an accepted classifier to another image, we extract the same ordered features and apply the normalization and any PCA fitted to the training data. The saved decision trees, SVM decision functions or LR coefficients then produce predictions in the original class order. The stage guides describe how the models and assignments are saved and reopened. <a href="../tissue-classification/index.html#saved-result-and-later-changes">Tissue-classification results</a> · <a href="../phenotyping/supervised.html#accept-the-model-and-assignment">Cell-phenotyping results</a></p>
 <p>The fitted transformations, OpenCV parameters and per-cell score calculations are available in the implementation. <a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/classification/FeaturePreparation.java">Feature preparation</a> · <a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/classification/OpenCvTraining.java">OpenCV fitting</a> · <a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/classification/ClassifierScores.java">Classifier scores</a> · <a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/cell_analysis/supervised.py">Cell assignment</a> · <a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/cell_analysis/supervised_qc.py">Cell evaluation</a></p>
-</main>
+  </main>
+</div>
 </body>
 </html>

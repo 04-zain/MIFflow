@@ -3,20 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <title>Classifier, cell and structure summaries · MIFflow</title>
 <link rel="stylesheet" href="../../../guide.css">
+<script defer src="../../../guide.js"></script>
 </head>
 <body>
 <a class="skip" href="#guide">Skip to guide</a>
-<header class="site-bar">
-  <nav class="site-width" aria-label="Documentation">
-    <a class="brand" href="../../../index.html">MIFflow</a>
-    <a href="../../../index.html#analysis-stages">Analysis stages</a>
-    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/results/figures.md">View source</a>
-  </nav>
-</header>
-<main id="guide" class="site-width">
+<aside class="library">
+  <header class="masthead">
+    <a class="brand" href="../../../index.html">MIFflow <span>Documentation</span></a>
+    <button class="menu" type="button" aria-controls="contents" aria-expanded="false">Guides</button>
+  </header>
+  <nav id="contents" aria-label="Guide library"><a href="../../../index.html">Overview</a>
+<h2>Getting started</h2>
+<details><summary>Installation</summary><div>
+<a href="../../../docs/stages/installation-and-build/software.html">Software setup</a>
+<a href="../../../docs/stages/installation-and-build/building-and-releasing.html">Build and release MIFflow</a>
+<a href="../../../docs/stages/installation-and-build/native-extension.html">The MIFflow extension for QuPath</a>
+</div></details>
+<details><summary>Analysis setup</summary><div>
+<a href="../../../docs/stages/setup/analysis.html">Create an analysis and add samples</a>
+<a href="../../../docs/stages/setup/configuration.html">Analysis and software settings</a>
+<a href="../../../docs/stages/setup/analysis-folder.html">Analysis-folder contents</a>
+<a href="../../../docs/stages/setup/command-line.html">Command-line guide</a>
+<a href="../../../docs/stages/setup/references.html">File-format and implementation references</a>
+<a href="../../../docs/stages/setup/computing.html">Local and cluster computing</a>
+<a href="../../../docs/stages/setup/memory-and-threads.html">Memory during processing</a>
+<a href="../../../docs/stages/setup/python-api.html">Python interfaces</a>
+<a href="../../../docs/stages/setup/source-layout.html">Source layout</a>
+</div></details>
+<details><summary>Running an analysis</summary><div>
+<a href="../../../docs/stages/run/index.html">Run, review and continue an analysis</a>
+<a href="../../../docs/stages/run/saving-and-recovery.html">Analysis files, version selection and recovery</a>
+<a href="../../../docs/stages/run/execution.html">Execution, scheduling and result reuse</a>
+<a href="../../../docs/stages/run/program-execution.html">Python, Groovy and Java during processing</a>
+<a href="../../../docs/stages/run/qupath-review.html">Review annotations and predictions in QuPath</a>
+<a href="../../../docs/stages/run/interactive-viewing.html">Viewing images and cells in QuPath</a>
+</div></details>
+<h2>Analysis stages</h2>
+<details><summary>Images and channels</summary><div>
+<a href="../../../docs/stages/images/index.html">Images and channel assignments</a>
+<a href="../../../docs/stages/images/processing.html">Image processing</a>
+<a href="../../../docs/stages/images/storage.html">Multichannel image storage and regional access</a>
+</div></details>
+<a href="../../../docs/stages/cyclic-if-methods/index.html">Cyclic fluorescence</a>
+<details><summary>Spectral unmixing</summary><div>
+<a href="../../../docs/stages/unmixing/index.html">Spectral unmixing and component preparation</a>
+<a href="../../../docs/stages/unmixing/library-from-images.html">Creating a library from images</a>
+</div></details>
+<a href="../../../docs/stages/tissue/index.html">Tissue detection</a>
+<a href="../../../docs/stages/alignment/index.html">Paired-image alignment</a>
+<details><summary>Tissue classification</summary><div>
+<a href="../../../docs/stages/tissue-classification/index.html">Tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/kronos.html">KRONOS tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/model-execution.html">Model execution and Java–Python interfaces</a>
+</div></details>
+<details><summary>Cell segmentation</summary><div>
+<a href="../../../docs/stages/cells/index.html">Cell segmentation</a>
+<a href="../../../docs/stages/cells/processing.html">Segmentation processing and measurements</a>
+</div></details>
+<a href="../../../docs/stages/cell-measurements/index.html">Cell measurements</a>
+<details><summary>Phenotyping</summary><div>
+<a href="../../../docs/stages/phenotyping/index.html">Cell phenotyping</a>
+<a href="../../../docs/stages/phenotyping/marker-rules.html">Marker thresholds and phenotype rules</a>
+<a href="../../../docs/stages/phenotyping/nimbus.html">Nimbus</a>
+<a href="../../../docs/stages/phenotyping/supervised.html">Supervised cell phenotypes</a>
+<a href="../../../docs/stages/phenotyping/unsupervised.html">Unsupervised phenotyping</a>
+</div></details>
+<a href="../../../docs/stages/secondary-structures/index.html">Secondary structures</a>
+<details open><summary>Results and export</summary><div>
+<a href="../../../docs/stages/results/index.html">Results and export</a>
+<a href="../../../docs/stages/results/figures.html" aria-current="page">Classifier, cell and structure summaries</a>
+</div></details>
+<h2>Reference</h2>
+<a href="../../../docs/stages/classifier-methods/index.html">Classifier methods</a>
+<details><summary>Data formats</summary><div>
+<a href="../../../docs/reference/data-formats.html">Saved image, model and cell data</a>
+<a href="../../../docs/reference/cell-storage.html">Cell datasets and spatial queries</a>
+</div></details>
+<details><summary>Example images</summary><div>
+<a href="../../../docs/data/public-image-sources.html">Public image sources</a>
+<a href="../../../docs/data/luca.html">LuCa example image</a>
+</div></details>
+<details><summary>Licences</summary><div>
+<a href="../../../docs/third-party/pcre2-license.html">PCRE2</a>
+<a href="../../../docs/third-party/md4c-license.html">MD4C</a>
+</div></details>
+<a href="../../../docs/troubleshooting.html">Troubleshooting</a></nav>
+</aside>
+<div class="reading-pane">
+  <header class="context">
+    <span class="location">Analysis stages / Results and export</span>
+    <div class="tools"><details class="outline"><summary>On this page</summary><nav aria-label="On this page"><a href="#tissue-classifier-precisionrecall">Tissue classifier precision–recall</a><a href="#phenotype-composition-and-tissue-compartments">Phenotype composition and tissue compartments</a><a href="#marker-profiles">Marker profiles</a><a href="#marker-combinations">Marker combinations</a><a href="#phenotype-rule-assignments">Phenotype rule assignments</a><a href="#final-measurement-distributions">Final measurement distributions</a><a href="#accepted-secondary-structures">Accepted secondary structures</a><a href="#cell-gallery">Cell gallery</a><a href="#counts-density-and-denominators">Counts, density and denominators</a></nav></details><a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/results/figures.md">View source</a></div>
+  </header>
+  <main id="guide" class="site-width" tabindex="-1">
 <h1 id="classifier-cell-and-structure-summaries">Classifier, cell and structure summaries</h1>
 <p><a id="additional-result-figures"></a></p>
 <p><a href="index.html">Results and export</a> · <a href="../../reference/data-formats.html#figure-data">Figure data</a> · <a href="../../reference/cell-storage.html">Complete cell tables</a></p>
@@ -94,6 +175,7 @@ p_k(R)=100\frac{n_k(R)}{N(R)},\qquad
 <p>Region outlines use full-resolution image coordinates. If a matching physical area has not been recorded, calculate the enclosed area from the saved geometry, subtract its holes, and multiply by the X and Y pixel sizes. Pixel sizes in µm/pixel give area in µm²; divide by 1,000,000 to obtain mm².</p>
 <p>A cell can belong to several overlapping secondary structures. Count it in each structure's own summary; for a unique-cell total across their union, deduplicate using the complete cell identity. The <a href="../secondary-structures/index.html#example-overlapping-regions-in-the-retained-luca-population">region-membership example</a> shows how shared cells affect counts and denominators.</p>
 <p>If the question concerns the fraction of <em>cells</em> with phenotype <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>, pool the counts across subjects and divide by the total number of included cells, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>s</mi></msub><msub><mi>n</mi><mrow><mi>k</mi><mi>s</mi></mrow></msub><mi>/</mi><msub><mo>∑</mo><mi>s</mi></msub><msub><mi>N</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">\sum_s n_{ks}/\sum_s N_s</annotation></semantics></math>. A subject with more cells then contributes more to the estimate. If the question concerns the average fraction <em>per subject</em>, calculate a fraction for each subject first, then take their mean, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>S</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mo>∑</mo><mi>s</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mrow><mi>k</mi><mi>s</mi></mrow></msub><mi>/</mi><msub><mi>N</mi><mi>s</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">S^{-1}\sum_s(n_{ks}/N_s)</annotation></semantics></math>. This gives equal weight to each of the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> subjects with a nonzero included-cell count. Report how you handled subjects for whom no fraction could be calculated.</p>
-</main>
+  </main>
+</div>
 </body>
 </html>

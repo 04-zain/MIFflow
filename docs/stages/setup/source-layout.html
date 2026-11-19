@@ -3,20 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <title>Source layout · MIFflow</title>
 <link rel="stylesheet" href="../../../guide.css">
+<script defer src="../../../guide.js"></script>
 </head>
 <body>
 <a class="skip" href="#guide">Skip to guide</a>
-<header class="site-bar">
-  <nav class="site-width" aria-label="Documentation">
-    <a class="brand" href="../../../index.html">MIFflow</a>
-    <a href="../../../index.html#analysis-stages">Analysis stages</a>
-    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/source-layout.md">View source</a>
-  </nav>
-</header>
-<main id="guide" class="site-width">
+<aside class="library">
+  <header class="masthead">
+    <a class="brand" href="../../../index.html">MIFflow <span>Documentation</span></a>
+    <button class="menu" type="button" aria-controls="contents" aria-expanded="false">Guides</button>
+  </header>
+  <nav id="contents" aria-label="Guide library"><a href="../../../index.html">Overview</a>
+<h2>Getting started</h2>
+<details><summary>Installation</summary><div>
+<a href="../../../docs/stages/installation-and-build/software.html">Software setup</a>
+<a href="../../../docs/stages/installation-and-build/building-and-releasing.html">Build and release MIFflow</a>
+<a href="../../../docs/stages/installation-and-build/native-extension.html">The MIFflow extension for QuPath</a>
+</div></details>
+<details open><summary>Analysis setup</summary><div>
+<a href="../../../docs/stages/setup/analysis.html">Create an analysis and add samples</a>
+<a href="../../../docs/stages/setup/configuration.html">Analysis and software settings</a>
+<a href="../../../docs/stages/setup/analysis-folder.html">Analysis-folder contents</a>
+<a href="../../../docs/stages/setup/command-line.html">Command-line guide</a>
+<a href="../../../docs/stages/setup/references.html">File-format and implementation references</a>
+<a href="../../../docs/stages/setup/computing.html">Local and cluster computing</a>
+<a href="../../../docs/stages/setup/memory-and-threads.html">Memory during processing</a>
+<a href="../../../docs/stages/setup/python-api.html">Python interfaces</a>
+<a href="../../../docs/stages/setup/source-layout.html" aria-current="page">Source layout</a>
+</div></details>
+<details><summary>Running an analysis</summary><div>
+<a href="../../../docs/stages/run/index.html">Run, review and continue an analysis</a>
+<a href="../../../docs/stages/run/saving-and-recovery.html">Analysis files, version selection and recovery</a>
+<a href="../../../docs/stages/run/execution.html">Execution, scheduling and result reuse</a>
+<a href="../../../docs/stages/run/program-execution.html">Python, Groovy and Java during processing</a>
+<a href="../../../docs/stages/run/qupath-review.html">Review annotations and predictions in QuPath</a>
+<a href="../../../docs/stages/run/interactive-viewing.html">Viewing images and cells in QuPath</a>
+</div></details>
+<h2>Analysis stages</h2>
+<details><summary>Images and channels</summary><div>
+<a href="../../../docs/stages/images/index.html">Images and channel assignments</a>
+<a href="../../../docs/stages/images/processing.html">Image processing</a>
+<a href="../../../docs/stages/images/storage.html">Multichannel image storage and regional access</a>
+</div></details>
+<a href="../../../docs/stages/cyclic-if-methods/index.html">Cyclic fluorescence</a>
+<details><summary>Spectral unmixing</summary><div>
+<a href="../../../docs/stages/unmixing/index.html">Spectral unmixing and component preparation</a>
+<a href="../../../docs/stages/unmixing/library-from-images.html">Creating a library from images</a>
+</div></details>
+<a href="../../../docs/stages/tissue/index.html">Tissue detection</a>
+<a href="../../../docs/stages/alignment/index.html">Paired-image alignment</a>
+<details><summary>Tissue classification</summary><div>
+<a href="../../../docs/stages/tissue-classification/index.html">Tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/kronos.html">KRONOS tissue classification</a>
+<a href="../../../docs/stages/tissue-classification/model-execution.html">Model execution and Java–Python interfaces</a>
+</div></details>
+<details><summary>Cell segmentation</summary><div>
+<a href="../../../docs/stages/cells/index.html">Cell segmentation</a>
+<a href="../../../docs/stages/cells/processing.html">Segmentation processing and measurements</a>
+</div></details>
+<a href="../../../docs/stages/cell-measurements/index.html">Cell measurements</a>
+<details><summary>Phenotyping</summary><div>
+<a href="../../../docs/stages/phenotyping/index.html">Cell phenotyping</a>
+<a href="../../../docs/stages/phenotyping/marker-rules.html">Marker thresholds and phenotype rules</a>
+<a href="../../../docs/stages/phenotyping/nimbus.html">Nimbus</a>
+<a href="../../../docs/stages/phenotyping/supervised.html">Supervised cell phenotypes</a>
+<a href="../../../docs/stages/phenotyping/unsupervised.html">Unsupervised phenotyping</a>
+</div></details>
+<a href="../../../docs/stages/secondary-structures/index.html">Secondary structures</a>
+<details><summary>Results and export</summary><div>
+<a href="../../../docs/stages/results/index.html">Results and export</a>
+<a href="../../../docs/stages/results/figures.html">Classifier, cell and structure summaries</a>
+</div></details>
+<h2>Reference</h2>
+<a href="../../../docs/stages/classifier-methods/index.html">Classifier methods</a>
+<details><summary>Data formats</summary><div>
+<a href="../../../docs/reference/data-formats.html">Saved image, model and cell data</a>
+<a href="../../../docs/reference/cell-storage.html">Cell datasets and spatial queries</a>
+</div></details>
+<details><summary>Example images</summary><div>
+<a href="../../../docs/data/public-image-sources.html">Public image sources</a>
+<a href="../../../docs/data/luca.html">LuCa example image</a>
+</div></details>
+<details><summary>Licences</summary><div>
+<a href="../../../docs/third-party/pcre2-license.html">PCRE2</a>
+<a href="../../../docs/third-party/md4c-license.html">MD4C</a>
+</div></details>
+<a href="../../../docs/troubleshooting.html">Troubleshooting</a></nav>
+</aside>
+<div class="reading-pane">
+  <header class="context">
+    <span class="location">Getting started / Analysis setup</span>
+    <div class="tools"><details class="outline"><summary>On this page</summary><nav aria-label="On this page"><a href="#desktop-forms-and-processing-requests">Desktop forms and processing requests</a><a href="#find-the-code-for-an-analysis-stage">Find the code for an analysis stage</a><a href="#follow-a-saved-result">Follow a saved result</a><a href="#change-a-default-script-or-installed-component">Change a default, script or installed component</a></nav></details><a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/source-layout.md">View source</a></div>
+  </header>
+  <main id="guide" class="site-width" tabindex="-1">
 <h1 id="source-layout">Source layout</h1>
 <p>The desktop and the command line use the same Python service to run an analysis. To trace a setting from a desktop form to a saved result, follow the <a href="#desktop-forms-and-processing-requests">form and its submitted request</a> into the <a href="#find-the-code-for-an-analysis-stage">stage that performs the calculation</a>. The <a href="../run/program-execution.html">processing guide</a> explains where Python, Groovy and Java take part.</p>
 <p><a id="source-components-and-integration-points"></a> <a id="source-locations-and-responsibilities"></a> <a id="i-setup-and-execution"></a> <a id="setup-requests-and-saved-execution-state"></a></p>
@@ -84,6 +165,7 @@
 <p>For a QuPath script, edit the source under <a href="https://github.com/04-zain/MIFflow/tree/main/qupath/scripts">qupath/scripts</a>. The <a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/qupath_runtime/_script_asset_registry.py">script registry</a> identifies the packaged entry points. Before running a project stage, we add the <a href="https://github.com/04-zain/MIFflow/blob/main/qupath/scripts/general/project_stage_bootstrap.groovy">shared startup checks</a> and save the prepared script and its checksum with the run. If you launch MIFflow from an installed package, <a href="../installation-and-build/software.html#update-an-existing-source-installation">reinstall after changing a script</a> so the runner loads that change.</p>
 <p>Changes to the Java classes or their <a href="https://github.com/04-zain/MIFflow/tree/main/src/java-resources">service registrations</a> require <a href="../installation-and-build/native-extension.html">rebuilding the extension</a>. For changes to the distribution itself, follow <a href="https://github.com/04-zain/MIFflow/blob/main/setup.py">setup.py</a> for the Python package and <a href="https://github.com/04-zain/MIFflow/tree/main/packaging">packaging</a> for the portable editions. The <a href="../installation-and-build/building-and-releasing.html">build guide</a> describes how to check the installed programs and resources.</p>
 <p>For a worker startup or resource issue, follow the task allowance into the <a href="https://github.com/04-zain/MIFflow/tree/main/src/python/mif_containment">process controls</a> and <a href="https://github.com/04-zain/MIFflow/tree/main/src/python/mif_pipeline/qupath_runtime">QuPath runtime</a>. The launch settings limit memory, threads and caches. The caller also checks the worker's release and protocol version before sending it a calculation. <a href="memory-and-threads.html">Memory during processing</a> · <a href="../run/program-execution.html">How programs exchange work</a></p>
-</main>
+  </main>
+</div>
 </body>
 </html>
