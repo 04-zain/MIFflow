@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Model execution and Java–Python interfaces · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/tissue-classification/model-execution.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="model-execution-and-javapython-interfaces">Model execution and Java–Python interfaces</h1>
+<p><a href="index.html">Tissue classification</a> · <a href="kronos.html">KRONOS calculations</a></p>
+<p>To classify a new image, we read the selected channels at the pixel size used for training. The saved classifier applies its feature calculations and fitted normalization, then predicts a tissue class at each sampled pixel or KRONOS patch.</p>
+<p>This guide follows the training observations through Python, Groovy and Java to the fitted model and its saved predictions. See the <a href="index.html">stage guide</a> for the controls and <a href="kronos.html">KRONOS calculations</a> for the encoder and graph.</p>
+<p><strong>On this page:</strong> <a href="#i-which-program-performs-each-calculation">Programs and data exchange</a> · <a href="#ii-conventional-pixel-classifiers">Pixel features</a> · <a href="#iii-kronos-input-preparation-and-feature-reuse">KRONOS preparation and reuse</a> · <a href="#iv-graph-fitting-and-frozen-inference">Graph prediction</a> · <a href="#v-subject-grouped-fitting">Grouped fitting</a> · <a href="#vi-cell-references-prediction-and-acceptance">Cell prediction</a> · <a href="#vii-process-exchange-and-device-transfer">Worker communication</a> · <a href="#viii-dependencies-used-for-reuse">What changes require recalculation</a></p>
+<h2 id="i-which-program-performs-each-calculation">i) Which program performs each calculation</h2>
+<p>Python builds the training request from the saved images, reference labels, subject roles, feature choices and parameter combinations. It starts QuPath for calculations that use its image servers and saved annotations. Inside QuPath's Java virtual machine (<strong>JVM</strong>), Groovy connects the requested images and annotations to compiled Java methods. For a conventional pixel classifier, those methods construct feature rows and their reference labels, fit the selected normalization and optional principal-component analysis (<strong>PCA</strong>), call OpenCV to fit RF or SVM, and save the resulting classifier.</p>
+<p>KRONOS adds two Python calculations. Python/PyTorch prepares an encoder with fixed weights for the selected marker panel, then learns the graph matrices from the encoder's patch embeddings: vectors of 768 values describing each image patch. QuPath performs repeated image encoding through the Deep Java Library (<strong>DJL</strong>) and native PyTorch runtime, LibTorch, then applies the fitted graph and final RF/SVM in Java. This division keeps repeated image reads and prediction beside the QuPath image server, while Python fits the graph's learned parameters.</p>
+<p>QuPath’s JavaFX panels start those calculations outside the interface thread and display the returned preview only while its image and model still match the request. <a href="../run/program-execution.html">Program execution</a> explains the process and JVM boundaries; <a href="#vii-process-exchange-and-device-transfer">process exchange</a> below describes the separate Python worker connection.</p>
+<h2 id="ii-conventional-pixel-classifiers">ii) Conventional pixel classifiers</h2>
+<h3 id="extract-the-selected-reference-rows">Extract the selected reference rows</h3>
+<p>For a conventional pixel fit, the native training script constructs a QuPath image operation from the ordered channels and the filters assigned to each physical scale. <code>PixelClassifierTraining</code> reads those features within the eligible reference regions at the requested training pixel size. For a filtered feature, QuPath reads the neighbouring pixels needed to calculate the requested tile and discards that extra border from the returned feature tile. A labelled pixel near a tile edge therefore receives its surrounding image context, just as a pixel inside the tile does.</p>
+<p><a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/classification/PixelTrainingRows.java">PixelTrainingRows</a> extracts each image’s labelled rows and records its interval in the combined matrix. If there are <code>N</code> labelled pixels and <code>F</code> features, the result is <code>X ∈ ℝ^(N×F)</code> and an aligned vector of <code>N</code> integer reference labels. With <code>C</code> channels, <code>S</code> scales, <code>B_s</code> selected scalar filters at scale <code>s</code>, and intensity inclusion <code>I</code> equal to zero or one,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>I</mi><mo>+</mo><munderover><mo>∑</mo><mrow><mi>s</mi><mo>=</mo><mn>1</mn></mrow><mi>S</mi></munderover><msub><mi>B</mi><mi>s</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F=C\left(I+\sum_{s=1}^{S} B_s\right).
+</annotation></semantics></math></p>
+<p>Each separately selected Hessian or structure-tensor quantity counts as one filter output. Intensity-only features have no scales and give <code>F = C</code>.</p>
+<p>Before allocating the reference matrices, the native preparation checks the estimated extraction memory and number of requested image tiles. It then extracts the eligible reference pixels, shuffles their feature rows and applies the selected observation limit. The saved counts identify the training pixels contributed by each image and class. Because selection happens after extraction, memory for the initial matrix still depends on the complete reference area and its sampling resolution.</p>
+<h3 id="fit-and-save-the-complete-calculation">Fit and save the complete calculation</h3>
+<p><a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/classification/FeaturePreparation.java">FeaturePreparation</a> calculates the selected normalization and optional PCA from the training rows. It saves the offset and scale for each input feature and, when PCA is enabled, the directions used to calculate the retained components. The classifier receives the transformed rows, with class labels and any balancing weights kept in the same row order. <a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/classification/OpenCvTraining.java">OpenCvTraining</a> applies the random seed and RF or SVM settings and returns the trained native model. The saved pixel classifier contains the image operation, fitted transformation, physical pixel size and ordered class names alongside that model. Predictions on later images reuse these saved values.</p>
+<p>Each fold and parameter combination repeats feature extraction and preparation for its training references. QuPath's cache can reuse decoded image tiles during these reads. The resulting conventional feature matrix belongs to that fit and is released afterward.</p>
+<h3 id="predict-image-tiles">Predict image tiles</h3>
+<p>During image review or application, QuPath requests feature tiles from the saved operation. Java applies the retained transformation and OpenCV model using bounded batches and reusable native input/output matrices. Primary predictions are restricted to the accepted analysis regions. Secondary predictions use the eligible parent regions selected for each structure, which can include the analysis region itself. Converting connected same-class pixels to annotations produces the classified regions consumed by later stages.</p>
+<p><a href="index.html#reference-pixel-classification">Pixel classification</a> gives the filter definitions, normalization, PCA and decision-function equations. The producing operations are <code>preparePixelFit</code> and the model-saving path in the <a href="https://github.com/04-zain/MIFflow/blob/main/qupath/scripts/general/02_train_native_classifier.groovy">native fitting script</a>; the <a href="https://github.com/04-zain/MIFflow/blob/main/qupath/scripts/compartment_analysis/02_apply_primary_compartment_classifier.groovy">primary application script</a> reads the accepted model to create regions.</p>
+<h2 id="iii-kronos-input-preparation-and-feature-reuse">iii) KRONOS input preparation and feature reuse</h2>
+<h3 id="prepare-the-encoder-and-image-patches">Prepare the encoder and image patches</h3>
+<p>Python exports the encoder as <strong>TorchScript</strong>, a saved PyTorch calculation that the native runtime can execute without running its Python model definition. The export includes the selected marker order, intensity normalization and patch side length <code>P</code>; Python checks its output against the supplied model. The <a href="kronos.html#prepare-marker-channels-and-image-patches">KRONOS input calculation</a> defines the per-channel divisors, marker statistics and supported patch sizes. Images with the same encoder inputs reuse that exported file.</p>
+<p>The native image tensor is a multidimensional numerical array with shape <code>(N, C_m, P, P)</code>, where <code>C_m</code> is the selected marker-channel count and <code>N</code> the number of patches. The deployed predictor uses <code>N = 1</code>.</p>
+<p>For a patch that has not already been encoded, Java's <code>MifKronosPatchProvider</code> reads the required image chunks through QuPath's shared cache, samples the pixels at the chosen physical size and arranges the selected channel planes into the input tensor. Java/DJL passes that tensor to the exported encoder and receives 768 values. Successive calls fill the saved feature table described below.</p>
+<p>For successive patches, the native session copies the sampled intensities into the same input buffer and reuses the predictor. CUDA execution transfers this input to the GPU. After prediction, the temporary tensors can be released. Each 768-value output vector occupies its own allocation in CPU memory.</p>
+<p><a href="../../assets/figures/model-execution.svg"><img src="../../assets/figures/model-execution.svg" alt="Schematic of Python model preparation and fitting, reusable patch features and native QuPath application." width="640"></a></p>
+<p><em>Schematic of panel preparation, saved patch features, graph fitting and application across Python and QuPath. The illustrated encoder call reads one 256-pixel patch and returns one 768-value vector; labels identify the same stored patch rows through fitting and prediction.</em></p>
+<h3 id="save-and-reuse-patch-embeddings">Save and reuse patch embeddings</h3>
+<p>Java writes each completed embedding into a <strong>float32 NumPy matrix with 768 columns</strong>, one row per patch-grid position. Float32 stores each numerical value in four bytes, so each 768-value vector occupies 3,072 bytes. A separate description records which image, source channels, source pixel size, sampling size, patch dimensions, marker order, normalization and encoder produced the table. These settings identify the table to reuse for a later request.</p>
+<p>Before reading a patch's pixels, QuPath looks for its completed row. If every requested row is available, it reads those embeddings without loading the encoder weights. Editing reference labels, analysis regions or training folds can reuse the existing embeddings. The current region and fold restrictions still determine which patches and neighbours enter each calculation. Changing the image or encoder inputs requires new embeddings.</p>
+<p>A separate file stores a 32-byte checksum for each completed vector. If two processes calculate the same row, the table keeps the first completed vector. QuPath recalculates incomplete rows; the graph fitter checks that its required rows are complete and their checksums match before fitting.</p>
+<p>The encoder writes its feature vectors to an uncompressed matrix on disk. We memory-map this file so a calculation can retrieve the rows it needs and keep frequently used batches in memory up to the selected allowance. Positions that have never been visited occupy sparse file storage where the filesystem supports it. Each native session keeps at most sixteen patch tables open. When it closes the least recently used table to open another, the saved vectors remain available for later fits.</p>
+<h3 id="read-embeddings-for-graph-fitting">Read embeddings for graph fitting</h3>
+<p>The fitting request identifies the tables and rows to read, each patch's permitted neighbours, reference classes and graph optimization settings. Python opens the tables as read-only memory maps and builds two arrays: one containing each labelled patch's embedding, the other containing its neighbours' mean embedding. It reads only the rows needed for those arrays. The <a href="kronos.html#graph-fitting-arrays-and-calculation-limits">graph allocation check</a> covers the constructed training arrays and estimated optimizer workspace; mapped feature pages and framework memory also contribute to total process memory.</p>
+<p>Python checks one checksum file at a time and keeps the matrix mappings open until fitting finishes. It returns the learned self and neighbour matrices and bias through the process connection, then closes the mappings. The graph calculation and subsequent RF/SVM application are described below.</p>
+<h2 id="iv-graph-fitting-and-frozen-inference">iv) Graph fitting and frozen inference</h2>
+<p>Python fits the self-patch and neighbour matrices using the selected reference classes. The encoder remains fixed. The <a href="kronos.html#reference-kronos-classification--iv-learn-spatial-features-from-the-labelled-patches">KRONOS calculation</a> defines the neighbour mean, learned representation, temporary training head and final RF/SVM fit.</p>
+<p>For application, Java reads the saved embeddings and graph parameters. <code>GraphHeadKernel</code> computes <code>h_i = ReLU(e_i W_self + m_i W_neighbour + b)</code> for up to 64 patch rows per batch, where <code>e_i</code> describes the target patch and <code>m_i</code> is its permitted neighbours' mean embedding. After adding the two matrix products and bias, ReLU sets each negative entry of the resulting vector to zero. Java applies the fitted normalization and uses OpenCV's RF/SVM to assign one class to each resulting feature row. The raster writer fills each patch with its predicted label and clips the result to the selected tissue mask. Neighbours can extend beyond the visible rectangle, subject to the image, region and training-split restrictions.</p>
+<h3 id="keep-the-model-available-during-image-review">Keep the model available during image review</h3>
+<p>The compiled <code>MifKronosPatchOp</code> supplies patch predictions through QuPath's image-operation interface. <code>MifKronosResourceOp</code> opens a saved model and its feature tables for the current image. Both use the same Java prediction methods, so a saved classifier and an interactive preview apply the same patch geometry, graph calculation and RF/SVM model.</p>
+<p>The image session keeps the native classifier and its fitted normalization available across tile requests. Conventional models also retain PCA when selected; the tissue KRONOS route leaves PCA disabled. Temporary tile arrays are released after each request; the retained model is released when its session closes. Reference edits remove the previous prediction preview. After an explicit update, the review panel displays the newly fitted result only if it still matches the current request. Moving the viewport or changing overlay opacity reuses the fitted model.</p>
+<h2 id="v-subject-grouped-fitting">v) Subject-grouped fitting</h2>
+<p>Python passes the subjects assigned to training and evaluation, the saved reference annotations and the parameter combinations to Java. <a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/classification/GroupedCrossValidation.java">GroupedCrossValidation</a> calls the fitting procedure separately for each parameter combination and held-out fold. Groovy connects that procedure to the methods that extract reference rows, fit normalization and train the OpenCV model; the KRONOS procedure also fits its graph. Conventional fits extract their own feature matrices. KRONOS fits reuse saved embeddings when the image patches, channels and encoder settings match.</p>
+<p>For each held-out subject, we compare the predicted class with the reference class. Each eligible reference pixel or complete KRONOS patch contributes one observation to the corresponding cell of the confusion matrix. Java checks that parameter combinations use the same held-out observation counts for each subject and reference class, calculates their subject-weighted scores and selects the parameters for the final fit. The <a href="index.html#reference-training-and-evaluation">training and evaluation calculation</a> defines the fold assignment, score and tie rule. Model review reads those saved assignments, counts and selected parameters.</p>
+<p>During that same held-out evaluation, Java also associates observations with reference annotations containing each evaluated pixel or patch centre. These per-reference counts locate contributions to the confusion matrix. Overlapping annotations can share an observation, and a KRONOS patch covered by several same-class references can be associated with an individual reference that contains its centre. The selected parameter combination's report retains the counts with the fold, subject, image, annotation identity and bounds. Opening a contributing reference in QuPath shows its staining and that fold's predictions at the recorded position. The <a href="index.html#inspecting-and-accepting-the-model">review guide</a> explains the resulting reference-agreement values.</p>
+<p>Independent testing applies the saved final model to subjects kept separate from training and parameter selection. For each reference annotation, we count predictions at its contained pixel centres or completely covered KRONOS patches, omit ignored observations, and choose the class with the greatest count. The test confusion matrix then counts those reference regions. It retains the underlying observation counts separately so agreement within a region can be inspected even when its majority class is correct.</p>
+<h2 id="vi-cell-references-prediction-and-acceptance">vi) Cell references, prediction and acceptance</h2>
+<p>The same Java fitting classes serve supervised cell phenotyping. Each training row describes one labelled cell, using either its selected measurements or its nucleus-centred, cell-masked KRONOS embedding. RF, SVM or logistic regression (<strong>LR</strong>) learns directly from those rows. The <a href="../phenotyping/supervised.html">supervised-cell guide</a> explains the feature choices and reference annotation.</p>
+<p>When a researcher places a reference point, QuPath associates it with a segmented cell and saves its <code>cell_id</code>, image, segmentation result and reference class. Subject allocation determines whether that labelled cell contributes to training, validation or independent testing. Later fitting reads the saved cell association, so loading or displaying cells in a different order preserves the labels.</p>
+<p>The cell classifier reads its selected measurement or embedding columns, applies the saved feature preparation and returns a raw predicted class and score for each cell. The importer matches these rows to cell IDs or to a previously verified row order, then saves the predictions for review.</p>
+<p>Confidence review selects a cutoff for those saved scores. Predictions below it become Unclassified, with a separate rejection flag; their original classes and scores remain saved. The model records whether the score is an RF tree-vote fraction, SVM pairwise-vote agreement or normalized logistic score. <a href="../phenotyping/supervised.html#review-confidence-handling">Confidence handling</a> explains the controls, comparison rule and interpretation for each classifier.</p>
+<p>On acceptance, we check the population, measurement and model versions, then write the selected classifications from the matching reviewed predictions without running the classifier again.</p>
+<h2 id="vii-process-exchange-and-device-transfer">vii) Process exchange and device transfer</h2>
+<p>Groovy starts the KRONOS Python worker as a separate process and exchanges requests and replies through its standard-input and standard-output pipes. Each message carries a request identifier, JSON metadata and any declared binary arrays. This connection sends graph-fitting instructions to Python and returns the fitted parameters to QuPath; image embeddings remain in the shared files described above.</p>
+<p><a href="../../assets/figures/model-worker-communication.svg"><img src="../../assets/figures/model-worker-communication.svg" alt="QuPath starts the KRONOS Python worker and exchanges framed requests and replies over its process pipes." width="700"></a></p>
+<p><em>Schematic of a KRONOS request and matching reply on the Python worker's process pipes. Each message contains a four-byte JSON-length field, JSON metadata and any declared binary data. Block widths identify the message parts without representing their relative byte sizes.</em></p>
+<p>The client uses Java's <code>ProcessBuilder</code> to launch the worker. A four-byte length field tells the receiver how many bytes of JSON metadata to read; that metadata declares the size of any following binary body. Graph fitting can send progress messages before its final result, all with the same request ID. A failed operation returns an error for that request. Diagnostic output goes to <code>worker.log</code>, keeping it separate from the encoded model results. The connection stays open for subsequent requests until the client closes the worker session.</p>
+<p>Encoder preparation saves a TorchScript model that QuPath subsequently loads. Graph fitting reads the saved embedding rows and returns the learned matrices and bias through the same worker connection. The figure in section iii shows where these files and returned parameters enter the model calculation.</p>
+<p>On one computer, Java and Python open the same saved datasets. The request identifies their paths and versions, the columns and cells or regions to read, and the calculation settings. Small parameter arrays and bounded results pass through the existing binary connection without a separate dataset file.</p>
+<p>On a cluster, the processing programs read cluster-local paths. The desktop reads the image and object data needed for review through the configured mount. Image calculations run on the processing computer with its local data and model software.</p>
+<h3 id="local-and-cluster-memory">Local and cluster memory</h3>
+<p>Each submitted analysis requests one compute node and one scheduler task, with the selected CPU cores and memory. The coordinator launches Java and Python children inside that allocation, so local mapped datasets retain the same sharing benefit as on a workstation. Independent analysis jobs can occupy different nodes.</p>
+<p>PhenoGraph constructs its complete neighbour graph and runs Leiden within one process; its graph and numerical workspace must fit the job allowance. FlowSOM fits its self-organizing map and groups the learned profiles within one process, using the selected cells’ scaled measurements. Dividing a joint clustering population among nodes and merging labels is not an equivalent operation.</p>
+<p>The <a href="../setup/memory-and-threads.html">memory and threads guide</a> explains when model weights, input buffers and temporary prediction arrays are allocated and released.</p>
+<p><a id="viii-dependencies-used-for-reuse"></a></p>
+<h2 id="viii-which-changes-require-recalculation">viii) Which changes require recalculation</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Retained quantity</th>
+<th>Depends on</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Decoded image chunk</td>
+<td>Image version, level and spatial chunk coordinates</td>
+</tr>
+<tr class="even">
+<td>Conventional feature calculation</td>
+<td>Image, channels, physical sampling, filters and scales; each native fit extracts its own reference matrix</td>
+</tr>
+<tr class="odd">
+<td>Frozen KRONOS embedding</td>
+<td>Image patch, ordered panel, normalization, scale and encoder</td>
+</tr>
+<tr class="even">
+<td>Neighbour mean</td>
+<td>Stored embeddings and neighbours permitted by the current image, subject role, fold, analysis region, tissue component and parent</td>
+</tr>
+<tr class="odd">
+<td>Learned graph representation</td>
+<td>Self-patch embedding, permitted-neighbour mean and the fitted self/neighbour matrices and bias</td>
+</tr>
+<tr class="even">
+<td>Raw predictions</td>
+<td>Prepared feature rows, fitted RF/SVM or cell LR, and the included pixels, patches or cells</td>
+</tr>
+<tr class="odd">
+<td>Accepted cell classifications</td>
+<td>Saved predictions, marker calls or cluster assignments; reviewed cutoff and class names</td>
+</tr>
+</tbody>
+</table></div>
+<p>After a reference class is edited, the next fit reads the saved KRONOS embeddings and trains a new graph and classifier using the revised labels. Changing a patch's intensity divisor also changes its encoder input, so its embedding must be recalculated. Changing a cell-score cutoff reuses the saved predictions and updates which assignments meet that cutoff.</p>
+<p>When a memory cache fills, it releases older arrays. A later request can reload a saved embedding from its table or decode the required image chunk again. Releasing those arrays changes the cost of the next read; the saved embeddings and fitted model remain available.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="index.html">Tissue classification</a>.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Analysis-folder contents · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/analysis-folder.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="analysis-folder-contents">Analysis-folder contents</h1>
+<p><a id="reference-analysis-folder"></a></p>
+<p><a id="reference-analysis-folder--analysis-folder-contents"></a></p>
+<p><a href="../run/index.html#user-guide-reviewing-and-resuming">Reopen and resume</a> · <a href="configuration.html">Saved analysis settings</a></p>
+<p>For local processing, the analysis folder contains both the setup and the results. For cluster streaming, look in the local folder for the connection settings and in the cluster analysis folder for the processing history and results.</p>
+<p>To find a prepared image, QuPath project or cell dataset from the desktop, open <a href="../results/index.html#locate-the-image-and-qupath-project">Results</a>.</p>
+<p><a id="reference-analysis-folder--i-editable-setup-and-recorded-run-inputs"></a></p>
+<h2 id="editable-setup-and-recorded-run-inputs">Editable setup and recorded run inputs</h2>
+<p>The desktop saves your sample list and analysis choices in <code>analysis.setup.json</code>, so you can return to unfinished sections. It saves the selected processor and processing location in <code>analysis.computing.json</code>. For cluster streaming this file also holds the connection and folder mapping.</p>
+<p>Preparing the run validates these choices, fills in defaults and writes <code>analysis.manifest.json</code>. This file identifies the images and settings at the start of the run. If you later change an accepted setting, we save a new plan identifying the work affected by that revision.</p>
+<h3 id="locations-of-saved-files">Locations of saved files</h3>
+<p>The processing workspace contains the QuPath project, stage results and the records used to reopen the run. For local processing, look for this workspace under the analysis folder. With cluster streaming, the desktop keeps the connection settings locally and reads progress from the workspace on the cluster. Source images and shared models remain at the paths selected during setup.</p>
+<pre class="text"><code>&lt;processing workspace&gt;/
+    manifest/
+        original.json
+        normalized.json
+    plans/
+    state/
+        head.json
+        current-progress.json
+        history-&lt;checksum&gt;.json
+    qupath/
+        project.qpproj
+    attempts/
+    interactions/
+    catalogue/
+    summaries/
+    resume/
+    samples/&lt;sample&gt;/...</code></pre>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Processing record</th>
+<th>What it records</th>
+<th>When to consult it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>manifest/original.json</code>, <code>manifest/normalized.json</code></td>
+<td>Original and resolved processing inputs</td>
+<td>Preparing and reopening the processing workspace</td>
+</tr>
+<tr class="even">
+<td><code>plans/</code></td>
+<td>Successive plans and task dependencies</td>
+<td>Determining the work required by each accepted revision</td>
+</tr>
+<tr class="odd">
+<td><code>state/head.json</code></td>
+<td>Current plan, project state, selected results and execution-history reference</td>
+<td>Selecting the current analysis state</td>
+</tr>
+<tr class="even">
+<td><code>state/current-progress.json</code></td>
+<td>Derived workflow, sample status, result references and error/review messages</td>
+<td>Refreshing the desktop from the saved progress summary</td>
+</tr>
+<tr class="odd">
+<td>Completed dataset description</td>
+<td>Selected cells/regions, input versions, columns, data files, indexes and summary counts</td>
+<td>Opening a cell or region result with its recorded definitions</td>
+</tr>
+<tr class="even">
+<td><code>attempts/</code>, <code>interactions/</code> and <code>state/history-&lt;checksum&gt;.json</code></td>
+<td>Processing attempts, review requests/responses and recorded state changes</td>
+<td>Tracing the operation and review that produced a selected result</td>
+</tr>
+</tbody>
+</table></div>
+<p>Stage results identify the prepared image, model and cell-table files used by later calculations, including files outside the per-sample folders.</p>
+<p><a id="reference-analysis-folder--ii-processing-progress-and-accepted-results"></a></p>
+<h2 id="processing-progress-and-accepted-results">Processing progress and accepted results</h2>
+<p>The plan lists each task and the results it needs before it can start. Each time a task runs, its attempt record identifies the inputs, settings, outcome and checked outputs. When you accept a review, we save your decision and update <code>state/head.json</code> to identify the results used by subsequent stages.</p>
+<p>When you reopen an analysis, the desktop checks that the progress in <code>state/current-progress.json</code> agrees with the plan and results selected in <code>state/head.json</code>. Run then shows which samples are processing, which reviews need a decision and which steps have stopped. If a calculation ran more than once, its attempt records identify the inputs and outputs of each run. The <a href="../run/saving-and-recovery.html#select-a-complete-dataset">recovery guide</a> explains how we select a completed result.</p>
+<p><a id="reference-analysis-folder--iii-qupath-project-and-annotation-drafts"></a></p>
+<h2 id="qupath-project-and-annotation-drafts">QuPath project and annotation drafts</h2>
+<p>The main QuPath project lists its images and classifiers. Each image's <code>data.qpdata</code> file stores its settings and annotations. An outline-editing draft contains the QuPath objects selected for correction.</p>
+<p>We store accepted cell outlines in Spatial Parquet and keep subsequent corrections in separate edit tables. When a calculation requests cell data, the reader uses the cell IDs to apply the relevant edits and returns the requested columns one batch at a time. In Python, each batch is a PyArrow <code>RecordBatch</code> in memory.</p>
+<p>Tissue-detector editing, classifier references and landmarks use separate draft projects containing the images and objects needed for that step. <a href="../run/qupath-review.html#reference-qupath-integration--ii-saving-the-project-and-returning-annotations">Saving a project and returning annotations</a> explains the editing and submission sequence.</p>
+<p>When a draft returns, we check its image coordinates, requested labels and permitted objects before accepting the changes into the analysis. The saved review identifies which annotations were used by the detector, classifier or alignment operation.</p>
+<p>To decide whether a QuPath save affects later processing, we compare the image settings used by the analysis. The file <code>project.qpproj.mif-content.json</code> beside the project contains the checksums used for that comparison. If you saved after viewing the image and its identity, channels and physical calibration still match, the analysis can recognize those inputs on reopening. <a href="../run/qupath-review.html#reference-qupath-integration--ii-saving-the-project-and-returning-annotations">How we compare saved project inputs</a></p>
+<p>Each step records the annotations, tissue outlines, model parameters or measured cells it used. Later calculations check those input versions before reusing the result. Changing a training label requires refitting its model; the original image entries can still be used.</p>
+<p><a id="reference-analysis-folder--iv-processed-images-and-exported-measurements"></a></p>
+<h2 id="processed-images-and-exported-measurements">Processed images and exported measurements</h2>
+<p>Each prepared image is a sharded <code>.ome.zarr</code> directory containing its full-resolution values, pyramid levels and OME metadata. Its processing record identifies the source image and metadata used to prepare it. For spectral unmixing, the record also includes the intensity correction, selected spectra and fitting settings. Later stages read the completed image directory selected by its accepted result. <a href="../images/storage.html">Image storage</a> explains its chunk and shard layout.</p>
+<p>Spatial Parquet tables store cell outlines and positions in a base dataset. Measurement and classification results can add selected columns through separate result tables. The final <code>spatial-cell-handoff.json</code> selects a completed generation in the adjacent hidden directory.</p>
+<pre class="text"><code>&lt;export directory&gt;/
+    spatial-cell-handoff.json
+    .spatial-cell-handoff.generations/&lt;generation-id&gt;/
+        descriptor.json
+        cells/dataset.json</code></pre>
+<p>To open a spatial export, start with <code>spatial-cell-handoff.json</code>. It locates the export description in the adjacent hidden directory, so copy that directory with the handoff file. The description identifies the cell collection and gives the full paths to its tables, result columns and corrections. Those datasets must remain accessible at the recorded paths. See the <a href="../../reference/data-formats.html#file-identifiers-and-selection-checks">file format guide</a> for the checksums and the <a href="python-api.html#publish-and-reopen-a-spatial-handoff">Python interface</a> for reading selected columns.</p>
+<p><a id="reference-analysis-folder--v-reopening-and-cleanup"></a></p>
+<h2 id="reopening-and-cleanup">Reopening and cleanup</h2>
+<p>Open the named analysis folder to inspect saved progress. To continue a paused calculation, the processing computer also needs access to its source images and any earlier results it uses. We check the saved request, its previous outcome and its output files to determine whether the current attempt can continue or a new one is needed. <a href="../run/saving-and-recovery.html#recover-after-interruption">Recovery after interruption</a></p>
+<p>Before deleting an older dataset, check whether an accepted model or export still refers to it. Revisions can supersede an image or cell table for new calculations and still leave an earlier result dependent on that file. <a href="../run/saving-and-recovery.html#retain-results-and-clean-up-temporary-files">Retention and cleanup</a></p>
+<hr />
+<p><strong>Continue:</strong> <a href="analysis.html">Analysis setup</a>.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Analysis and software settings · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/configuration.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="analysis-and-software-settings">Analysis and software settings</h1>
+<p><a href="analysis.html">Analysis setup</a> · <a href="analysis-folder.html">Analysis-folder contents</a></p>
+<p><a id="reference-configuration"></a></p>
+<p><a id="reference-configuration--configuration"></a> <a id="configuration"></a></p>
+<p>The files under <code>config/defaults/</code> set the initial values for each analysis method. Once you save a method’s settings in an analysis, those choices take precedence when you reopen it. The files under <code>config/software/</code> identify the software releases used for processing and the checks performed during Software setup.</p>
+<p><a id="reference-configuration--i-initial-settings-by-module"></a></p>
+<h2 id="initial-settings-by-module">Initial settings by module</h2>
+<p>Look in <code>src/python/mif_pipeline/config/defaults/</code> for the file corresponding to the processing module. Within each file, the named sections hold the starting values for individual methods.</p>
+<h3 id="tissue-classifiers-and-kronos">Tissue classifiers and KRONOS</h3>
+<p><code>classifier.json</code> contains the initial RF, SVM and logistic-regression settings, feature normalization, training allocation and parameter-search values. <code>classifier.rtrees</code> sets the initial RF parameters, while <code>classifier.grid</code> lists the values initially offered for cross-validation. <code>classifier.kronos</code> contains the graph-fitting and working-memory settings used by the KRONOS route. The <a href="../tissue-classification/index.html">tissue-classifier guide</a> explains feature selection, RF/SVM parameters and training procedures.</p>
+<h3 id="tissue-detection">Tissue detection</h3>
+<p><code>tissue_detection.json</code> supplies the initial settings for finding tissue. The target pixel size (<code>tissue_detection.resolution_um_per_px</code>) and permitted deviation determine the initial choice of image level. The file also sets the minimum tissue area and the criteria for comparing revised tissue regions.</p>
+<p>The <code>tissue_detection.editor</code> section supplies the initial threshold, features and fitting settings for the detector editor. For RF and SVM, the starting features are channel intensity and Gaussian smoothing at scales of 1 and 3 detector pixels. Once you choose an image level, <strong>Image detail</strong> expresses these scales in micrometres and passes them to QuPath with the selected channel. We save the channel and image level with the completed detector. <a href="../tissue/index.html">Tissue detection</a></p>
+<h3 id="paired-image-alignment">Paired-image alignment</h3>
+<p><code>registration.json</code> contains the settings for global alignment, local refinement and checks on the completed transformation. The <code>registration.automatic</code> section selects the fitting channels, global view size, optimizer updates, thread count, starting orientations and whether automatic local refinement is enabled. <code>registration.bspline</code> selects the local view size, updates per level, final control-point spacing in µm, relative bending weight, maximum displacement and numerical inverse settings. The manual editor receives its initial permitted local displacement from <code>registration.manual</code>.</p>
+<p>Separate sections define the acceptable area, coverage and geometry when importing an alignment or transferring annotations. <a href="../alignment/index.html#reference-registration">Alignment controls and calculations</a> explains the fitting sequence and the effect of those limits.</p>
+<h3 id="image-preparation-and-spectral-fitting">Image preparation and spectral fitting</h3>
+<p><code>unmixing.json</code> contains the spectral estimator, requested NNLS tolerance, iteration limit, processing-region dimensions and saved pixel type. New image writes use the fixed lossless Blosc/Zstd level 1 codec with byte shuffle. The file also sets the condition-number, cosine-similarity and matrix-rank checks for reference spectra. Its processing limits cover simultaneous calculations, prepared image regions and memory for the working arrays. Calculation precision sets the number format used to fit the spectra. Output precision sets the format used to store the resulting component intensities. <a href="../unmixing/index.html#numerical-and-output-settings">Processing and output settings</a> explains these choices, and <a href="../images/storage.html">image storage</a> describes the output layout.</p>
+<h3 id="cell-segmentation">Cell segmentation</h3>
+<p><code>segmentation.json</code> contains the initial image-tile size, overlap padding, simultaneous tile count, analysis area and automatic device selection. Install or select the model files in Software setup, then choose the segmentation method and area to process in the segmentation form. Computing selects the processor. The segmentation form’s advanced settings expose the tile size, padding and simultaneous tile count. <a href="../cells/index.html">Cell segmentation</a> explains how these affect image sampling and execution.</p>
+<h3 id="cell-classification-and-marker-fitting">Cell classification and marker fitting</h3>
+<p><code>phenotyping.json</code> contains supervised cell-classifier settings and the marker-threshold fitting settings. The threshold section sets histogram bins, the maximum cells sampled for mixture fitting, the random seed and the batch size used to count classifications. Gaussian and Gamma fits have iteration limits, convergence tolerances and numbers of starting fits. The Gaussian section additionally selects shared or separate component variances and a minimum variance relative to the data scale.</p>
+<p>For a mixture fit, we propose the intensity at which the increasing marker score reaches <code>score_cutoff</code>. The researcher can adjust that intensity during review. The saved decision records the accepted threshold together with the measurement to which it applies. <a href="../phenotyping/marker-rules.html#finding-the-threshold-from-the-fitted-curves">How we obtain the gate from the fitted curves</a></p>
+<h3 id="unsupervised-phenotyping">Unsupervised phenotyping</h3>
+<p><code>clustering.json</code> contains the initial nearest-neighbour count, clustering resolution, random seed and marker-feature weight. The clustering result records the selected parameter values with the participating cells. <a href="../phenotyping/unsupervised.html">Unsupervised phenotyping</a> explains scaling and how PhenoGraph and FlowSOM use the selected measurements to group cells. The saved UMAP request records its embedding and display settings; <a href="../phenotyping/unsupervised.html#optional-umap-display">optional UMAP display</a> explains those parameters and the separate plot limit.</p>
+<h3 id="execution-limits">Execution limits</h3>
+<p><code>execution.json</code> sets the initial number of batch workers, in-flight tasks and tasks sharing a resource. The scheduler combines these limits with the CPU and memory available on the processing computer before starting work. <a href="memory-and-threads.html#iv-queue-and-thread-allocation">Memory and thread allocation</a> distinguishes these batch limits from the workers and image regions inside one operation.</p>
+<h3 id="displayed-channel-names">Displayed channel names</h3>
+<p><code>display.json</code> selects whether biomarker labels become displayed channel names.</p>
+<p><a id="example-section-structure"></a></p>
+<h3 id="section-structure">Section structure</h3>
+<pre class="json"><code>{
+  &quot;schema&quot;: &quot;mif-authoring-defaults/v1&quot;,
+  &quot;sections&quot;: {
+    &quot;classifier.svm&quot;: {
+      &quot;model_type&quot;: &quot;C_SVC&quot;,
+      &quot;kernel&quot;: &quot;LINEAR&quot;,
+      &quot;c&quot;: 1.0,
+      &quot;gamma&quot;: null,
+      &quot;max_iterations&quot;: 1000,
+      &quot;termination_epsilon&quot;: 1e-6
+    }
+  }
+}</code></pre>
+<p><em>The <code>classifier.svm</code> section of <code>classifier.json</code> supplies these initial SVM settings. The complete file also contains the other classifier sections.</em></p>
+<p>Each method's configuration class checks its field names and allowed values. To add a model, implement those checks, fitting, prediction and saved-model format alongside its default section.</p>
+<p><a id="reference-configuration--ii-reading-and-editing-initial-settings"></a></p>
+<h2 id="reading-and-editing-initial-settings">Reading and editing initial settings</h2>
+<p><code>default_section("classifier.svm")</code> reads <code>classifier.json</code> and returns the named section. We read each module file on its first use in the process and return an independent copy of its values to the caller. This keeps edits in one form from changing another form's starting values.</p>
+<p>We check the JSON for duplicate field names and nonfinite numerical values, including a decimal exponent that exceeds floating-point storage. A section placed in another module's file is also reported at that file's location. Parameter-specific checks then apply when the selected method is constructed.</p>
+<p>We read these files from the imported <code>mif_pipeline</code> package. The <a href="../installation-and-build/software.html#install-the-python-application">source-installation commands</a> install copies into the Python environment, so reinstall after editing repository defaults or software descriptions, then restart MIFflow. For a portable application, rebuild the distribution to include the updated files.</p>
+<p>To revise a setting already accepted in an analysis, open the stage’s <a href="../run/index.html#change-a-completed-decision">revision form</a>. It shows which results used the previous setting so you can review the work to repeat before applying the change.</p>
+<p>An imported model uses the settings saved during fitting. For a random forest these include the tree count, tree depth, feature preparation and class order. A tissue detector likewise retains the smoothing scales, centring and normalization used to calculate its features. Edits to a defaults file apply the next time you set up a model. Where available, the classifier records the defaults used for fitting under <code>training_defaults</code>.</p>
+<p>Format requirements and model input checks are implemented beside the code that consumes them. For example, the tissue predictor checks the saved feature order before applying a detector. Changing a JSON starting value therefore requires its corresponding settings parser and calculation to support that value.</p>
+<p><a id="reference-configuration--iii-installed-software-descriptions"></a></p>
+<h2 id="installed-software-descriptions">Installed software descriptions</h2>
+<p>Each supported software component has a JSON description under <code>src/python/mif_pipeline/config/software/</code>. It identifies the release, download locations and files required for a valid installation. The component's setup code chooses the local destination, extracts the archive and checks that the installed libraries or programs load.</p>
+<h3 id="instanseg-extension-and-model">InstanSeg extension and model</h3>
+<p><code>instanseg.json</code> records the QuPath extension and pretrained model separately. The extension entry contains the 0.1.7 JAR download, byte count and checksum. The model entry contains the <code>fluorescence_nuclei_and_cells</code> model name, release 0.1.1, archive description and eight required filenames with their checksums. These include the network, model description, preprocessing/postprocessing files and supplied examples. The extension and model can therefore be checked and installed through their separate setup controls.</p>
+<h3 id="cellpose-sam-and-stardist">Cellpose-SAM and StarDist</h3>
+<p><code>cellpose.json</code> identifies the Cellpose-SAM checkpoint, its source revision and the associated model files. <code>stardist.json</code> identifies the StarDist model and QuPath extension. Both descriptions record download locations, file sizes and checksums, which Software setup uses to verify the selected files. The <a href="../cells/index.html">segmentation guide</a> describes the outputs and settings of each method.</p>
+<h3 id="warpy">Warpy</h3>
+<p><code>warpy.json</code> records the Warpy 0.5.0 extension JAR, download size and checksum. Its installer first obtains QuPath's configured extension directory and checks existing Warpy copies. A missing extension is downloaded to a temporary directory and moved into that extension directory only after its bytes have been verified.</p>
+<h3 id="elastix-and-transformix">Elastix and Transformix</h3>
+<p><code>elastix.json</code> records the selected Elastix/Transformix 5.3.1 archive for each supported platform, the programs' location within that archive, and the required executable, library and licence files. A supplied existing installation is checked for the complete platform file set and execution of both programs. Automatic registration subsequently passes its image views and fitting parameters to those selected executables.</p>
+<h3 id="qupath">QuPath</h3>
+<p><code>qupath.json</code> records the supported QuPath version and the names, versions and checksums of its included DJL and PyTorch-engine Java libraries. Software setup uses these records when inspecting the QuPath installation we select. The program-specific release description contains the files needed by those checks; the actual executable path is saved in the desktop's software selections.</p>
+<h3 id="pytorch-libraries-for-qupath">PyTorch libraries for QuPath</h3>
+<p><code>pytorch.json</code> records the Java engine version, the Java/native bridge download and platform-specific CPU library archives. Its file lists identify the required Linux shared libraries or Windows DLLs and their checksums. Software setup uses these records to install the native libraries that InstanSeg and the prepared KRONOS encoder run inside QuPath. The CUDA bridge has a separate checksum for each platform; it connects QuPath to the Torch libraries included in the NVIDIA worker bundle. <a href="../installation-and-build/software.html#nvidia-processing-libraries">NVIDIA processing libraries</a> explains that installation.</p>
+<h3 id="java-for-image-reading">Java for image reading</h3>
+<p><code>java.json</code> records the selected Temurin Java 21 distribution, platform archives, exact sizes and checksums, together with release/source/licence locations. After extraction, setup checks the program and JVM library and requires the executable to report Java 21. The combined image-reader check then opens the selected Java and Bio-Formats libraries together.</p>
+<h3 id="bio-formats">Bio-Formats</h3>
+<p><code>bioformats.json</code> records the ordered 64-JAR image-reader definition and its corresponding downloads. Each required JAR has a dependency coordinate, relative filename and checksum; its download entry additionally supplies the address and byte count. Setup compares the two lists in order before downloading. We retain that order when constructing the Java classpath so the same selected library set is used when opening vendor files.</p>
+<h3 id="nimbus-weights">Nimbus weights</h3>
+<p><code>nimbus.json</code> records the V1 checkpoint, its pinned source revision, download size, checksum and licence. Software setup verifies those weights independently of the <a href="../installation-and-build/building-and-releasing.html#bundled-nimbus-worker">bundled Nimbus worker</a>, which contains the inference libraries.</p>
+<h3 id="biolinkbert-marker-descriptions">BioLinkBERT marker descriptions</h3>
+<p><code>biolinkbert.json</code> records the supported BioLinkBERT-large revision, model licence and six files used to encode new KRONOS marker descriptions. Each file has a download address, byte count and checksum. Software setup verifies these files during installation or selection; encoder preparation uses the selected local copy.</p>
+<p><a id="reference-configuration--reading-a-program-description"></a> <a id="reading-a-program-description"></a></p>
+<h2 id="read-and-update-a-program-description">Read and update a program description</h2>
+<p><code>read_software_description("instanseg")</code> reads the installed JSON by its supported program name. It requires the <code>mif-software-installation/v1</code> format and matching <code>program</code> field, rejects repeated fields and nonfinite numbers, and limits the file to 256 KiB. We cache each description on first use and return an independent copy to the caller. The program-specific functions then validate their version, download, path and required-file fields.</p>
+<p>For Bio-Formats, the required-file section is encoded with sorted JSON keys, fixed separators and a trailing newline when calculating its checksum. That checksum describes the ordered JAR list and Java requirement. The separate download section must point to the same file definition before installation begins.</p>
+<p><a id="reference-configuration--keeping-installation-and-method-settings-together"></a> <a id="keeping-installation-and-method-settings-together"></a></p>
+<h3 id="change-a-supported-software-release">Change a supported software release</h3>
+<p>We select an installed program in Software setup and choose its analysis parameters at the corresponding processing step. For example, <code>software/elastix.json</code> identifies the programs and libraries to install, while <code>defaults/registration.json</code> sets the initial affine iterations and B-spline spacing shown in the alignment form.</p>
+<p>When updating a supported software release, update its file description and the setup checks that confirm it can run. The method's numerical operations and parameter definitions remain in the processing code; the installation description records the files needed to run that code.</p>
+<p>Existing analyses retain the model and processing inputs selected during setup.</p>
+<p><a id="reference-configuration--iv-saved-analysis-settings"></a></p>
+<h2 id="saved-analysis-settings">Saved analysis settings</h2>
+<p><a href="analysis-folder.html#editable-setup-and-recorded-run-inputs">Analysis-folder contents</a> identifies the setup, computing and run-definition files. These retain the samples, image paths and processing choices selected when preparing the run.</p>
+<p>As processing progresses, the accepted review for each stage records the settings used to produce its result. For tissue detection, the record identifies the detector, the channel and image resolution it used, and the minimum tissue area retained. For a trained classifier they also identify the subjects, reference annotations, feature preparation and parameter values used for fitting. When you reopen the analysis, the progress record identifies which accepted results to display and which settings subsequent calculations should use.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="analysis.html">Analysis setup</a>.</p>
+</main>
+</body>
+</html>

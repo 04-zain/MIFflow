@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Python, Groovy and Java during processing · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/run/program-execution.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="python-groovy-and-java-during-processing">Python, Groovy and Java during processing</h1>
+<p><a href="index.html">Run and review</a> → <a href="execution.html">Execution and scheduling</a></p>
+<p>Python runs the desktop and schedules each stage of the analysis. It also performs calculations such as spectral unmixing on image bands and clustering on cell measurements. When a calculation uses QuPath’s image reader, annotations or classifier tools, Python starts QuPath with a Groovy script. The script opens the requested image and passes it to the Java code that performs the calculation.</p>
+<p><a id="starting-a-qupath-task"></a> <a id="python-selects-and-starts-a-task"></a></p>
+<h2 id="from-a-planned-operation-to-a-processing-request">From a planned operation to a processing request</h2>
+<p>Before starting a task, Python records the calculation to perform, its settings and the locations of its inputs and output. The program that performs the calculation uses this request to open the image or cell table directly. Recording the request also lets us identify which inputs produced a result if the task needs to be repeated.</p>
+<p><a id="groovy-connects-the-stage-to-qupath"></a> <a id="calling-qupath-and-our-java-classes"></a> <a id="compiled-java-calculations-use-qupaths-images-and-objects"></a></p>
+<h2 id="inside-qupath">Inside QuPath</h2>
+<p>When a calculation needs QuPath, Python launches it with the appropriate Groovy script and the saved request. The script opens the project image and passes it to our compiled Java extension. Groovy and Java share the same Java virtual machine, so the extension can use QuPath’s open image directly. It asks the image server for pixels and reads the annotations from the image’s object hierarchy. Whole-slide cell outlines are stored separately and read from the <a href="../../reference/cell-storage.html">cell tables</a>.</p>
+<p>During a <a href="qupath-review.html">classifier annotation review</a>, Groovy opens the review panel in QuPath. Java fits the preview classifier on a background thread so the researcher can continue inspecting the image. The panel displays the fitted predictions over the staining.</p>
+<p><a href="../../assets/figures/qupath-jvm.svg"><img src="../../assets/figures/qupath-jvm.svg" alt="Groovy calls compiled Java calculations and QuPath image methods within the same JVM; feature rows are passed to native OpenCV for classifier fitting." width="800"></a></p>
+<p><em>The Groovy script supplies the open image and annotation geometry to the Java calculation. In the classifier example, Java extracts features from labelled pixels and passes the training rows to OpenCV.</em></p>
+<h3 id="from-a-cell-outline-to-a-saved-measurement">From a cell outline to a saved measurement</h3>
+<p>To measure mean staining intensity, the request identifies the image channel, the accepted cells and the part of each cell to measure. Java reads the pixels inside the corresponding outlines and calculates a mean for each cell. We save these values with their cell IDs in a Parquet table so later stages can match each measurement to its cell.</p>
+<p><a href="../../assets/figures/process-lifecycle.svg"><img src="../../assets/figures/process-lifecycle.svg" alt="A cell-measurement request starts QuPath, where an image window and cell mask produce a saved intensity table that Python reads before completing the step." width="740"></a></p>
+<p><em>The three pixels inside the cell have intensities of 2, 4 and 6. The teal path follows their mean of 4.0 from the output table to the coordinator. The blue path carries the process exit status.</em></p>
+<p>When QuPath exits, Python reads its exit status and the result returned for the measurement request. Before making the table available to phenotyping, it checks the image, cell population and measurements against that request and confirms that any required review is complete. These same checks allow an interrupted analysis to recognize a table that QuPath finished writing. <a href="saving-and-recovery.html">How results are saved and recovered</a></p>
+<p><a id="numerical-libraries-perform-the-underlying-algorithms"></a> <a id="how-java-calls-opencv-and-pytorch"></a></p>
+<h2 id="where-model-fitting-and-prediction-run">Where model fitting and prediction run</h2>
+<p><strong>Tissue and cell classifiers.</strong> Java prepares the training rows and uses OpenCV to fit random forests, support vector machines and logistic regression. We save the fitted feature transformation with the model so that predictions use the same preparation as training. For KRONOS, the annotation preview and final fit share the Java method that orders and normalizes the features. <a href="../tissue-classification/model-execution.html">Classifier fitting and prediction</a></p>
+<p><strong>Image models.</strong> InstanSeg and the fixed KRONOS encoder use PyTorch through the Deep Java Library. InstanSeg converts an image tile into cell and nuclear masks. KRONOS converts each image patch into a vector of features. For KRONOS tissue classification, Python prepares the encoder for the selected marker panel so Java can use it to calculate those features across the image. Java saves them in a NumPy matrix that the Python worker reads to train the graph model. <a href="../tissue-classification/model-execution.html#iii-kronos-input-preparation-and-feature-reuse">KRONOS inputs and feature reuse</a></p>
+<p><a id="calculations-that-run-in-python-or-another-program"></a></p>
+<h2 id="how-other-stages-use-these-programs">How other stages use these programs</h2>
+<p><strong>Unmixing and phenotyping.</strong> The Python unmixing code estimates how much each reference spectrum contributes to the signal measured at each pixel. During phenotyping, Python reads the saved cell measurements to fit marker thresholds or cluster cells. For Nimbus, QuPath supplies the image fields and cell masks to a separate Python worker, which calculates one score per cell and marker. <a href="../phenotyping/nimbus.html">Nimbus scoring</a></p>
+<p><strong>Cell segmentation.</strong> Cellpose-SAM runs in a Python worker and returns masks that we convert to cell outlines. StarDist runs through its QuPath extension and OpenCV. <a href="../cells/processing.html">Segmentation processing</a></p>
+<p><strong>Paired-image alignment.</strong> The Qt editor displays fields supplied by the Java reader. Elastix fits the transformation between the two images, and Transformix supplies coordinates for checking a B-spline fit. During review the Java reader evaluates the saved transformation and Warpy reads the corresponding pixels from the original paired image. <a href="../alignment/index.html">Paired-image alignment</a></p>
+<p>In <a href="execution.html#dispatch-cluster-work">cluster processing</a>, the coordinator and processing programs read and write the analysis files on the allocated node. With cluster streaming, MIFflow submits the job from the researcher’s computer and the local review opens the images through a mounted cluster folder.</p>
+<h2 id="source-locations">Source locations</h2>
+<details>
+<summary>Files for scheduling, QuPath processing and model fitting</summary>
+
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select and schedule processing steps</td>
+<td><code>src/python/mif_pipeline/orchestration/</code></td>
+</tr>
+<tr class="even">
+<td>Construct QuPath commands and collect process results</td>
+<td><a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/qupath_runtime/runner.py"><code>runner.py</code></a></td>
+</tr>
+<tr class="odd">
+<td>Read stage requests and connect QuPath review controls</td>
+<td><code>qupath/scripts/</code></td>
+</tr>
+<tr class="even">
+<td>Perform compiled image, cell, geometry and model calculations</td>
+<td><code>src/java/org/mif/</code></td>
+</tr>
+<tr class="odd">
+<td>Fit OpenCV classifiers</td>
+<td><a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/classification/OpenCvTraining.java"><code>OpenCvTraining.java</code></a></td>
+</tr>
+<tr class="even">
+<td>Compile and package the Java extension</td>
+<td><a href="https://github.com/04-zain/MIFflow/blob/main/scripts/build_native_extension.py"><code>build_native_extension.py</code></a></td>
+</tr>
+<tr class="odd">
+<td>Register the image reader and viewer extension</td>
+<td><code>src/java-resources/META-INF/services/</code></td>
+</tr>
+<tr class="even">
+<td>Start and communicate with the KRONOS Python worker</td>
+<td><a href="https://github.com/04-zain/MIFflow/blob/main/qupath/scripts/compartment_analysis/kronos_worker_client.groovy"><code>kronos_worker_client.groovy</code></a></td>
+</tr>
+</tbody>
+</table></div>
+</details>
+
+<p><a href="../setup/source-layout.html">Source organization</a> describes the modules in more detail.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="execution.html">Execution and scheduling</a>.</p>
+</main>
+</body>
+</html>

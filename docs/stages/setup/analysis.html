@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Create an analysis and add samples · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/analysis.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="create-an-analysis-and-add-samples">Create an analysis and add samples</h1>
+<p><a href="../../../index.html#analysis-stages">Analysis stages</a> · <a href="analysis-folder.html">Analysis-folder contents</a> · <a href="configuration.html">Saved analysis settings</a></p>
+<p><strong>In this stage:</strong> <a href="#create-the-analysis-folder">Create the analysis folder</a> · <a href="#select-where-processing-runs">Select where processing runs</a> · <a href="#add-the-analytical-images">Add the images</a> · <a href="#label-samples-and-groups">Label samples and groups</a> · <a href="#add-a-paired-image-where-required">Add a paired image where required</a> · <a href="#save-and-inspect-plan">Save and inspect Plan</a> · <a href="#what-is-saved">Reopen a saved analysis</a></p>
+<p><a id="getting-started-first-analysis"></a></p>
+<p><a id="getting-started-first-analysis--create-your-first-analysis"></a></p>
+<p>An analysis can include several images from the same subject and several subjects imaged with the same marker panel. On <strong>Home</strong>, create the folder for the analysis. On <strong>Computing</strong>, choose where the images will be processed. Then use <strong>Samples</strong> to identify the images, their subjects and which images can share preparation settings and fitted models.</p>
+<p><a id="getting-started-first-analysis--1-create-the-analysis-folder"></a> <a id="luca-example"></a></p>
+<h2 id="create-the-analysis-folder">Create the analysis folder</h2>
+<p>On <strong>Home</strong>, select <strong>New analysis</strong>. Enter the <strong>Analysis name</strong> and choose the parent directory under <strong>Save analysis in</strong>. Check the path shown under <strong>Analysis folder</strong>, then select <strong>Create analysis</strong>.</p>
+<p><a href="../../assets/screenshots/luca-create-analysis.png"><img src="../../assets/screenshots/luca-create-analysis.png" alt="Home showing the LuCa analysis name, parent folder and resulting analysis folder." width="560"></a></p>
+<p><em>For the LuCa walkthrough, choosing <code>/data/analyses</code> as the parent directory creates the study folder <code>/data/analyses/luca-public-walkthrough</code>.</em></p>
+<p><a id="getting-started-first-analysis--2-select-where-processing-runs"></a></p>
+<h2 id="select-where-processing-runs">Select where processing runs</h2>
+<p>To run the analysis on your computer, select <strong>This computer</strong>. Under <strong>Local settings…</strong>, choose the processor and check the available memory and disk space. Select <strong>Save and return</strong>, then <strong>Next: Samples</strong>.</p>
+<p>To run the analysis on a cluster, choose <strong>Cluster desktop</strong> or <strong>Cluster streaming</strong>. The images and results are stored on the cluster and an allocated compute node runs the analysis. There are two ways to review its progress and inspect the images.</p>
+<ul>
+<li><strong>Cluster desktop.</strong> Open MIFflow in a <a href="computing.html#cluster-desktop">graphical session on the compute node</a>. Select <strong>This computer</strong> inside that session to run the analysis and review the images in QuPath on the node.</li>
+<li><strong>Cluster streaming.</strong> Open MIFflow on your own computer and <a href="computing.html#cluster-streaming">set up the streaming connection</a>. MIFflow submits processing jobs to Slurm. QuPath opens the images through a mounted cluster folder so you can review them locally.</li>
+</ul>
+<p><a href="../../assets/screenshots/analysis-computing-location.png"><img src="../../assets/screenshots/analysis-computing-location.png" alt="Computing with This computer selected and Local settings available below the three processing locations." width="550"></a></p>
+<p><a id="add-the-analytical-images"></a> <a id="getting-started-first-analysis--3-add-the-analytical-images"></a> <a id="user-guide-batch-analysis"></a> <a id="user-guide-batch-analysis--organize-and-run-a-batch"></a> <a id="user-guide-batch-analysis--1-import-the-images-together"></a> <a id="import-the-images-together"></a></p>
+<h2 id="add-the-images">Add the images</h2>
+<p>Select <strong>Add images…</strong> and choose one or more source files. Each imported image initially uses its filename as the sample name. Hover over a filename to see its complete location, or select the images and use <strong>Copy path</strong> or <strong>Ctrl+C</strong> to copy their locations.</p>
+<p>A source file can contain several images, such as separate tissue sections and a slide thumbnail. We select the fluorescence image automatically when only one is suitable for processing. If several qualify, <strong>Choose images</strong> shows their names, dimensions and channel counts. Select the sections to analyse and choose <strong>Use selected images</strong>. Each selected image becomes a separate sample.</p>
+<p>If a cyclic immunofluorescence sample has one file per cycle, select those rows and choose <strong>Group cycle files…</strong>. During image inspection, you can <a href="../cyclic-if-methods/index.html#import-the-cycle-images">align the cycles using a shared stain</a>. If the cycles are already assembled in one image, add it as a single sample.</p>
+<p><a href="../../assets/screenshots/analysis-imported-images-current.png"><img src="../../assets/screenshots/analysis-imported-images-current.png" alt="Samples after adding the public LuCa file, with its suitable fluorescence image selected automatically." width="600"></a></p>
+<p><em>The public LuCa file contains one suitable fluorescence image and a thumbnail. Adding it selects the fluorescence image automatically.</em></p>
+<p><a id="getting-started-first-analysis--4-label-samples-and-groups"></a></p>
+<h2 id="label-samples-and-groups">Label samples and groups</h2>
+<p>To edit an entry, select the cell and type its new value, or press <strong>F2</strong> to edit the existing text.</p>
+<p>Give each image a unique <strong>Sample name</strong> and enter the person or animal it came from under <strong>Subject ID</strong>. We use the subject ID to keep images from one subject together when allocating training, validation and test sets in later stages.</p>
+<p>Assign the same <strong>Processing group</strong> to images recorded with the same marker panel and image detector settings. Images in a group can share a <a href="../tissue-classification/index.html">tissue classifier</a> or a <a href="../phenotyping/index.html">pooled phenotyping model</a>.</p>
+<p><a href="../../assets/figures/sample-labels-and-processing-groups.svg"><img src="../../assets/figures/sample-labels-and-processing-groups.svg" alt="Four named slides share three subject IDs. The first three slides belong to panel-A-run1 and the fourth to panel-B-run1." width="660"></a></p>
+<p><em>The two sections from Mouse07 have distinct sample names and share a subject ID. The section from Mouse08 joins them in the same processing group because all three were imaged with the same panel and detector settings. Mouse09 was imaged with a different panel.</em></p>
+<h3 id="edit-several-sample-labels">Edit several sample labels</h3>
+<p>To paste labels from a spreadsheet, select the first destination cell and press <strong>Ctrl+V</strong>. For a block with headers, use the column names <strong>Sample name</strong>, <strong>Subject ID</strong> and <strong>Processing group</strong> for the fields you include.</p>
+<p>To copy labels out of the table, use <strong>Shift-click</strong> to select a block or <strong>Ctrl+A</strong> to select the visible samples, then press <strong>Ctrl+C</strong>. The same copy and paste actions are available by right-clicking the table. Use <strong>Ctrl+Z</strong> to undo a label edit.</p>
+<p>To assign one subject or processing group to several samples, select their cells. Choose the field below the table, enter its value and select <strong>Apply to … samples</strong>. If you filter the table, the assignment applies only to selected samples that remain visible.</p>
+<p><a href="../../assets/screenshots/analysis-sample-labels-current.png"><img src="../../assets/screenshots/analysis-sample-labels-current.png" alt="Current Samples table with the saved public LuCa sample, subject and processing-group assignments." width="650"></a></p>
+<p><em>The saved LuCa sample has one subject and one processing group. Its labels can be edited directly in the table; bulk assignment becomes available when several samples are selected.</em></p>
+<p>Once finished, select <strong>Next</strong> - we will automatically check the sample list for problems such as duplicate sample names and select the entry to correct.</p>
+<p><a id="user-guide-batch-analysis--2-review-shared-inputs"></a> <a id="review-shared-inputs"></a></p>
+<p><a id="user-guide-batch-analysis--5-reserve-independent-evaluation-subjects"></a> <a id="reserve-independent-evaluation-subjects"></a></p>
+<p><a id="getting-started-first-analysis--5-add-a-paired-image-where-required"></a></p>
+<h2 id="add-a-paired-image-where-required">Add a paired image where required</h2>
+<p>A paired image provides a reference for identifying tissue structures during mIF review and annotation.</p>
+<p>Select <strong>Next: paired images</strong>, choose the mIF sample and use <strong>Choose file…</strong> to attach its reference. If the file contains one usable image, we select it automatically. If it contains several, use their names and dimensions to identify the corresponding section and select <strong>Use selected image</strong>. Set <strong>Image type</strong> to the staining or imaging method and check the <strong>Paired image name</strong>.</p>
+<p>Under <strong>Use with mIF</strong>, choose <strong>Compare images side by side</strong> to inspect the two images without registration. Choose <strong>Align with mIF and use an overlay</strong> to register the paired image to the mIF image. Once you <a href="../alignment/index.html#user-guide-paired-image-registration">review and accept the alignment</a>, you can overlay the two images in QuPath to compare corresponding tissue structures. If the analysis uses mIF images alone, continue to <strong>Save analysis</strong>.</p>
+<p><a href="../../assets/screenshots/analysis-paired-image-current.png"><img src="../../assets/screenshots/analysis-paired-image-current.png" alt="Paired-image step with LuCa selected in the sample list and Choose file on the right." width="700"></a></p>
+<p><em>LuCa-01 is selected in the sample list, with no paired image assigned.</em></p>
+<p><a id="getting-started-first-analysis--6-save-and-inspect-plan"></a> <a id="user-guide-batch-analysis--3-save-and-inspect-the-batch-plan"></a> <a id="save-and-inspect-the-batch-plan"></a></p>
+<h2 id="save-and-inspect-plan">Save and inspect Plan</h2>
+<p>Select <strong>Save analysis</strong>, then open <strong>Plan</strong> to review the included samples, subject and processing-group assignments, computing location and processor choice. <strong>Show image locations</strong> displays the source paths if you need to check which files were selected.</p>
+<p><strong>Software availability</strong> shows which processing tools are ready. At this stage we check that at least one supported segmentation model is available. When you choose a method during segmentation setup, we check the model for that method. If you requested paired-image registration, we also check Elastix, Transformix and the Warpy extension used to apply the transformation in QuPath.</p>
+<p>If a check fails, open <strong>Details</strong> for the reported problem and installation location. Correct the named component in <a href="../installation-and-build/software.html">Software setup</a>, follow any restart instruction, and return to Plan to refresh the checks.</p>
+<p><a href="../../assets/screenshots/analysis-software-availability-current.png"><img src="../../assets/screenshots/analysis-software-availability-current.png" alt="Plan groups verified image reading and installed segmentation models, with Details beside each check." width="700"></a></p>
+<p><em>Plan shows which image reader and segmentation models are available for the LuCa analysis.</em></p>
+<p>Select <strong>Start analysis</strong> when the plan is ready. You can return to <strong>Plan</strong> to check the samples and processing groups for the running analysis. On <strong>Run</strong>, open <strong>Channels &amp; markers</strong> when image inspection finishes.</p>
+<p><a id="user-guide-batch-analysis--4-complete-group-and-sample-reviews"></a> <a id="complete-group-and-sample-reviews"></a> <a id="user-guide-batch-analysis--6-review-batch-results"></a> <a id="review-batch-results"></a> The <a href="../run/index.html#user-guide-workflow">workflow guide</a> explains how to complete the processing stages and revisit their settings. <a href="../results/index.html#user-guide-results-and-exports">Results</a> describes the saved reviews and exports.</p>
+<p><a id="getting-started-first-analysis--what-is-saved"></a> <a id="what-is-saved"></a></p>
+<h2 id="reopen-a-saved-analysis">Reopen a saved analysis</h2>
+<p>On <strong>Home</strong>, choose <strong>Open analysis…</strong> and select the named analysis folder. Before processing starts, you can return to the sample list and its subject and group assignments. These are saved in <code>analysis.setup.json</code>. The processing location, processor choice and any cluster connection settings are stored in <code>analysis.computing.json</code>.</p>
+<p>When you prepare the run, we write the selected images and initial processing settings to <code>analysis.manifest.json</code>. Reopening a prepared analysis restores the run and its waiting reviews. To replace an image at this point, use <a href="../run/index.html#replace-a-source-image-or-select-another-series">Change source image…</a> so the plan identifies which results (from later stages) need recalculation.</p>
+<hr />
+<p><strong>Next:</strong> <a href="../images/index.html">Images and channel assignments</a>.</p>
+</main>
+</body>
+</html>

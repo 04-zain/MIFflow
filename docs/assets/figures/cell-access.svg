@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1070" viewBox="0 0 1000 1070" role="img" aria-labelledby="title description">
+<title id="title">Complete cell bounds select a spatial group before exact outline filtering</title>
+<desc id="description">An illustrative cell with centroid x4094 belongs to home block zero but extends to x4108. A viewport beginning at x4096 intersects its outline. The complete-geometry bounds of group G0 therefore remain candidates in the retained layout index. Readers obtain that group&#x27;s base geometry and aligned selected phenotype component. Exact outline intersection retains cell i1 and removes candidate i2. The phenotype dictionary belongs to the selected field and result version. Coordinates shown are level-zero image pixels; table identifiers and codes are illustrative.</desc>
+<rect width="1000" height="1070" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="35" y="37" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Cell geometry and viewport</text>
+<text x="35" y="62" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">Level-zero pixels</text>
+<text x="533" y="37" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Spatial group index</text>
+<rect x="182" y="112" width="210" height="248" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.3"/>
+<text x="285" y="76" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">Viewport</text>
+<text x="285" y="102" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x ≥ 4096</text>
+<path d="M70 158 H266 V327 H70 Z" fill="none" stroke="#526773" stroke-width="1.3" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<ellipse cx="168" cy="222" rx="98" ry="64" fill="#EAF5F4" fill-opacity=".8" stroke="#007D83" stroke-width="2"/>
+<ellipse cx="156" cy="219" rx="32" ry="25" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.5"/>
+<ellipse cx="112" cy="308" rx="21" ry="19" fill="#FFFFFF" stroke="#007D83" stroke-width="1.7"/>
+<circle cx="168" cy="222" r="4" fill="#243746" stroke="#243746"/>
+<text x="187" y="247" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">i₁</text>
+<text x="141" y="315" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="start">i₂</text>
+<text x="45" y="85" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="start">centroid x = 4094</text>
+<path d="M143 94 V139 L168 218" fill="none" stroke="#526773" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M45 379 L408 379" fill="none" stroke="#526773" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M182 373 L182 385" fill="none" stroke="#526773" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="182" y="408" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">4096</text>
+<path d="M266 373 L266 385" fill="none" stroke="#526773" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="266" y="408" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">4108</text>
+<text x="398" y="408" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">x</text>
+<text x="43" y="440" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="start">Centroid home block: bₓ = 0</text>
+<path d="M70 290 H21 V470 H506 V211 H533" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="381" y="451" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="start">full bounds</text>
+<rect x="533" y="111" width="437" height="235" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="533" y="111" width="437" height="48" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="549" y="142" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Group</text>
+<text x="665" y="142" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Max x</text>
+<text x="792" y="142" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Part / row group</text>
+<rect x="534" y="160" width="435" height="102" rx="0" fill="#EAF5F4" stroke="#EAF5F4" stroke-width="1"/>
+<text x="559" y="219" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="start">G0</text>
+<text x="671" y="219" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="start">4108</text>
+<text x="830" y="219" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="start">p₀ / r₀</text>
+<text x="559" y="313" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">G1</text>
+<text x="671" y="313" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">4040</text>
+<text x="830" y="313" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">p₀ / r₁</text>
+<path d="M552 346 V490 H528 V638 H512" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M945 346 V550" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="585" y="394" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="start">Candidate group G0</text>
+<text x="585" y="424" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Resolve the stored rows</text>
+<text x="45" y="523" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Base group G0</text>
+<text x="590" y="523" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Selected phenotype group G0</text>
+<rect x="45" y="550" width="467" height="201" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="45" y="550" width="467" height="48" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="69" y="580" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">ID</text>
+<text x="157" y="580" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">X bounds</text>
+<text x="317" y="580" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Cell / nucleus WKB</text>
+<text x="71" y="643" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#243746" text-anchor="start">i₁</text>
+<text x="151" y="643" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">4080–4108</text>
+<ellipse cx="392" cy="636" rx="39" ry="21" fill="#EAF5F4" stroke="#007D83" stroke-width="1.5"/>
+<ellipse cx="387" cy="636" rx="12" ry="9" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.2"/>
+<text x="71" y="719" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#243746" text-anchor="start">i₂</text>
+<text x="151" y="719" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">4083–4089</text>
+<ellipse cx="392" cy="712" rx="22" ry="21" fill="#EAF5F4" stroke="#007D83" stroke-width="1.5"/>
+<path d="M46 676 L511 676" fill="none" stroke="#E8EEF0" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="590" y="550" width="380" height="201" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="590" y="550" width="380" height="48" rx="0" fill="#EAF5F4" stroke="#EAF5F4" stroke-width="1"/>
+<text x="614" y="580" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">ID</text>
+<text x="709" y="580" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Code</text>
+<text x="819" y="580" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Rejected</text>
+<text x="617" y="643" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#243746" text-anchor="start">i₁</text>
+<text x="735" y="643" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="middle">1</text>
+<text x="854" y="643" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">false</text>
+<text x="617" y="719" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#243746" text-anchor="start">i₂</text>
+<text x="735" y="719" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="middle">2</text>
+<text x="854" y="719" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">false</text>
+<path d="M591 676 L969 676" fill="none" stroke="#E8EEF0" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M45 650 H22 V922 H43" fill="none" stroke="#356E9A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="43" y="830" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Exact outline intersection</text>
+<rect x="43" y="859" width="267" height="145" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="65" y="904" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">i₁</text>
+<text x="115" y="904" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="start">intersects</text>
+<path d="M44 931 L309 931" fill="none" stroke="#E8EEF0" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="65" y="976" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#526773" text-anchor="start">i₂</text>
+<text x="115" y="976" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">outside</text>
+<path d="M310 900 L378 900" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="344" y="880" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">i₁</text>
+<rect x="378" y="859" width="330" height="145" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="378" y="859" width="330" height="48" rx="0" fill="#EAF5F4" stroke="#EAF5F4" stroke-width="1"/>
+<text x="398" y="889" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">ID</text>
+<text x="481" y="889" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Phenotype</text>
+<text x="401" y="965" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">i₁</text>
+<text x="481" y="965" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="start">Phenotype A</text>
+<path d="M970 649 H989 V922 H970" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="773" y="817" width="197" height="187" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="773" y="817" width="197" height="63" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="789" y="843" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="start">Field: phenotype</text>
+<text x="789" y="869" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">Result version K</text>
+<text x="786" y="915" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">0 → Unclassified</text>
+<text x="786" y="951" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#007D83" text-anchor="start">1 → Phenotype A</text>
+<text x="786" y="985" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">2 → Phenotype B</text>
+<path d="M773 952 L708 952" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="740" y="932" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#007D83" text-anchor="middle">decode</text>
+</svg>

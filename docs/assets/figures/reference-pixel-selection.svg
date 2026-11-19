@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="410" viewBox="0 0 1000 410" role="img" aria-labelledby="title description">
+<title id="title">Whole-pixel selection and per-band regional means</title>
+<desc id="description">Constructed example of six pixels in one region and three measurement bands. Each row is one complete pixel spectrum. Pixels 1, 3 and 5 have corrected intensities (10,20,30), (14,18,28) and (12,22,32). Pixel 2 is excluded because a source detector-count band reaches the saturation cutoff; its corrected values are omitted. Pixel 4 has zero corrected spectral length and is excluded. Pixel 6 has a nonfinite band and its entire spectrum is excluded. Averaging the same three retained pixels in each band gives the regional mean (12,20,30). Saturation uses acquired detector counts before intensity correction, whereas minimum spectral signal uses the L2 length after correction. Values are illustrative, not measured data.</desc>
+<rect width="1000" height="410" fill="#FFFFFF"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<g font-family="Arial, Helvetica, sans-serif" fill="#243746">
+<text x="30" y="31" font-size="20" fill="#243746" font-weight="600" text-anchor="start">Pixels in one region</text>
+<text x="30" y="59" font-size="17" fill="#526773" font-weight="400" text-anchor="start">Corrected band intensities</text>
+<text x="704" y="31" font-size="20" fill="#243746" font-weight="600" text-anchor="start">Retained spectra</text>
+<text x="704" y="59" font-size="17" fill="#526773" font-weight="400" text-anchor="start">The same pixels in every band</text>
+<text x="35" y="91" font-size="16" fill="#526773" font-weight="400" text-anchor="start">Pixel</text>
+<text x="112" y="91" font-size="16" fill="#526773" font-weight="400" text-anchor="middle">Band 1</text>
+<text x="173" y="91" font-size="16" fill="#526773" font-weight="400" text-anchor="middle">Band 2</text>
+<text x="234" y="91" font-size="16" fill="#526773" font-weight="400" text-anchor="middle">Band 3</text>
+<text x="45" y="125" font-size="18" fill="#007D83" font-weight="400" text-anchor="middle">1</text>
+<rect x="80" y="102" width="185" height="33" fill="#EAF5F4" stroke="none"/>
+<text x="112" y="125" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">10</text>
+<text x="173" y="125" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">20</text>
+<text x="234" y="125" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">30</text>
+<text x="45" y="165" font-size="18" fill="#526773" font-weight="400" text-anchor="middle">2</text>
+<rect x="80" y="142" width="185" height="33" fill="#F5F7F8" stroke="none"/>
+<text x="173" y="165" font-size="17" fill="#526773" font-weight="400" text-anchor="middle">not used</text>
+<rect x="80" y="142" width="3" height="33" fill="#946A21" stroke="none"/>
+<text x="285" y="159" font-size="17" fill="#946A21" font-weight="400" text-anchor="start">Saturated detector count</text>
+<text x="285" y="180" font-size="16" fill="#526773" font-weight="400" text-anchor="start">Any band, before correction</text>
+<text x="45" y="205" font-size="18" fill="#007D83" font-weight="400" text-anchor="middle">3</text>
+<rect x="80" y="182" width="185" height="33" fill="#EAF5F4" stroke="none"/>
+<text x="112" y="205" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">14</text>
+<text x="173" y="205" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">18</text>
+<text x="234" y="205" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">28</text>
+<text x="45" y="245" font-size="18" fill="#526773" font-weight="400" text-anchor="middle">4</text>
+<rect x="80" y="222" width="185" height="33" fill="#F5F7F8" stroke="none"/>
+<text x="112" y="245" font-size="19" fill="#526773" font-weight="400" text-anchor="middle">0</text>
+<text x="173" y="245" font-size="19" fill="#526773" font-weight="400" text-anchor="middle">0</text>
+<text x="234" y="245" font-size="19" fill="#526773" font-weight="400" text-anchor="middle">0</text>
+<rect x="80" y="222" width="3" height="33" fill="#946A21" stroke="none"/>
+<text x="285" y="239" font-size="17" fill="#946A21" font-weight="400" text-anchor="start">Spectral length ≤ minimum</text>
+<text x="285" y="260" font-size="16" fill="#526773" font-weight="400" text-anchor="start">L2 length after correction</text>
+<text x="45" y="285" font-size="18" fill="#007D83" font-weight="400" text-anchor="middle">5</text>
+<rect x="80" y="262" width="185" height="33" fill="#EAF5F4" stroke="none"/>
+<text x="112" y="285" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">12</text>
+<text x="173" y="285" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">22</text>
+<text x="234" y="285" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">32</text>
+<text x="45" y="325" font-size="18" fill="#526773" font-weight="400" text-anchor="middle">6</text>
+<rect x="80" y="302" width="185" height="33" fill="#F5F7F8" stroke="none"/>
+<text x="112" y="325" font-size="19" fill="#526773" font-weight="400" text-anchor="middle">16</text>
+<text x="173" y="325" font-size="19" fill="#526773" font-weight="400" text-anchor="middle">—</text>
+<text x="234" y="325" font-size="19" fill="#526773" font-weight="400" text-anchor="middle">24</text>
+<rect x="80" y="302" width="3" height="33" fill="#946A21" stroke="none"/>
+<text x="285" y="319" font-size="17" fill="#946A21" font-weight="400" text-anchor="start">Missing or infinite band value</text>
+<text x="285" y="340" font-size="16" fill="#526773" font-weight="400" text-anchor="start">Entire pixel excluded</text>
+<path d="M78 98 H70 V340 H78" fill="none" stroke="#243746" stroke-width="1.4"/>
+<path d="M267 98 H275 V340 H267" fill="none" stroke="#243746" stroke-width="1.4"/>
+<text x="600" y="181" font-size="17" fill="#526773" font-weight="400" text-anchor="middle">Retain</text>
+<text x="600" y="202" font-size="17" fill="#526773" font-weight="400" text-anchor="middle">whole rows</text>
+<path d="M562 218 H638" fill="none" stroke="#243746" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="738" y="91" font-size="16" fill="#526773" font-weight="400" text-anchor="middle">Band 1</text>
+<text x="827" y="91" font-size="16" fill="#526773" font-weight="400" text-anchor="middle">Band 2</text>
+<text x="916" y="91" font-size="16" fill="#526773" font-weight="400" text-anchor="middle">Band 3</text>
+<rect x="704" y="102" width="68" height="168" fill="#EAF5F4" stroke="none"/>
+<rect x="793" y="102" width="68" height="168" fill="#EAF5F4" stroke="none"/>
+<rect x="882" y="102" width="68" height="168" fill="#EAF5F4" stroke="none"/>
+<text x="677" y="126" font-size="18" fill="#007D83" font-weight="400" text-anchor="middle">1</text>
+<text x="738" y="126" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">10</text>
+<text x="827" y="126" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">20</text>
+<text x="916" y="126" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">30</text>
+<text x="677" y="169" font-size="18" fill="#007D83" font-weight="400" text-anchor="middle">3</text>
+<text x="738" y="169" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">14</text>
+<text x="827" y="169" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">18</text>
+<text x="916" y="169" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">28</text>
+<text x="677" y="212" font-size="18" fill="#007D83" font-weight="400" text-anchor="middle">5</text>
+<text x="738" y="212" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">12</text>
+<text x="827" y="212" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">22</text>
+<text x="916" y="212" font-size="19" fill="#007D83" font-weight="400" text-anchor="middle">32</text>
+<path d="M738 225 V251" fill="none" stroke="#243746" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M827 225 V251" fill="none" stroke="#243746" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M916 225 V251" fill="none" stroke="#243746" stroke-width="1.2" marker-end="url(#arrow)"/>
+<text x="827" y="293" font-size="18" fill="#243746" font-weight="600" text-anchor="middle">Average each band (n = 3)</text>
+<rect x="704" y="309" width="246" height="38" fill="#EAF5F4" stroke="none"/>
+<text x="738" y="335" font-size="22" fill="#007D83" font-weight="600" text-anchor="middle">12</text>
+<text x="827" y="335" font-size="22" fill="#007D83" font-weight="600" text-anchor="middle">20</text>
+<text x="916" y="335" font-size="22" fill="#007D83" font-weight="600" text-anchor="middle">30</text>
+<text x="827" y="374" font-size="18" fill="#007D83" font-weight="600" text-anchor="middle">Regional mean spectrum</text>
+</g>
+</svg>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Troubleshooting · MIFflow</title>
+<link rel="stylesheet" href="../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../index.html">MIFflow</a>
+    <a href="../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/troubleshooting.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="troubleshooting">Troubleshooting</h1>
+<p>If an analysis has stopped, select the affected step on <strong>Run</strong> and open <strong>Details</strong>. The failed operation and its last saved result tell you where to resume. If processing has yet to start, begin with the failed check on <strong>Plan</strong>.</p>
+<p><a href="#startup-and-software">Startup and software</a> · <a href="#images-and-calibration">Images and calibration</a> · <a href="#reviews-and-annotations">Forms and QuPath</a> · <a href="#resume-a-stopped-step">Interrupted processing</a> · <a href="#cluster-submission-outcome-is-uncertain">Cluster submission</a></p>
+<h2 id="startup-and-software">Startup and software</h2>
+<h3 id="a-required-software-check-fails">A required software check fails</h3>
+<p>Open <strong>Details</strong> on the failed Plan row to identify the executable, library or model that could not be loaded. In <strong>Software setup</strong>, use the row for that component to select an existing installation or install the supported version. Close QuPath before replacing an extension. If two versions were found, check the paths in the error to identify the competing copies.</p>
+<p>If an InstanSeg check fails, open <strong>Cell segmentation</strong> to identify which component needs attention. QuPath needs the extension to start segmentation, the model directory to find the trained network and the native PyTorch libraries to run it. Use the separate Cellpose-SAM or StarDist checks if you selected one of those methods.</p>
+<p>If you change Java or Bio-Formats after the image reader has started, restart the desktop so the next Java session loads the selected files. <a href="stages/installation-and-build/software.html#open-software-setup">Software setup</a></p>
+<h3 id="the-desktop-cannot-connect-to-wslg">The desktop cannot connect to WSLg</h3>
+<p>If the terminal reports <code>Failed to create wl_display (No such file or directory)</code>, Qt could not open the Wayland display socket. In WSL, <code>XDG_RUNTIME_DIR</code> may point to <code>/run/user/1000</code> even though WSLg placed the socket in <code>/mnt/wslg/runtime-dir</code>. Check for WSL updates from Windows with <code>wsl --update</code>. <a href="https://github.com/microsoft/WSL/issues/11261">Microsoft WSL issue</a></p>
+<p>If <code>/mnt/wslg/runtime-dir/wayland-0</code> exists, launch the desktop using that socket. This selects Wayland even if Qt previously reported a missing X11 <code>xcb</code> library.</p>
+<pre class="bash"><code>WAYLAND_DISPLAY=/mnt/wslg/runtime-dir/wayland-0 \
+QT_QPA_PLATFORM=wayland \
+.venv/bin/mif-desktop</code></pre>
+<h2 id="images-and-calibration">Images and calibration</h2>
+<h3 id="source-file-cannot-be-inspected">Source file cannot be inspected</h3>
+<p>Check that the processing computer can read the complete file at the path shown in <strong>Details</strong>. On <strong>Samples</strong>, inspect the file and select the series containing the tissue. If the file became unavailable after processing started, restore access and choose <strong>Retry step…</strong> when offered. To use a different file or series, open <strong>Image inspection → Change source image…</strong> and review which results will need recalculation. Keep the reader error if the original file still cannot be opened. <a href="stages/run/index.html#replace-a-source-image-or-select-another-series">Replace a source image</a></p>
+<p><a id="image-state-and-calibration"></a> <a id="channel-or-acquisition-information-conflicts"></a></p>
+<h3 id="conflicting-channel-identities-or-imaging-settings">Conflicting channel identities or imaging settings</h3>
+<p>First determine whether the source contains measured spectral bands or separated components. For spectral bands, compare the reported channel order and intensity scale with those of the reference library. For separated components, confirm the component identities in the export record and select the separated-image route. Preparation then preserves their intensities in OME-Zarr.</p>
+<p>If the conflict concerns intensity correction, check which operations the image metadata records. Recorded offset subtraction is taken into account, and fully calibrated values that already include exposure normalization can be used directly. Full correction of raw intensities needs the stored integer range and the required detector and exposure settings. If metadata is incomplete, open the spectral-preparation review to supply the missing values or choose exposure-only correction when appropriate. <a href="stages/images/processing.html#complete-acquisition-information">Correction routes and required settings</a></p>
+<h2 id="reviews-and-annotations">Reviews and annotations</h2>
+<h3 id="a-form-still-asks-for-input">A form still asks for input</h3>
+<p>Open the review for the sample or group named on Run. Check the message beside each highlighted field. A change to the method or image can change which fields it requires. For an annotation request, check that the draft has returned to the matching review and that the page shows the intended references before accepting them.</p>
+<h3 id="return-a-saved-qupath-draft">Return a saved QuPath draft</h3>
+<p>Save the draft in its original analysis folder and close the editing session. Return to the review that opened it and use its import or acceptance action. In cluster streaming, restore the connection and confirm the local folder is mapped to the intended analysis on the cluster. If the image or segmentation changed after the draft was drawn, reopen the review and check which image and cells it now expects. <a href="stages/run/index.html#return-a-qupath-annotation-draft">Return a QuPath annotation draft</a></p>
+<h3 id="predictions-are-absent-or-incomplete">Predictions are absent or incomplete</h3>
+<p>Open the accepted model for the selected image and make its prediction overlay visible. If adjusting the opacity reveals predictions in only part of the tissue, compare the edge of the overlay with the area chosen for classification. For example, when a secondary classifier is restricted to selected primary tissue classes, its predictions end at those class boundaries.</p>
+<p>For a KRONOS fit, check that the reference regions contain complete training patches. To apply the model, check the selected model package, marker order and physical patch scale against the fit. <a href="stages/tissue-classification/kronos.html">KRONOS image inputs</a></p>
+<p><a id="a-stopped-step-has-no-retry-action"></a></p>
+<h2 id="resume-a-stopped-step">Resume a stopped step</h2>
+<p>Read <strong>Details</strong> before repeating the calculation. If a file, software installation or storage device became unavailable, restore it and refresh Run. The action shown depends on how far the previous attempt progressed.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Action on Run</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Continue saved work</strong></td>
+<td>Reopen the unfinished attempt. For tasks such as marker fitting and clustering, we save the inputs and any review response so processing can resume with the decision you already submitted.</td>
+</tr>
+<tr class="even">
+<td><strong>Retry step…</strong></td>
+<td>Start another attempt at the failed operation with its saved inputs and settings.</td>
+</tr>
+<tr class="odd">
+<td><strong>Restore accepted regions</strong></td>
+<td>After an interrupted first segmentation, restore the accepted tissue and analysis regions before reviewing the segmentation settings and running it again.</td>
+</tr>
+<tr class="even">
+<td><strong>Edit spectral references…</strong> or <strong>Change…</strong></td>
+<td>Revise the inputs or settings responsible for the failure. Review which later results depend on that change before applying it. <a href="stages/run/index.html#change-a-completed-or-stopped-step">Revise an analysis</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>If no recovery action appears, establish whether the original process is still running. This is especially important after losing a cluster connection. For a process that wrote to QuPath, we also need to identify the image state it saved before allowing another write. Keep the project, draft and execution records together. If the process has ended and refreshing Run still offers no action, include the step details in a <a href="#reporting-a-problem">problem report</a>.</p>
+<p>If segmentation completed with no cells, inspect the staining and the selected tissue area before changing the segmentation settings. If measurements report a different cell population from the one requested, check which segmentation and edits are currently accepted.</p>
+<h3 id="working-memory-or-device-memory-is-exhausted">Working memory or device memory is exhausted</h3>
+<p><strong>Waiting for memory</strong> means a task is ready but has yet to start. Compare the requirement shown on Run with the available RAM on the processing computer or the memory assigned to the Slurm job. Close other memory-intensive processes or request a larger allocation, then continue the saved analysis.</p>
+<p>If a task failed during GPU inference, check device memory separately. The computer needs RAM for image reads, the Java heap and native arrays. The GPU needs memory for model weights, input tiles and intermediate results. For InstanSeg, open <strong>Cell segmentation → Change segmentation settings…</strong> and review the tile size, padding and number of simultaneous tiles. Reducing tile size or concurrency can lower peak memory use. For a failed measurement task, <strong>Change cell measurements…</strong> lets you revise optional measurements and retain the accepted cells. <a href="stages/setup/memory-and-threads.html">Memory estimates</a></p>
+<h3 id="output-storage-is-full-or-writing-is-interrupted">Output storage is full or writing is interrupted</h3>
+<p>Pause active processing and free space on the drive named in the error. Keep the analysis folder and partially written output together. Image processing can resume from shards recorded as complete. A partial cell table must be rebuilt before the dataset can be selected. Reopen Run to see the recovery action for the saved attempt. <a href="stages/run/saving-and-recovery.html#v-restart-behaviour">How outputs are completed and selected</a></p>
+<h2 id="cluster-submission-outcome-is-uncertain">Cluster submission outcome is uncertain</h2>
+<p>Reconnect and choose <strong>Check submission</strong> on Run. We use the saved receipt to find the original Slurm job. If it is found, Run reconnects to that job. If the scheduler has yet to return a matching record, choose <strong>Keep waiting</strong>. The cluster guide explains when to use <a href="stages/setup/computing.html#request-resources-and-submit">Allow another submission</a>.</p>
+<p>If the job started but cannot read a file, check its path from inside the compute allocation. For local review, also check that the mounted folder maps to the same source, processed and paired images used by the job. Saved local annotation drafts remain in the workspace until their return completes.</p>
+<h2 id="reporting-a-problem">Reporting a problem</h2>
+<p>Include the affected stage, the complete error text and the last action that succeeded. Give the operating system, processing mode, application and native software versions, and relevant settings. A small shareable image or example can help reproduce a problem that depends on the source. Remove credentials and private patient information.</p>
+<p><a href="stages/run/index.html#user-guide-reviewing-and-resuming">Reopen and continue an analysis</a></p>
+</main>
+</body>
+</html>

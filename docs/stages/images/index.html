@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Images and channel assignments · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/images/index.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="images-and-channel-assignments">Images and channel assignments</h1>
+<p><a href="../../../index.html#analysis-stages">Analysis stages</a> · <a href="processing.html">Image reading and preparation</a> · <a href="storage.html">Storage and regional reads</a></p>
+<p><strong>In this stage:</strong> <a href="#confirm-the-channel-content">Confirm the channel content</a> · <a href="#assign-fluorophores-and-markers">Assign fluorophores and markers</a> · <a href="#choose-the-nuclear-stain">Choose the nuclear stain</a> · <a href="#save-the-assignments">Save the assignments</a></p>
+<p><a id="user-guide-images-and-channels"></a> <a id="user-guide-images-and-channels--images-and-channel-assignments"></a></p>
+<p>Open <strong>Channels &amp; markers</strong> to record the fluorophores used to stain the tissue, assign their biological markers and identify the nuclear stain.</p>
+<p><a id="identify-the-channel-content"></a></p>
+<h2 id="confirm-the-channel-content">Confirm the channel content</h2>
+<p>On <strong>Run</strong>, select <strong>Open review</strong> under <strong>Channels &amp; markers</strong>. We preselect <strong>Channel content</strong> when the image metadata identifies how the channels were produced. If the field is blank, check the export settings for the image.</p>
+<h3 id="raw-spectral-bands">Raw spectral bands</h3>
+<p>Choose <strong>Raw spectral bands</strong> for a mixed image — where each image channel contains the intensities recorded by the microscope in one detection band. The table names the fluorescence components to recover during unmixing of these bands.</p>
+<p>Typically, several fluorophores contribute to the intensity measured in each band. However, some microscopes use filters that isolate a single fluorophore in each band. These images still contain <strong>Raw spectral bands</strong>, but their signals can be used directly. When you reach <a href="../unmixing/index.html#user-guide-spectral-unmixing--image-state"><strong>Confirm image status</strong></a>, choose <strong>No — fluorophore signals are already separated (isolated by measurement bands)</strong>. You can then match each band to its fluorophore and carry its measured intensities forward.</p>
+<h3 id="separated-components">Separated components</h3>
+<p>Choose <strong>Separated components</strong> for an image unmixed by the scanner or another program — where each image channel contains the estimated intensity of one fluorophore or, if retained, tissue autofluorescence. The table lists these channels in file order and fills in the channel label and marker name wherever they are recorded in the image metadata.</p>
+<p><a href="../../assets/figures/channel-content.svg"><img src="../../assets/figures/channel-content.svg" alt="FL6 reference spectra across 35 raw bands, grouped by filter set, with the Cy3 band at 590 nm outlined in gold. Each row is labelled with its output channel and staining assignment." width="670"></a></p>
+<p><em>For the FL6 image, the scanner sampled several detection wavelengths with each of five filter sets (DAPI, FITC, Cy3, Texas Red and Cy5). Each column represents one of the 35 raw bands. Several fluorophores can contribute to the same band because their emission spectra overlap. For example, both Opal 540 and Opal 570 emit light detected in the highlighted Cy3 band at 590 nm. Each row shows one component’s reference spectrum, with its strongest bands shaded darkest. During unmixing, we find the combination of these spectra that best reproduces the 35 intensities measured at each pixel. These estimates form the eight separated component channels shown on the right, one for each of the seven dyes and one for tissue autofluorescence (AF). Data from <a href="https://doi.org/10.17632/274xbhc5rx.3">Tsakiroglou and colleagues</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</em></p>
+<p><a id="user-guide-images-and-channels--2-assign-fluorescence-components-and-markers"></a> <a id="assign-fluorescence-components-and-markers"></a></p>
+<h2 id="assign-fluorophores-and-markers">Assign fluorophores and markers</h2>
+<p>We fill in the fluorophore and marker names recorded in the image metadata. Check these assignments against the staining panel and enter any missing names.</p>
+<p>For <strong>Raw spectral bands</strong>, enter missing fluorophores under <strong>Fluorophore / component</strong>. Use <strong>Add component</strong> if you need another row, or select a fluorophore absent from the panel and choose <strong>Remove</strong>. When naming components for unmixing, use the fluorophore names from the <a href="../unmixing/index.html#import-measured-reference-spectra">spectral library you plan to import</a> or from the <a href="../unmixing/library-from-images.html">single-stained reference images</a> you will use to build it.</p>
+<p>For <strong>Separated components</strong>, edit <strong>Channel label</strong> if the recorded name needs changing. Hover over the channel to see its recorded fluorophore.</p>
+<p><a id="luca-example"></a></p>
+<div class="table-scroll"><table>
+<tr><th>Raw spectral bands</th><th>Separated components</th></tr>
+<tr>
+<td width="50%" valign="top"><a href="../../assets/screenshots/channels-markers-mixed-current.png"><img src="../../assets/screenshots/channels-markers-mixed-current.png" alt="Mixed FL6 image: eight reviewed output components, with controls to add or remove fluorophores." width="480"></a></td>
+<td width="50%" valign="top"><a href="../../assets/screenshots/channels-markers-reviewed-current.png"><img src="../../assets/screenshots/channels-markers-reviewed-current.png" alt="Separated LuCa image: assignments for its eight stored channels, with no controls to add or remove channels." width="480"></a></td>
+</tr>
+</table></div>
+
+<p><em>For the mixed FL6 image (left), the eight rows name the components to recover from the 35 detection bands. The LuCa image (right) has already been unmixed, so each row corresponds to a component channel stored in the file.</em></p>
+<p>In either table, choose <strong>Marker assigned</strong> and enter the biological target under <strong>Marker name</strong>. Choose <strong>No marker</strong> for a component such as tissue autofluorescence. Select <strong>Use marker names in the processed image</strong> to label the channels in the prepared image by their biological targets. In this case, components with <strong>No marker</strong> keep their channel labels.</p>
+<p>In cyclic immunofluorescence, the same fluorophore can label different markers in successive rounds of staining. Therefore, we add a <strong>Cycle</strong> column to identify the staining round in which the fluorophore labelled the marker in each row. See the table in <a href="../cyclic-if-methods/index.html#assign-fluorophores-and-markers">Assign fluorophores and markers by cycle</a>.</p>
+<h2 id="choose-the-nuclear-stain">Choose the nuclear stain</h2>
+<p>Under <strong>Nuclear stain</strong>, select the component or channel containing the DNA stain. We preselect DAPI when there is a single match. Select <strong>No nuclear stain</strong> if the image has none.</p>
+<p><a href="../cell-measurements/index.html#measurement-channels-and-compartments">Cell measurements</a> initially assigns the DNA-stain role to this channel. If you include it in <a href="../tissue-classification/index.html#kronos-channel-inputs">KRONOS tissue classification</a>, we use it as the model’s DAPI input.</p>
+<h2 id="save-the-assignments">Save the assignments</h2>
+<p>Select <strong>Save and next</strong> to continue to <a href="../unmixing/index.html#user-guide-spectral-unmixing--image-state"><strong>Confirm image status</strong></a>, where you choose whether to unmix the image or copy its channels to OME-Zarr. To resume later, select <strong>Save and pause</strong>. Reopening the review restores the saved assignments and nuclear stain.</p>
+<hr />
+<p><strong>Next:</strong> <a href="../unmixing/index.html">Spectral unmixing and component preparation</a>.</p>
+</main>
+</body>
+</html>

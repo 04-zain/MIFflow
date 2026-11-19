@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Public image sources · MIFflow</title>
+<link rel="stylesheet" href="../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../index.html">MIFflow</a>
+    <a href="../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/data/public-image-sources.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="public-image-sources">Public image sources</h1>
+<p>These are the source images used in the walkthroughs. Each entry identifies the original dataset, its reuse terms and the field or channels shown in the guides.</p>
+<h2 id="luca-fluorescence-field">LuCa fluorescence field</h2>
+<p>The PerkinElmer file <code>LuCa-7color_[13860,52919]_1x1component_data.tif</code> contains eight float32 component channels over 1868 × 1400 pixels at 0.49799447890790055 µm/pixel. The <a href="luca.html">LuCa example</a> provides its direct download, CC-BY 4.0 attribution and channel panel, and identifies the <a href="luca.html#recorded-example-populations">cell populations</a> used by the measurement and marker-decision walkthroughs.</p>
+<h2 id="whole-slide-fluorescence-inputs">Whole-slide fluorescence inputs</h2>
+<p>The <a href="https://downloads.openmicroscopy.org/images/OME-TIFF/2016-06/sub-resolutions/Fluorescence/LuCa-7color_Scan1.ome.tiff">OME LuCa Scan1</a> file contains a 24,960 × 34,560-pixel, five-channel uint8 image at approximately 0.498 µm/pixel. Its channels are DAPI, FITC, CY3, Texas Red and CY5. This is a different scan and channel representation from the eight-component LuCa field described above.</p>
+<p><a href="https://hta-melatlas-1.s3.amazonaws.com/data/MEL02-1-1.ome.tif">HTAN MEL02-1-1</a> contains an 11,218 × 13,599-pixel, 48-channel uint16 image at approximately 0.650 µm/pixel. The <a href="https://labsyspharm.github.io/HTA-MELATLAS-1/data.html">publisher's data description</a> identifies it as whole-slide cyclic immunofluorescence (CyCIF), assembled from registered imaging rounds with flat-field correction. The <a href="https://labsyspharm.github.io/HTA-MELATLAS-1/exhibits/MEL02-1-1-overview.json">Minerva channel definitions</a> provide marker names for the displayed channels.</p>
+<p>The <a href="../assets/figures/fluorescence-wsi-source-overviews.png">source overview</a> shows channel zero from each original image, with brightness limits selected separately to reveal its tissue.</p>
+<p><a id="melanoma-classifier-batch"></a></p>
+<h3 id="melanoma-classifier-batch">Melanoma classifier batch</h3>
+<p>The <a href="../stages/tissue-classification/index.html#inspecting-and-accepting-the-model">classifier review example</a> uses three 1024 × 1024-pixel fields from each of <a href="https://hta-melatlas-1.s3.amazonaws.com/data/MEL02-1-1.ome.tif">MEL02-1-1</a>, <a href="https://hta-melatlas-1.s3.amazonaws.com/data/MEL05-1-1.ome.tif">MEL05-1-1</a> and <a href="https://hta-melatlas-1.s3.amazonaws.com/data/MEL09-1-1.ome.tif">MEL09-1-1</a> in the same HTAN CyCIF collection. The fields retain the source uint16 intensities and approximately 0.650 µm/pixel calibration. Each prepared field contains DNA, SOX10 and KERATIN; the classifier uses DNA and KERATIN.</p>
+<p>Thirty-six manually reviewed rectangular annotations define the walkthrough classes <strong>Keratin-rich epithelium</strong> and <strong>Other nucleated tissue</strong>. The recorded scores describe agreement with these annotations. MEL02 and MEL05 supply the two grouped cross-validation folds and the final fit; MEL09 supplies the independent test.</p>
+<p>The <a href="../stages/results/figures.html#phenotype-composition-and-tissue-compartments">Results composition and compartment figures</a> use 1,652 cells from the first MEL05 field. A supervised cell classifier fitted on SOX10 and KERATIN means assigns <strong>KERATIN-positive epithelial cells</strong>, <strong>SOX10-positive cells</strong> and <strong>Other nucleated cells</strong>; a 0.70 tree-vote cutoff retains ten cells as <strong>Unclassified</strong>.</p>
+<h2 id="maps-classical-hodgkin-lymphoma-fluorescence">MAPS classical Hodgkin lymphoma fluorescence</h2>
+<p>The unsupervised phenotype review uses a <strong>1024 × 1024-pixel</strong> field from the <strong>cHL CODEX</strong> dataset released by <a href="https://www.nature.com/articles/s41467-023-44188-w">Shaban et al.</a>, available under <strong>CC BY 4.0</strong> from <a href="https://zenodo.org/records/10067010">Zenodo 10067010</a>. The field begins at source position <strong>(2560, 1536)</strong>, contains 23 fluorescence channels, and retains the supplied values and <strong>0.37 µm/pixel</strong> calibration.</p>
+<p>The <a href="../stages/phenotyping/unsupervised.html#maps-refined-example">unsupervised phenotyping walkthrough</a> and Results examples use <strong>3,459 InstanSeg cells</strong> and 16 whole-cell marker means for an initial twelve-group PhenoGraph fit. Broad B-cell, CD4 T-cell and CD8 T-cell assignments follow review of marker distributions and native tissue fields; unresolved groups retain <strong>Undefined</strong>, and all cells remain included. The separately labelled optional FlowSOM/reclustering illustration uses a different fit.</p>
+<h2 id="cyclic-tonsil-channel-assignments">Cyclic tonsil channel assignments</h2>
+<p>The <a href="../stages/cyclic-if-methods/index.html">cyclic-image guide</a> uses <code>Arlene_Tonsil_9x9.qptiff</code> from <a href="https://zenodo.org/records/22107401">Sangüesa, de Andrea and Ariz, Zenodo 22107401</a>, released under <strong>CC BY 4.0</strong>. The image contains 43 channels over 12,672 × 9,508 pixels. Its original channel metadata supplies marker names and cycle assignments for 42 channels; DAPI-01 lacks that per-channel value, but the embedded scan profile identifies it as cycle 1. The walkthrough reviews these source assignments before preparing the channels.</p>
+<p><a id="separate-cycif-acquisition-files"></a></p>
+<h2 id="separate-cycif-cycle-files">Separate CyCIF cycle files</h2>
+<p>The separate-file registration example in the <a href="../stages/cyclic-if-methods/index.html#align-separate-cycle-files">cyclic-image guide</a> uses <strong>MCMICRO Exemplar 001</strong>, a lung adenocarcinoma specimen imaged by CyCIF. <a href="https://doi.org/10.1038/s41592-021-01308-y">Schapiro et al., <em>MCMICRO: a scalable, modular image-processing pipeline for multiplexed tissue imaging</em></a>, Nature Methods <strong>19</strong>, 311–315 (2022), describe the resource. The <a href="https://mcmicro.org/datasets/">official datasets page</a> supplies the exemplar for demonstration purposes, and the <a href="https://mcmicro.org/tutorial/tutorial.html">MCMICRO tutorial</a> describes its raw cycle images and shared Hoechst stain.</p>
+<p>The screenshots show the corresponding field <strong>761</strong> (first image series) from <code>exemplar-001-cycle-06.ome.tiff</code> and <code>exemplar-001-cycle-07.ome.tiff</code>. Each original field contains four uint16 channels over <strong>1,280 × 1,080 pixels</strong> at <strong>0.65 µm/pixel</strong>. Registration uses the original Hoechst channels. Cycle 6 supplies the reference grid, and the retained common rectangle begins at reference pixel <strong>(45, 1)</strong> with dimensions <strong>1,234 × 1,078 pixels</strong>.</p>
+<p>The guide reproduces limited application views of these demonstration images. The article is published under <strong>CC BY 4.0</strong>, and the MCMICRO website identifies its own content as <strong>CC BY-NC 4.0</strong>. The source pages do not specify a separate licence for the linked raw-image downloads; those files are not redistributed here.</p>
+<h2 id="same-section-tonsil-fluorescence-and-he">Same-section tonsil fluorescence and H&amp;E</h2>
+<p>The positive tonsil pair from <a href="https://zenodo.org/records/8023452">Marlin et al., Zenodo 8023452</a> is released under CC BY 4.0. The <a href="https://onlinelibrary.wiley.com/doi/10.1002/cyto.a.24789">study methods and antibody table</a> describe fluorescence imaging followed by H&amp;E staining and imaging of the same tissue section. The original CZI scans retain their distinct image extents, physical sampling and image coordinates.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Original file</th>
+<th>Image</th>
+<th>Sampling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>2022_08_9_Tonsil_IF_PositiveIF.czi</code></td>
+<td>24,517 × 33,405 pixels; four uint16 fluorescence channels</td>
+<td>0.344107 µm/pixel</td>
+</tr>
+<tr class="even">
+<td><code>2022_08_10_Tonsil_IF_HE_PostiveIF.czi</code></td>
+<td>42,792 × 60,118 pixels; RGB H&amp;E</td>
+<td>0.172054 µm/pixel</td>
+</tr>
+</tbody>
+</table></div>
+<p>The stored fluorescence channels are <strong>Cy5, AF555, AF488 and DAPI</strong>. The methods identify the corresponding antibody targets as <strong>CD4, vimentin and CD45</strong>; CD45 uses an AF488 secondary antibody. Marker assignments retain these original channel names separately.</p>
+<p>The alignment example uses independently framed native rectangles around the same follicular chain: fluorescence begins at <strong>(15,000, 13,000)</strong> and contains <strong>5,000 × 6,000</strong> pixels; H&amp;E begins at <strong>(25,000, 21,000)</strong> and contains <strong>11,000 × 14,000</strong> pixels. Lossless OME-TIFF exports retain the original level-zero values and calibration. The fields were selected before fitting any spatial transform.</p>
+<h2 id="tonsil-lymphoid-follicles">Tonsil lymphoid follicles</h2>
+<p><code>KB_tonsil_TLS_Scan1.qptiff</code> is a tonsil control from the <a href="https://data.mendeley.com/datasets/9zxht4rchk/1">MacFawn et al. public image collection</a>, released under CC BY 4.0 with the study <em>The activity of tertiary lymphoid structures in high grade serous ovarian cancer is governed by site, stroma, and cellular interactions</em>. The image contains 21,120 × 23,040 pixels at approximately 0.497 µm/pixel. Its staining panel includes DAPI, CD4, PNAd, CD21, Ki67, CD20 and AID; the image also includes an autofluorescence band.</p>
+<p>The follicle example uses a 2,600 × 2,600-pixel field beginning at x = 12,600 and y = 14,900 in the source image. We first unmixed the source with the MOTiF library. The derived crop retains those prepared float32 values and the source pixel dimensions exactly. The selected field shows a CD20-rich mantle around a smaller CD21/AID/Ki67-rich centre, with CD4-rich tissue outside. The example concerns lymphoid follicles in tonsil tissue.</p>
+<p><a id="cmu-1-source-and-regional-processing"></a></p>
+<h2 id="cmu-1-whole-slide-preparation">CMU-1 whole-slide preparation</h2>
+<p>The public <a href="https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs">CMU-1.svs</a> image comes from the OpenSlide Aperio collection. <a href="https://qupath.readthedocs.io/en/stable/docs/intro/acknowledgements.html">QuPath's image acknowledgements</a> record its CC0 1.0 reuse terms.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Original image</td>
+<td>46,000 × 32,914 pixels, RGB uint8</td>
+</tr>
+<tr class="even">
+<td>Native pyramid</td>
+<td>46,000 × 32,914; 11,500 × 8,228; 2,875 × 2,057 pixels</td>
+</tr>
+<tr class="odd">
+<td>Physical sampling</td>
+<td>0.499 µm/pixel along X and Y</td>
+</tr>
+<tr class="even">
+<td>Prepared image</td>
+<td>Complete RGB uint8 OME-Zarr image, retaining all three native levels</td>
+</tr>
+<tr class="odd">
+<td>Stored RGB organization</td>
+<td>Red, Green and Blue sample planes in all-sample 256 × 256 chunks and 1024 × 1024 shards</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="../stages/images/processing.html#prepare-a-packed-rgb-image">RGB preparation method</a> explains how we preserve the colour image and its resolution levels. The same source supplies the <a href="../stages/run/qupath-review.html#reference-qupath-integration--ii-saving-the-project-and-returning-annotations">zoomed annotation view</a>.</p>
+<p>The retained regional measurement example uses a separate <strong>1109 × 1057</strong> level-zero window beginning at <strong>(8195, 19204)</strong>. Adding that origin to a regional coordinate locates the corresponding point in the whole slide.</p>
+<p><a href="../stages/images/index.html">Images and channels</a> · <a href="../stages/images/processing.html">Image reading and preparation</a> · <a href="../stages/cell-measurements/index.html#luca-measurement-example">Cell measurements</a></p>
+<hr />
+<p><strong>Continue:</strong> <a href="../stages/setup/analysis.html#import-the-images-together">Import and inspect the images</a>.</p>
+</main>
+</body>
+</html>

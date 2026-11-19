@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1200" viewBox="0 0 1000 1200" role="img" aria-labelledby="title description">
+<title id="title">Increasing marker scores and their complementary negative scores</title>
+<desc id="description">Illustrative Gaussian components have means 3 and 5, variances 1 and 9 and equal weights. Seven distinct intensities from zero to six define the saved score pairs. The first corrected score is the minimum raw responsibility; subsequent scores add only positive successive changes. The negative score is one minus the corrected positive score. The lower right panel enlarges intensities four to four and a half, within the interpolation interval between the saved knots at four and five. The score crosses one half at approximately 4.428. Four and a half is an interpolated position, not a saved knot.</desc>
+<rect width="1000" height="1200" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="35" y="36" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Raw component responsibility</text>
+<text x="550" y="36" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Increasing positive score</text>
+<text x="35" y="70" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="start">r(x) = π₁f₁(x) / [π₀f₀(x) + π₁f₁(x)]</text>
+<text x="550" y="70" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Same components and observed intensities</text>
+<path d="M70 337.0 L428 337.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="58" y="342.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<path d="M70 224.5 L428 224.5" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="58" y="229.5" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0.5</text>
+<path d="M70 112.0 L428 112.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="58" y="117.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">1</text>
+<path d="M70 112 V337 H428" fill="none" stroke="#B8C8CE" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M70.0 337 L70.0 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="70.0" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">0</text>
+<path d="M129.66666666666666 337 L129.66666666666666 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="129.66666666666666" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M189.33333333333331 337 L189.33333333333331 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="189.33333333333331" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M249.0 337 L249.0 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="249.0" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<path d="M308.66666666666663 337 L308.66666666666663 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="308.66666666666663" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<path d="M368.33333333333337 337 L368.33333333333337 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="368.33333333333337" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<path d="M428.0 337 L428.0 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="428.0" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<path d="M70.336 138.850 L71.492 139.984 L72.648 141.150 L73.804 142.348 L74.960 143.579 L76.116 144.842 L77.272 146.137 L78.428 147.463 L79.584 148.821 L80.740 150.210 L81.896 151.629 L83.052 153.078 L84.208 154.556 L85.364 156.063 L86.520 157.598 L87.676 159.160 L88.832 160.748 L89.988 162.362 L91.144 163.999 L92.300 165.660 L93.456 167.344 L94.613 169.048 L95.769 170.772 L96.925 172.514 L98.081 174.274 L99.237 176.050 L100.393 177.840 L101.549 179.644 L102.705 181.459 L103.861 183.285 L105.017 185.120 L106.173 186.962 L107.329 188.810 L108.485 190.663 L109.641 192.519 L110.797 194.377 L111.953 196.235 L113.109 198.092 L114.265 199.947 L115.421 201.797 L116.577 203.643 L117.733 205.481 L118.889 207.312 L120.045 209.134 L121.201 210.946 L122.357 212.746 L123.514 214.534 L124.670 216.308 L125.826 218.068 L126.982 219.812 L128.138 221.539 L129.294 223.249 L130.450 224.941 L131.606 226.614 L132.762 228.267 L133.918 229.900 L135.074 231.512 L136.230 233.103 L137.386 234.671 L138.542 236.217 L139.698 237.740 L140.854 239.239 L142.010 240.715 L143.166 242.167 L144.322 243.594 L145.478 244.997 L146.634 246.376 L147.790 247.730 L148.946 249.058 L150.102 250.362 L151.259 251.641 L152.415 252.895 L153.571 254.124 L154.727 255.329 L155.883 256.508 L157.039 257.662 L158.195 258.792 L159.351 259.898 L160.507 260.979 L161.663 262.036 L162.819 263.069 L163.975 264.078 L165.131 265.064 L166.287 266.026 L167.443 266.965 L168.599 267.882 L169.755 268.775 L170.911 269.647 L172.067 270.497 L173.223 271.324 L174.379 272.131 L175.535 272.916 L176.691 273.680 L177.848 274.423 L179.004 275.146 L180.160 275.849 L181.316 276.533 L182.472 277.196 L183.628 277.841 L184.784 278.467 L185.940 279.073 L187.096 279.662 L188.252 280.232 L189.408 280.785 L190.564 281.320 L191.720 281.838 L192.876 282.339 L194.032 282.822 L195.188 283.290 L196.344 283.741 L197.500 284.175 L198.656 284.594 L199.812 284.998 L200.968 285.385 L202.124 285.758 L203.280 286.116 L204.436 286.458 L205.593 286.786 L206.749 287.100 L207.905 287.399 L209.061 287.684 L210.217 287.955 L211.373 288.213 L212.529 288.456 L213.685 288.687 L214.841 288.903 L215.997 289.107 L217.153 289.297 L218.309 289.474 L219.465 289.638 L220.621 289.790 L221.777 289.928 L222.933 290.054 L224.089 290.167 L225.245 290.268 L226.401 290.356 L227.557 290.432 L228.713 290.495 L229.869 290.546 L231.025 290.585 L232.181 290.611 L233.338 290.626 L234.494 290.627 L235.650 290.617 L236.806 290.594 L237.962 290.559 L239.118 290.512 L240.274 290.452 L241.430 290.380 L242.586 290.295 L243.742 290.198 L244.898 290.088 L246.054 289.966 L247.210 289.831 L248.366 289.684 L249.522 289.523 L250.678 289.350 L251.834 289.163 L252.990 288.964 L254.146 288.751 L255.302 288.525 L256.458 288.285 L257.614 288.032 L258.770 287.764 L259.926 287.483 L261.082 287.188 L262.239 286.879 L263.395 286.555 L264.551 286.217 L265.707 285.863 L266.863 285.495 L268.019 285.112 L269.175 284.713 L270.331 284.299 L271.487 283.868 L272.643 283.422 L273.799 282.960 L274.955 282.481 L276.111 281.985 L277.267 281.472 L278.423 280.942 L279.579 280.395 L280.735 279.830 L281.891 279.246 L283.047 278.645 L284.203 278.024 L285.359 277.385 L286.515 276.727 L287.671 276.050 L288.827 275.352 L289.984 274.635 L291.140 273.898 L292.296 273.140 L293.452 272.361 L294.608 271.561 L295.764 270.739 L296.920 269.896 L298.076 269.031 L299.232 268.143 L300.388 267.234 L301.544 266.301 L302.700 265.345 L303.856 264.366 L305.012 263.364 L306.168 262.338 L307.324 261.288 L308.480 260.214 L309.636 259.116 L310.792 257.993 L311.948 256.846 L313.104 255.673 L314.260 254.477 L315.416 253.255 L316.572 252.008 L317.729 250.736 L318.885 249.440 L320.041 248.118 L321.197 246.771 L322.353 245.400 L323.509 244.004 L324.665 242.584 L325.821 241.139 L326.977 239.670 L328.133 238.177 L329.289 236.661 L330.445 235.122 L331.601 233.560 L332.757 231.976 L333.913 230.370 L335.069 228.744 L336.225 227.096 L337.381 225.429 L338.537 223.742 L339.693 222.037 L340.849 220.315 L342.005 218.576 L343.161 216.820 L344.317 215.050 L345.474 213.266 L346.630 211.470 L347.786 209.661 L348.942 207.842 L350.098 206.014 L351.254 204.177 L352.410 202.334 L353.566 200.484 L354.722 198.631 L355.878 196.775 L357.034 194.917 L358.190 193.059 L359.346 191.202 L360.502 189.348 L361.658 187.498 L362.814 185.654 L363.970 183.817 L365.126 181.988 L366.282 180.170 L367.438 178.363 L368.594 176.568 L369.750 174.788 L370.906 173.023 L372.062 171.276 L373.219 169.546 L374.375 167.836 L375.531 166.147 L376.687 164.479 L377.843 162.835 L378.999 161.214 L380.155 159.618 L381.311 158.049 L382.467 156.506 L383.623 154.991 L384.779 153.504 L385.935 152.046 L387.091 150.619 L388.247 149.221 L389.403 147.854 L390.559 146.519 L391.715 145.215 L392.871 143.942 L394.027 142.702 L395.183 141.494 L396.339 140.319 L397.495 139.176 L398.651 138.065 L399.808 136.986 L400.964 135.940 L402.120 134.925 L403.276 133.943 L404.432 132.991 L405.588 132.071 L406.744 131.181 L407.900 130.322 L409.056 129.492 L410.212 128.692 L411.368 127.921 L412.524 127.178 L413.680 126.463 L414.836 125.775 L415.992 125.113 L417.148 124.478 L418.304 123.867 L419.460 123.282 L420.616 122.720 L421.772 122.182 L422.928 121.667 L424.084 121.173 L425.240 120.701 L426.396 120.250 L427.552 119.819" fill="none" stroke="#946A21" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="70.0" cy="138.52679329065606" r="4.2" fill="#FFFFFF" stroke="#946A21"/>
+<circle cx="129.66666666666666" cy="223.79695039012447" r="4.2" fill="#FFFFFF" stroke="#946A21"/>
+<circle cx="189.33333333333331" cy="280.75" r="4.2" fill="#FFFFFF" stroke="#946A21"/>
+<circle cx="249.0" cy="289.59711562340067" r="4.2" fill="#FFFFFF" stroke="#946A21"/>
+<circle cx="308.66666666666663" cy="260.03853878599597" r="4.2" fill="#FFFFFF" stroke="#946A21"/>
+<circle cx="368.33333333333337" cy="176.97221629879135" r="4.2" fill="#FFFFFF" stroke="#946A21"/>
+<circle cx="428.0" cy="119.65717997840468" r="4.2" fill="#FFFFFF" stroke="#946A21"/>
+<circle cx="249.0" cy="289.59711562340067" r="5" fill="#946A21" stroke="#946A21"/>
+<text x="249.0" y="267.59711562340067" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#946A21" text-anchor="middle">min r</text>
+<text x="249" y="388" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Intensity x</text>
+<path d="M452 224 L531 224" fill="none" stroke="#243746" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<text x="491" y="183" font-family="Arial, Helvetica, sans-serif" font-size="16.5" font-weight="400" fill="#526773" text-anchor="middle">Retain</text>
+<text x="491" y="206" font-family="Arial, Helvetica, sans-serif" font-size="16.5" font-weight="400" fill="#526773" text-anchor="middle">upward Δr</text>
+<path d="M590 337.0 L955 337.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="578" y="342.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<path d="M590 224.5 L955 224.5" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="578" y="229.5" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0.5</text>
+<path d="M590 112.0 L955 112.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="578" y="117.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">1</text>
+<path d="M590 112 V337 H955" fill="none" stroke="#B8C8CE" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M590.0 337 L590.0 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="590.0" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">0</text>
+<path d="M650.8333333333334 337 L650.8333333333334 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="650.8333333333334" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M711.6666666666666 337 L711.6666666666666 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="711.6666666666666" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M772.5 337 L772.5 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="772.5" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<path d="M833.3333333333333 337 L833.3333333333333 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="833.3333333333333" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<path d="M894.1666666666667 337 L894.1666666666667 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="894.1666666666667" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<path d="M955.0 337 L955.0 342" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="955.0" y="363" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<path d="M590.000 289.597 L650.833 289.597 L711.667 289.597 L772.500 289.597 L833.333 260.039 L894.167 176.972 L955.000 119.657" fill="none" stroke="#007D83" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="590.0" cy="289.59711562340067" r="4.2" fill="#FFFFFF" stroke="#007D83"/>
+<circle cx="650.8333333333334" cy="289.59711562340067" r="4.2" fill="#FFFFFF" stroke="#007D83"/>
+<circle cx="711.6666666666666" cy="289.59711562340067" r="4.2" fill="#FFFFFF" stroke="#007D83"/>
+<circle cx="772.5" cy="289.59711562340067" r="4.2" fill="#FFFFFF" stroke="#007D83"/>
+<circle cx="833.3333333333333" cy="260.03853878599597" r="4.2" fill="#FFFFFF" stroke="#007D83"/>
+<circle cx="894.1666666666667" cy="176.97221629879135" r="4.2" fill="#FFFFFF" stroke="#007D83"/>
+<circle cx="955.0" cy="119.65717997840468" r="4.2" fill="#FFFFFF" stroke="#007D83"/>
+<text x="773" y="388" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Intensity x</text>
+<text x="35" y="437" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Starting level</text>
+<text x="35" y="475" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#946A21" text-anchor="start">s₁ = min r</text>
+<text x="330" y="437" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Add upward changes between successive intensities</text>
+<text x="330" y="475" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#007D83" text-anchor="start">sⱼ = sⱼ₋₁ + max(rⱼ − rⱼ₋₁, 0)</text>
+<rect x="35" y="504" width="930" height="49" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="48" y="535" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Intensity uⱼ</text>
+<text x="282.5" y="535" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">0</text>
+<text x="387.5" y="535" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">1</text>
+<text x="492.5" y="535" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">2</text>
+<text x="597.5" y="535" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">3</text>
+<text x="702.5" y="535" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">4</text>
+<text x="807.5" y="535" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">5</text>
+<text x="912.5" y="535" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">6</text>
+<rect x="35" y="553" width="930" height="49" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="48" y="584" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#946A21" text-anchor="start">Responsibility rⱼ</text>
+<text x="282.5" y="584" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="middle">0.882</text>
+<text x="387.5" y="584" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="middle">0.503</text>
+<text x="492.5" y="584" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="middle">0.250</text>
+<rect x="555" y="559" width="85" height="37" rx="0" fill="#F8F0DF" stroke="#946A21" stroke-width="1"/>
+<text x="597.5" y="584" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="middle">0.211</text>
+<text x="702.5" y="584" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="middle">0.342</text>
+<text x="807.5" y="584" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="middle">0.711</text>
+<text x="912.5" y="584" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="middle">0.966</text>
+<rect x="35" y="602" width="930" height="49" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="48" y="633" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="start">Added amount</text>
+<rect x="240" y="608" width="85" height="37" rx="0" fill="#F8F0DF" stroke="#946A21" stroke-width="1"/>
+<text x="282.5" y="633" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">0.211</text>
+<rect x="338" y="607" width="99" height="39" rx="0" fill="#E8EEF0" stroke="none" stroke-width="0"/>
+<text x="387.5" y="633" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">0.000</text>
+<rect x="443" y="607" width="99" height="39" rx="0" fill="#E8EEF0" stroke="none" stroke-width="0"/>
+<text x="492.5" y="633" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">0.000</text>
+<rect x="548" y="607" width="99" height="39" rx="0" fill="#E8EEF0" stroke="none" stroke-width="0"/>
+<text x="597.5" y="633" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">0.000</text>
+<text x="702.5" y="633" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">0.131</text>
+<text x="807.5" y="633" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">0.369</text>
+<text x="912.5" y="633" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">0.255</text>
+<rect x="35" y="651" width="930" height="49" rx="0" fill="#EAF5F4" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="48" y="682" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="start">Positive score sⱼ</text>
+<text x="282.5" y="682" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">0.211</text>
+<text x="387.5" y="682" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">0.211</text>
+<text x="492.5" y="682" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">0.211</text>
+<text x="597.5" y="682" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">0.211</text>
+<text x="702.5" y="682" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">0.342</text>
+<text x="807.5" y="682" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">0.711</text>
+<text x="912.5" y="682" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">0.966</text>
+<text x="282.5" y="731" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#946A21" text-anchor="middle">starting level</text>
+<text x="492.5" y="731" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">decreases add 0</text>
+<text x="807.5" y="731" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">increases add Δr</text>
+<path d="M35 758 L965 758" fill="none" stroke="#E8EEF0" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="35" y="800" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Positive and negative scores</text>
+<text x="550" y="800" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Enlarge intensities 4–4.5</text>
+<path d="M70 1070.0 L428 1070.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="58" y="1075.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<path d="M70 960.0 L428 960.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="58" y="965.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0.5</text>
+<path d="M70 850.0 L428 850.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="58" y="855.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">1</text>
+<path d="M70 850 V1070 H428" fill="none" stroke="#B8C8CE" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M70.0 1070 L70.0 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="70.0" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">0</text>
+<path d="M129.66666666666666 1070 L129.66666666666666 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="129.66666666666666" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M189.33333333333331 1070 L189.33333333333331 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="189.33333333333331" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M249.0 1070 L249.0 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="249.0" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<path d="M308.66666666666663 1070 L308.66666666666663 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="308.66666666666663" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<path d="M368.33333333333337 1070 L368.33333333333337 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="368.33333333333337" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<path d="M428.0 1070 L428.0 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="428.0" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<rect x="308.66666666666663" y="850.0" width="29.83333333333337" height="220.0" rx="0" fill="#E8EEF0" stroke="none" stroke-width="0"/>
+<path d="M70.000 1023.651 L129.667 1023.651 L189.333 1023.651 L249.000 1023.651 L308.667 994.749 L368.333 913.528 L428.000 857.487" fill="none" stroke="#007D83" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M70.000 896.349 L129.667 896.349 L189.333 896.349 L249.000 896.349 L308.667 925.251 L368.333 1006.472 L428.000 1062.513" fill="none" stroke="#356E9A" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="89" y="875" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#356E9A" text-anchor="start">s₋</text>
+<text x="89" y="1037" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="start">s₊</text>
+<text x="249" y="1120" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Intensity x</text>
+<path d="M338.5 949.0 H500 V825 H760 V847" fill="none" stroke="#B8C8CE" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<path d="M590 1070.0 L955 1070.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="578" y="1075.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0.3</text>
+<path d="M590 996.6666666666666 L955 996.6666666666666" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="578" y="1001.6666666666666" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0.4</text>
+<path d="M590 923.3333333333333 L955 923.3333333333333" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="578" y="928.3333333333333" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0.5</text>
+<path d="M590 850.0 L955 850.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="578" y="855.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0.6</text>
+<path d="M590 850 V1070 H955" fill="none" stroke="#B8C8CE" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M590.0 1070 L590.0 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="590.0" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<path d="M662.9999999999998 1070 L662.9999999999998 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="662.9999999999998" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4.1</text>
+<path d="M736.0000000000001 1070 L736.0000000000001 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="736.0000000000001" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4.2</text>
+<path d="M808.9999999999999 1070 L808.9999999999999 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="808.9999999999999" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4.3</text>
+<path d="M882.0000000000002 1070 L882.0000000000002 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="882.0000000000002" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4.4</text>
+<path d="M955.0 1070 L955.0 1075" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="955.0" y="1096" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4.5</text>
+<path d="M590.0 1039.162644932135 L955.0 903.7953045826163" fill="none" stroke="#007D83" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="590.0" cy="1039.162644932135" r="4.2" fill="#FFFFFF" stroke="#007D83"/>
+<path d="M590.0 923.3333333333333 L955.0 923.3333333333333" fill="none" stroke="#526773" stroke-width="1" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<path d="M902.318308274371 923.3333333333333 L902.318308274371 1070.0" fill="none" stroke="#243746" stroke-width="1.3" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="902.318308274371" cy="923.3333333333333" r="4.5" fill="#243746" stroke="#243746"/>
+<text x="888.318308274371" y="901.3333333333333" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="end">t = 4.428</text>
+<text x="772.5" y="1120" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Intensity x</text>
+<text x="249" y="1170" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#356E9A" text-anchor="middle">s₋(x) = 1 − s₊(x)</text>
+<text x="772.5" y="1165" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="middle">s₊(x) = s(4) + (x − 4)[s(5) − s(4)]</text>
+</svg>

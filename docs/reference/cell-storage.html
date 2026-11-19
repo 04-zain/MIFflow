@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Cell datasets and spatial queries · MIFflow</title>
+<link rel="stylesheet" href="../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../index.html">MIFflow</a>
+    <a href="../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/reference/cell-storage.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="cell-datasets-and-spatial-queries">Cell datasets and spatial queries</h1>
+<p><a href="../stages/results/index.html">Results and export</a> · <a href="data-formats.html">Saved data formats</a> · <a href="../stages/results/figures.html">Additional figures</a></p>
+<p>We use the cell ID to link each segmented outline to its measurements and phenotype throughout the analysis. The <strong>base dataset</strong> contains the cell IDs and outlines. Separate <strong>result tables</strong> hold measurements and classifications. When combining tables, we use the cell IDs and their recorded row positions to match the results to the correct outlines.</p>
+<p>The sections below explain how we store these tables and retrieve cells within a field. To open an exported result, see <a href="data-formats.html#input-files-for-spatial-analysis">Saved data formats</a>.</p>
+<p><strong>On this page:</strong> <a href="#i-dataset-structure-and-keys">Files and cell identity</a> · <a href="#ii-physical-row-layout">Row layout</a> · <a href="#iii-layout-and-cell-id-indexes">Indexes</a> · <a href="#iv-spatial-query-sequence">Regional reads</a> · <a href="#v-matching-new-results-to-the-same-cells">Joining results</a> · <a href="#vi-category-dictionaries">Category codes</a> · <a href="#vii-geometry-edits-and-derived-layout">Edited outlines</a>.</p>
+<p><a id="i-dataset-structure-and-keys"></a></p>
+<h2 id="files-and-cell-identity">Files and cell identity</h2>
+<p>A base cell dataset contains:</p>
+<pre class="text"><code>dataset.json
+layout.parquet
+id-index.parquet
+base/
+    part-*.parquet</code></pre>
+<p>The base <code>dataset.json</code> uses the format identifier <code>mif-cell-dataset/v1</code> and lists the Parquet files containing the cells, together with the layout and ID indexes used to locate their rows. A measurement or classification result has its own description, identified by <code>mif-cell-component/v1</code>, which lists its value tables and records how their rows correspond to the base cells.</p>
+<p>An exported collection, identified by <code>mif-cell-dataset-collection/v1</code>, selects the base datasets for the included tissue sections, the measurement and classification results to read, and any accepted outline edits. Opening it reads the descriptions, layouts and category dictionaries and indexes any accepted outline edits. Subsequent queries load the requested columns from the base and result tables.</p>
+<p>Each JSON description identifies the sample, image, segmentation population, coordinate system and selected outline revision. Information shared by every cell can appear once in the dataset’s <code>scope</code> metadata. Consequently, a table row may contain <code>cell_id</code> while its sample and image identities come from the surrounding dataset description. The collection’s <code>schema</code> lists the columns available when requesting measurements or classifications.</p>
+<p>Across samples and segmentations, retain <code>(sample_id, image_entry_id, population_id, cell_id)</code> as the complete cell identity. <code>population_id</code> identifies the segmentation population; <code>cell_id</code> identifies a cell within it. The selected section and domain records supply the population context. A row offset locates that cell in one saved layout and can change if a population is rewritten. The layout and ID indexes below connect the stable cell ID to its stored row.</p>
+<h3 id="base-and-region-fields">Base and region fields</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Field or record</th>
+<th>Representation</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cell_id</code></td>
+<td>String</td>
+<td>Identifies the segmented cell within its population</td>
+</tr>
+<tr class="even">
+<td><code>section_id</code>, <code>analysis_domain_id</code>, <code>tissue_roi_id</code></td>
+<td>Strings</td>
+<td>Associate the cell with its tissue section and analysis domain</td>
+</tr>
+<tr class="odd">
+<td><code>x_level0</code>, <code>y_level0</code></td>
+<td>Float64</td>
+<td>Full-resolution centroid coordinates in image pixels; used for spatial ordering</td>
+</tr>
+<tr class="even">
+<td><code>x_um</code>, <code>y_um</code></td>
+<td>Float64</td>
+<td>Calibrated centroid coordinates in µm</td>
+</tr>
+<tr class="odd">
+<td><code>cell_geometry</code></td>
+<td>Binary WKB (Well-Known Binary)</td>
+<td>Cell outline, retaining holes and multipart geometry where present</td>
+</tr>
+<tr class="even">
+<td><code>nucleus_geometry</code></td>
+<td>Nullable binary WKB</td>
+<td>Associated nucleus; null records its absence</td>
+</tr>
+<tr class="odd">
+<td><code>min_x</code>, <code>min_y</code>, <code>max_x</code>, <code>max_y</code></td>
+<td>Float64</td>
+<td>Complete cell-outline bounds in full-resolution pixels</td>
+</tr>
+<tr class="even">
+<td>Geometry revision and edit selection</td>
+<td>Dataset/component metadata and edits keyed by cell ID</td>
+<td>Identify which outlines apply to a measurement or membership result</td>
+</tr>
+</tbody>
+</table></div>
+<p>The geometry columns carry GeoParquet metadata. [1] <a href="data-formats.html#coordinates-units-and-selected-populations">Coordinate conventions</a> defines their image frame, calibration and null CRS.</p>
+<p>Cell rows also refer to tissue sections and analysis regions. Secondary-structure membership associates a cell ID with each structure containing it, allowing several memberships for overlapping structures. <a href="data-formats.html#classified-region-tables">Region tables</a> retain the corresponding outlines, classes and review decisions.</p>
+<h3 id="result-component-fields">Result-component fields</h3>
+<p>Result tables store measurements, reference labels, predictions or accepted classifications for the base population. Their descriptions retain the field definitions, source population and relevant model or review identities.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Per-cell values</th>
+<th>Definition stored with the component</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Measurements</td>
+<td>Selected cell shape and intensity values</td>
+<td>Measurement name, channel, cellular region, measure, units and storage type</td>
+</tr>
+<tr class="even">
+<td>Reference labels</td>
+<td>The class assigned to each labelled cell</td>
+<td>Reference set, class dictionary and subject allocation for fitting or evaluation</td>
+</tr>
+<tr class="odd">
+<td>Model predictions</td>
+<td>Predicted class code and model score</td>
+<td>Fitted model, input features, score definition and model class order</td>
+</tr>
+<tr class="even">
+<td>Accepted classifications</td>
+<td>Reviewed class code and confidence-rejection flag</td>
+<td>Prediction or marker-rule result, accepted cutoff or label mapping, and class dictionary</td>
+</tr>
+</tbody>
+</table></div>
+<p>Numerical measurement fields use Float64; categorical fields use Int32 codes and the dictionaries described below. Textual notes and external identifiers remain strings. When reading measurement or marker-state columns, a corresponding <code>present:&lt;field&gt;</code> Boolean column can also be returned. It records whether that field was supplied for the cell, allowing a missing field to be distinguished from one explicitly supplied with a null value.</p>
+<p><a id="ii-physical-row-layout"></a></p>
+<h2 id="how-cells-are-arranged-on-disk">How cells are arranged on disk</h2>
+<p>To keep nearby cells close together on disk, the writer assigns each finalized centroid <code>(x,y)</code> to a 4096-by-4096-pixel block:</p>
+<p>[ b_x=\left\lfloor x/4096\right\rfloor,\qquad b_y=\left\lfloor y/4096\right\rfloor. ]</p>
+<p>To keep nearby tissue regions close together on disk, we order the blocks by <strong>Morton code</strong>. We form this code by interleaving the binary digits of the horizontal and vertical block indices. Sorting by the resulting numbers follows a repeating Z-shaped path across the grid.</p>
+<p>Within a block, we use the same ordering for the integer-pixel positions of cell centroids and break ties by <code>cell_id</code>. This rounding is only used to order rows. Each cell retains its original Float64 coordinates and its outline vertices in WKB.</p>
+<p>A block containing many cells can occupy several row groups, and smaller groups can share a file. The Python base writer packs these sorted cells into independently readable Parquet row groups with at most <strong>8,192 cells</strong> and an <strong>8 MiB target for the uncompressed Arrow table in memory</strong>. It estimates row size while assembling a group, then checks the Arrow table size and splits a multi-cell group if necessary. WKB and other variable-length fields contribute to that size. Groups are packed toward <strong>64 MiB decoded data per part file</strong> and compressed with Zstd level 1. These are decoded sizes; compressed file sizes vary with the data.</p>
+<p>The Python writer can isolate an oversized individual cell under its separate record allowance, which defaults to 64 MiB. Native readers and result writers enforce their own row-group allocation limits, including 8 MiB limits on result groups. A Python-written oversized cell therefore requires checking the intended reader's limits.</p>
+<p><a id="iii-layout-and-cell-id-indexes"></a></p>
+<h2 id="locate-a-region-or-a-known-cell">Locate a region or a known cell</h2>
+<p><code>layout.parquet</code> contains one row per indexed data group:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>group_id</code></td>
+<td>Logical group used to associate base cells and result columns</td>
+</tr>
+<tr class="even">
+<td><code>file</code>, <code>row_group</code></td>
+<td>Relative Parquet part path and physical row-group number</td>
+</tr>
+<tr class="odd">
+<td><code>row_count</code>, <code>decoded_bytes</code></td>
+<td>Number of cells and decoded Arrow table bytes recorded by the base writer</td>
+</tr>
+<tr class="even">
+<td><code>min_x</code>, <code>min_y</code>, <code>max_x</code>, <code>max_y</code></td>
+<td>Bounds enclosing every complete cell outline in the group</td>
+</tr>
+</tbody>
+</table></div>
+<p>When QuPath opens a cell dataset, we read the layout in the background and build a <strong>JTS STRtree</strong>, a spatial index that searches the groups' bounding rectangles. We retain this index while the dataset is open, subject to the configured metadata-memory limit. The Python reader stores the same rectangles in numerical arrays and compares them with each requested region. Both readers can therefore identify which groups may contain relevant cells before loading their outlines. [2]</p>
+<p><code>id-index.parquet</code> maps sorted cell IDs to logical groups and row offsets. Known-ID queries read the corresponding sorted ranges and return locations in the saved table layout. The mapping is built once for that population/layout and reused by reference, edit and result-join operations.</p>
+<p>The block assignment uses the centroid; the index bounds enclose complete outlines. A query can therefore find a cell whose outline crosses into the requested region even when its centroid belongs to a neighbouring block.</p>
+<p><a id="iv-spatial-query-sequence"></a></p>
+<h2 id="read-cells-within-a-region">Read cells within a region</h2>
+<p>A regional read starts with a rectangle in full-resolution mIF coordinates and the selected cell result. We first identify saved groups whose bounding rectangles overlap or touch this region, then examine individual cells within those groups. The final inclusion rule depends on the task: a detailed image view needs outlines intersecting the rectangle, including cells crossing its edge, whereas a centre-based membership calculation selects cells whose centres fall inside it.</p>
+<h3 id="python-table-reads">Python table reads</h3>
+<p>For a regional read, call the exported collection's <code>query((min_x, min_y, max_x, max_y), columns=..., predicate=...)</code> with a rectangle in full-resolution image pixels and the columns needed for your calculation. We compare that rectangle with the saved group bounds to select candidate row groups.</p>
+<p>Within each candidate group, we read the requested base columns and the corresponding measurement or phenotype columns. The result descriptions locate these values by base-group and row range; we verify that their cell-ID sequence matches the base rows before joining them. We also read the coordinates or outlines needed for the selected <code>predicate</code>, apply its cell-inclusion test, and restrict the collection to its included analysis regions. Iterating over the query yields Arrow <code>RecordBatch</code> objects containing the requested columns for those cells.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Predicate</th>
+<th>Final inclusion test</th>
+<th>Additional data read</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>intersects</code> (default)</td>
+<td>Cell outline intersects the rectangle, including its boundary</td>
+<td>Per-cell bounds and cell WKB</td>
+</tr>
+<tr class="even">
+<td><code>bounds</code></td>
+<td>Cell bounding rectangle overlaps or touches the query rectangle</td>
+<td>Per-cell bounds</td>
+</tr>
+<tr class="odd">
+<td><code>centroid</code></td>
+<td>Stored centroid lies within the inclusive query rectangle</td>
+<td>Per-cell bounds and <code>x_level0</code>/<code>y_level0</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>A bounding rectangle can overlap the requested region even when the enclosed cell outline does not, so <code>bounds</code> is useful for finding possible matches and <code>intersects</code> for confirming outline overlap. An intersecting cell may have its centre outside the region.</p>
+<p>To read the complete selected population, use <code>iter_batches(columns=...)</code>. It visits every base row group in order and uses the same result joining and analysis-region filtering, yielding batches of at most 8,192 cells. To retrieve known cells, use <code>lookup_ids(ids, columns=...)</code>; this operation uses the sorted ID index to locate their saved rows. Collection reads translate category codes using the <a href="#vi-category-dictionaries">combined dictionaries</a>.</p>
+<p>Parquet stores columns separately within each row group, so reads using cell IDs, centroids and marker values can leave the outline columns unread. [3] During iteration, memory holds the selected base batch, the result group being joined and arrays needed for filtering or calculation. For a histogram or running summary, process each yielded batch before requesting the next; retaining every batch keeps the selected population in memory.</p>
+<h3 id="qupath-viewport-reads">QuPath viewport reads</h3>
+<p>The native provider first estimates the number and decoded size of candidate groups. A wide view with more than 20,000 candidate cells, or estimated geometry cost beyond its display allowance, uses a 64 × 64 density grid. This view reads cell IDs, centroids and bounds, then counts centroids within the requested rectangle.</p>
+<p>At a detailed scale, the provider reads the candidate groups' display columns and joins the selected classification fields. Per-row bounds remove cells that cannot intersect the viewport before their outlines are decoded. The final outline-intersection test retains complete cells crossing the viewport boundary. Current edited outlines are checked separately, so a moved cell can appear outside its original group's bounds.</p>
+<h3 id="scientific-native-traversals">Scientific native traversals</h3>
+<p>Calculations that use QuPath cell objects read one saved group at a time and pass each matching cell to the calculation. <code>forEachInBounds</code> finds possible groups through the spatial index, constructs their cell objects and checks each outline against the requested rectangle. The corresponding centre-based operation checks the centroid of the QuPath outline, including centres on the rectangle's boundary. In both cases, the cell receives the selected measurement and classification fields before it is passed to the calculation. A whole-population operation follows the same sequence across all groups. These calculations visit individual cells regardless of whether the image viewer is displaying a density overview.</p>
+<p>Point-reference import groups nearby annotation points into batches, allowing several cell-matching searches to share the same file reads and outline decoding.</p>
+<p>Cells deleted during editing are excluded, and cells with moved outlines are checked at their updated positions. If an outline changes while a calculation is reading cells, the reader reports an error so that the calculation can restart using one outline revision throughout.</p>
+<p><a href="../assets/figures/cell-access.svg"><img src="../assets/figures/cell-access.svg" alt="Schematic of retrieving a complete cell outline that crosses the viewport boundary despite its centroid lying outside." width="650"></a></p>
+<p><em>Cell <code>i₁</code> has its centre in the first 4096-pixel block, but its outline extends to <code>x=4108</code>. A view beginning at <code>x=4096</code> therefore needs group <code>G0</code>. Checking the complete outlines includes this cell and removes the second cell, which lies outside the view. Dictionary <code>K</code> supplies the phenotype label for each stored code.</em></p>
+<p><a id="v-matching-new-results-to-the-same-cells"></a> <a id="assemble-selected-results"></a></p>
+<h2 id="join-measurements-and-classifications">Join measurements and classifications</h2>
+<p>A result table records its segmentation population (<code>population_id</code>), base-row arrangement (<code>layout_version</code>), outline revision (<code>geometry_revision</code>) and applicable image or region selection (<code>scope_key</code>). Its <code>groups</code> entries identify the base group and starting row, then the result file, Parquet row group and number of corresponding rows. A result can divide one base group into several smaller groups; its physical files need not have the same boundaries as the geometry files.</p>
+<p>The reader uses those recorded row ranges to join each result to its base cells, checking the population, row layout, selection and outline revision. Within a range, the result’s <code>cell_id</code> sequence must match the base sequence. The Boolean <code>applied</code> field distinguishes rows receiving that result from rows present only to preserve alignment. This prevents a measurement or phenotype from being attached to another cell when files have different group boundaries.</p>
+<p>The Java writer reads cells in groups and adds the selected input fields as required. Intensity measurements use the outlines to sample the image; shape calculations use geometry and saved shape measurements. Reviewed phenotype assignments read the selected classification fields. Each operation writes its own result component and reuses the base geometry.</p>
+<p>Imported references and other external values are first matched by cell ID. A reference-label table can contain only the annotated cells. A completed result for a whole population must account for every expected cell; an unavailable value and a row outside a result's scope remain distinguishable through the saved field validity and applicability records.</p>
+<p><a id="vi-category-dictionaries"></a></p>
+<h2 id="interpret-category-codes">Interpret category codes</h2>
+<p>Repeated categories use nonnegative <strong>Int32 codes</strong> and a dictionary associated with the field and result version. Java and Python can therefore read the same 32-bit integers for counting, filtering and colour selection, while the dictionary stores each class name once.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Dictionary field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dictionary_id</code></td>
+<td>Identifies the result's saved category dictionary</td>
+</tr>
+<tr class="even">
+<td><code>field</code></td>
+<td>The category described, such as phenotype or primary compartment</td>
+</tr>
+<tr class="odd">
+<td><code>entries[].code</code></td>
+<td>Unique nonnegative integer in this dictionary</td>
+</tr>
+<tr class="even">
+<td><code>entries[].label_id</code></td>
+<td>Stable identity of the label within the analysis</td>
+</tr>
+<tr class="odd">
+<td><code>entries[].name</code></td>
+<td>Name shown to the researcher</td>
+</tr>
+<tr class="even">
+<td><code>entries[].color</code></td>
+<td>Display colour for this category in the saved dictionary</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use the selected result's dictionary to translate every phenotype code, including zero, into its label. Null represents unavailable or unassigned data, while a separate flag records whether a prediction was rejected by the confidence cutoff. A marker-negative call is a recorded state in its marker-state field and must remain distinguishable from missing data.</p>
+<p>When Python combines results from several tissue sections or result tables, we construct one dictionary for each categorical field. Entries with the same <code>label_id</code> receive the same code in the combined table, even if their source tables used different integers. Decode the returned values with the opened dataset's <code>dictionaries</code>, which record these combined codes. If the same label identity has conflicting names or colours in the selected results, the reader reports the conflicting definitions and cannot combine those results.</p>
+<p>The native adapter creates a reusable name and QuPath <code>PathClass</code> for each dictionary entry it needs. Exports that present readable labels look up each code in its dictionary.</p>
+<p>The returned Arrow columns retain these Int32 category values and their validity masks. Parquet may additionally compress repeated stored values with its own dictionary encoding. Those compression indexes can differ between column chunks; the decoded category values always refer to the explicit result dictionary. [4,5]</p>
+<h3 id="reusing-predictions-after-label-review">Reusing predictions after label review</h3>
+<p>Accepting a confidence cutoff or revised class assignment saves the selected phenotype codes and rejection flags with references to the original prediction. Renaming a label updates its dictionary entry while retaining the label's identity. Merging labels records which previous classes become the combined class. These changes reuse the cell and nucleus outlines; earlier results retain the dictionaries needed to interpret their original codes.</p>
+<h3 id="selecting-cells-for-export">Selecting cells for export</h3>
+<p>A collection selects section datasets, measurement and phenotype components, accepted cell edits and active analysis domains. Its reader excludes deleted cells and filters batches to those domains. It retains both the source-population summaries and selected-population summaries so their counts can be reconciled. <a href="data-formats.html#input-files-for-spatial-analysis">Saved data formats</a> describes the handoff that opens this selection.</p>
+<p><a id="vii-geometry-edits-and-derived-layout"></a></p>
+<h2 id="read-accepted-outline-edits">Read accepted outline edits</h2>
+<p>Reshaping an existing cell retains its ID and saves the revised outline separately from the base dataset. Splitting or merging cells creates new cell IDs and removes the source cells from the selected population; drawing a missing cell also creates a new ID. The reader applies these accepted additions, changes and deletions when assembling the selected cells. <a href="../stages/cells/index.html#review-and-accept-the-changes">Outline correction</a> explains their review and acceptance.</p>
+<p>View queries check edited bounds as well as the original spatial index, so a cell remains findable after its outline moves outside its original indexed group.</p>
+<p>For cells retaining their IDs, the geometry revision determines which derived values remain applicable. With accepted edits, the component reader can retain an earlier result for unchanged cells. For a changed cell, it clears measurement and marker-state values, their presence flags, membership and selected-result fields before joining components. A component row applies only when its <code>applied</code> flag is true and its recorded geometry revision is at least that cell’s edit revision. Replacement measurements and classifications can therefore reuse the original IDs while supplying values for the revised outlines.</p>
+<p><strong>References:</strong> <a href="https://geoparquet.org/releases/v1.1.0/">1. GeoParquet 1.1</a>; <a href="https://locationtech.github.io/jts/javadoc/org/locationtech/jts/index/strtree/STRtree.html">2. JTS STRtree</a>; <a href="https://parquet.apache.org/docs/file-format/">3. Parquet file layout</a>; <a href="https://arrow.apache.org/docs/format/Columnar.html">4. Arrow columnar format</a>; <a href="https://parquet.apache.org/docs/file-format/data-pages/encodings/">5. Parquet encodings</a>.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="../stages/results/index.html">Results and export</a>.</p>
+</main>
+</body>
+</html>

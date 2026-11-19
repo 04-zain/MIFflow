@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Build and release MIFflow · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/installation-and-build/building-and-releasing.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="build-and-release-mifflow">Build and release MIFflow</h1>
+<p>There are two ways to build and distribute MIFflow.</p>
+<ul>
+<li><strong>Build a wheel</strong> for users who have a Python 3.12 environment, including on a remote processing host. They install the wheel with pip. Installing it with the <code>desktop</code> extra also provides the graphical interface.</li>
+<li><strong>Build a portable application</strong> for desktop users on Windows or Ubuntu who want to extract the download and run it immediately. The archive includes Python, Qt and the processing libraries for the chosen operating system and processor edition.</li>
+</ul>
+<p><a id="source-and-environment"></a> <a id="packaging-files-and-prerequisites"></a></p>
+<h2 id="prepare-the-qupath-extension">Prepare the QuPath extension</h2>
+<p>The wheel and the portable application both include our Groovy scripts and the Java extension they use in QuPath. The checkout supplies the scripts. Before packaging either distribution, <a href="native-extension.html#build-and-install">compile the extension against QuPath 0.7.0</a>. Keep the JAR and its build record together. Both builders take this directory as an input.</p>
+<p><a id="python-distributions"></a></p>
+<h2 id="build-a-wheel-and-source-distribution">Build a wheel and source distribution</h2>
+<p>Open a terminal at the root of the checkout and activate a Python 3.12 environment. Install the Python build tool, point <code>MIF_NATIVE_READER_BUILD_DIR</code> to your compiled extension and choose where to write the distributions. The examples use <code>mif-releases</code> as the output directory.</p>
+<p><strong>Ubuntu</strong></p>
+<pre class="bash"><code>python -m pip install build
+export MIF_NATIVE_READER_BUILD_DIR=&quot;$HOME/mif_pipeline_build/native&quot;
+python -m build --outdir &quot;$HOME/mif-releases&quot;</code></pre>
+<p><strong>Windows PowerShell</strong></p>
+<pre class="powershell"><code>python -m pip install build
+$env:MIF_NATIVE_READER_BUILD_DIR = &#39;C:\mif_pipeline_build\native&#39;
+python -m build --outdir &#39;C:\mif-releases&#39;</code></pre>
+<p>The build first packages the source files and the compiled extension into a source distribution. It then unpacks that archive and builds the installable wheel from its contents.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>File in the output directory</th>
+<th>How to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mif_pipeline-&lt;version&gt;-py3-none-any.whl</code></td>
+<td>Install or distribute this file. Pip installs the declared Python dependencies with it. <a href="software.html#install-a-shared-wheel">Install a wheel</a></td>
+</tr>
+<tr class="even">
+<td><code>mif_pipeline-&lt;version&gt;.tar.gz</code></td>
+<td>Share this archive with users who want to inspect the packaged sources or rebuild the wheel. It includes the compiled extension as well as the Java source files, so rebuilding this distribution does not require compiling the extension again.</td>
+</tr>
+</tbody>
+</table></div>
+<p>To build only the wheel from your checkout, add <code>--wheel</code> to the build command. If you want to run a checkout locally, <a href="software.html#install-the-python-application">install from source</a>. In that case pip builds and installs the wheel in one operation. <a href="https://build.pypa.io/en/stable/how-to/basic-usage.html">Python build commands</a></p>
+<p><a id="portable-application-builds"></a></p>
+<h2 id="build-a-portable-application">Build a portable application</h2>
+<p>Build the portable application on the operating system where it will run. The launcher uses a native x86-64 Python 3.12 installation to assemble the executable and libraries for that system. Run the launcher as an ordinary user from the repository checkout.</p>
+<p>The launcher needs the compiled extension and a local copy of the InstanSeg model. Give it separate locations for assembling the application and writing the finished archive. Keep these directories outside the checkout.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Directory</th>
+<th>What to put there</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Compiled extension</td>
+<td>Use the output directory from the Java extension build.</td>
+</tr>
+<tr class="even">
+<td>InstanSeg model</td>
+<td>Place the eight model files under <code>model/fluorescence_nuclei_and_cells/</code>. Pass the parent of <code>model/</code> to the launcher.</td>
+</tr>
+<tr class="odd">
+<td>Temporary build space</td>
+<td>Choose a working directory for installing dependencies and assembling the application.</td>
+</tr>
+<tr class="even">
+<td>Release output</td>
+<td>Choose a separate directory for the verified archive and its checksum.</td>
+</tr>
+</tbody>
+</table></div>
+<p><a id="choose-the-processor-edition"></a></p>
+<h3 id="choose-the-processor-edition">Choose the processor edition</h3>
+<p>The build commands below produce the CPU edition by default. To produce the NVIDIA edition, add <code>-Accelerator cuda</code> to the PowerShell command or <code>--accelerator cuda</code> to a shell command. This selects the CUDA libraries for the Python calculations, the Nimbus scoring program and the models that run in QuPath. A computer running GPU processing also needs a compatible NVIDIA driver. <a href="software.html#nvidia-processing-libraries">Check NVIDIA processing</a></p>
+<h3 id="windows-11">Windows 11</h3>
+<p>Open native x86-64 PowerShell in the repository root. On Windows, the checkout, compiled extension, model, temporary build directory and output directory must be on a local fixed NTFS volume. Use a short path for <code>-StagingRoot</code> because the build creates several levels of subdirectories.</p>
+<pre class="powershell"><code>.\scripts\build_windows.ps1 `
+  -StagingRoot &#39;C:\mif-build&#39; `
+  -OutputRoot &#39;C:\mif-build\artifacts&#39; `
+  -NativeReaderBuildDir &#39;C:\mif_pipeline_build\native&#39; `
+  -InstanSegModelRoot &#39;C:\instanseg-build-input&#39;</code></pre>
+<h3 id="ubuntu-2404">Ubuntu 24.04</h3>
+<p>Run the Linux launcher from the checkout. Give it absolute paths to Python, the compiled extension, the model and the desired output directory. If you build the Ubuntu application under WSL2, keep the checkout, inputs, temporary workspace and output on the Linux filesystem outside <code>/mnt</code>.</p>
+<pre class="bash"><code>scripts/build_linux.sh \
+  --source-root &quot;$PWD&quot; \
+  --output-dir &quot;$HOME/mif-releases&quot; \
+  --python /usr/bin/python3.12 \
+  --native-reader-build-dir &quot;$HOME/mif_pipeline_build/native&quot; \
+  --instanseg-model-root &quot;$HOME/instanseg-build-input&quot;</code></pre>
+<h3 id="windows-build-from-wsl2">Windows build from WSL2</h3>
+<p>To build a Windows application from a checkout in WSL2, run the wrapper below. It copies the source to the Windows staging directory and runs the Windows builder using native Windows Python. Use a Linux path for <code>--source-root</code> and Windows paths for the other directories.</p>
+<pre class="bash"><code>scripts/build_windows_from_wsl.sh \
+  --source-root &quot;$PWD&quot; \
+  --staging-root &#39;C:\mif-build&#39; \
+  --output-root &#39;C:\mif-build\artifacts&#39; \
+  --native-reader-build-dir &#39;C:\mif_pipeline_build\native&#39; \
+  --instanseg-model-root &#39;C:\instanseg-build-input&#39;</code></pre>
+<p><a id="outputs-and-verification"></a> <a id="outputs"></a></p>
+<h2 id="find-the-portable-archive">Find the portable archive</h2>
+<p>The <a href="https://github.com/04-zain/MIFflow/blob/main/scripts/build_portable.py">portable builder</a> installs the wheel and its pinned dependencies in a fresh Python environment. After it checks the InstanSeg model, Torch edition and installed application files, PyInstaller assembles the executable and the libraries it will load. On Ubuntu the bundle also includes the system libraries needed by the interface.</p>
+<p>Before the build finishes, the builder extracts the new archive, checks its contents against the build manifest and runs the diagnostic from the extracted executable. A successful build leaves two files in the output directory. One is the application archive (a ZIP on Windows or a <code>.tar.gz</code> on Ubuntu). The other is its <code>.sha256</code> checksum. The archive name identifies the application version, source checksum, operating system and processor edition.</p>
+<p><a id="bundled-nimbus-worker"></a> <a id="bundled-numerical-workers"></a> <a id="qupath-torch-libraries"></a> <a id="how-processing-libraries-are-packaged"></a></p>
+<details>
+<summary>Processing libraries included with the portable desktop</summary>
+
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Program</th>
+<th>Libraries included in the archive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>KRONOS</td>
+<td>The <code>mif-numerical-worker</code> executable prepares the encoder for QuPath and fits the spatial graph model. It shares the desktop’s Python libraries, including Torch 2.6.0.</td>
+</tr>
+<tr class="even">
+<td>Nimbus</td>
+<td>Nimbus uses NumPy 1.26.4 and Torch 2.7.1. Its library versions differ from the desktop’s, so <code>build_nimbus_runtime.py</code> packages a separate scoring program under <code>runtimes/nimbus</code> in both editions.</td>
+</tr>
+<tr class="odd">
+<td>QuPath GPU processing</td>
+<td>For the NVIDIA edition, <code>build_native_gpu_runtime.py</code> prepares the Java adapter and records the locations of compatible Torch libraries under <code>runtimes/torch-native</code>. QuPath can reuse the libraries packaged for Nimbus.</td>
+</tr>
+</tbody>
+</table></div>
+<p>For a Python installation, the software guide explains how to <a href="software.html#nimbus-for-source-installations">add Nimbus</a> or <a href="software.html#add-nvidia-processing-libraries">prepare NVIDIA processing</a>. Researchers select the model weights used for their analysis in <a href="software.html#open-software-setup">Software setup</a>.</p>
+</details>
+
+<p><a id="acceptance-before-distribution"></a> <a id="native-ome-zarr-reader-build"></a> <a id="java-extension-resources"></a></p>
+<h2 id="verify-the-distributions">Verify the distributions</h2>
+<h3 id="check-a-wheel-rebuilt-from-the-source-distribution">Check a wheel rebuilt from the source distribution</h3>
+<p>Extract the source distribution into a fresh directory and unset <code>MIF_NATIVE_READER_BUILD_DIR</code>. From the extracted directory, run <code>python -m build --wheel</code>. This checks that someone receiving only the source archive can build a wheel with the QuPath extension included.</p>
+<p>Install the resulting wheel with the <a href="software.html#install-a-shared-wheel">desktop installation commands</a> in a separate Python environment. Open a terminal outside the checkout and activate that environment. Run <code>mif-batch --help</code> and open <code>mif-desktop</code> to check the two installed entry points.</p>
+<h3 id="run-the-extracted-portable-application">Run the extracted portable application</h3>
+<p>Extract the complete archive outside the build tree on its target operating system. Run the extracted executable with <code>--portable-diagnostics-json</code> to check the bundled programs and libraries. Add <code>--result-json FILE</code> to write the report to a new file at an absolute path.</p>
+<p>Open the extracted desktop, connect QuPath and read a source image. Run one of the intended analyses on the processor for that edition to check image reading and model execution together.</p>
+<h3 id="check-the-affected-analysis-stages">Check the affected analysis stages</h3>
+<p>Run a representative whole slide through the affected stages. Pause the run, reopen it and continue to its saved results. For image-reader changes, compare the prepared image’s pixel values and physical calibration in QuPath with the expected values. For cluster changes, verify the shared paths and run a job in a Slurm allocation.</p>
+<p><a id="application-and-processing-program-identity"></a> <a id="dependencies-and-licences"></a></p>
+<h2 id="dependencies-and-licences">Dependencies and licences</h2>
+<p>For a wheel, the <a href="https://github.com/04-zain/MIFflow/blob/main/pyproject.toml">package definition</a> specifies the Python dependencies and commands installed into the recipient’s environment. For portable archives, the <a href="https://github.com/04-zain/MIFflow/tree/main/packaging/requirements">platform dependency files</a> specify exact versions and hashes for each edition. The build manifest identifies the source and packaged resources. A separate runtime record identifies the libraries used by Nimbus.</p>
+<p>Distribute the <a href="https://github.com/04-zain/MIFflow/blob/main/packaging/notices/THIRD_PARTY_NOTICES.txt">third-party notices</a> with each build. These identify the software and model terms, including the licences for FlowSOM Python 0.2.2 (GPLv3) and PhenoGraph 1.5.7 (MIT). FlowSOM also includes the MIT attribution for its consensus-clustering code.</p>
+<h2 id="publish-the-downloads">Publish the downloads</h2>
+<p>Create a GitHub release for the tested source revision. Give each operating system and processor edition its own row in the download table. Link the application archive and its matching SHA-256 file in that row so users can identify their edition and check the download.</p>
+<p>Each GitHub release asset must be smaller than 2 GiB. If an archive exceeds that limit, link its release row to the verified file on the download host. Download each published archive and verify it against the checksum produced by the builder. <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases">GitHub release assets</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1140" viewBox="0 0 1000 1140" role="img" aria-labelledby="title description">
+<title id="title">A complete local annotation draft returns through the current cluster review</title>
+<desc id="description">The cluster source and local QuPath draft share one image coordinate frame. The same protected contour P and image features appear in the before-and-after pair. Local editing revises R1, removes R2 and adds R3. Saving and closing QuPath returns the complete GeoJSON collection containing P, R1 and R3 with its review ticket. Python checks the current image and review. QuPath compares the returned objects with the current source by original ID, preserves P, replaces R1, removes R2 and adds R3. Native saving writes candidate.qpdata with the existing cells retained. The saved references reach pipeline review before the separate Freeze references and fit action. Shapes, abbreviated IDs and cell glyphs are schematic.</desc>
+<rect width="1000" height="1140" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<rect x="30" y="20" width="360" height="366" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="610" y="20" width="360" height="366" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="50" y="55" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Cluster; saved image</text>
+<text x="630" y="55" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Local QuPath; draft</text>
+<rect x="69" y="85" width="282" height="222" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="1"/>
+<ellipse cx="97.200" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="142.320" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="187.440" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="232.560" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="277.680" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="322.800" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="97.200" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="142.320" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="187.440" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="232.560" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="277.680" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="322.800" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="97.200" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="142.320" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="187.440" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="232.560" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="277.680" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="322.800" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="97.200" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="142.320" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="187.440" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="232.560" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="277.680" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="322.800" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="97.200" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="142.320" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="187.440" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="232.560" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="277.680" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="322.800" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<path d="M83.100 107.200 L159.240 93.880 L328.440 111.640 L336.900 280.360 L243.840 295.900 L88.740 278.140 Z" fill="none" stroke="#526773" stroke-width="2" stroke-linejoin="round"/>
+<path d="M131.040 140.500 L193.080 129.400 L198.720 193.780 L136.680 207.100 Z" fill="none" stroke="#007D83" stroke-width="2" stroke-linejoin="round"/>
+<path d="M257.940 218.200 L308.700 215.980 L308.700 262.600 L255.120 264.820 Z" fill="none" stroke="#356E9A" stroke-width="2" stroke-linejoin="round"/>
+<text x="94.38" y="133.84" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#526773" text-anchor="start">P</text>
+<text x="147.96" y="176.01999999999998" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="start">R1</text>
+<text x="257.94" y="251.5" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="start">R2</text>
+<rect x="649" y="85" width="282" height="222" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="1"/>
+<ellipse cx="677.200" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="722.320" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="767.440" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="812.560" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="857.680" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="902.800" cy="113.860" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="677.200" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="722.320" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="767.440" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="812.560" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="857.680" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="902.800" cy="153.820" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="677.200" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="722.320" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="767.440" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="812.560" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="857.680" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="902.800" cy="193.780" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="677.200" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="722.320" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="767.440" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="812.560" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="857.680" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="902.800" cy="233.740" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="677.200" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="722.320" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="767.440" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<ellipse cx="812.560" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.14"/>
+<ellipse cx="857.680" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.18"/>
+<ellipse cx="902.800" cy="273.700" rx="9.870" ry="9.324" fill="#356E9A" opacity="0.10"/>
+<path d="M663.100 107.200 L739.240 93.880 L908.440 111.640 L916.900 280.360 L823.840 295.900 L668.740 278.140 Z" fill="none" stroke="#526773" stroke-width="2" stroke-linejoin="round"/>
+<path d="M711.040 140.500 L806.920 124.960 L812.560 196.000 L716.680 207.100 Z" fill="none" stroke="#007D83" stroke-width="2" stroke-linejoin="round"/>
+<path d="M761.800 231.520 L815.380 215.980 L837.940 260.380 L770.260 271.480 Z" fill="none" stroke="#356E9A" stroke-width="2" stroke-linejoin="round"/>
+<text x="674.38" y="133.84" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#526773" text-anchor="start">P</text>
+<text x="727.96" y="176.01999999999998" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="start">R1</text>
+<text x="775.9" y="255.94" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="start">R3</text>
+<text x="210" y="330" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Saved annotations</text>
+<text x="210" y="360" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">Original image coordinates</text>
+<text x="790" y="330" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">Revise R1; remove R2</text>
+<text x="790" y="360" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">Add R3; same coordinates</text>
+<path d="M390 192 L610 192" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="500" y="170" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">Open draft</text>
+<text x="500" y="223" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">Image via mount</text>
+<path d="M790 386 L790 450" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="809" y="424" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="start">Save + close</text>
+<path d="M645 450 H920 L945 475 V750 H645 Z" fill="none" stroke="#356E9A" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M920 450 V475 H945" fill="none" stroke="#356E9A" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="795" y="490" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="middle">Complete GeoJSON</text>
+<path d="M664 505 L924 505" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="674" y="534" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">ID</text>
+<text x="829" y="534" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Geometry</text>
+<text x="674" y="576" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#526773" text-anchor="start">P</text>
+<path d="M807.643 553.242 L820.457 551.000 L848.933 553.989 L850.357 582.385 L834.695 585.000 L808.592 582.011 Z" fill="none" stroke="#526773" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="674" y="624" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">R1</text>
+<path d="M807.989 605.432 L847.676 599.000 L850.011 628.405 L810.324 633.000 Z" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="674" y="672" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#356E9A" text-anchor="start">R3</text>
+<path d="M805.678 656.520 L838.502 647.000 L852.322 674.200 L810.861 681.000 Z" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round"/>
+<path d="M664 695 L924 695" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="795" y="729" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#356E9A" text-anchor="middle">Review ticket</text>
+<rect x="30" y="465" width="540" height="650" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="50" y="501" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Cluster import</text>
+<rect x="60" y="529" width="480" height="64" rx="3" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.2"/>
+<text x="300" y="569" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#356E9A" text-anchor="middle">Python; check image + review</text>
+<path d="M370 386 L370 529" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="185" y="435" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">Recheck source</text>
+<path d="M645 561 L540 561" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="592.5" y="540" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#356E9A" text-anchor="middle">Return</text>
+<text x="60" y="634" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">QuPath / JVM; compare by ID</text>
+<path d="M515 593 L515 655" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="60" y="655" width="480" height="231" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="60" y="655" width="480" height="46" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="80" y="685" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">ID</text>
+<text x="136" y="685" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Current</text>
+<text x="278" y="685" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Returned</text>
+<text x="435" y="685" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Apply</text>
+<text x="80" y="733" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773" text-anchor="start">P</text>
+<text x="136" y="733" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">Protected</text>
+<text x="278" y="733" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">Same</text>
+<text x="435" y="733" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773" text-anchor="start">Keep</text>
+<text x="80" y="777" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="start">R1</text>
+<text x="136" y="777" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">Reference</text>
+<text x="278" y="777" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">Revised</text>
+<text x="435" y="777" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="start">Replace</text>
+<text x="80" y="821" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">R2</text>
+<text x="136" y="821" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">Reference</text>
+<text x="278" y="821" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">Absent</text>
+<text x="435" y="821" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">Remove</text>
+<text x="80" y="865" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">R3</text>
+<text x="136" y="865" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">Absent</text>
+<text x="278" y="865" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="start">New</text>
+<text x="435" y="865" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">Add</text>
+<path d="M300 886 L300 950" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="319" y="925" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="start">Save</text>
+<path d="M75 950 H507 L530 973 V1090 H75 Z" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M507 950 V973 H530" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="299" y="984" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">candidate.qpdata</text>
+<path d="M95 1000 L510 1000" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="126" y="1041" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#526773" text-anchor="middle">P</text>
+<text x="194" y="1041" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="middle">R1</text>
+<text x="267" y="1041" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#356E9A" text-anchor="middle">R3</text>
+<text x="194" y="1073" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Annotations</text>
+<ellipse cx="365" cy="1032" rx="13" ry="10" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.3"/>
+<ellipse cx="405" cy="1035" rx="16" ry="11" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.3"/>
+<ellipse cx="448" cy="1030" rx="13" ry="9" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.3"/>
+<text x="406" y="1073" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Cells retained</text>
+<rect x="610" y="892" width="360" height="223" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="630" y="932" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Pipeline review</text>
+<text x="790" y="975" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Review returned references</text>
+<rect x="630" y="1024" width="320" height="65" rx="4" fill="#EAF5F4" stroke="#007D83" stroke-width="1.2"/>
+<text x="790" y="1064" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">Freeze references and fit</text>
+<path d="M530 1056 L630 1056" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="580" y="1035" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">Saved</text>
+</svg>

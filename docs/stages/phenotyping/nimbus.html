@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Nimbus · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/phenotyping/nimbus.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="nimbus">Nimbus</h1>
+<p><a href="../../../index.html#analysis-stages">Analysis stages</a></p>
+<p><a id="reference-nimbus"></a> <a id="reference-nimbus--nimbus-setup-and-calculation"></a></p>
+<p>On <strong>Run → Cell phenotyping → Marker rules</strong>, choose <strong>Nimbus</strong> to assess marker expression from the staining image. Nimbus reads one marker channel and the segmented cell outlines. It predicts a score at each pixel and averages the scores inside each cell.</p>
+<p>Review the cell scores to choose a cutoff for marker positivity. If you need a rule based on measured intensity, you can also fit an intensity threshold to the reviewed Nimbus decisions.</p>
+<p><a href="#install-the-model-and-choose-the-processing-device">Install Nimbus</a> · <a href="#select-the-marker-inputs">Choose marker inputs</a> · <a href="#review-the-marker-scores">Review scores</a> · <a href="marker-rules.html#review-an-intensity-distillation">Fit an intensity threshold</a> · <a href="#normalize-the-marker-image">How scores are calculated</a> · <a href="#saved-scores-and-later-changes">Saved scores</a></p>
+<p><a id="reference-nimbus--runtime-setup"></a> <a id="runtime-setup"></a> <a id="set-up-the-model-and-image-scale"></a></p>
+<h2 id="install-the-model-and-choose-the-processing-device">Install the model and choose the processing device</h2>
+<ol type="1">
+<li>Open <strong>Software setup → Cell phenotyping</strong> on the processing computer. The portable editions include the Nimbus scoring software. For a wheel or source installation, <a href="../installation-and-build/software.html#nimbus-for-source-installations">install the Nimbus processing libraries</a>. Use <strong>Check again</strong> to verify the Python packages.</li>
+<li>Under <strong>Nimbus</strong>, choose <strong>Install model…</strong> to download the V1 model or <strong>Use existing…</strong> to select its checkpoint file. We verify the weights and save their location for subsequent analyses. You can reopen <strong>Software setup</strong> from marker setup to change the model.</li>
+<li>In <strong>Computing</strong>, choose the processor for scoring. <strong>Automatic</strong> uses an available NVIDIA GPU if its memory can accommodate the model and otherwise uses the CPU. The score record identifies which device was used. For cluster processing, the worker and model must be accessible from the compute node. <a href="../setup/computing.html">Processor settings</a></li>
+</ol>
+<p><a href="../../assets/screenshots/software-cell-phenotyping.png"><img src="../../assets/screenshots/software-cell-phenotyping.png" alt="Nimbus model and scoring-software cards in the Cell phenotyping setup section." width="560"></a></p>
+<p><em>Software setup shows the installed Nimbus V1 model and CPU scoring software.</em></p>
+<details>
+<summary>Model package and checkpoint</summary>
+
+<p>Nimbus runs in its own Python environment because it requires a specific NumPy version. The bundled worker contains Python 3.12, <code>Nimbus-Inference==0.0.5</code>, <code>numpy==1.26.4</code>, <code>torch==2.7.1</code> and <code>opencv-python-headless==4.11.0.86</code> (OpenCV reports <code>4.11.0</code>). It scores one input per batch in 32-bit floating point and uses up to eight CPU threads within the task’s allowance. For a source installation, follow the <a href="../installation-and-build/software.html#nimbus-for-source-installations">instructions for building this worker</a>.</p>
+<p>The checkpoint is <code>V1.pt</code> from <a href="https://huggingface.co/JLrumberger/Nimbus-Inference">JLrumberger/Nimbus-Inference</a>, revision <code>3affc9e774d68408701e44ed6136b1e13503c639</code>. The repository declares the MIT license. Its SHA-256 is:</p>
+<pre class="text"><code>0651a3852fbafc03be415a1ec80ef947cc1913a081cf0bc649301ade887a82a9</code></pre>
+<p>The Python process verifies this checksum and loads the model once for the selected images. <a href="../installation-and-build/building-and-releasing.html#dependencies-and-licences">Dependency and model notices</a> describe the redistribution requirements.</p>
+</details>
+
+<h2 id="select-the-marker-inputs">Select the marker inputs</h2>
+<p>Select the marker’s saved <strong>Mean</strong> or <strong>Median</strong> intensity and choose <strong>Nimbus</strong>. The measurement supplies the values for the intensity histogram and for optional <a href="marker-rules.html#review-an-intensity-distillation">intensity distillation</a>. To add a missing measurement, use <strong>Cell measurements → Change cell measurements…</strong>.</p>
+<ul>
+<li><strong>Nimbus input.</strong> Choose <strong>Run on selected images</strong> to score the marker channel within the whole-cell outlines. This scoring area also applies when the selected intensity measurement comes from the nucleus, cytoplasm or membrane. Choose <strong>Advanced: load saved scores</strong> to reuse predictions for the same image, marker and segmented cells.</li>
+<li><strong>Nimbus score cutoff.</strong> Start with the default of <strong>0.5</strong> or enter a cutoff for the initial review. You can adjust it after inspecting the score distribution.</li>
+<li><strong>Objective magnification if missing.</strong> Nimbus resizes the image to the model’s 10× scale using the objective magnification recorded in the metadata. If an image lacks this value, enter the magnification used to capture it (for example, <strong>20</strong> for a 20× objective).</li>
+<li><strong>Nimbus model checkpoint</strong> under <strong>Advanced settings</strong> lets you use a different checkpoint for this calculation. Enter a path accessible on the processing computer.</li>
+</ul>
+<p><a href="../../assets/screenshots/luca-nimbus-inputs-current.png"><img src="../../assets/screenshots/luca-nimbus-inputs-current.png" alt="Actual LuCa PDL1 marker setup: whole-cell Mean intensity, Nimbus on selected images, score cutoff 0.5, objective magnification 10, and an existing checkpoint under Advanced settings." width="441"></a></p>
+<p><em>PDL1 setup for <strong>802 segmented cells</strong> in a 512 × 512-pixel <a href="../../data/luca.html">LuCa</a> field. The histogram displays the selected whole-cell Mean intensities; Nimbus will calculate image-based scores. <strong>Advanced settings</strong> is expanded to show the saved checkpoint path.</em></p>
+<p><a id="review-an-intensity-distillation"></a></p>
+<h2 id="review-the-marker-scores">Review the marker scores</h2>
+<p>After scoring, compare the score histogram with staining in the tissue viewer. The marker review guide describes how to <a href="marker-rules.html#review-nimbus-scores">choose the Nimbus cutoff</a> and <a href="marker-rules.html#review-an-intensity-distillation">compare the resulting calls with an intensity threshold</a>.</p>
+<p><a id="reference-nimbus--normalization-and-inference-geometry"></a> <a id="normalization-and-inference-geometry"></a></p>
+<h2 id="normalize-the-marker-image">Normalize the marker image</h2>
+<p>We normalize each marker using the positive pixel intensities across the entire source image. After converting the pixels to float32, we calculate their 99.9th percentile by linear interpolation between ordered positive values. This gives every prediction tile for the marker the same intensity scale.</p>
+<p>For source intensity <code>I(x,y)</code> and image-level quantile <code>q</code>, the normalized input is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mfrac><mrow><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mi>q</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+u(x,y)=\min\left(1,\max\left(0,\frac{I(x,y)}{q}\right)\right).
+</annotation></semantics></math></p>
+<p><code>I</code> and <code>q</code> have the same source intensity units, so <code>u</code> is dimensionless. Zero or negative intensities become zero, the quantile becomes one, and brighter intensities are clipped to one. Every processing window for that marker in the same source image uses this factor.</p>
+<p>An all-zero channel uses the defined factor <code>1e-8</code> and remains zero. A nonzero channel containing no positive values cannot supply this quantile. Nonfinite intensities also stop scoring because they cannot form valid model inputs. In either case, inspect the reported channel and its image preparation before retrying.</p>
+<p><a id="reference-nimbus--native-pixels-masks-and-identities"></a> <a id="native-pixels-masks-and-identities"></a></p>
+<h2 id="marker-images-and-cell-masks">Marker images and cell masks</h2>
+<ol type="1">
+<li><strong>Identify the cells.</strong> QuPath draws the segmented outlines on the marker’s original pixel grid. Each cell receives a distinct integer label, with zero for background. Two cells claiming the same pixel must be corrected before scoring. Cells excluded from intensity-threshold fitting still appear in the image seen by Nimbus.</li>
+<li><strong>Form the model mask.</strong> For each cell pixel, we check its neighbours above, below, left and right. If any is background or belongs to another cell, we set the pixel to zero. The remaining interiors are set to one. This separates touching cells for prediction. We keep the original labels, including boundary pixels, for calculating whole-cell scores.</li>
+<li><strong>Resize both inputs.</strong> For an objective magnification of <code>m</code>, each model dimension is <code>int(original_dimension × 10 / m)</code>. A 20× image therefore has half as many pixels along each axis at the model’s 10× scale. We interpolate marker intensities linearly and use the nearest mask pixel for each new mask value. The physical size represented by a model pixel also depends on the camera and detector binning.</li>
+</ol>
+<p><a href="../../assets/figures/nimbus-input-preparation.svg"><img src="../../assets/figures/nimbus-input-preparation.svg" alt="Stepwise Nimbus input preparation: positive-pixel percentile, divide and clip, integer cell labels, four-neighbour boundary removal, binary interiors and matched sampling, with original labels retained for whole-cell averaging." width="568"></a></p>
+<p><em>Nimbus receives two image planes. In the intensity plane, the 99.9th percentile of the positive pixels is 10, so an intensity of 16 reaches the normalized maximum of 1. The mask plane marks cell interiors using the four neighbours of each pixel. Resampling the two planes from 20× to 10× reduces the 8 × 10 field to 4 × 5 model pixels. The original cell labels identify which predictions to average for each cell.</em></p>
+<p><a id="apply-nimbus-and-review-marker-decisions"></a></p>
+<h2 id="from-marker-pixels-to-whole-cell-scores">From marker pixels to whole-cell scores</h2>
+<p>Nimbus processes the marker and mask planes together, preserving surrounding staining and neighbouring cells as image context. The residual U-Net predicts a marker score between zero and one at each output pixel; the whole-cell masks then determine which predictions contribute to each cell.</p>
+<p><a href="../../assets/figures/nimbus-application.svg"><img src="../../assets/figures/nimbus-application.svg" alt="Aligned marker intensities and cell interiors enter Nimbus; tiled predictions are restored to whole-cell masks and averaged before score review or optional intensity distillation." width="616"></a></p>
+<p><em>Schematic of normalization, cell-mask preparation and tiled prediction. The numbered cells retain their identities through whole-cell averaging; the final branch compares score decisions with an optional intensity rule.</em></p>
+<h3 id="cover-the-image-with-matching-prediction-tiles">Cover the image with matching prediction tiles</h3>
+<p>A large image uses 1,024 × 1,024 model-input windows. Valid convolutions produce an 836 × 836 prediction, and we discard two pixels from each edge to assign the central <strong>832 × 832</strong> output to that tile. The wider input supplies <strong>96 pixels of surrounding context</strong> on each side of the assigned output. Adjacent tiles therefore use overlapping inputs while contributing different output pixels.</p>
+<p>Tiles belong to one grid over the complete image. Reflection at the full-image edges supplies context outside the image. Before reading pixels, we use saved cell-group bounds to skip a tile only when its output cannot contribute to any cell being scored. All retained tiles use the same normalization, global position and surrounding masks.</p>
+<h3 id="check-the-model-image-dimensions">Check the model image dimensions</h3>
+<p>Nimbus uses reflection padding to score the whole image in one pass when both scaled dimensions are at most 1,024 pixels. Each dimension must be at least 32 pixels. If the source is already at 10×, both dimensions must also be multiples of 16. Otherwise the model crops its prediction to that spacing and the result no longer fits the source grid.</p>
+<p>Larger images are scored in tiles. If a scaled dimension leaves a remainder of <strong>831</strong> when divided by <strong>832</strong>, the last output tile along that axis would be empty and the image is rejected.</p>
+<p>These checks apply to the complete source image after magnification-based resizing. If the reported dimensions are incompatible, select a source image with supported dimensions or return to marker setup and choose another method.</p>
+<h3 id="combine-predictions-from-transformed-views">Combine predictions from transformed views</h3>
+<p>Nimbus evaluates transformed views to combine predictions from different orientations. The released six-entry sequence repeats a 270° rotation four times and includes one vertical flip and one horizontal flip. We calculate the three distinct predictions once, restore each to the original orientation, and weight them <strong>4:1:1</strong> to preserve that averaging rule.</p>
+<h3 id="average-predictions-over-each-whole-cell">Average predictions over each whole cell</h3>
+<p>The restored predictions are sampled onto original-resolution cell pixels using nearest-neighbour sampling. For whole-cell mask <code>M_i</code> and restored prediction <code>p_a(x,y)</code> at position <code>a</code> in the six-entry sequence, the cell score is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mi>i</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mn>6</mn><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>M</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>a</mi><mo>=</mo><mn>1</mn></mrow><mn>6</mn></munderover><munder><mo>∑</mo><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∈</mo><msub><mi>M</mi><mi>i</mi></msub></mrow></munder><msub><mi>p</mi><mi>a</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+s_i=\frac{1}{6|M_i|}\sum_{a=1}^{6}\sum_{(x,y)\in M_i}p_a(x,y).
+</annotation></semantics></math></p>
+<p>Here, <code>|M_i|</code> is the number of original pixels in cell <code>i</code>, including the boundary removed from the model's mask input. The denominator <code>6|M_i|</code> averages over those pixels and the six transformed views. A pixel contributes once per view even when its cell crosses a tile boundary, and the number of contributing pixels must agree between views. A cell whose mask covers no image pixels receives an unknown score.</p>
+<p><a id="image-model-and-cell-scores"></a></p>
+<h3 id="the-pretrained-residual-u-net">The pretrained residual U-Net</h3>
+<p><a href="../../assets/figures/nimbus-architecture.svg"><img src="../../assets/figures/nimbus-architecture.svg" alt="Nimbus residual U-Net with feature channels, valid-convolution dimensions and cropped connections between matching scales." width="598"></a></p>
+<p><em>Schematic of the fixed Nimbus network. The two input planes produce one pixel-score plane; cropped connections combine fine image structure with features calculated over wider context.</em></p>
+<p>The two input planes contain the normalized image of one marker and a binary image of cell interiors. The contracting path builds 64, 128, 256, 512 and 1,024 feature maps at progressively smaller spatial scales. Four pooling operations reduce the image dimensions; four learned upsampling operations restore spatial detail. At each matching scale, the expanding path combines its features with cropped features from the contracting path. The deeper layers describe wider image context, while these connections retain finer staining patterns for the final pixel prediction.</p>
+<p>Each residual block projects its input through a 1 × 1 convolution and applies two 3 × 3 convolutions, each followed by batch normalization and ReLU. Each valid convolution reduces both spatial dimensions by two pixels. We crop two pixels from every edge of the projected input to match the calculated features, then add the two arrays element by element to complete the block. A final 1 × 1 convolution and sigmoid produce one marker-score plane. <a href="#cover-the-image-with-matching-prediction-tiles">Prediction tiles</a> explains the resulting output dimensions and how the retained pixels cover the complete image.</p>
+<p><a id="reference-nimbus--retained-evidence-and-limitations"></a> <a id="retained-evidence-and-limitations"></a></p>
+<h2 id="saved-scores-and-later-changes">Saved scores and later changes</h2>
+<p>Changing only the score cutoff reuses completed scores. Returning to marker setup with the same image, marker channel, segmented cells, objective magnification and model reopens that calculation. Replacing the image or segmentation, or changing a model input, requires scores for the new inputs. Intensity distillation uses the saved scores and selected measurement column without another image-model inference.</p>
+<p>Each saved score remains associated with its image, marker and cell ID. Missing identity rows are an input error; an explicit null score identifies a present cell with an unknown outcome. For a mismatched or incomplete imported file, select scores generated for the current cells or choose <strong>Run on selected images</strong> to calculate them.</p>
+<p>If image reading or scoring fails, open <strong>Run → Details</strong> and use the available retry or correction action. To replace a stopped review after correcting its inputs or choosing another method, use <a href="../run/index.html#restart-a-marker-review"><strong>Change phenotyping choices…</strong></a>. This restarts the marker review and requires new marker confirmations.</p>
+<p><a id="saved-score-file"></a></p>
+<details>
+<summary>Saved score-file format and cell identities</summary>
+
+<p>The imported NDJSON file has schema <code>mif-nimbus-scores/v1</code> and contains one marker. Its first record declares <code>record_type="header"</code>, the marker, <code>score_kind="nimbus_cell_expression_confidence"</code>, <code>model_id</code>, <code>package_version</code>, <code>weights_sha256</code> and the image-section scopes. Each scope records <code>(sample_id, project_entry_id, slide_id, section_id)</code>, the segmentation-population identity and source-image identity.</p>
+<p>Each later row contains <code>cell_identity</code>, formed by appending the existing pipeline cell ID to the four-part scope, and <code>score</code>. This key identifies the segmented cell within its image and section. The reader matches each requested cell once and returns its score in the measurement table’s cell order. It reports missing or duplicate rows, foreign scopes, changed image/population identities and scores outside <code>[0,1]</code>. A JSON <code>null</code> records an unknown score.</p>
+<p>The saved review retains the score-file checksum, model identifier, package version and weights checksum. Application checks the reviewed score file and its cell identities, then applies the accepted cutoff to those saved scores.</p>
+</details>
+
+<details>
+<summary>Bounded reads and saved calculation details</summary>
+
+<p>Each source must have one Z plane, one time point and distinct channel names. QuPath reads the objective's <code>NominalMagnification</code> from the source OME metadata when a saved image entry omits it from display metadata. The score record identifies the objective value and whether it came from metadata or manual entry.</p>
+<p>The positive-pixel quantile uses NumPy 1.26.4's linear interpolation convention. We locate the two ordered intensities surrounding the requested percentile without holding or sorting the complete image in memory. Four passes over bounded image rectangles progressively narrow their values using 256-bin histograms, considering one byte of each positive float32 intensity at a time. The first pass also counts positive pixels to determine the required positions in the ordered values; after the fourth pass, linear interpolation between the two selected values gives the quantile.</p>
+<p>Each rectangle exchanges at most 16 MiB of float32 values, with each axis at most 1,024 pixels. Cell-mask reads include one native pixel of neighbouring context for the four-neighbour boundary calculation.</p>
+<p>QuPath opens one image at a time and returns original-resolution float32 marker rectangles or int32 cell labels. Python checks their image, dimensions, data type, path and byte count. Mask labels map to the existing cell IDs, and source checks bind the masks to the selected segmentation. QuPath closes each image after its selected markers have been processed; Python keeps the model loaded for the next image.</p>
+<p>Temporary prediction tiles are released after their per-cell sums have been accumulated. Model memory, QuPath's cell-ID table and spatial index, and Python's score arrays remain in memory alongside the bounded image windows. Cell tables and score arrays grow with cell count; calculation time also depends on image dimensions, marker count and read speed.</p>
+</details>
+
+<details>
+<summary>Implementation and source references</summary>
+
+<p><a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/orchestration/batch_phenotyping/nimbus_execution.py">AutomaticNimbusScoreProvider</a> selects the image, marker, model and cells, then either reopens completed scores or starts scoring. <a href="https://github.com/04-zain/MIFflow/blob/main/qupath/scripts/cell_analysis/nimbus_image_source.groovy">The native image-source script</a> supplies the image rectangles and cell labels. <a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/cell_analysis/nimbus_streaming.py">Nimbus streaming</a> calculates the whole-image normalization factors and accumulates predictions by cell ID. <a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/cell_analysis/nimbus_tiling.py">Nimbus tiling</a> maps the full-image grid, transformed views and native pixels without making storage-window boundaries into model boundaries. <a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/gui/marker_setup.py">Marker setup</a> supplies the displayed choices and defaults.</p>
+<p>Primary implementation sources are the <a href="https://github.com/angelolab/Nimbus-Inference">official Nimbus-Inference repository</a>, the <a href="https://pypi.org/project/Nimbus-Inference/0.0.5/">0.0.5 package release</a> and the pinned public checkpoint above. The package version and checkpoint checksum fix the calculation used for each saved score file.</p>
+</details>
+
+<hr />
+<p><strong>Continue:</strong> <a href="marker-rules.html">Marker decisions and phenotype rules</a>.</p>
+</main>
+</body>
+</html>

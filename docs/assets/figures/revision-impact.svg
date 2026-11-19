@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="848" viewBox="0 0 1140 848" role="img" aria-labelledby="title description">
+<title id="title">Section segmentation revision and pooled clustering dependencies</title>
+<desc id="description">A schematic preview of revising segmentation in section A. Prepared image and accepted tissue inputs remain reusable in both sections. Section A requires a replacement segmentation population A-prime and new per-cell measurements. Section B retains its segmentation and measurements. Both measurement tables enter one pooled clustering calculation, so its shared result and both section-specific label tables require recomputation. The outer paths also carry each section&#x27;s measured cell rows to its labels. A-prime-1 through A-prime-3 and B1 through B3 are schematic cell identities, not population sizes. Blank feature and label slots show pending results; no resulting cluster assignments are asserted. The preview itself does not run these calculations or replace saved results.</desc>
+<rect width="1140" height="848" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="28" y="80" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#243746" text-anchor="start">Section A</text>
+<rect x="238" y="36" width="170" height="69" rx="5" fill="#FFFFFF" stroke="#526773" stroke-width="1.3"/>
+<text x="323" y="63" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Revised</text>
+<text x="323" y="88" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">options</text>
+<path d="M323 105 L323 132" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<text x="28" y="476" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#243746" text-anchor="start">Section B</text>
+<rect x="28" y="132" width="166" height="242" rx="5" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.5"/>
+<text x="111.0" y="159" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Image +</text>
+<text x="111.0" y="184" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">tissue</text>
+<text x="111.0" y="353" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773" text-anchor="middle">Preserved</text>
+<rect x="46" y="206" width="130" height="100" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<polygon points="52.5,217.0 139.6,212.0 169.5,228.0 163.0,292.0 127.9,301.0 62.900000000000006,296.0 51.2,262.0" fill="#E8EEF0" stroke="#526773" stroke-width="1.2"/>
+<circle cx="78.5" cy="235.0" r="5" fill="#526773" stroke="#526773"/>
+<circle cx="143.5" cy="235.0" r="5" fill="#526773" stroke="#526773"/>
+<circle cx="111.0" cy="282.0" r="5" fill="#526773" stroke="#526773"/>
+<rect x="238" y="132" width="170" height="242" rx="5" fill="#FFF6E7" stroke="#946A21" stroke-width="1.5"/>
+<text x="323.0" y="159" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Segment</text>
+<text x="323.0" y="184" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">cells</text>
+<text x="323.0" y="353" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="middle">Recompute</text>
+<rect x="258" y="206" width="130" height="100" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<polygon points="264.5,217.0 351.6,212.0 381.5,228.0 375.0,292.0 339.9,301.0 274.9,296.0 263.2,262.0" fill="#E8EEF0" stroke="#526773" stroke-width="1.2"/>
+<path d="M271.5 230.0 C272.5 212.0 305.5 212.0 309.5 230.0 C313.5 247.0 298.5 258.0 282.5 253.0 C268.5 249.0 267.5 237.0 271.5 230.0 Z" fill="none" stroke="#946A21" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="290.5" y="242.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">1</text>
+<path d="M335.5 230.0 C336.5 212.0 370.5 212.0 375.5 230.0 C379.5 247.0 363.5 258.0 347.5 253.0 C332.5 249.0 331.5 237.0 335.5 230.0 Z" fill="none" stroke="#946A21" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="355.5" y="242.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">2</text>
+<path d="M305.0 277.0 C306.0 259.0 338.0 259.0 341.0 277.0 C345.0 294.0 331.0 305.0 315.0 300.0 C302.0 296.0 301.0 284.0 305.0 277.0 Z" fill="none" stroke="#946A21" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="323.0" y="289.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">3</text>
+<text x="323" y="331" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#243746" text-anchor="middle">New cell IDs</text>
+<rect x="452" y="132" width="192" height="242" rx="5" fill="#FFF6E7" stroke="#946A21" stroke-width="1.5"/>
+<text x="548.0" y="159" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Cell</text>
+<text x="548.0" y="184" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">measurements</text>
+<text x="548.0" y="353" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="middle">Recompute</text>
+<rect x="464" y="206" width="168" height="126" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="464" y="206" width="168" height="27" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<text x="474" y="226" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Cell</text>
+<text x="575.5" y="226" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Features</text>
+<text x="474" y="256" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′1</text>
+<rect x="536" y="239" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="580" y="239" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<path d="M464 266 L632 266" fill="none" stroke="#B8C8CE" stroke-width="0.8" stroke-linejoin="round"/>
+<text x="474" y="289" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′2</text>
+<rect x="536" y="272" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="580" y="272" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<path d="M464 299 L632 299" fill="none" stroke="#B8C8CE" stroke-width="0.8" stroke-linejoin="round"/>
+<text x="474" y="322" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′3</text>
+<rect x="536" y="305" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="580" y="305" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="954" y="132" width="158" height="242" rx="5" fill="#FFF6E7" stroke="#946A21" stroke-width="1.5"/>
+<text x="1033.0" y="159" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Cluster</text>
+<text x="1033.0" y="184" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">labels</text>
+<text x="1033.0" y="353" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="middle">Recompute</text>
+<rect x="966" y="206" width="134" height="126" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="966" y="206" width="134" height="27" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<text x="974" y="226" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Cell</text>
+<text x="1061" y="226" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Label</text>
+<text x="974" y="256" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′1</text>
+<rect x="1049" y="239" width="33" height="21" rx="0" fill="#FFFFFF" stroke="#946A21" stroke-width="1.1"/>
+<path d="M966 266 L1100 266" fill="none" stroke="#B8C8CE" stroke-width="0.8" stroke-linejoin="round"/>
+<text x="974" y="289" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′2</text>
+<rect x="1049" y="272" width="33" height="21" rx="0" fill="#FFFFFF" stroke="#946A21" stroke-width="1.1"/>
+<path d="M966 299 L1100 299" fill="none" stroke="#B8C8CE" stroke-width="0.8" stroke-linejoin="round"/>
+<text x="974" y="322" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′3</text>
+<rect x="1049" y="305" width="33" height="21" rx="0" fill="#FFFFFF" stroke="#946A21" stroke-width="1.1"/>
+<path d="M194 253 L238 253" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M408 253 L452 253" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<rect x="28" y="506" width="166" height="242" rx="5" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.5"/>
+<text x="111.0" y="533" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Image +</text>
+<text x="111.0" y="558" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">tissue</text>
+<text x="111.0" y="727" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773" text-anchor="middle">Preserved</text>
+<rect x="46" y="580" width="130" height="100" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<polygon points="59.0,585.0 163.0,592.0 170.8,633.0 155.2,675.0 96.7,672.0 52.5,660.0 51.2,610.0" fill="#E8EEF0" stroke="#526773" stroke-width="1.2"/>
+<circle cx="78.5" cy="609.0" r="5" fill="#526773" stroke="#526773"/>
+<circle cx="143.5" cy="609.0" r="5" fill="#526773" stroke="#526773"/>
+<circle cx="111.0" cy="656.0" r="5" fill="#526773" stroke="#526773"/>
+<rect x="238" y="506" width="170" height="242" rx="5" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.5"/>
+<text x="323.0" y="533" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Segment</text>
+<text x="323.0" y="558" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">cells</text>
+<text x="323.0" y="727" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773" text-anchor="middle">Preserved</text>
+<rect x="258" y="580" width="130" height="100" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<polygon points="271.0,585.0 375.0,592.0 382.8,633.0 367.2,675.0 308.7,672.0 264.5,660.0 263.2,610.0" fill="#E8EEF0" stroke="#526773" stroke-width="1.2"/>
+<path d="M271.5 604.0 C272.5 586.0 305.5 586.0 309.5 604.0 C313.5 621.0 298.5 632.0 282.5 627.0 C268.5 623.0 267.5 611.0 271.5 604.0 Z" fill="none" stroke="#526773" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="290.5" y="616.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">1</text>
+<path d="M335.5 604.0 C336.5 586.0 370.5 586.0 375.5 604.0 C379.5 621.0 363.5 632.0 347.5 627.0 C332.5 623.0 331.5 611.0 335.5 604.0 Z" fill="none" stroke="#526773" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="355.5" y="616.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">2</text>
+<path d="M305.0 651.0 C306.0 633.0 338.0 633.0 341.0 651.0 C345.0 668.0 331.0 679.0 315.0 674.0 C302.0 670.0 301.0 658.0 305.0 651.0 Z" fill="none" stroke="#526773" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="323.0" y="663.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">3</text>
+<text x="323" y="705" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#243746" text-anchor="middle">Same cell IDs</text>
+<rect x="452" y="506" width="192" height="242" rx="5" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.5"/>
+<text x="548.0" y="533" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Cell</text>
+<text x="548.0" y="558" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">measurements</text>
+<text x="548.0" y="727" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773" text-anchor="middle">Preserved</text>
+<rect x="464" y="580" width="168" height="126" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="464" y="580" width="168" height="27" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<text x="474" y="600" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Cell</text>
+<text x="575.5" y="600" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Features</text>
+<text x="474" y="630" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B1</text>
+<rect x="536" y="613" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="539" y="619" width="17.98" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="580" y="613" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="583" y="619" width="11.31" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<path d="M464 640 L632 640" fill="none" stroke="#B8C8CE" stroke-width="0.8" stroke-linejoin="round"/>
+<text x="474" y="663" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B2</text>
+<rect x="536" y="646" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="539" y="652" width="8.99" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="580" y="646" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="583" y="652" width="20.88" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<path d="M464 673 L632 673" fill="none" stroke="#B8C8CE" stroke-width="0.8" stroke-linejoin="round"/>
+<text x="474" y="696" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B3</text>
+<rect x="536" y="679" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="539" y="685" width="22.04" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="580" y="679" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="583" y="685" width="15.66" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="954" y="506" width="158" height="242" rx="5" fill="#FFF6E7" stroke="#946A21" stroke-width="1.5"/>
+<text x="1033.0" y="533" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Cluster</text>
+<text x="1033.0" y="558" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">labels</text>
+<text x="1033.0" y="727" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="middle">Recompute</text>
+<rect x="966" y="580" width="134" height="126" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="966" y="580" width="134" height="27" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<text x="974" y="600" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Cell</text>
+<text x="1061" y="600" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Label</text>
+<text x="974" y="630" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B1</text>
+<rect x="1049" y="613" width="33" height="21" rx="0" fill="#FFFFFF" stroke="#946A21" stroke-width="1.1"/>
+<path d="M966 640 L1100 640" fill="none" stroke="#B8C8CE" stroke-width="0.8" stroke-linejoin="round"/>
+<text x="974" y="663" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B2</text>
+<rect x="1049" y="646" width="33" height="21" rx="0" fill="#FFFFFF" stroke="#946A21" stroke-width="1.1"/>
+<path d="M966 673 L1100 673" fill="none" stroke="#B8C8CE" stroke-width="0.8" stroke-linejoin="round"/>
+<text x="974" y="696" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B3</text>
+<rect x="1049" y="679" width="33" height="21" rx="0" fill="#FFFFFF" stroke="#946A21" stroke-width="1.1"/>
+<path d="M194 627 L238 627" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M408 627 L452 627" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<rect x="700" y="272" width="205" height="444" rx="5" fill="#FFF6E7" stroke="#946A21" stroke-width="1.5"/>
+<text x="802.5" y="301" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">Pooled</text>
+<text x="802.5" y="328" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">clustering</text>
+<text x="802.5" y="363" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="middle">Recompute</text>
+<rect x="718" y="382" width="169" height="225" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="718" y="382" width="169" height="27" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="1"/>
+<text x="728" y="402" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Cell</text>
+<text x="829.5" y="402" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Features</text>
+<rect x="718" y="409" width="169" height="33" rx="0" fill="#FAE8CB" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="728" y="432" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′1</text>
+<rect x="790" y="415" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="834" y="415" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="718" y="442" width="169" height="33" rx="0" fill="#FAE8CB" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="728" y="465" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′2</text>
+<rect x="790" y="448" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="834" y="448" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="718" y="475" width="169" height="33" rx="0" fill="#FAE8CB" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="728" y="498" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">A′3</text>
+<rect x="790" y="481" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="834" y="481" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="718" y="508" width="169" height="33" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="728" y="531" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B1</text>
+<rect x="790" y="514" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="793" y="520" width="17.98" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="834" y="514" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="837" y="520" width="11.31" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="718" y="541" width="169" height="33" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="728" y="564" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B2</text>
+<rect x="790" y="547" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="793" y="553" width="8.99" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="834" y="547" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="837" y="553" width="20.88" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="718" y="574" width="169" height="33" rx="0" fill="#F3F6F7" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="728" y="597" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">B3</text>
+<rect x="790" y="580" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="793" y="586" width="22.04" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<rect x="834" y="580" width="35" height="21" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="837" y="586" width="15.66" height="9" rx="0" fill="#526773" stroke="#526773" stroke-width="0.5"/>
+<path d="M802.5 607 L802.5 630" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<rect x="718" y="630" width="169" height="62" rx="4" fill="#FFFFFF" stroke="#946A21" stroke-width="1.3"/>
+<text x="802.5" y="655" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Cluster</text>
+<text x="802.5" y="679" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">pooled cells</text>
+<path d="M644 253 H675 V447 H700" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M644 627 H675 V546 H700" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M548 132 V96 H1033 V132" fill="none" stroke="#526773" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<text x="790" y="79" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">Same cell rows</text>
+<path d="M548 748 V792 H1033 V748" fill="none" stroke="#526773" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<text x="790" y="826" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">Same cell rows</text>
+<path d="M887 661 H929 V253 H954" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M929 627 H954" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<circle cx="929" cy="627" r="2.4" fill="#243746" stroke="#243746"/>
+</svg>

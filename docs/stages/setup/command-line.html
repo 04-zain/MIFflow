@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Command-line guide · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/command-line.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="command-line-guide">Command-line guide</h1>
+<p><a id="reference-command-line"></a> <a id="reference-command-line--command-line-interface"></a></p>
+<p>Use <code>mif-batch</code> on the processing computer to start an analysis, check its progress and submit review decisions. To submit jobs to Slurm from your own computer, use <code>mif-remote</code>. Both commands read the analysis manifest prepared in the desktop. The <a href="../installation-and-build/software.html#install-a-shared-wheel">installation guide</a> explains how to install the commands on a processing host.</p>
+<p>A wheel or source installation places the launchers in the Python environment where you installed MIFflow. If the environment is called <code>.venv</code>, use either column below from its parent directory. Activating it lets you type a command by name for the rest of the session. To launch just one program by its path, substitute its name for <code>COMMAND</code>, for example <code>mif-desktop</code>. The arguments in the following sections apply to Windows and Ubuntu.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Operating system</th>
+<th>Activate the environment</th>
+<th>Run a command without activating it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ubuntu</td>
+<td><code>source .venv/bin/activate</code></td>
+<td><code>.venv/bin/COMMAND</code></td>
+</tr>
+<tr class="even">
+<td>Windows PowerShell</td>
+<td><code>.\.venv\Scripts\Activate.ps1</code></td>
+<td><code>.\.venv\Scripts\COMMAND.exe</code></td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mif-desktop</code></td>
+<td>Open the graphical application to prepare samples, select methods and review results. Install the <code>desktop</code> extra to use it.</td>
+</tr>
+<tr class="even">
+<td><code>mif-batch</code></td>
+<td>Prepare the processing host, run an analysis and submit decisions for stages waiting for review.</td>
+</tr>
+<tr class="odd">
+<td><code>mif-remote</code></td>
+<td>Submit a batch run to Slurm over SSH and check the job from another computer.</td>
+</tr>
+<tr class="even">
+<td><code>mif-kernel-worker</code></td>
+<td>Run individual calculations sent by a MIFflow process.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="use-the-batch-commands">Use the batch commands</h2>
+<p>If this is the first analysis on the processing host, begin with <a href="#software-setup">Software setup</a>. If the software is ready and the sample list has been saved, go to <a href="#start-a-prepared-analysis">Start a prepared analysis</a>. To return to an analysis that has already started, <a href="#check-progress-and-continue-processing">check its progress</a>.</p>
+<p>Replace uppercase placeholders with your own paths or identifiers. Options for the whole run go between <code>mif-batch</code> and the operation name. Options for one operation follow its name. Use <code>mif-batch --help</code> to list the operations or <code>mif-batch COMMAND --help</code> for the arguments to one of them.</p>
+<p><a id="reference-command-line--software-setup"></a></p>
+<h2 id="software-setup">Software setup</h2>
+<p>Prepare the software on the computer that will read the images and run the analysis. For a cluster job, the processing node must be able to open the executable, model and image paths selected here. Run setup under the same account as the analysis so it can use the saved installations. <a href="../installation-and-build/software.html#open-software-setup">Software setup in the desktop</a></p>
+<h3 id="prepare-the-workspace-and-connect-qupath">Prepare the workspace and connect QuPath</h3>
+<p>Run <code>mif-batch setup-workspace</code> once under the processing account to initialize its workspace. Running it again checks the existing workspace.</p>
+<p>QuPath loads our image reader and review tools from an extension folder prepared for MIFflow. Supply the path to QuPath and an existing parent directory for this folder.</p>
+<pre class="text"><code>mif-batch --qupath EXECUTABLE setup-qupath-profile DIRECTORY --consent-download</code></pre>
+<p>The result includes <code>qupath_profile_manifest</code>, the path to the file that identifies the prepared QuPath installation and its extensions. For subsequent commands, place <code>--qupath EXECUTABLE --qupath-profile MANIFEST</code> before the operation name. If several commands will use the same installation, set <code>MIF_QUPATH_EXECUTABLE</code> and <code>MIF_QUPATH_PROFILE</code> once in the terminal or job environment. <a href="../installation-and-build/native-extension.html#how-qupath-loads-the-extension">How QuPath loads the extensions</a></p>
+<p>For a host that needs the native PyTorch CPU libraries for QuPath, run <code>mif-batch setup-cpu DIRECTORY --consent-download</code>. Supply an absolute destination. This installs the platform’s CPU libraries and Java bridge for models running inside QuPath.</p>
+<h3 id="connect-java-and-bio-formats">Connect Java and Bio-Formats</h3>
+<p>Bio-Formats runs in Java to read the original image files. First use <code>setup-image inspect java</code> to check the Java runtime, then <code>setup-image inspect bioformats</code> to check the reader with that runtime. If either is missing, select an existing copy or install the supported version. In the commands below, replace <code>COMPONENT</code> with <code>java</code> or <code>bioformats</code>.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Arguments after <code>mif-batch</code></th>
+<th>When to use them</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>setup-image inspect COMPONENT</code></td>
+<td>Check the selected or managed installation.</td>
+</tr>
+<tr class="even">
+<td><code>setup-image select COMPONENT DIRECTORY</code></td>
+<td>Check an existing Java home or Bio-Formats root.</td>
+</tr>
+<tr class="odd">
+<td><code>setup-image install COMPONENT --consent-download</code></td>
+<td>Install the supported release. Add <code>--managed-root DIRECTORY</code> to specify where managed installations are kept.</td>
+</tr>
+</tbody>
+</table></div>
+<p>When the response includes <code>next_command_option</code> and <code>next_command_path</code>, use them together before the next command. For instance, after selecting a Java installation, run <code>mif-batch --java-home DIRECTORY setup-image inspect bioformats</code> to check the reader with that runtime.</p>
+<h3 id="install-alignment-and-segmentation-software">Install alignment and segmentation software</h3>
+<p>Choose the rows for the methods used in the analysis. For InstanSeg and Warpy, supply <code>--qupath EXECUTABLE</code> before the command. Include <code>--qupath-profile MANIFEST</code> when using the profile prepared above.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Arguments after <code>mif-batch</code> and its global options</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Warpy extension</td>
+<td><code>setup-warpy inspect</code> or <code>setup-warpy install --consent-download</code></td>
+</tr>
+<tr class="even">
+<td>Elastix and Transformix executables</td>
+<td><code>setup-elastix inspect</code>, <code>setup-elastix select DIRECTORY</code> or <code>setup-elastix install --consent-download</code>. To change the managed location, pass <code>--target DIRECTORY</code>.</td>
+</tr>
+<tr class="odd">
+<td>InstanSeg extension and model</td>
+<td><code>setup-instanseg inspect COMPONENT</code> or <code>setup-instanseg install COMPONENT --consent-download</code>. Use <code>extension</code> or <code>model</code> for <code>COMPONENT</code>. Use <code>--extension-directory DIRECTORY</code> to specify an extension folder.</td>
+</tr>
+<tr class="even">
+<td>Cellpose or StarDist model</td>
+<td><code>setup-segmentation METHOD inspect</code> or <code>setup-segmentation METHOD install --consent-download</code>. Use <code>cellpose</code> or <code>stardist</code> for <code>METHOD</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<p>To keep a Cellpose or StarDist model in a custom location, add <code>--directory DIRECTORY</code> to its setup command. Set <code>MIF_CELLPOSE_MODEL_DIRECTORY</code> or <code>MIF_STARDIST_MODEL_DIRECTORY</code> to the same absolute directory when launching the desktop or worker.</p>
+<h3 id="select-the-nimbus-checkpoint">Select the Nimbus checkpoint</h3>
+<p>Install the <a href="../installation-and-build/software.html#nimbus-for-source-installations">Nimbus scoring software</a> before using the model. The following commands manage the V1 checkpoint.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Arguments after <code>mif-batch</code></th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>setup-nimbus inspect [--target FILE]</code></td>
+<td>Check the checkpoint at its default location or the specified absolute filename.</td>
+</tr>
+<tr class="even">
+<td><code>setup-nimbus install --consent-download [--target FILE]</code></td>
+<td>Download and verify the checkpoint.</td>
+</tr>
+<tr class="odd">
+<td><code>setup-nimbus select FILE</code></td>
+<td>Verify an existing checkpoint. The response reports whether its path was saved in the application preferences.</td>
+</tr>
+</tbody>
+</table></div>
+<p>If <code>preference_saved</code> is false after selection, use the returned <code>next_step</code> to enter the path under <strong>Nimbus model checkpoint</strong> in marker setup.</p>
+<h3 id="other-processing-paths">Other processing paths</h3>
+<p>Use <code>--java-home</code> and <code>--bioformats-root</code> when specifying an external Java installation and image reader. A processing host that supplies its own QuPath libraries can pass <code>--instanseg-jar</code>, <code>--djl-jar</code>, <code>--pytorch-engine-jar</code>, <code>--cpu-native-root</code> and <code>--qupath-cache-root</code>. Supply all five as absolute paths. For an analysis that sends selected calculations to another host, <code>--selective-compute-profile FILE</code> selects the saved profile for those calculations.</p>
+<p><a id="prepare-and-execute"></a> <a id="reference-command-line--prepare-and-execute"></a></p>
+<h2 id="start-a-prepared-analysis">Start a prepared analysis</h2>
+<p>First <a href="analysis.html#save-and-inspect-plan">save the samples and computing settings in the desktop</a>. This creates <code>analysis.manifest.json</code>, which identifies the input images, the analysis ID (<code>batch_id</code>) and the parent directory for its results (<code>output_root</code>). Pass the manifest path to the start command. To check or resume that run later, use the output root and batch ID from the same manifest.</p>
+<pre class="text"><code>mif-batch validate MANIFEST
+mif-batch plan MANIFEST
+mif-batch run MANIFEST</code></pre>
+<ol type="1">
+<li><strong>Check the inputs.</strong> <code>validate</code> reads the manifest. Its <code>enabled_sample_ids</code> list identifies the samples included in this run.</li>
+<li><strong>Inspect the plan.</strong> <code>plan</code> shows which stages will run for each sample and which depend on a result shared by several samples.</li>
+<li><strong>Start processing.</strong> <code>run</code> executes the plan. When a sample reaches a review, processing can continue on other samples whose inputs are ready. The command returns a JSON report when execution stops. Check its <code>outcome</code> and <code>pending_interaction_ids</code> to see whether the run completed or is waiting for a decision.</li>
+</ol>
+<p>In cluster streaming, the desktop prepares the same analysis by sending its sample and computing choices to <code>mif-batch prepare-stdin</code> as JSON. The response identifies the new manifest, batch ID and sample count. When reopening the analysis, <code>mif-batch describe-analysis ANALYSIS_FOLDER</code> retrieves its saved setup from the cluster. <a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/orchestration/setup/cluster_setup.py">Cluster setup document</a></p>
+<h2 id="check-progress-and-continue-processing">Check progress and continue processing</h2>
+<p>After starting a run, use the output root and batch ID from its manifest to check progress.</p>
+<pre class="text"><code>mif-batch status OUTPUT_ROOT BATCH_ID</code></pre>
+<p>Read <code>pending_interaction_ids</code> to see whether a stage is waiting for a decision. If it is, <a href="#submit-a-waiting-review">retrieve the request and submit the answer</a>. Once a review is accepted, or when you return to a paused analysis, run <code>mif-batch resume OUTPUT_ROOT BATCH_ID</code>. This reopens the plan, checks the software needed for the remaining stages and starts ready work.</p>
+<p>After an interruption, check <code>resume_disposition</code> before starting another process. If the run is idle but still recorded as active and continuation is offered, use <code>mif-batch continue OUTPUT_ROOT BATCH_ID --expected-head-sha256 HEAD</code>. Replace <code>HEAD</code> with the <code>state_head_sha256</code> returned by <code>status</code>. This identifies the exact saved state to continue. If an operation recorded a failure, read its error and <a href="#retry-a-failed-or-interrupted-operation">list the available retries</a>. For a completed run, open its <a href="../results/index.html">results</a>.</p>
+<p>To check the capabilities of the processing host itself, use <code>mif-batch runtime-capabilities OUTPUT_ROOT BATCH_ID</code>. It reports the available processing devices without launching QuPath.</p>
+<p>When scripting a run, read the JSON report on standard output. A run that stops for a review can exit successfully with <code>outcome</code> set to <code>needs_interaction</code>. A failed or incomplete run returns exit status 1, as does a rejected review response. Argument and execution errors return status 2, with diagnostics on standard error.</p>
+<p><a id="reviews-and-retry"></a> <a id="reference-command-line--reviews-and-retry"></a></p>
+<h2 id="submit-a-waiting-review">Submit a waiting review</h2>
+<h3 id="find-the-request-and-choose-its-targets">Find the request and choose its targets</h3>
+<p>Run <code>mif-batch interactions OUTPUT_ROOT BATCH_ID</code> to list the decisions holding up processing. Each group identifies the stage and reason for the review (<code>stage</code> and <code>interaction_reason</code>), the samples or other targets it affects (<code>targets</code>) and the actions you can take (<code>allowed_actions</code>). Inspect the targets before choosing a shared response. One group may include several samples that need different decisions.</p>
+<p>Use <code>mif-batch review-page OUTPUT_ROOT BATCH_ID</code> when you need the records shown in the desktop review or the location of its QuPath project. Both listing commands accept <code>--domain ID</code> and <code>--reason REASON</code> to narrow the results. They return up to 50 entries per page by default. To read the next page, pass the returned <code>next_offset</code> to <code>--offset</code>, or set a different page size with <code>--limit</code>.</p>
+<h3 id="send-the-decision-and-resume">Send the decision and resume</h3>
+<p>Copy <code>group_id</code> and <code>group_sha256</code> from the listing entry for the review you want to answer. To check that the analysis still has the inputs you reviewed, we also need the listing’s top-level <code>state_head_sha256</code>. Enter it as <code>expected_state_head_sha256</code> in the response.</p>
+<p>In <code>selection</code>, specify the target IDs to receive this answer. If the group permits it, you can select validation domains with <code>{"validation_domain_ids": ["ID"]}</code> or all compatible targets with <code>{"all_compatible": true}</code>. Choose an offered action and fill in its requested fields under <code>response</code>. An action that requires no fields takes an empty object.</p>
+<p>The example shows the JSON file for a single target. <a href="python-api.html#open-an-analysis-service-and-submit-a-review">Submit the same decision from Python</a></p>
+<pre class="json"><code>{
+  &quot;group_id&quot;: &quot;&lt;group_id&gt;&quot;,
+  &quot;group_sha256&quot;: &quot;&lt;group_sha256&gt;&quot;,
+  &quot;expected_state_head_sha256&quot;: &quot;&lt;state_head_sha256&gt;&quot;,
+  &quot;selection&quot;: {&quot;target_ids&quot;: [&quot;&lt;target_id&gt;&quot;]},
+  &quot;action&quot;: &quot;&lt;allowed_action&gt;&quot;,
+  &quot;response&quot;: {}
+}</code></pre>
+<p>Submit the file with <code>mif-batch respond OUTPUT_ROOT BATCH_ID RESPONSE_FILE</code>. A program that already has the response as JSON can send it to <code>mif-batch respond-stdin OUTPUT_ROOT BATCH_ID</code> on standard input. Both commands accept up to 1 MiB of UTF-8 JSON.</p>
+<p>Check the returned status for each selected target. <code>accepted_for_retry</code> means the stage can run again with the answer you supplied. Use <code>resume</code> to continue. If a response was rejected because the analysis changed, list the requests again and review the current targets and choices before submitting a replacement.</p>
+<h2 id="retry-a-failed-or-interrupted-operation">Retry a failed or interrupted operation</h2>
+<p>Run <code>mif-batch list-retries OUTPUT_ROOT BATCH_ID</code>. The result identifies the operations eligible for retry and the saved state to which those choices apply. Copy the node ID, state checksum and failed-attempt or pending-authorization checksum from the same listing.</p>
+<pre class="text"><code>mif-batch retry OUTPUT_ROOT BATCH_ID --node-id NODE --expected-head-sha256 HEAD --terminal-record-sha256 RECORD</code></pre>
+<p>For a listed pending authorization, replace <code>--terminal-record-sha256 RECORD</code> with <code>--pending-authorization-sha256 RECORD</code>. If the listing has no eligible entry, check <code>status</code> for the available action. <a href="../../troubleshooting.html#resume-a-stopped-step">Troubleshoot a stopped step</a></p>
+<h2 id="change-a-completed-stage">Change a completed stage</h2>
+<p>When changing the settings of a completed stage, first check which of its results and later stages will have to be recalculated. Each command below takes <code>OUTPUT_ROOT BATCH_ID</code> after its name. Use the same proposed settings for the preview and the revision so the changes you apply match the ones you reviewed.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Arguments after <code>OUTPUT_ROOT BATCH_ID</code> and input</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>stage-options</code></td>
+<td>Without additional options, list the stages that can be revised. Add <code>--node-id NODE --expected-head-sha256 HEAD</code> for the settings of one stage. For an image-inspection or registration change, <code>--source-image FILE</code> inspects the replacement image.</td>
+</tr>
+<tr class="even">
+<td><code>preview-stage-revision</code></td>
+<td>Pass <code>--node-id NODE --expected-head-sha256 HEAD</code> and supply the proposed settings as JSON on standard input. Inspect the affected results before applying the change.</td>
+</tr>
+<tr class="odd">
+<td><code>revise-stage</code></td>
+<td>Pass the same node, state checksum and settings to apply the revision.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="transfer-reviews-between-the-desktop-and-a-cluster">Transfer reviews between the desktop and a cluster</h2>
+<p>In <a href="computing.html#cluster-streaming">cluster streaming</a>, the desktop can retrieve a waiting review from the processing host, open its material locally and return the edits. The commands below are the individual transfers used by the desktop. Use them directly when automating the same exchange.</p>
+<p>To open a cluster review, use the request ID to identify which annotations, landmarks or figures the desktop should retrieve. The state checksum identifies the version being reviewed. To return edits, first stage the edited files or settings on the cluster. Use the submission ID returned by that command to import the edits into the same review. In the table below, each command takes <code>OUTPUT_ROOT BATCH_ID</code> before the listed arguments.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Command and remaining arguments</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Open annotations</td>
+<td><code>annotations-export REQUEST_ID EXPECTED_HEAD</code></td>
+<td>Export the requested annotation material. Optional <code>--entry-id</code>, <code>--preview-id</code> and <code>--reference-role JSON</code> identify an entry, a preview or the reference labels.</td>
+</tr>
+<tr class="even">
+<td>Prepare an annotation preview</td>
+<td><code>stage-annotation-preview</code></td>
+<td>Read the preview request from standard input and prepare it for the annotation session.</td>
+</tr>
+<tr class="odd">
+<td>Return edited annotations</td>
+<td><code>stage-annotations</code>, then <code>annotations-import SUBMISSION_ID</code></td>
+<td>Receive the annotation submission on standard input, then apply the staged edits to the current review.</td>
+</tr>
+<tr class="even">
+<td>Open landmarks</td>
+<td><code>stage-landmark-review</code>, then <code>landmark-export SUBMISSION_ID</code></td>
+<td>Stage the landmark review request from standard input, then retrieve the landmarks for editing.</td>
+</tr>
+<tr class="odd">
+<td>Return edited landmarks</td>
+<td><code>stage-landmarks</code>, then <code>landmark-import SUBMISSION_ID</code></td>
+<td>Stage the returned landmarks from standard input, then submit them to the waiting review.</td>
+</tr>
+<tr class="even">
+<td>Apply paired-image alignment</td>
+<td><code>align RESPONSE_FILE SETTINGS_FILE</code></td>
+<td>Submit a review response with the alignment settings from a second JSON file.</td>
+</tr>
+<tr class="odd">
+<td>Apply staged alignment</td>
+<td><code>stage-alignment</code>, then <code>align-staged SUBMISSION_ID</code></td>
+<td>Receive alignment material through standard input, then apply the staged submission.</td>
+</tr>
+<tr class="even">
+<td>Retrieve review figures</td>
+<td><code>review-figures REQUEST_ID EXPECTED_HEAD</code></td>
+<td>Retrieve figures for a current review. Use <code>--umap-settings JSON</code> and <code>--attribute NAME</code> for a UMAP request. The default attribute is <code>cluster_id</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="submit-and-monitor-a-slurm-job">Submit and monitor a Slurm job</h2>
+<p>Use <code>mif-remote PROFILE OPERATION</code> with the JSON profile for the SSH connection and Slurm allocation. The profile identifies the analysis and tells Slurm which program and resources it needs. <a href="computing.html#cluster-streaming">Set up cluster streaming</a></p>
+<p>Set <code>host</code> to the SSH alias or <code>user@host</code> used to reach the cluster. Give the absolute cluster paths to the installed <code>mif-batch</code> program (<code>batch_executable</code>), the analysis manifest (<code>manifest</code>), the results directory (<code>output_root</code>) and the directory for job files (<code>working_directory</code>). Use the <code>output_root</code> and <code>batch_id</code> recorded in the manifest so subsequent status and resume commands open the same analysis. The optional <code>cpus</code>, <code>memory_gib</code>, <code>hours</code> and <code>gpus</code> fields set the Slurm allocation.</p>
+<p>Run <code>mif-remote PROFILE preview</code> to inspect the command and Slurm script, then submit the job with <code>mif-remote PROFILE run</code>. Use the returned job ID with <code>status --job-id ID</code> to check whether Slurm has started the job. Use <code>analysis-status</code> to find which stage is processing or waiting for review.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>preview</code></td>
+<td>Print the remote command and submission script for inspection.</td>
+</tr>
+<tr class="even">
+<td><code>run</code></td>
+<td>Submit a job to start the prepared analysis.</td>
+</tr>
+<tr class="odd">
+<td><code>resume</code></td>
+<td>Submit a job to resume the saved analysis.</td>
+</tr>
+<tr class="even">
+<td><code>analysis-status</code></td>
+<td>Read the progress of the MIFflow analysis.</td>
+</tr>
+<tr class="odd">
+<td><code>status --job-id ID</code></td>
+<td>Check the Slurm job returned by submission.</td>
+</tr>
+<tr class="even">
+<td><code>cancel --job-id ID</code></td>
+<td>Ask Slurm to cancel that job.</td>
+</tr>
+</tbody>
+</table></div>
+<p><a id="reference-command-line--numerical-processing-program"></a> <a id="numerical-processing-program"></a></p>
+<h2 id="check-the-calculation-worker">Check the calculation worker</h2>
+<p>Run <code>mif-kernel-worker --probe</code> on the processing host to report the worker version and supported request format. For calculations, the client starts <code>mif-kernel-worker --stdio</code>, sends the inputs through standard input and reads the result from standard output. It supplies the request ID, message lengths and checksums as part of that exchange.</p>
+<p><a href="../run/index.html">Run and review an analysis</a></p>
+</main>
+</body>
+</html>

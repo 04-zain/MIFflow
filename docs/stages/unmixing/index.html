@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Spectral unmixing and component preparation · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/unmixing/index.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="spectral-unmixing-and-component-preparation">Spectral unmixing and component preparation</h1>
+<p><a href="../../../index.html#analysis-stages">Analysis stages</a> · <a href="../images/processing.html">Regional calculation and writing</a></p>
+<p><a id="user-guide-spectral-unmixing"></a></p>
+<p><a id="user-guide-spectral-unmixing--spectral-unmixing-and-component-preparation"></a></p>
+<p><strong>Open:</strong> <strong>Run → Spectral unmixing → Open review</strong>.</p>
+<p><strong>On this page:</strong> <a href="#image-state">Image state</a> · <a href="#solver-methods">Solver methods</a> · <a href="#correct-intensities-for-acquisition-settings">Correct intensities for imaging settings</a> · <a href="#numerical-and-output-settings">Processing settings</a> · <a href="#spectral-reference-sources">Spectral references</a> · <a href="#creating-a-library-from-images">Create a library from images</a> · <a href="#review-the-reference-spectra">Reference review</a> · <a href="#run-unmixing">Run unmixing</a> · <a href="#inspect-the-prepared-channels">Review the unmixed image</a> · <a href="#saved-result-and-revisions">Saved results and revisions</a> · <a href="#solver-implementation">Implementation details</a></p>
+<p>Unmixing separates overlapping fluorescence signals into one image channel per component. We first check how the intensities were recorded and correct for exposure time and other imaging settings where needed. We then fit the spectrum at every pixel to the reference spectra to estimate each component's contribution. The resulting component channels are used for tissue and cell measurements. Images whose channels are ready for analysis are copied with their intensities preserved.</p>
+<p><a id="user-guide-spectral-unmixing--image-state"></a> <a id="luca-example"></a></p>
+<h2 id="image-state">Image state</h2>
+<p>On <strong>Confirm image status</strong>, choose whether the fluorophore signals need separation. We display the image metadata and the <strong>Channel content</strong> choice saved in <strong>Channels &amp; markers</strong> to support this decision. Raw measurement bands may contain mixed signals or isolate individual fluorophores; the metadata alone does not establish that isolation. Check how the channels were recorded and whether the supplied processing information reports spectral unmixing.</p>
+<p>Select <strong>Yes — separate the fluorophore signals (mixed image)</strong> when the recorded bands contain overlapping fluorescence signals. Continue to <strong>Choose the unmixing method</strong> to select how their contributions will be fitted and complete any missing imaging settings. After saving these settings, select and review the reference spectra before starting the unmixing.</p>
+<p>Select <strong>No — fluorophore signals are already separated (previously unmixed)</strong> when the scanner or another program has already unmixed the image.</p>
+<p>Select <strong>No — fluorophore signals are already separated (isolated by measurement bands)</strong> when the emission filters isolate the intended fluorophore signal in each measurement band, making spectral unmixing unnecessary. Complete the <strong>Match measurement bands to components</strong> table shown below by assigning each acquired band to its fluorophore and associated marker from <strong>Channels &amp; markers</strong>, using every band and listed component exactly once. When a measurement band's OME <code>Channel Fluor</code> field names a fluorophore, we use that name to propose its assignment. Review the proposed assignments and manually complete bands without a unique match.</p>
+<p>Both <strong>No</strong> options copy the selected image to OME-Zarr with the pixel values, channel order and pixel size supplied by that source, recording the component and marker identities reviewed in <strong>Channels &amp; markers</strong>. For separately registered cycle files, registration first samples the original images with linear interpolation onto the <a href="../cyclic-if-methods/index.html#retain-the-common-image-area">common image area</a>, and we copy the resulting aligned values. When preparation finishes, continue to <a href="../tissue/index.html">Tissue detection</a>.</p>
+<p><a href="../../assets/screenshots/unmixing-image-state-current.png"><img src="../../assets/screenshots/unmixing-image-state-current.png" alt="Confirm image status for LuCa, with No — fluorophore signals are already separated (previously unmixed) selected." width="680"></a></p>
+<p><em>The <a href="../../data/luca.html">LuCa component image</a> is already unmixed. Its recorded image status selects the corresponding <strong>No</strong> option.</em></p>
+<p><a id="user-guide-spectral-unmixing--solver-methods"></a></p>
+<h2 id="solver-methods">Solver methods</h2>
+<p>On <strong>Choose the unmixing method</strong>, select <strong>Non-negative least squares (NNLS)</strong>, the default, or <strong>Clipped least squares</strong>. Both methods use reference spectra to estimate how much of each fluorescence component contributes to the measured signal at every pixel.</p>
+<p><a id="fitting-and-intensity-definitions"></a> <a id="reference-unmixing"></a> <a id="reference-unmixing--spectral-unmixing"></a> <a id="reference-unmixing--i-organize-the-measured-and-reference-spectra"></a> <a id="organize-the-measured-and-reference-spectra"></a></p>
+<h3 id="how-the-reference-spectra-separate-a-pixels-signal">How the reference spectra separate a pixel's signal</h3>
+<p>A spectral measurement band records overlapping contributions from the fluorophores and autofluorescence. The reference spectrum for each component describes how its signal is distributed across those bands. We place these spectra in a matrix <code>S</code>, with one row per measurement band and one column per component. For <code>B</code> bands and <code>C</code> components, <code>S</code> has shape <code>B × C</code>.</p>
+<p>The image provides one measured spectrum per pixel. After the selected intensity correction, we arrange these spectra as columns of <code>Y</code>. For a block containing <code>P</code> pixels, <code>Y</code> has shape <code>B × P</code>. We calculate a <code>C × P</code> matrix <code>A</code>, with one coefficient for each component at each pixel. Multiplying each reference spectrum by its coefficient and adding the contributions gives the reconstructed spectrum</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Y</mi><mo accent="true">̂</mo></mover><mrow><mi>b</mi><mi>p</mi></mrow></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>C</mi></munderover><msub><mi>S</mi><mrow><mi>b</mi><mi>j</mi></mrow></msub><msub><mi>A</mi><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo>,</mo><mspace width="2.0em"></mspace><mover><mi>Y</mi><mo accent="true">̂</mo></mover><mo>=</mo><mi>S</mi><mi>A</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\widehat Y_{bp}=\sum_{j=1}^{C}S_{bj}A_{jp},\qquad \widehat Y=SA.
+</annotation></semantics></math></p>
+<p>Both methods use a least-squares model. Ordinary least squares minimizes the sum of squared differences between reconstructed and measured band intensities, with equal weight for every corrected band. Its unconstrained solution can contain negative coefficients. <strong>Clipped LS</strong> replaces each negative coefficient with zero and leaves the other coefficients unchanged. <strong>NNLS</strong> fits the coefficients under the nonnegative constraint, allowing the other contributions to change as well. The figure follows the same pixel through these two calculations.</p>
+<p><a href="../../assets/figures/spectral-unmixing-mechanism.svg"><img src="../../assets/figures/spectral-unmixing-mechanism.svg" alt="Schematic of reference inversion, a negative least-squares coefficient handled by clipped LS or NNLS, and the resulting component intensities." width="650"></a></p>
+<p><em>Schematic of reference inversion, clipped LS and NNLS for four measurement bands, three components and a 2 × 2 image window. For the highlighted top-right pixel, the corrected spectrum <code>(0.39, 1.15, 2.68, 1.39)</code> gives ordinary least-squares coefficients <code>(-0.2, 3, 1)</code> for marker A, marker B and AF. Clipping gives <code>(0, 3, 1)</code>. NNLS instead finds approximately <code>(0, 3.204, 0.444)</code>, adjusting the nonnegative contributions and reducing the squared residual error across the four bands from <code>0.0361</code> to approximately <code>0.00348222</code>. The other pixels already have nonnegative least-squares coefficients, so their solutions remain unchanged.</em></p>
+<p><a id="cyclic-fluorescence-images"></a> For cyclic images, we fit NNLS or clipped least squares separately within each cycle. See <a href="../cyclic-if-methods/index.html#fit-each-cycle-and-prepare-marker-channels">Cyclic fluorescence images</a>.</p>
+<p><a id="user-guide-spectral-unmixing--nonnegative-least-squares"></a> <a id="reference-unmixing--iv-nonnegative-least-squares-and-its-stopping-criterion"></a> <a id="nonnegative-least-squares-and-its-stopping-criterion"></a></p>
+<h3 id="nonnegative-least-squares">Nonnegative least squares</h3>
+<p>For one corrected pixel spectrum <code>y</code>, NNLS finds a coefficient vector <code>a</code> satisfying</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>a</mi><mo accent="true">̂</mo></mover><mo>=</mo><munder><mo>argmin</mo><mrow><mi>a</mi><mo>≥</mo><mn>0</mn></mrow></munder><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false" form="prefix">∥</mo><mi>S</mi><mi>a</mi><mo>−</mo><mi>y</mi><msubsup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn><mn>2</mn></msubsup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\hat a=\underset{a\ge0}{\operatorname{argmin}}\frac12\lVert Sa-y\rVert_2^2.
+</annotation></semantics></math></p>
+<p>Here, <code>Sa−y</code> contains the reconstruction error in each measurement band. Requiring <code>a ≥ 0</code> restricts every component contribution to zero or a positive value. When the reference matrix has full column rank, this objective has a unique exact minimum. The solver approaches that minimum until it meets the selected stopping tolerance.</p>
+<p>Set the stopping tolerance and iteration limit under <a href="#nnls-convergence">NNLS convergence</a>. The <a href="#nnls-convergence-calculation">stopping-condition derivation</a> explains how we check whether the coefficients have reached the required accuracy.</p>
+<p><a id="user-guide-spectral-unmixing--clipped-least-squares"></a> <a id="reference-unmixing--iii-ordinary-and-clipped-least-squares"></a> <a id="ordinary-and-clipped-least-squares"></a></p>
+<h3 id="clipped-least-squares">Clipped least squares</h3>
+<p>Ordinary least squares finds the best reconstruction without restricting the sign of the component coefficients. We calculate its solution using the pseudoinverse <code>S⁺</code>. Singular-value decomposition expresses <code>S</code> as three matrix factors. We replace the retained singular values by their reciprocals to calculate the inverse transform</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mi>U</mi><mi>Σ</mi><msup><mi>V</mi><mi>T</mi></msup><mo>,</mo><mspace width="2.0em"></mspace><mi>T</mi><mo>=</mo><msup><mi>S</mi><mo>+</mo></msup><mo>=</mo><mi>V</mi><msup><mi>Σ</mi><mo>+</mo></msup><msup><mi>U</mi><mi>T</mi></msup><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>A</mi><mrow><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><mi>T</mi><mi>Y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+S=U\Sigma V^T,\qquad T=S^+=V\Sigma^+U^T,\qquad A_{\mathrm{LS}}=TY.
+</annotation></semantics></math></p>
+<p>We prepare <code>T</code> once for the reference matrix and reuse it for every block of image spectra. Clipped LS then replaces each negative coefficient with zero</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">p</mi></mrow><mo>,</mo><mi>j</mi><mi>p</mi></mrow></msub><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msub><mi>A</mi><mrow><mrow><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow><mo>,</mo><mi>j</mi><mi>p</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+A_{\mathrm{clip},jp}=\max(0,A_{\mathrm{LS},jp}).
+</annotation></semantics></math></p>
+<p>The method performs no further fit after clipping. Consequently, the retained positive coefficients can give a larger reconstruction error than NNLS when the original solution contains negative contributions. Both methods convert their fitted coefficients to <a href="#normalization-and-reported-intensity">component intensities</a> using the same reference-dependent calculation.</p>
+<p><a id="user-guide-spectral-unmixing--acquisition-correction"></a> <a id="reference-unmixing--ii-correct-the-acquired-measurements"></a> <a id="correct-the-acquired-measurements"></a> <a id="acquisition-correction"></a></p>
+<h2 id="read-imaging-settings-and-correct-intensities">Read imaging settings and correct intensities</h2>
+<p><a id="extract-acquisition-settings"></a></p>
+<h3 id="read-imaging-settings">Read imaging settings</h3>
+<p>Exposure time, detector gain, binning and detector offset affect the measured intensity. Before unmixing, we account for these settings in both the image measurements and the reference spectra using the correction described below. We read the required values from standard OME fields first, then supported vendor fields in OME <code>OriginalMetadata</code> when a required value is missing.</p>
+<p><a href="../../assets/figures/acquisition-calibration.svg"><img src="../../assets/figures/acquisition-calibration.svg" alt="Recorded corrections and available imaging settings determine whether we apply full correction, request missing values or use stored calibrated intensities." width="500"></a></p>
+<p><em>Schematic of intensity correction before spectral fitting. For the two-band example, measured counts <code>I = (61, 122)</code>, offsets <code>o = (10, 20)</code> and exposure times <code>t = (1, 2)</code> seconds give <code>Y = (0.2, 0.2)</code> with full correction (<code>M = 255</code>; <code>g = B = r = 1</code>), or <code>(61, 61)</code> counts per second with exposure-only correction. The right branch shows a separate image whose recorded corrections already include exposure normalization, so we use its stored values directly.</em></p>
+<p><a id="correct-intensities-for-acquisition-settings"></a></p>
+<h3 id="correct-intensities-for-imaging-settings">Correct intensities for imaging settings</h3>
+<p>For images requiring full intensity correction, we subtract the detector offset and divide by the digital range, gain, binning area and exposure time. For measurement band <code>b</code> and pixel <code>p</code>,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mrow><mi>b</mi><mi>p</mi></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>Y</mi><mrow><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">w</mi></mrow><mo>,</mo><mi>b</mi><mi>p</mi></mrow></msub><mo>−</mo><msub><mi>o</mi><mi>b</mi></msub></mrow><mrow><msub><mi>M</mi><mi>b</mi></msub><msub><mi>g</mi><mi>b</mi></msub><msub><mi>B</mi><mi>b</mi></msub><msub><mi>t</mi><mi>b</mi></msub></mrow></mfrac><mspace width="0.167em"></mspace><msub><mi>r</mi><mi>b</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Y_{bp}=\frac{Y_{\mathrm{raw},bp}-o_b}{M_b g_b B_b t_b}\,r_b.
+</annotation></semantics></math></p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Value</th>
+<th>Meaning</th>
+<th>Role in the calculation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Detector offset <code>o_b</code></td>
+<td>Additive baseline, in stored-image counts</td>
+<td>Removes the baseline from each pixel before scaling. If metadata records prior offset subtraction, this term is zero.</td>
+</tr>
+<tr class="even">
+<td>Digital maximum <code>M_b</code></td>
+<td>Maximum of the recorded signal range</td>
+<td>Expresses the intensity relative to that digital range.</td>
+</tr>
+<tr class="odd">
+<td>Detector gain <code>g_b</code></td>
+<td>Gain recorded for that band</td>
+<td>Divides out the detector's recorded amplification.</td>
+</tr>
+<tr class="even">
+<td>Binning area <code>B_b</code></td>
+<td>Number of detector pixels combined into one stored pixel</td>
+<td>Divides by the combined pixel count; for 2 × 2 binning, <code>B_b = 4</code>.</td>
+</tr>
+<tr class="odd">
+<td>Exposure time <code>t_b</code></td>
+<td>Exposure duration in seconds</td>
+<td>Expresses the signal per second of exposure.</td>
+</tr>
+<tr class="even">
+<td>Response multiplier <code>r_b</code></td>
+<td>Per-band multiplier accepted with the reference</td>
+<td>Applies the same band-response correction used to prepare the reference spectra.</td>
+</tr>
+</tbody>
+</table></div>
+<p><a id="digital-intensity-range"></a> The digital maximum depends on the number of meaningful signal bits. For an unsigned signal with <code>n</code> meaningful bits, <code>M = 2^n − 1</code>. A 12-bit signal therefore has a maximum of 4,095, including when it is saved in a 16-bit image.</p>
+<p>For images stored as unsigned integers, we read the meaningful bit count from the source image's OME <code>SignificantBits</code>. If this field is absent, we use the actual stored bit depth recorded by the TIFF <code>BitsPerSample</code> tag or supplied as verified storage information by the source reader. We save the selected range and its source with the unmixing result.</p>
+<p><a id="complete-missing-acquisition-information"></a></p>
+<h3 id="complete-missing-imaging-settings">Complete missing imaging settings</h3>
+<p>If required values are missing from the image metadata, <strong>Intensity correction</strong> on the <strong>Choose the unmixing method</strong> page offers two choices.</p>
+<ul>
+<li><strong>Enter missing imaging settings.</strong> Complete the displayed fields using your imaging or calibration records. We then apply the full correction above.</li>
+<li><strong>Correct for exposure time only.</strong> Reference images and batch slides must have identical gain, binning and illumination settings, and the same detector settings, including detector offset. Enter any missing exposure times. For this route,</li>
+</ul>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mrow><mi>b</mi><mi>p</mi></mrow></msub><mo>=</mo><mfrac><msub><mi>Y</mi><mrow><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">w</mi></mrow><mo>,</mo><mi>b</mi><mi>p</mi></mrow></msub><msub><mi>t</mi><mi>b</mi></msub></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Y_{bp}=\frac{Y_{\mathrm{raw},bp}}{t_b}.
+</annotation></semantics></math></p>
+<p>Exposure-only correction leaves the other intensity corrections, including any remaining detector offset, unapplied. Reference spectra must be prepared with the same exposure-only calculation. If a library was prepared using full correction, rebuild it from the reference images with exposure-only correction or provide a library already prepared that way. Having complete imaging settings for a reference image does not change the correction selected for the batch.</p>
+<h3 id="use-recorded-calibrated-intensities">Use recorded calibrated intensities</h3>
+<p>When metadata records previous calibration that includes exposure normalization, we use the stored intensities directly, so <code>Y = Y_stored</code>. Reference spectra and batch images must use the same imaging settings and correction procedure, including identical exposure times for each channel. We check the recorded corrections separately for each reference image.</p>
+<p>The <a href="../images/processing.html#complete-acquisition-information">image-metadata guide</a> identifies the OME fields and explains manual entry.</p>
+<p><a id="user-guide-spectral-unmixing--normalization-and-reported-intensity"></a> <a id="reference-unmixing--vii-convert-coefficients-to-reported-component-intensities"></a> <a id="convert-coefficients-to-reported-component-intensities"></a> <a id="normalization-and-reported-intensity"></a></p>
+<h3 id="reference-normalization-and-saved-component-intensities">Reference normalization and saved component intensities</h3>
+<p>We save each component's total fitted intensity across the measurement bands. At pixel <code>p</code>, multiplying the fitted coefficient <code>A_{jp}</code> by the reference spectrum <code>S_{bj}</code> gives component <code>j</code>'s contribution to each band <code>b</code>. We sum those contributions to obtain its saved intensity</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo>=</mo><munder><mo>∑</mo><mi>b</mi></munder><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>S</mi><mrow><mi>b</mi><mi>j</mi></mrow></msub><msub><mover><mi>A</mi><mo accent="true">̂</mo></mover><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mover><mi>A</mi><mo accent="true">̂</mo></mover><mrow><mi>j</mi><mi>p</mi></mrow></msub><munder><mo>∑</mo><mi>b</mi></munder><msub><mi>S</mi><mrow><mi>b</mi><mi>j</mi></mrow></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+X_{jp}=\sum_b\left(S_{bj}\hat A_{jp}\right)
+=\hat A_{jp}\sum_b S_{bj}.
+</annotation></semantics></math></p>
+<p>Changing a reference's normalization changes the fitted coefficient needed to reproduce the same band intensities. Multiplying by the reference's sum converts that coefficient to the same total-intensity scale for either normalization.</p>
+<ul>
+<li>With <strong>L1 normalization</strong>, the reference values sum to one, so the fitted coefficient already equals the total intensity. References <a href="library-from-images.html#combine-the-reviewed-regional-spectra">created from images</a> use this normalization.</li>
+<li>With <strong>L2 normalization</strong>, the squared reference values sum to one, so we multiply the fitted coefficient by the sum of the reference values. For example, a reference <code>(0.6, 0.8)</code> fitted with coefficient <code>10</code> contributes <code>(6, 8)</code> across two bands, giving a saved intensity of <code>14</code>. The same reference shape with L1 normalization is <code>(3/7, 4/7)</code> and has a fitted coefficient of <code>14</code>, producing the same band contributions.</li>
+</ul>
+<p>Both NNLS and clipped LS use this conversion after fitting. If the library specifies an additional abundance-rescaling factor <code>c_j</code>, we also multiply the total by that factor; its default is <code>1</code>.</p>
+<p><a id="user-guide-spectral-unmixing--numerical-and-output-settings"></a> <a id="numerical-and-output-settings"></a></p>
+<h2 id="processing-and-output-settings">Processing and output settings</h2>
+<p>Expand <strong>Advanced settings</strong> below the unmixing method.</p>
+<p><a href="../../assets/screenshots/unmixing-settings-current.png"><img src="../../assets/screenshots/unmixing-settings-current.png" alt="Current unmixing method form with Advanced settings expanded: NNLS, 1024-pixel block dimensions, 64-bit calculation, 32-bit output, tolerance 1e-8 and 500 iterations." width="528"></a></p>
+<p><em>The CPU NNLS settings select 64-bit fitting, 32-bit output, stopping tolerance <code>1e-8</code> and a maximum of 500 iterations. The requested processing blocks are 1024 × 1024 pixels; source-read and memory limits determine the smaller regions actually fitted.</em></p>
+<p><a id="processing-block-size"></a> <a id="calculation-and-saved-image-precision"></a></p>
+<h3 id="memory-use-and-image-precision">Memory use and image precision</h3>
+<p><strong>Processing block width (pixels)</strong> and <strong>Processing block height (pixels)</strong> start at <strong>1024 × 1024</strong> and set the requested upper limit for the image area fitted together. Actual blocks are capped at <strong>512 × 512 pixels</strong> and reduced further when needed to fit memory. Within that limit, larger blocks reduce the number of reads and solver calls but require more memory for the measurements, coefficients and intermediate calculations. <a href="../images/processing.html#select-the-number-of-simultaneous-regions">Image preparation</a> explains how these blocks are combined and written to OME-Zarr.</p>
+<p><strong>Calculation precision</strong> selects 64-bit or 32-bit floating-point arithmetic for unmixing and starts at <strong>64-bit</strong> (or <strong>32-bit for Apple Metal</strong>). <strong>Output image precision</strong> selects the values saved in OME-Zarr and starts at <strong>32-bit</strong> (since 64-bit output requires twice the uncompressed storage). Calculating in 64-bit and saving in 32-bit performs the fit in 64-bit arithmetic, then rounds its output to 32-bit values.</p>
+<p><a id="nnls-convergence"></a></p>
+<h3 id="nnls-accuracy-and-iteration-limit">NNLS accuracy and iteration limit</h3>
+<p><strong>NNLS stopping tolerance</strong> starts at <strong><code>1e-8</code></strong> and determines how closely each pixel's fitted coefficients must satisfy the NNLS optimality conditions before iteration stops. These conditions require the gradient of the least-squares loss to be zero for every positive coefficient and nonnegative for every coefficient equal to zero. We scale the permitted gradient error for each pixel using the <a href="#nnls-convergence-calculation">stopping-condition calculation</a>. A smaller tolerance requires the coefficients to satisfy these conditions more closely and can increase processing time.</p>
+<p><strong>Maximum NNLS iterations</strong> starts at <strong>500</strong>. On the float64 CPU route, this limit is shared between grouped fitting rounds and passes that update individual coefficients. A grouped round fits pixels with the same proposed positive components together; an update pass adjusts every component coefficient for pixels that have not yet converged. Each round or complete pass counts once toward the limit. The <a href="#v-float64-cpu-solution-sequence">float64 CPU calculation</a> explains their order and the final checks; the <a href="#precision-and-processor-specific-calculations">float32 and GPU calculations</a> describe the corresponding processor-specific procedures.</p>
+<p>A stopping tolerance below <code>1e-5</code> requires 64-bit calculation. With Apple Metal selected, that tighter tolerance uses CPU processing because Metal does not support 64-bit calculations.</p>
+<p><a id="user-guide-spectral-unmixing--spectral-reference-sources"></a></p>
+<h2 id="spectral-reference-sources">Spectral reference sources</h2>
+<p>On <strong>Choose spectral references</strong>, select an existing library, enter measured spectra, or create a library from single-stained reference images.</p>
+<ul>
+<li>Select <strong>Import or enter a spectral library</strong> to use a <code>.miflib.zip</code> package, supported library JSON or CSV file, or enter reference values in the application. Packages and library JSON retain their recorded normalization and imaging settings. For CSV or manually entered values, supply these details in the form.</li>
+<li>Select <strong>PhenoImager MOTiF library</strong> to use the built-in spectra for images recorded with compatible optical and detector settings. Check the component names and their association with the measured bands. Selecting <strong>Use the PhenoImager MOTiF library</strong> opens the spectral review.</li>
+<li>Select <strong>Create a library from reference images</strong> to provide the single-stain images and corresponding controls. Select the regions used to estimate each spectrum, as described in <a href="library-from-images.html">Creating a library from images</a>.</li>
+</ul>
+<p><a href="../../assets/screenshots/unmixing-spectral-source-choices-current.png"><img src="../../assets/screenshots/unmixing-spectral-source-choices-current.png" width="700" alt="Choose spectral references page with options to import or enter a spectral library, use the PhenoImager MOTiF library or create a library from reference images."></a></p>
+<p><em>The spectral-reference page offers library import or entry, the built-in PhenoImager MOTiF library, and library creation from single-stained images.</em></p>
+<p>For cyclic images, we reuse each fluorophore's reference spectrum across cycles acquired with the same measurement bands and optical settings. See <a href="../cyclic-if-methods/index.html#reuse-fluorophore-reference-spectra">Cyclic fluorescence images</a>.</p>
+<p><a id="import-measured-reference-spectra"></a></p>
+<h2 id="import-or-enter-a-spectral-library">Import or enter a spectral library</h2>
+<p>Selecting <strong>Import or enter a spectral library</strong> opens two choices. <strong>Import library file…</strong> opens a <code>.miflib.zip</code> package, library JSON or CSV file and fills the reference table with its values. <strong>Enter spectra</strong> opens the same table for typing or pasting values.</p>
+<p>For CSV file imports, the first header cell must be exactly <code>measurement</code>, followed by the component names. Each subsequent row starts with a band name and contains that band’s value for each component. We match these names to the image bands and component assignments, then arrange the imported values in the corresponding order.</p>
+<p><a href="../../assets/screenshots/unmixing-library-method-current.png"><img src="../../assets/screenshots/unmixing-library-method-current.png" alt="Spectral-library entry choices: Import library file or Enter spectra." width="660"></a></p>
+<p><em>The two choices open the same reference-table page. File import fills the table automatically; manual entry begins with the acquired-band and component names already in place.</em></p>
+<h3 id="enter-and-review-reference-spectra">Enter and review reference spectra</h3>
+<p>The table lists acquired bands in its first column and the reference values for each component in the remaining columns, using the names assigned in <strong>Channels &amp; markers</strong> as headings. When autofluorescence is required, it appears as the last component in the displayed table; images with recorded prior AF subtraction use only the fluorophore columns. Together, these columns form the reference matrix <code>S</code> described under <a href="#organize-the-measured-and-reference-spectra">the spectral model</a>.</p>
+<p>For a CSV import or manually entered table, select the L1 or L2 normalization used under <strong>Normalization of supplied spectra</strong>, then select <strong>Corrections already applied</strong>. Choose <strong>Raw intensities</strong> if L1 or L2 normalization was applied to measurements that had not been corrected for the imaging settings. If the measurements were corrected before normalization, select the correction that was applied. Packages and library JSON supply these settings automatically. <strong>Save and next</strong> submits the library for spectral review.</p>
+<p><a href="../../assets/screenshots/unmixing-library-entry-current.png"><img src="../../assets/screenshots/unmixing-library-entry-current.png" alt="Spectral-library review with the accepted FL6 reference values across 35 acquired bands and eight components, plus L1 normalization and exposure-normalized intensities." width="700"></a></p>
+<p><em>The FL6 reference values displayed in the shared table. Its 35 acquired bands form the rows; DAPI, six Opal fluorophores and AF form the columns. <strong>Reference preparation</strong> records L1 normalization and exposure-normalized intensities. Displayed numbers are shortened for readability; editing and unmixing retain their full precision. <strong>Preview spectra</strong> expands the curve comparison.</em></p>
+<p>Use <strong>Import file…</strong> to choose another library, or <strong>Back: library source</strong> to return to the entry choices. Returning to the table preserves its values and preparation settings.</p>
+<details>
+<summary>Correct supplied spectra prepared from raw intensities</summary>
+
+<p><a id="raw-intensities-correction"></a></p>
+<p>When <strong>Raw intensities</strong> is selected, the reference spectra must have been measured using the same imaging settings as the images in the processing group. We apply the image's <a href="#acquisition-correction">multiplicative correction</a> to each reference band, then restore the reference's declared normalization. The original normalization factor cancels, giving the same spectral shape as applying those multiplicative corrections to the measurements before normalization.</p>
+<p>Detector-offset subtraction requires the original intensity values and must precede normalization, so it cannot be applied to these normalized spectra. For the other selected correction options, we use the supplied reference spectra directly; see <a href="#acquisition-correction">correction routes</a>.</p>
+</details>
+
+<p><a id="user-guide-spectral-unmixing--creating-a-library-from-images"></a></p>
+<h2 id="creating-a-library-from-images">Creating a library from images</h2>
+<p>Each single-stain image supplies one fluorophore reference. We subtract image background and tissue autofluorescence from the selected stained regions, then combine their spectra into one column of the library. The unstained controls also supply the AF references used when fitting the mixed image. <a href="library-from-images.html">Create a library from images</a></p>
+<p><a href="../../assets/figures/reference-spectrum-preparation.svg"><img src="../../assets/figures/reference-spectrum-preparation.svg" width="500" alt="Background subtraction, autofluorescence removal and equal weighting of regional spectra to create one reference-library column"></a></p>
+<p><em>Three stained regions contribute equally to the fluorophore reference. The numbers on the right give its relative intensity in each of the six bands.</em></p>
+<p><a id="user-guide-spectral-unmixing--reviewing-the-reference-and-output"></a> <a id="reviewing-the-reference-and-output"></a> <a id="reference-unmixing--viii-assess-spectral-separation"></a> <a id="assess-spectral-separation"></a></p>
+<h2 id="review-the-reference-spectra">Review the reference spectra</h2>
+<p>Reference review calculates the condition number, pairwise cosine similarities and matrix rank from the selected reference spectra. Together, these checks assess whether the library can distinguish all components and how sensitive the estimated intensities are to errors in the spectra.</p>
+<h3 id="condition-number">Condition number</h3>
+<p>The <strong>condition number</strong> is the ratio of the reference matrix's largest to smallest singular value (<code>σ_max / σ_min</code>). The <a href="#ordinary-and-clipped-least-squares">pseudoinverse calculation</a> divides by these singular values. Small singular values can therefore amplify small errors in the measured signal or reference spectra, producing large changes in the estimated component intensities. A high condition number identifies this sensitivity even when no single pair of spectra appears nearly identical. A condition number of <strong>30 or higher</strong> requires review; <strong>100 or higher</strong> prevents unmixing.</p>
+<h3 id="cosine-similarity">Cosine similarity</h3>
+<p><strong>Cosine similarity</strong> compares two components' spectra across the acquired bands. For reference columns <code>s_i</code> and <code>s_j</code>, we calculate</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>cosine</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>s</mi><mi>i</mi></msub><mo>,</mo><msub><mi>s</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><munder><mo>∑</mo><mi>b</mi></munder><msub><mi>s</mi><mrow><mi>b</mi><mi>i</mi></mrow></msub><msub><mi>s</mi><mrow><mi>b</mi><mi>j</mi></mrow></msub></mrow><mrow><mo stretchy="false" form="prefix">∥</mo><msub><mi>s</mi><mi>i</mi></msub><msub><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msub><mo stretchy="false" form="prefix">∥</mo><msub><mi>s</mi><mi>j</mi></msub><msub><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msub></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\operatorname{cosine}(s_i,s_j)=\frac{\sum_b s_{bi}s_{bj}}{\lVert s_i\rVert_2\lVert s_j\rVert_2}.
+</annotation></semantics></math></p>
+<p>We multiply the two reference intensities in each band and sum the products across bands. Dividing by both spectrum lengths gives the same similarity even if one reference is multiplied by a positive constant. A value near 1 means the components have nearly proportional band intensities, making their individual contributions difficult to distinguish. We display the highest similarity across all component pairs. A cosine similarity of <strong>0.99 or higher</strong> flags the pair for review; <strong>0.999 or higher</strong> prevents unmixing.</p>
+<h3 id="matrix-rank">Matrix rank</h3>
+<p>The <strong>matrix rank</strong> counts the linearly independent reference spectra. It must equal the number of components, so the library must also contain at least as many acquired bands as components. If one reference can be reproduced by a combination of the others, different component contributions can reconstruct the same measured spectrum. The library cannot uniquely separate all components, and unmixing cannot proceed.</p>
+<h3 id="inspect-the-spectra">Inspect the spectra</h3>
+<p>Inspect any flagged spectra and confirm that the library matches the markers and imaging settings.</p>
+<p>Start with the matrix rank and condition number above the reference curves to see how well the library can distinguish the components together. If the highest cosine similarity is elevated, expand <strong>Pairwise cosine similarities</strong> to identify the two components concerned. Click a legend label to hide or show its curve and use <strong>Pan</strong>, <strong>Zoom</strong> or <strong>Reset view</strong> to compare their shapes across bands.</p>
+<p>For this comparison, we display each band as a fraction of that component’s spectral total. This is the L1 scale used by image-derived references. An imported library uses its declared L1 or L2 normalization for the actual fit.</p>
+<p>Choose <strong>Export figure…</strong> to save the visible curves as SVG, PDF or a 300 dpi PNG. The figure retains the current zoom limits, component colours, legend and axis labels. When wavelengths are recorded, the horizontal axis shows detection wavelength. Measurements from different optical settings form separate line segments, with their wavelength ranges labelled beneath the plot. Images without recorded wavelengths use acquired-band numbers.</p>
+<p><a href="../../assets/screenshots/motif-library-review.png"><img src="../../assets/screenshots/motif-library-review.png" alt="Current spectral-review panel showing eight packaged PhenoImager MOTiF spectra, full matrix rank, condition number 38.6385 and highest cosine similarity 0.862096." width="600"></a></p>
+<p><em>The packaged PhenoImager MOTiF library in the reference-review panel. Its condition number exceeds the warning threshold of 30 even though every pairwise cosine similarity is below 0.99. Inspecting the complete matrix therefore identifies sensitivity that a pairwise check alone would not flag.</em></p>
+<p>When <strong>Back: spectral references</strong> is offered in the final review, it returns to the reference-source choice before unmixing. If a spectral review was stopped, use <strong>Edit spectral references…</strong> to reopen it and revise the saved choices.</p>
+<h2 id="run-unmixing">Run unmixing</h2>
+<p>Select <strong>Start unmixing</strong> to accept the reviewed spectra and begin calculating the component image. We read the image in regions, apply the selected intensity correction, fit each pixel spectrum and write its component intensities to OME-Zarr. Follow processing progress on <strong>Workflow</strong>.</p>
+<p>To leave before starting, select <strong>Workflow</strong>. Accepted decisions remain saved, and reopening <strong>Spectral unmixing → Open review</strong> returns to the saved checkpoint. Unsubmitted form entries remain available during the current desktop session. Use <strong>Back: image state</strong> from the method page or <strong>Back: spectral references</strong> from the final reference review to revise those choices.</p>
+<p><a id="prepared-image-organization"></a> <a id="inspect-the-prepared-channels"></a></p>
+<h2 id="review-the-unmixed-image">Review the unmixed image</h2>
+<p>After unmixing, inspect individual component channels in strongly stained, weakly stained and overlapping structures. Compare their staining patterns with the corresponding single-stain controls and the markers' expected locations. Shared staining across components may reflect biological co-expression or incomplete signal separation; the controls and reference spectra help distinguish these explanations. When an AF component was fitted, use the unstained control to assess whether the fitted AF follows its tissue pattern and whether similar signal remains in the marker channels. The <a href="../run/interactive-viewing.html#choose-grayscale-or-channel-colours">image-viewing controls</a> provide channel selection and display adjustments when needed.</p>
+<h3 id="select-a-field-for-comparison">Select a field for comparison</h3>
+<p>In <strong>Results &amp; export</strong>, select <strong>Spectral unmixing</strong>, the processed image and <strong>Acquired bands and components</strong>, <strong>Reconstruction images</strong> or <strong>Reconstruction mean spectra</strong>. All three figures use the same field selection.</p>
+<p>Use <strong>Choose region in QuPath…</strong> to open the image with any saved channel selection, colours and brightness limits. Move or resize the export rectangle and choose <strong>Selected annotation bounds</strong>; alternatively, choose <strong>Current view</strong> to use the visible field. <strong>Use field and return</strong> fills <strong>Left (X)</strong>, <strong>Top (Y)</strong>, <strong>Width</strong> and <strong>Height</strong> in source-image pixels. The field must fit inside the image and contain no more than <strong>512 × 512 pixels</strong>. Select <strong>Open figure</strong> to display it.</p>
+<p><a href="../../assets/screenshots/export-field-selection-current.png"><img src="../../assets/screenshots/export-field-selection-current.png" width="300" alt="Export field controls for choosing selected annotation bounds or the current view and returning the selected field."></a></p>
+<p><em>Choose the field source, adjust the rectangle in QuPath and use <strong>Use field and return</strong> to apply the selection.</em></p>
+<h3 id="compare-acquired-bands-and-components">Compare acquired bands and components</h3>
+<p>For <strong>Acquired bands and components</strong>, choose one to three acquired bands and one to three unmixed components to display in separate rows over the selected field. The band panels show intensities after the correction selected for unmixing, and the component panels show the resulting unmixed intensities. We scale each panel independently so that staining patterns remain visible across their different intensity ranges. By default, the colour scale runs from zero, or the lowest value if negative, to that panel's 99.5th intensity percentile.</p>
+<p><strong>Export figure…</strong> saves PNG, SVG or PDF. <strong>Export data…</strong> provides a CSV with panel labels, intensity summaries and display limits, or a NumPy archive containing the selected band and component intensities without display scaling, together with the field coordinates and calibration.</p>
+<p><a href="../../assets/figures/fl6-mixed-unmixed-matched.png"><img src="../../assets/figures/fl6-mixed-unmixed-matched.png" alt="Matched region of a follicular-lymphoma TMA core before and after NNLS: three acquired spectral bands above the separated DAPI, CD21 and CD4 components." width="650"></a></p>
+<p><em>The same region of the FL6 tissue core before and after unmixing. A–C show three of the 35 acquired bands, labelled by filter set and wavelength. D–F show the DAPI, CD21 and CD4 components fitted with NNLS. Each panel maps zero to its own 99.5th intensity percentile using the same purple-to-yellow colour scale; scale bars are 100 µm. The <a href="../../assets/figures/fl6-unmixed-components.png">complete eight-component view</a> includes the other markers and AF. Images and references from <a href="https://doi.org/10.17632/274xbhc5rx.3">Tsakiroglou and colleagues, follicular-lymphoma dataset (2021)</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</em></p>
+<h3 id="examine-the-reconstructed-signal">Examine the reconstructed signal</h3>
+<p>Reconstruction shows how much of the measured spectral signal is explained by the fitted components. We recover the fitted coefficients <code>A</code> by dividing each saved component by the multiplier used in the <a href="#reference-normalization-and-saved-component-intensities">component-intensity calculation</a>. Multiplying these coefficients by the accepted reference matrix gives the predicted band intensities, <code>Ŷ = SA</code>. The observed intensities <code>Y</code> receive the same intensity correction that was applied during unmixing.</p>
+<p>For each pixel, the relative spectral residual is <code>‖y − ŷ‖₂ / ‖y‖₂</code>, calculated across all acquired bands. Mapping this value over the image locates areas where the reference spectra explain the measurements less well. A large ratio can also occur in a dim background region because the observed signal in the denominator is small; inspect the signal image alongside the residual map. Pixels with no observed signal have an undefined ratio.</p>
+<p>Select <strong>Reconstruction images</strong> and the acquired band, then choose <strong>Open figure</strong>. The first two panels show its observed and reconstructed intensities on a shared display scale; the third maps the relative spectral residual across all acquired bands in the selected field.</p>
+<p><a href="../../assets/figures/fl6-reconstruction-diagnostic.png"><img src="../../assets/figures/fl6-reconstruction-diagnostic.png" width="650" alt="Observed and reconstructed Cy3 590 nm intensities and the relative spectral residual for a 512 by 512-pixel FL6 field."></a></p>
+<p><em>Reconstruction review of a 512 × 512-pixel FL6 field. A shows the exposure-corrected Cy3:590 nm band; B reconstructs it from all eight fitted components, including AF, on the same intensity scale. C shows the relative spectral residual across all 35 bands, with a median of 0.0813; values above 0.20 use the upper colour. Scale bars show 50 µm. Images and references from <a href="https://doi.org/10.17632/274xbhc5rx.3">Tsakiroglou and colleagues, follicular-lymphoma dataset (2021)</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</em></p>
+<p>Select <strong>Reconstruction mean spectra</strong> in Results to compare the observed and reconstructed intensities across the acquired bands. For each band, we average the corrected pixel intensities over the selected field and calculate the corresponding average from the reconstructed image. Differences between the two curves identify bands where the reconstruction overestimates or underestimates the average signal. Local differences can cancel when averaged, so examine these curves together with the spatial residual map. Switching between the image and spectra views retains the selected field. The overview follows the acquired-band order. When the band labels also record optical settings and detection wavelengths, additional panels show the same values against wavelength within each setting.</p>
+<p><a href="../../assets/figures/fl6-reconstruction-spectra.svg"><img src="../../assets/figures/fl6-reconstruction-spectra.svg" width="650" alt="Panel A compares the mean observed and reconstructed spectra across all 35 acquired bands; panel B shows the same values against detection wavelength within each optical setting."></a></p>
+<p><em>Observed and reconstructed spectra from the 512 × 512-pixel FL6 field shown above. Each blue point is the average intensity across all pixels in that field for one acquired band, after dividing the pixel intensities by the band’s exposure time in seconds. Orange points show the corresponding averages from the reconstructed image. A displays all 35 bands in their recorded order; B shows the same values against detection wavelength, separately for DAPI, FITC, Cy3, Texas Red and Cy5 optical settings. Both rows share the same intensity scale. At the longer wavelengths in the Texas Red panel, the reconstructed average exceeds the observed average.</em></p>
+<p>Use <strong>Export figure…</strong> for either view to save PNG, SVG or PDF. <strong>Export data…</strong> offers a CSV table of field-mean spectra and a NumPy archive containing the displayed band images, residual arrays, mean spectra and field coordinates.</p>
+<p>When the reconstruction leaves substantial signal unexplained, review the <a href="library-from-images.html#select-stained-control-and-background-regions">background regions</a>, the <a href="#correct-intensities-for-acquisition-settings">imaging settings</a> for the sample and controls, and the <a href="library-from-images.html#estimate-and-remove-tissue-autofluorescence">regions used to estimate autofluorescence</a>. To revise these choices after unmixing, open <strong>Run → Spectral unmixing → Review unmixing settings…</strong> and follow <a href="../run/index.html#change-saved-unmixing-settings">Change saved unmixing settings</a>.</p>
+<p><a id="user-guide-spectral-unmixing--saved-result-and-revisions"></a></p>
+<h2 id="saved-result-and-revisions">Saved result and revisions</h2>
+<p>The saved result identifies the source image and series, the assigned components and markers, and how the image was prepared. For an unmixed result, it also records the reference library, intensity correction, solver settings, processor, calculation and output precision, and convergence summaries. For either <strong>No</strong> option, it records the reason for copying and the reviewed channel assignments, including the measurement-band mapping when used.</p>
+<p>The prepared <code>.ome.zarr</code> image retains the component names, pixel sizes and intensity pyramid used for subsequent tissue and cell analysis. <a href="../images/storage.html">Image storage</a> describes its layout and compression; <a href="../images/processing.html">Image preparation</a> explains how regions and pyramid levels are calculated and saved.</p>
+<p>Revising the reference spectra or intensity correction requires a new component image and recalculation of results using the changed intensities. For an existing analysis, use an offered correction form or follow <a href="../run/index.html#change-a-completed-decision">the available revision and recovery actions</a>. See <a href="../setup/analysis-folder.html#reference-analysis-folder">saved files</a> and <a href="../images/processing.html#reference-image-metadata-and-coordinates">coordinate and channel definitions</a>.</p>
+<p><a id="solver-implementation"></a></p>
+<h2 id="calculation-details">Calculation details</h2>
+<p>The calculations below explain the NNLS stopping condition and the fitting procedures used for each precision and processor.</p>
+<p><a id="nnls-convergence-calculation"></a></p>
+<details>
+<summary>NNLS convergence calculation</summary>
+
+<p>For a pixel with corrected band intensities <code>y</code> and fitted component coefficients <code>a</code>, the spectral matrix <code>S</code> contains one reference spectrum per column. The least-squares loss measures the reconstruction error, and its gradient describes how that loss changes as each coefficient changes</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false" form="prefix">∥</mo><mi>S</mi><mi>a</mi><mo>−</mo><mi>y</mi><msubsup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn><mn>2</mn></msubsup><mo>,</mo><mspace width="2.0em"></mspace><mi>∇</mi><mi>L</mi><mo>=</mo><msup><mi>S</mi><mi>T</mi></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mi>a</mi><mo>−</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+L(a)=\frac12\lVert Sa-y\rVert_2^2,\qquad \nabla L=S^T(Sa-y).
+</annotation></semantics></math></p>
+<p>For a block of pixels, the columns of <code>Y</code> contain their measured spectra and the columns of <code>A</code> contain their fitted coefficients. We prepare <code>G = SᵀS</code> once and calculate <code>H = SᵀY</code> for each block, giving</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>∇</mi><mi>L</mi><mo>=</mo><mi>G</mi><mi>A</mi><mo>−</mo><mi>H</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\nabla L=GA-H.
+</annotation></semantics></math></p>
+<p>At the minimum, a positive coefficient has zero gradient because neither increasing nor decreasing it should reduce the loss. A coefficient already equal to zero can only increase; a nonnegative gradient means that increasing it would not reduce the loss. We collect the remaining violations of these conditions in <code>Q</code></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>G</mi><mi>A</mi><mo>−</mo><mi>H</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>A</mi><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo>&gt;</mo><mn>0</mn><mspace width="0.222em"></mspace><mtext mathvariant="normal">or</mtext><mspace width="0.222em"></mspace><msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>G</mi><mi>A</mi><mo>−</mo><mi>H</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo>&lt;</mo><mn>0</mn><mo>,</mo></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mn>0</mn><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">otherwise</mtext><mi>.</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+Q_{jp}=\begin{cases}
+(GA-H)_{jp},&amp;A_{jp}&gt;0\ \text{or}\ (GA-H)_{jp}&lt;0,\\
+0,&amp;\text{otherwise}.
+\end{cases}
+</annotation></semantics></math></p>
+<p>The float64 CPU solver stops iterating for pixel <code>p</code> when every component's violation is within the scaled tolerance</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>max</mo><mi>j</mi></munder><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>Q</mi><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>≤</mo><mi>ϵ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><munder><mo>max</mo><mi>j</mi></munder><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>H</mi><mrow><mi>j</mi><mi>p</mi></mrow></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\max_j|Q_{jp}|\le\epsilon\left(1+\max_j|H_{jp}|\right),
+</annotation></semantics></math></p>
+<p>where <code>ε</code> is <strong>NNLS stopping tolerance</strong>, initially <code>10⁻⁸</code>. The factor on the right scales the permitted gradient error using that pixel's values in <code>H = SᵀY</code>. A smaller tolerance therefore requires the coefficients to be closer to satisfying the optimality conditions. The <a href="#examine-the-reconstructed-signal">reconstructed-signal review</a> separately shows how closely the fitted spectra reproduce the measured intensities.</p>
+</details>
+
+<details>
+<summary>Precision-specific calculations</summary>
+
+<p><a id="reference-unmixing--vi-precision-and-processor-specific-calculations"></a> <a id="precision-and-processor-specific-calculations"></a></p>
+<h3 id="precision-and-processor-specific-calculations">Precision and processor-specific calculations</h3>
+<p>The following routes calculate coefficients at the selected precision before conversion to the output storage type.</p>
+<p>For full intensity correction, we calculate <code>M_b g_b B_b t_b</code> in float64, convert each image region to float32 and subtract the per-band offsets before scaling. Offset-corrected measurements may be negative. Exposure-only correction divides a float32 copy by each band's exposure time. The stored-calibrated route reads the existing intensities without further intensity correction. The selected solver receives these corrected measurements.</p>
+<p><a id="reference-unmixing--float32-clipped-ls"></a></p>
+<h4 id="float32-clipped-ls">Float32 clipped LS</h4>
+<p>The float32 clipped-LS implementation prepares its pseudoinverse and singular values in float64, then converts the matrix to float32. The conversion must remain finite and preserve nonzero entries. A preparation check combines transform-conversion error, input rounding and dot-product roundoff on the spectral matrix's norm scale, with a fixed preparation limit of <code>10⁻⁴</code>.</p>
+<p>We multiply pixel spectra in float32 on CPU, CUDA or Metal and clip negative coefficients. Autocast is disabled, and the CUDA preparation checks the reduced-mantissa settings used for matrix multiplication. Input blocks and calculated coefficients must remain finite.</p>
+<p><a id="reference-unmixing--float32-nnls"></a></p>
+<h4 id="float32-nnls">Float32 NNLS</h4>
+<p>The float32 NNLS route requires a requested tolerance of at least <code>10⁻⁵</code>. It starts from clipped LS and maintains the spectral residual <code>R=SA-Y</code>. A change <code>δ_j</code> in component <code>j</code> updates the residual as</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>←</mo><mi>R</mi><mo>+</mo><msub><mi>S</mi><mi>j</mi></msub><msub><mi>δ</mi><mi>j</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+R\leftarrow R+S_j\delta_j.
+</annotation></semantics></math></p>
+<p>We calculate each component update from its projection onto the current residual, divided by the squared norm of its reference column. After every sweep, we recalculate the full residual and gradient to limit accumulated update error.</p>
+<p>The final per-pixel gradient cutoff in this implementation is <code>ε max|Sᵀy_p|</code>. Its internal convergence target is half that cutoff. For up to eight components, we also prepare subset transforms, perform at most 16 coordinate sweeps before subset checks and count those subset attempts within the remaining iteration limit.</p>
+<p>A requested NNLS tolerance tighter than the supported float32 limit selects an available float64 route. The saved result records the processor and precision actually used for that calculation.</p>
+<p><a id="reference-unmixing--float64-pytorch-fitting"></a></p>
+<h4 id="float64-pytorch-fitting">Float64 PyTorch fitting</h4>
+<p>The float64 tensor solver applies the estimator using PyTorch tensors. For NNLS, it checks the calculated coefficients against the original float64 spectral matrix and residual. Any rejected or nonfinite columns are fitted with the corresponding float64 CPU solver and inserted into their original positions. The result records how many pixels were checked and refitted.</p>
+<p>A float64 fit runs on a processor that supports 64-bit arithmetic. Metal supports the float32 calculation; a request for float64 uses the CPU or another selected processor that supports it.</p>
+</details>
+
+<details>
+<summary>Grouped NNLS fitting, memory and saved diagnostics</summary>
+
+<p><a id="reference-unmixing--v-float64-cpu-solution-sequence"></a></p>
+<p><a id="v-float64-cpu-solution-sequence"></a></p>
+<h3 id="float64-cpu-solution-sequence">Float64 CPU solution sequence</h3>
+<p>We prepare the spectral matrix calculations in float64. The pseudoinverse uses <code>numpy.linalg.pinv</code> with a relative cutoff of <code>1e-15</code> for retaining singular values, as described in <a href="https://numpy.org/doc/2.0/reference/generated/numpy.linalg.pinv.html">NumPy's pseudoinverse documentation</a>. Grouped fitting also uses <code>G = SᵀS</code>; in exact arithmetic, its condition number is the square of that of <code>S</code>, so poorly separated reference spectra can amplify numerical errors in this calculation.</p>
+<p>We use four successive calculations, accepting a pixel as soon as its nonnegative coefficients satisfy the final gradient criterion.</p>
+<p>i) <strong>Check the unconstrained solution.</strong> We calculate <code>S⁺Y</code>, clip negative coefficients and check the resulting gradient. Pixels whose original coefficients are at least <code>−ε</code> and whose clipped solution meets that gradient condition are accepted immediately. Constrained iterations then process the remaining pixels.</p>
+<p>ii) <strong>Fit groups with the same positive components.</strong> For panels with at most 12 components, we prepare inverses for the nonempty component subsets. If <code>J</code> contains the components proposed to be positive, we calculate</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>J</mi><mo>,</mo><mi>p</mi></mrow></msub><mo>=</mo><msubsup><mi>G</mi><mrow><mi>J</mi><mi>J</mi></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><msub><mi>H</mi><mrow><mi>J</mi><mo>,</mo><mi>p</mi></mrow></msub><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>A</mi><mrow><mover><mi>J</mi><mo accent="true">‾</mo></mover><mo>,</mo><mi>p</mi></mrow></msub><mo>=</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+A_{J,p}=G_{JJ}^{-1}H_{J,p},\qquad A_{\bar J,p}=0.
+</annotation></semantics></math></p>
+<p>We encode each subset as a bit mask and group pixels requiring the same subset. One small matrix multiplication then fits all columns in that group. There are <code>2^C-1</code> nonempty subsets, giving 255 for eight components and 4095 for twelve. We check coefficient signs and the projected gradient, then update the proposed subsets of unresolved pixels. This stage performs at most <code>min(8, max_iterations)</code> grouped rounds and is enabled when the selected iteration limit is at least <code>2C</code>.</p>
+<p>iii) <strong>Update unresolved coefficients one component at a time.</strong> Holding the remaining coefficients fixed, we minimize the least-squares loss with respect to that coefficient and enforce nonnegativity</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>j</mi></msub><mo>←</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mfrac><mrow><msub><mi>H</mi><mi>j</mi></msub><mo>−</mo><msub><mi>G</mi><mi>j</mi></msub><mi>A</mi><mo>+</mo><msub><mi>G</mi><mrow><mi>j</mi><mi>j</mi></mrow></msub><msub><mi>A</mi><mi>j</mi></msub></mrow><msub><mi>G</mi><mrow><mi>j</mi><mi>j</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+A_j\leftarrow\max\left(0,\frac{H_j-G_jA+G_{jj}A_j}{G_{jj}}\right).
+</annotation></semantics></math></p>
+<p>We apply each component update across all unresolved pixels. A complete pass through the components is one sweep; later updates use the values already changed earlier in that sweep. After each sweep, we recalculate the gradient, store converged columns and remove them from further iteration. The available sweep count is the iteration limit minus completed grouped rounds. When subset inverses are available, we use at most <code>max(32,4C)</code> sweeps before the final subset search.</p>
+<p>iv) <strong>Check remaining subsets.</strong> For eligible small panels, we first check the all-zero solution and then test the cached nonempty subsets in descending subset-size order. We require feasible selected coefficients and acceptable gradients for omitted components. The complete assembled result receives the final projected-gradient check.</p>
+<p>The diagnostic iteration count includes grouped rounds and coordinate sweeps. It excludes the final enumeration of cached subsets. An unresolved pixel makes the block's convergence flag false, and the image-processing workflow requires every region to converge before accepting the final NNLS output.</p>
+<p>The internal CPU block contains at most 65,536 pixels. This limits iterative arrays while the enclosing image region can contain more pixels. The spectral matrix, pseudoinverse and subset calculations are reused across these blocks.</p>
+<p><a id="reference-unmixing--ix-memory-computation-and-saved-results"></a></p>
+<p><a id="ix-memory-computation-and-saved-results"></a></p>
+<h3 id="memory-computation-and-saved-results">Memory, computation and saved results</h3>
+<p>After preparing the small spectral matrix calculations, the initial LS multiplication costs approximately <code>O(BCP)</code>. Constructing <code>G</code> costs <code>O(BC²)</code>. A coordinate sweep over unresolved pixels costs approximately <code>O(C²P_unresolved)</code>. Grouping shares subset calculations, while removing converged columns concentrates later iterations on pixels that still need refinement.</p>
+<p>The saved diagnostics include total pixels, pixels accepted from the initial LS solution, pixels requiring constrained fitting, iteration count, maximum projected-gradient violation and convergence status. Across blocks and regions, we sum the pixel counts and report the highest iteration count and largest gradient violation.</p>
+<p>The corrected spectra, component coefficients and iterative arrays contribute to the regional memory estimate. The defaults permit two simultaneous shard tasks and two in-flight regions within a 2 GiB working-array allowance; memory availability can reduce these allocations. The local executor reduces numerical block dimensions when necessary, writes the fitted components directly to sharded OME-Zarr, and constructs the intensity pyramid from completed output. The <a href="../images/processing.html#reference-image-processing">image-processing reference</a> provides the allocation formulas, temporary-storage estimate and output sequence.</p>
+<p><a id="reference-unmixing--sources-and-implementation"></a></p>
+<h3 id="sources-and-implementation">Sources and implementation</h3>
+<p>Intensity correction is implemented in <code>preprocessing/unmixing/normalization.py</code>. The coefficient calculations are implemented in <code>solvers.py</code>, <code>grouped_nnls.py</code>, <code>float32_clipped.py</code>, <code>float32_nnls.py</code> and <code>tensor_solver.py</code>. The accepted reference determines the band-response and component-reporting vectors. Initial method settings are stored in <code>config/defaults/unmixing.json</code>.</p>
+</details>
+
+<hr />
+<p><strong>Next:</strong> <a href="../tissue/index.html">Tissue detection</a>.</p>
+</main>
+</body>
+</html>

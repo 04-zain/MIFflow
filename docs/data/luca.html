@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>LuCa example image · MIFflow</title>
+<link rel="stylesheet" href="../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../index.html">MIFflow</a>
+    <a href="../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/data/luca.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="luca-example-image">LuCa example image</h1>
+<p><a id="tutorials-public-data"></a> <a id="tutorials-public-data--luca-input-preparation-and-capture-record"></a> <a id="tutorials-public-data--source-image"></a></p>
+<h2 id="source-image">Source image</h2>
+<p>The stage guides use the PerkinElmer field <code>LuCa-7color_[13860,52919]_1x1component_data.tif</code> from the <a href="https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_fields/LuCa-7color_%5B13860%2C52919%5D_1x1component_data.tif">OME Vectra sample collection</a>. The dataset is attributed to PerkinElmer under <strong>CC BY 4.0</strong> in <a href="https://qupath.readthedocs.io/en/stable/docs/intro/acknowledgements.html">QuPath's image acknowledgements</a>.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Full-resolution image</td>
+<td>1868 × 1400 pixels, eight channels</td>
+</tr>
+<tr class="even">
+<td>Stored component type</td>
+<td>float32</td>
+</tr>
+<tr class="odd">
+<td>X and Y pixel size</td>
+<td>Approximately 0.498 µm</td>
+</tr>
+<tr class="even">
+<td>Component state</td>
+<td>Already unmixed; vendor pages record <code>IsUnmixedComponent=True</code></td>
+</tr>
+<tr class="odd">
+<td>Processing input</td>
+<td>Original vendor TIFF, analytical series 0</td>
+</tr>
+</tbody>
+</table></div>
+<p>The two-image examples also use <a href="https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_fields/LuCa-7color_%5B17572%2C60173%5D_3x3component_data.tif"><code>LuCa-7color_[17572,60173]_3x3component_data.tif</code></a>, a 5604 × 4200-pixel field with the same eight-channel panel and approximately 0.498 µm pixel size. These fields use separate image identities within the same subject in the walkthrough.</p>
+<p><a id="tutorials-public-data--prepare-the-vendor-image"></a></p>
+<h2 id="prepare-the-vendor-image">Prepare the vendor image</h2>
+<p>Download the original TIFF and add it on <strong>Samples</strong>. Its sole eligible analytical image is selected automatically; the other series is an RGB thumbnail. If a file contains several eligible images, choose the images to add from the selection dialog. Complete <a href="../stages/images/index.html#user-guide-images-and-channels">Channels and markers</a>, retaining the already-unmixed image state and assigning the markers listed below.</p>
+<p>Preparation writes the supplied component intensities to OME-Zarr, preserving channel order and physical calibration. The vendor's zero exposure values are treated as unavailable exposure times. Choose whether to display marker names with the channel-name option. <a href="../stages/images/processing.html#reference-image-processing">Image processing</a> explains how we read and write the image in regions.</p>
+<p><a id="tutorials-public-data--quantitative-panel"></a></p>
+<h2 id="quantitative-panel">Quantitative panel</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>Original channel</th>
+<th>Component</th>
+<th>Marker or role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>PDL1 (Opal 520)</td>
+<td>Opal 520</td>
+<td>PDL1</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>CD8 (Opal 540)</td>
+<td>Opal 540</td>
+<td>CD8</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>FoxP3 (Opal 570)</td>
+<td>Opal 570</td>
+<td>FoxP3</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>CD68 (Opal 620)</td>
+<td>Opal 620</td>
+<td>CD68</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>PD1 (Opal 650)</td>
+<td>Opal 650</td>
+<td>PD1</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>CK (Opal 690)</td>
+<td>Opal 690</td>
+<td>CK</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>DAPI</td>
+<td>DAPI</td>
+<td>Nuclear stain</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Autofluorescence</td>
+<td>Autofluorescence</td>
+<td>Estimated background component</td>
+</tr>
+</tbody>
+</table></div>
+<p><a id="tutorials-public-data--screenshot-acquisition"></a> <a id="screenshot-acquisition"></a> <a id="recorded-example-populations"></a> <a id="inputs-and-completed-operations"></a></p>
+<h2 id="examples-in-the-guides">Examples in the guides</h2>
+<p>The LuCa walkthrough illustrates tissue detection, cell segmentation, measurement selection and marker decisions. The guides identify the field, selected population and settings beside each result. Some method comparisons use a separately segmented population from the same source field:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Example</th>
+<th>Population and calculation</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Full-field measurements and Nimbus</td>
+<td>7,123 cells; whole-cell Mean for the eight channels. Nimbus V1 evaluates PDL1 at 10× objective magnification.</td>
+<td><a href="../stages/cell-measurements/index.html#luca-measurement-example">Measurements</a>, <a href="../stages/phenotyping/nimbus.html">Nimbus</a></td>
+</tr>
+<tr class="even">
+<td>PDL1 mixture comparison</td>
+<td>1,173 cells; the Gaussian and Gamma methods use the same whole-cell PDL1 Mean values.</td>
+<td><a href="../stages/phenotyping/marker-rules.html#measured-luca-pdl1-example">Marker distributions</a></td>
+</tr>
+<tr class="odd">
+<td>Two-field marker review</td>
+<td>A 512 × 512-pixel analysis region in each source image, containing 834 and 730 cells.</td>
+<td><a href="../stages/phenotyping/marker-rules.html#review-the-marker-decision">Marker decisions</a></td>
+</tr>
+</tbody>
+</table></div>
+<p><a id="tutorials-public-data--reproducing-the-documented-scope"></a> <a id="reproducing-the-documented-scope"></a></p>
+<h2 id="follow-the-example">Follow the example</h2>
+<p>Start with <a href="../stages/images/index.html">Images and channels</a>, then continue through tissue detection, segmentation and measurements. Use the stage guides to choose settings and inspect the results. For the two-image example, the <a href="../stages/setup/analysis.html#user-guide-batch-analysis">analysis setup guide</a> explains image, subject and processing-group assignments.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="../stages/images/index.html">Images and channels</a>.</p>
+</main>
+</body>
+</html>

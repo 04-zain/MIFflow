@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Local and cluster computing · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/computing.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="local-and-cluster-computing">Local and cluster computing</h1>
+<p><a id="getting-started-cluster-setup"></a> <a id="getting-started-cluster-setup--configure-cluster-processing"></a></p>
+<p>On <strong>Computing</strong>, choose the computer that will process the images. If the analysis runs on a cluster, you can also choose whether to open MIFflow and QuPath on the allocated node or on your own computer.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Where to process the images</th>
+<th>Where to review them</th>
+<th>Computing choice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>On this computer</td>
+<td>On this computer</td>
+<td><a href="#this-computer">This computer</a></td>
+</tr>
+<tr class="even">
+<td>On a cluster compute node</td>
+<td>In a graphical desktop on that node</td>
+<td><a href="#cluster-desktop">Cluster desktop</a></td>
+</tr>
+<tr class="odd">
+<td>On a cluster compute node</td>
+<td>On your own computer, with access to the cluster image folders</td>
+<td><a href="#cluster-streaming">Cluster streaming</a></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="this-computer">This computer</h2>
+<p>Open <strong>Local settings…</strong>. Under <strong>Preferred processor</strong>, leave <strong>Automatic</strong> to let each method select a supported processor with enough memory, or choose a processor for this analysis. Unmixing, InstanSeg, Cellpose-SAM, KRONOS encoding, spatial graph fitting and Nimbus support GPU processing. Random forest, SVM and logistic regression run on the CPU.</p>
+<p>To use <strong>NVIDIA GPU</strong>, the computer needs a compatible driver. The portable NVIDIA edition includes the processing libraries. For a wheel or source installation, follow <a href="../installation-and-build/software.html#add-nvidia-processing-libraries">Add NVIDIA processing libraries</a>. Select the precision for spectral fitting and image storage later under <a href="../unmixing/index.html#user-guide-spectral-unmixing--numerical-and-output-settings">Unmixing</a>.</p>
+<p>Select <strong>Check memory, storage and processors</strong> to see the available RAM, processing devices and free space on the drive containing the analysis folder. To measure free space on another drive, enter a folder on that drive under <strong>Check available storage in</strong> and run the check again.</p>
+<p><a id="luca-example"></a></p>
+<p><a href="../../assets/screenshots/03-local-settings.png"><img src="../../assets/screenshots/03-local-settings.png" alt="Local settings with CPU selected and the analysis folder entered for the free-space check." width="600"></a></p>
+<p><em>The free-space check uses the drive containing the LuCa analysis folder. CPU is selected for processing.</em></p>
+<p>Select <strong>Save and return</strong>, then <strong>Next: Samples</strong>. The prepared analysis keeps its processing location and processor preference when you reopen it. To change either after preparation, create a new analysis.</p>
+<h3 id="memory-available-for-processing">Memory available for processing</h3>
+<p>Before starting a calculation, we check the RAM currently available, allow 20% for other activity and account for memory already reserved by running tasks. On a cluster, the Slurm job’s memory allocation also limits the RAM available for processing. A step marked <strong>Waiting for memory</strong> may start when another task finishes. If the step cannot fit even on its own, free memory on the processing computer or request a larger allocation. <a href="memory-and-threads.html">How we estimate memory for each task</a></p>
+<h2 id="cluster-desktop">Cluster desktop</h2>
+<p>Use a cluster desktop when the institution provides a graphical session on an allocated compute node. MIFflow, QuPath and the analysis files are all on the cluster.</p>
+<ol type="1">
+<li>Request a desktop session through the institution’s service. Choose the cores, memory, time and GPU needed for the analysis.</li>
+<li>Open MIFflow <strong>inside that session</strong>. A wheel or source installation needs the <code>desktop</code> extra. Complete <a href="../installation-and-build/software.html#open-software-setup">Software setup</a> there so that the compute node can open QuPath, read the images and load the models.</li>
+<li>Create the analysis in a writable cluster folder. Under <strong>Computing</strong>, select <strong>This computer</strong>. In this session, that is the allocated node. Open <strong>Local settings…</strong> to choose its processor.</li>
+<li>Add the <a href="analysis.html#add-the-analytical-images">samples</a> using their cluster paths. Save the analysis, check <strong>Software availability</strong> on Plan and select <strong>Start analysis</strong>. Complete the forms and QuPath reviews in the same desktop.</li>
+</ol>
+<p>Before ending the allocation, select <strong>Pause after current work</strong> and wait for progress to be saved. In a later desktop session, choose <strong>Open analysis…</strong> and select the same cluster folder. <a href="../run/index.html#pause-processing">Pause and reopen an analysis</a></p>
+<h2 id="cluster-streaming">Cluster streaming</h2>
+<p>With <strong>Cluster streaming</strong>, MIFflow runs on your computer and submits processing jobs to Slurm. Each job reads its inputs and saves its results on the cluster. To review the images in QuPath, mount the cluster folder on your computer. QuPath reads the image through that mount and saves any annotation edits in a local draft. Returning the draft sends the edits back to the analysis on the cluster.</p>
+<p><a id="getting-started-cluster-setup--1-prepare-the-computing-environment"></a></p>
+<h3 id="prepare-the-computing-environment">Prepare the computing environment</h3>
+<p>Install the same MIFflow release on the processing host as on your computer. The compute nodes need access to the image readers, the models used by the analysis and a writable results folder. Check these paths from an allocated node under the account that will run the jobs.</p>
+<p>Activate the cluster Python environment and run <code>command -v mif-batch</code> to find the executable the desktop will use to submit work. Enter its full path when setting up the connection below. If this is the first analysis under the cluster account, follow the <a href="command-line.html#software-setup">command-line setup instructions</a>, beginning with <code>mif-batch setup-workspace</code>.</p>
+<p><a id="getting-started-cluster-setup--2-select-the-connection"></a> <a id="select-the-connection"></a> <a id="getting-started-cluster-setup--3-supply-environment-activation-where-needed"></a> <a id="supply-environment-activation-where-needed"></a></p>
+<h3 id="connect-the-desktop-to-the-cluster">Connect the desktop to the cluster</h3>
+<p>On your computer, select <strong>Cluster streaming → Streaming connection…</strong>. Enter the SSH connection name or <code>user@host</code> and the full path to <code>mif-batch</code> on the cluster. Set up SSH key or agent access for this connection.</p>
+<p>If your cluster requires an activation script to make Python or the image-processing software available, enter its full cluster path under <strong>Environment script (optional)</strong>. Enter any required module names under <strong>Additional software modules</strong>, separated by spaces. Before running a processing command or starting a job, we load the script followed by the modules. Slurm status queries use the environment provided at SSH login. Select <strong>Check connection</strong> to test these settings.</p>
+<p><a id="getting-started-cluster-setup--4-select-the-analysis-folder"></a></p>
+<h3 id="select-the-analysis-folder">Select the analysis folder</h3>
+<p>Under <strong>Analysis storage</strong>, choose <strong>Create a new cluster analysis</strong> and enter a writable <strong>Cluster parent folder</strong>. The <strong>Analysis folder</strong> shown below it is where we save the run definition and results for this analysis. <strong>Details</strong> shows the paths to the run definition and job messages.</p>
+<p>To reopen an analysis already on the cluster, choose <strong>Open an existing cluster analysis</strong> and select its saved folder. This opens its samples and progress on your computer.</p>
+<p><a id="getting-started-cluster-setup--5-map-the-image-locations-for-local-review"></a></p>
+<h3 id="map-the-image-locations-for-local-review">Map the image locations for local review</h3>
+<p>The analysis records each image’s path on the cluster. To display it locally, QuPath needs a path to the same file on your computer. Choose a cluster folder containing the source images, any paired images and the analysis folder where the prepared images will be written. A read-only mount is sufficient because QuPath writes its annotation drafts locally.</p>
+<p>Under <strong>Image access</strong>, enter the cluster path as <strong>Image folder on the cluster</strong> and its local counterpart as <strong>Mount folder on this computer</strong>. If your institution already mounts the folder, use that location. Otherwise, on Ubuntu select <strong>Prepare connection command</strong> and run the displayed SSHFS command locally. On Windows, mount the drive with your SSHFS/WinFsp client.</p>
+<p>For example, if <code>/project/study</code> on the cluster is available at <code>/mnt/study</code> on your computer, enter those two folders. A review of <code>/project/study/images/sample01.ome.tiff</code> can then open <code>/mnt/study/images/sample01.ome.tiff</code> in QuPath. The same mapping locates prepared images saved beneath the study folder.</p>
+<p><a id="getting-started-cluster-setup--6-request-resources-and-submit"></a></p>
+<h3 id="request-resources-and-submit">Request resources and submit</h3>
+<p>Enter the cores, memory, time limit and GPU count for each job. Supply the Slurm account and partition if your institution requires them. <strong>Check processors</strong> in <strong>Cluster analysis</strong> runs a small calculation in an allocation with the requested resources.</p>
+<p>After <strong>Save and return</strong>, <a href="analysis.html#add-the-analytical-images">add and label the images</a> for the new analysis. Save the samples, open Plan and select <strong>Start analysis on cluster</strong> to submit the job to Slurm. Processing starts when Slurm can allocate the requested resources.</p>
+<p>If the connection closes before you receive a job number, select <strong>Check submission</strong> on Run. We look up the original submission and reconnect to the job if we find it. A new job can take time to appear in Slurm. Choose <strong>Keep waiting</strong> if its status is uncertain. Choose <strong>Allow another submission</strong> only after checking the displayed job name in the cluster history and confirming that the submission failed.</p>
+<p><a id="getting-started-cluster-setup--7-complete-reviews-and-continue"></a></p>
+<h3 id="complete-reviews-and-continue">Complete reviews and continue</h3>
+<p>When processing reaches a review, choose <strong>Run → Open current review</strong> on your computer. Move between its pages with <strong>Next</strong> and <strong>Back</strong> until the settings are ready to submit. Choosing <strong>Save and next</strong> or the stage’s own continue action sends the decision back to the cluster. Once it has been saved there, we submit the next Slurm job with the reviewed settings.</p>
+<p>For classifier references, select the image on <strong>Reference annotations</strong> and choose <strong>Annotate in QuPath</strong>. QuPath reads the mounted image and saves the drawings to a draft on your computer. If you want to preview predictions locally, install the model and its libraries on this computer as well.</p>
+<p>Save the draft and close QuPath to return the annotations. Reviews with a separate <strong>Image to annotate</strong> selector offer automatic return. If you turn it off, select <strong>Return saved annotations</strong> when you finish. An interrupted transfer leaves the draft on your computer for return after you reconnect. <a href="../run/index.html#return-a-qupath-annotation-draft">Returning a QuPath annotation draft</a></p>
+<h3 id="pause-and-reopen-a-cluster-analysis">Pause and reopen a cluster analysis</h3>
+<p>Where offered, <strong>Save and pause</strong> sends the decision and leaves processing paused. Choose <strong>Resume analysis</strong> on Run when ready to submit the next job. To return in a later session, use <strong>Open analysis…</strong> and select your local analysis folder. <a href="../../troubleshooting.html">Troubleshoot cluster submission and review</a></p>
+</main>
+</body>
+</html>

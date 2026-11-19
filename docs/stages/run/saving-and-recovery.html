@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Analysis files, version selection and recovery · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/run/saving-and-recovery.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="analysis-files-version-selection-and-recovery">Analysis files, version selection and recovery</h1>
+<p><a href="index.html">Run and review</a> · <a href="../setup/analysis-folder.html">Analysis-folder contents</a></p>
+<p>When you revise a calculation, subsequent stages continue to use the previously accepted result until its replacement has been written and checked. Processing can stop after the replacement reaches disk but before it is selected. When you <a href="index.html#reopen-an-analysis">reopen the analysis</a>, we compare the saved files with the original request to determine whether the replacement is complete or part of the calculation must run again.</p>
+<p><a id="i-physical-analysis-layout"></a> <a id="ii-which-file-answers-which-question"></a></p>
+<h2 id="locate-the-saved-inputs-and-results">Locate the saved inputs and results</h2>
+<p><a href="../setup/analysis-folder.html#locations-of-saved-files">Analysis-folder contents</a> identifies the setup files, processing workspace and records used to reopen an analysis. <code>state/head.json</code> selects the current plan, project state and results; <code>state/current-progress.json</code> contains the workflow summary displayed by the desktop. Image arrays, models and cell tables stay in the locations recorded by their completed results.</p>
+<p>On reopening, we read the saved settings and the records identifying the selected results. This lets you inspect progress even if a source image or model is temporarily unavailable. To resume a calculation or open a project in QuPath, restore access to the external files that operation needs.</p>
+<p><a id="iii-completing-one-table-part"></a></p>
+<h2 id="complete-one-table-part">Complete one table part</h2>
+<p>We divide large cell tables into Parquet files so they can be written and checked one part at a time. As each part is written to a temporary directory on the destination filesystem, we record its row count and column information. Closing the file adds a footer that identifies where each group of rows and its columns can be read. [1]</p>
+<p>Before accepting the part, we ask the filesystem to flush it to storage and read its footer. We compare the row count and column definitions with those recorded during writing. For categorical columns, we also record the dictionaries that link stored codes to their labels. Where a checksum is required, we calculate it once and retain it with the file record.</p>
+<p>The completed Parquet files remain in the temporary directory until the indexes and dataset description are also complete. The writer then moves the directory to its final location, making the dataset available for the coordinator to select.</p>
+<p>For an image, an unwritten region can read back as the array’s fill value, which may also be a genuine pixel intensity. We therefore record each completed shard and pyramid level as it is written. On reopening, we use this inventory to find the regions that still need processing.</p>
+<p><a id="iv-selecting-a-complete-dataset"></a></p>
+<h2 id="select-a-complete-dataset">Select a complete dataset</h2>
+<p>When the writer reports a complete dataset, the coordinator records its location and version in <code>state/head.json</code>. Only one coordinator may update this file at a time. A reader opening a query or calculation uses this record to select its inputs and keeps those versions until it finishes.</p>
+<p>The selected-result record is replaced in one filesystem operation, called an atomic replacement. Another reader therefore sees either the complete old record or the complete new record. Saving also requests the filesystem's supported flush operations. Java reports when the filesystem cannot perform an atomic move; each processing mode uses the save procedure supported by its filesystem. [2]</p>
+<p><a href="../../assets/figures/saving-recovery.svg"><img src="../../assets/figures/saving-recovery.svg" alt="Parquet parts and the complete dataset finish before the selected reference changes; a reader already using V0 retains V0 after V1 is selected." width="800"></a></p>
+<p><em>V0 remains selected until the new Parquet files, indexes and dataset description are complete. After the coordinator selects V1, new calculations read V1. A calculation already using V0 finishes with its original inputs.</em></p>
+<p>Cluster processing programs finish writing their results on the cluster filesystem. The desktop receives their recorded locations and updated progress, then reads the image fields and objects requested during review through the mounted folder.</p>
+<p><a id="v-restart-behaviour"></a></p>
+<h2 id="recover-after-interruption">Recover after interruption</h2>
+<p>On reopening the analysis, select the stopped step in Run. If the worker reported a failure, <strong>Retry step…</strong> can start a new attempt. If processing ended before the worker reported an outcome, some Python calculations can resume from the inputs and review decisions already saved. The files completed before the interruption determine which work can be reused.</p>
+<ul>
+<li><strong>Cell tables.</strong> If writing stopped before the dataset and indexes were complete, the next attempt rebuilds that dataset. A closed Parquet part alone cannot be selected. An abrupt stop can leave temporary files on disk.</li>
+<li><strong>Image arrays.</strong> Processing reads the record of completed shards and resumes the unfinished ones. The previous selected image remains available until the replacement is complete.</li>
+<li><strong>Completed datasets.</strong> If the files reached their final location before the coordinator recorded them, the coordinator checks their inputs and required reviews before selecting them. If selection had already finished, the saved record identifies the new result.</li>
+<li><strong>Annotations.</strong> Reopen the saved QuPath draft through the review that requested it. Re-enter any form choices that had not been submitted when the desktop closed.</li>
+</ul>
+<p>If an external input changed, restore the expected file or select its replacement through the relevant revision action. For an uncertain cluster submission, reconnect first. We check the saved job record before submitting again. Run identifies the expected location of any remote input it cannot find.</p>
+<h3 id="completing-a-native-project-stage">Completing a native project stage</h3>
+<p>When a stage changes a QuPath image, QuPath first saves its state in <code>data.qpdata</code>. The Groovy result writer reads this file once to calculate its SHA-256 checksum. It returns the checksum, image entry, request, prepared run and process-launch IDs in a record called <code>saved_project_state</code>. It then flushes the result file and replaces its destination atomically.</p>
+<p>If processing was interrupted after QuPath saved the image, the coordinator uses these records to decide whether it can finish the original request. It first verifies that the process exited successfully, finished cleaning up and released the project for exclusive access. It then compares the saved image’s checksum with the one QuPath returned for the pending request and checks the corresponding project and workflow revisions. This also lets it recognize a change already saved during an earlier recovery attempt.</p>
+<p>If the records agree, we reuse the saved image and perform the stage’s usual result and review checks. A different image state or later project revision needs review before another write.</p>
+<p><a href="../../assets/figures/native-completion.svg"><img src="../../assets/figures/native-completion.svg" alt="Saved tissue annotations produce a checksum embedded in the native result; continued or recovered Python control compares the current saved bytes before scientific validation and commit." width="520"></a></p>
+<p><em>After saving the tissue annotations, QuPath records the image entry (E), request (R), prepared run (D) and launch (L) with the checksums of the saved image state (S) and tissue result manifest (M). Python uses the same records to check the saved result when QuPath finishes normally or when an interrupted analysis reopens.</em></p>
+<h3 id="offered-recovery-actions">Offered recovery actions</h3>
+<p>For a task that writes to QuPath, a retry requires confirmation that the earlier process stopped and its saved output can be identified. Until then, a second write could overwrite the result of the first attempt.</p>
+<p>If the first segmentation attempt on this computer is interrupted and its saved state permits recovery, Run offers <strong>Restore accepted regions</strong>. This restores the accepted tissue, analysis-area and primary-classification regions so you can revise the segmentation settings and run it again. Before restoring them, we verify that the recorded processes have stopped and the accepted region files are available and unchanged. The interrupted project files are retained with a separate record of the restoration.</p>
+<p>Use <a href="index.html#change-a-completed-or-stopped-step">Run's continuation and revision procedures</a> for the displayed controls. <a href="../../troubleshooting.html#a-stopped-step-has-no-retry-action">Troubleshooting</a> matches recorded failures to their correction and retry actions. For a task waiting for RAM, follow <a href="../setup/computing.html#memory-available-for-processing">Computing</a> to make enough memory available, then continue the saved analysis.</p>
+<h3 id="replacing-results-after-a-revised-decision">Replacing results after a revised decision</h3>
+<p>The revision preview identifies which completed tasks depend on the changed decision. When you apply it, we check that the settings and analysis version still match the preview. Independent tasks keep their accepted results.</p>
+<p>For each affected image, the project stops displaying superseded generated regions, cells and phenotypes as current results. Manual reference annotations, including drawings nested within a generated region, are preserved. A revised segmentation receives a new cell-population ID so measurements from the earlier segmentation remain linked to their original cells.</p>
+<p>If you revise measurements using the existing segmentation, we read the accepted cells together with their saved edits. Deleted cells are excluded and measurements affected by revised outlines are recalculated. The new result identifies the segmentation and edits used.</p>
+<p>A stopped measurement task in local or cluster-desktop mode can accept removals of existing cells through a separate QuPath draft. Follow <a href="../cell-measurements/index.html#if-a-measurement-cannot-be-calculated">the measurement correction procedure</a> to inspect the reported cell and return its removal. Applying that revision changes the cells included in subsequent calculations.</p>
+<p>Replacement processing starts once every affected image has saved its change. If one save fails, Run identifies the image and the changes already saved for the others. If the saved state is uncertain, inspect the reported files before allowing a further write.</p>
+<p><a id="vi-where-checks-occur"></a> <a id="where-checks-occur"></a> <a href="index.html#change-a-completed-or-stopped-step">Changing a completed or stopped step</a> describes the revision controls. <a href="execution.html#accept-reviews-and-completed-results">Execution and scheduling</a> explains how we check a returned result against its request.</p>
+<p><a id="vii-retention-and-cleanup"></a></p>
+<h2 id="retain-results-and-clean-up-temporary-files">Retain results and clean up temporary files</h2>
+<p>Completed datasets and historical results remain on disk when a revision changes the selected references. The current application does not provide general removal of unreferenced results or dataset compaction. Preserve those files and annotation drafts when diagnosing an interruption or revising settings.</p>
+<p>An abrupt termination can leave temporary output that was never selected. Retain these files while resolving the interruption, since completed image shards may still be needed to continue. Display caches can release image and cell data from memory without changing saved annotations or cell edits.</p>
+<p>Results may refer directly to the accepted datasets rather than duplicate their files. The <a href="../results/index.html">results guide</a> explains which files must remain available to reopen a saved result and which exports create separate copies.</p>
+<p><strong>References:</strong> <a href="https://parquet.apache.org/docs/file-format/">1. Parquet file format</a>; <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html">2. Java Files move semantics</a>.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="index.html">Run and review</a>.</p>
+</main>
+</body>
+</html>

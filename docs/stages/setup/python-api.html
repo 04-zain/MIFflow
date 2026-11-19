@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Python interfaces · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/python-api.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="python-interfaces">Python interfaces</h1>
+<p><a href="../../../index.html#building-and-integration">Building and integration</a> · <a href="source-layout.html">Source organization</a></p>
+<p><a id="reference-python-api"></a></p>
+<p><a id="reference-python-api--python-interfaces"></a></p>
+<p>Use the image and calculation interfaces below when working with pixels or cell measurements in Python. To run a stage in an existing analysis or submit a review, use the batch service. It checks the saved analysis state and records the result.</p>
+<p><a id="reference-python-api--i-metadata-review-and-source-reading"></a></p>
+<h2 id="metadata-review-and-source-reading">Metadata review and source reading</h2>
+<h3 id="inspect-and-select-a-series">Inspect and select a series</h3>
+<p>Use <code>io.inspect_source_series_inventory()</code> to list the image series in a source file. Select the series containing the tissue to analyse. The entry lists its dimensions and stored resolutions. Keep the original series index and OME identifiers with your selection so subsequent reads use the same image.</p>
+<p>Call <code>io.canonical_ingestion.selected_canonical_ome()</code> to construct the OME description of the selected series. Channel review adds the component and marker assignments and any imaging settings supplied by the researcher. The prepared OME-Zarr image is written later, when regional processing reads the original pixels and applies the reviewed corrections.</p>
+<h3 id="open-the-selected-pixels">Open the selected pixels</h3>
+<p>Open the reviewed series with <code>io.reviewed_source.open_reviewed_source()</code> inside a <code>with</code> block. Within that reader the selected series is numbered zero, regardless of its index in the original file. Request the region in the reviewed image’s coordinates to obtain one array indexed by band, row and column. Leaving the block closes the reader. <a href="../images/processing.html#reference-image-processing">Reading and processing image regions</a></p>
+<p><a id="reference-python-api--ii-spectral-calculations"></a></p>
+<h2 id="spectral-calculations">Spectral calculations</h2>
+<p><a id="prepare-acquisition-corrections-and-the-spectral-solver"></a></p>
+<h3 id="prepare-intensity-corrections-and-the-spectral-solver">Prepare intensity corrections and the spectral solver</h3>
+<p><code>preprocessing.unmixing.normalization.CanonicalOffsetExposureNormalization.build_factors()</code> uses the reviewed exposure, detector and signal-range metadata to prepare per-band divisors, any applied offsets and response multipliers. <code>normalize_region()</code> applies each band's factors across its rows and columns, returning an independent float32 array of the same shape. The accepted full, exposure-only or as-stored correction determines which factors are applied; <a href="../unmixing/index.html#acquisition-correction">intensity correction</a> explains those choices. The source pixels and reusable factors remain unchanged.</p>
+<p>Arrange the reference spectra with one row per measured band and one column per component. For each image block, supply the measured intensities in the same band order, with one column per pixel. The solver estimates a coefficient for each component at each pixel.</p>
+<ul>
+<li><code>preprocessing.unmixing.solvers.ClippedLeastSquaresSolver</code> calculates the pseudoinverse of the reference matrix once, applies it to each image block and sets negative coefficients to zero.</li>
+<li><code>BatchedNnlsSolver</code> requires nonnegative coefficients during fitting and reports whether the fit met the selected convergence criterion.</li>
+</ul>
+<p>Both return the component-by-pixel coefficients and diagnostics for the calculation.</p>
+<p><code>tensor_solver.create_spectral_solver()</code> selects the implementation supporting the requested estimator, calculation precision and processor.</p>
+<h3 id="process-a-prepared-source-or-run-the-complete-image-operation">Process a prepared source or run the complete image operation</h3>
+<p><code>preprocessing.unmixing.engine.process_regions_to_zarr()</code> accepts an open regional source, validated image settings, a spectral basis, normalization factors, a prepared solver and the destination generation. It corrects and fits image regions, multiplies the fitted coefficients by the accepted component reporting factors, and writes the resulting intensities and pyramid levels. The returned <code>ProcessingSummary</code> records the staged array location, completed region and level counts, reporting weights and solver diagnostics. The enclosing caller retains responsibility for closing the source reader.</p>
+<p><code>preprocessing.unmixing.workflow.run_unmixing()</code> opens the selected image using its saved inspection and reviewed metadata, applies the accepted intensity correction and spectral reference, and processes image regions into the completed component image. The workflow retains the convergence report with the image operation. <a href="../unmixing/index.html#nnls-convergence">NNLS convergence</a> explains the criterion and review action for regions that do not converge.</p>
+<p>The equations, solver paths and parameter meanings are in <a href="../unmixing/index.html#reference-unmixing">Spectral unmixing</a>.</p>
+<p><a id="reference-python-api--iii-marker-thresholds-and-rules"></a></p>
+<h2 id="marker-thresholds-and-rules">Marker thresholds and rules</h2>
+<p>Pass aligned cell measurements, cell IDs, section and compartment labels to <code>cell_analysis.thresholds.build_threshold_review()</code>. Supply a <code>ThresholdFitPolicy</code> to set the fitting parameters. A cell with a nonfinite measurement has an unknown result for that marker and is excluded from the fit and histogram.</p>
+<p>By default the review compares manual, triangle, two-component Gaussian and two-component gamma thresholds. It returns the candidates, histograms, counts of cells with finite measurements, IDs of the cells sampled for fitting and IDs of example cells. Use <code>methods</code> to select particular methods. An empty sequence opens manual and distribution review without fitting a mixture.</p>
+<p><code>accept_threshold()</code> records the selected threshold and any replacement thresholds for individual tissue sections. Pass this choice to <code>cell_analysis.marker_rules.apply_threshold_rules()</code> with the same measurement definition used for fitting. The function compares each cell’s measurement with the threshold in the selected direction and returns its marker state.</p>
+<p>Pass the marker states and <a href="../phenotyping/marker-rules.html#write-phenotype-combinations">ordered phenotype rules</a> to <code>apply_ordered_composites()</code>. Each cell receives the phenotype of the first rule it satisfies, or the residual phenotype if it matches none. Keep the measurements and IDs in the same cell order so each assignment can be linked back to its cell.</p>
+<p><a id="reference-python-api--iv-kronos-and-learned-graph-features"></a></p>
+<h2 id="kronos-and-learned-graph-features">KRONOS and learned graph features</h2>
+<p><code>compartment_analysis.kronos_panel.KronosPanel</code> records the marker order and intensity preparation used to turn an image patch into encoder input. <code>kronos_encoder.inspect_kronos_package()</code> checks the selected pretrained package, and <code>kronos_native.export_native_encoder()</code> prepares its native deployment with the accepted panel. Java's <a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/inference/FrozenEncoder.java">FrozenEncoder</a> applies the prepared model to patches of the saved size (32, 64, 128 or 256 pixels per side), returning a 768-value feature vector for each patch.</p>
+<p><code>compartment_analysis.patch_graph.PatchGraph</code> connects patches immediately left, right, above and below when their image, accepted region, tissue component and training/evaluation identifiers agree. <code>graph_training.train_mean_self()</code> uses the patch vectors, permitted neighbours and reference labels to fit a layer that combines each patch's own vector with the mean of its neighbours. A temporary linear classification layer supplies the class scores used in the cross-entropy training loss. <code>graph_features.FrozenMeanSelf</code> retains the fitted self and neighbour matrices and bias for later feature calculation.</p>
+<p>In QuPath, <code>MifKronosPatchProvider</code> gathers those encoder vectors and <a href="https://github.com/04-zain/MIFflow/blob/main/src/java/org/mif/inference/GraphHeadKernel.java">GraphHeadKernel.features()</a> applies the saved graph parameters to produce spatial-feature rows. The native RF/SVM fitter applies the selected normalization to these rows and fits the tissue classifier; prediction uses the same saved graph, feature order and fitted normalization.</p>
+<p>The final native fitter and patch-level prediction adapter are registered Groovy scripts under <code>qupath/scripts/compartment_analysis/</code>. Their feature normalization, class mappings and saved model fields are part of the complete classifier. See <a href="../tissue-classification/kronos.html#reference-kronos-classification">KRONOS classification</a> and <a href="../tissue-classification/index.html#reference-pixel-classification">Pixel classification</a> for the full model construction.</p>
+<p><a id="reference-python-api--v-supervised-cells-and-classifier-evaluation"></a></p>
+<h2 id="supervised-cells-and-classifier-evaluation">Supervised cells and classifier evaluation</h2>
+<p>When you add or move a reference point in QuPath, the <a href="../phenotyping/supervised.html#match-point-references-to-cells">reference importer</a> matches it to an eligible cell and saves that cell’s ID with the point. In Python, <code>cell_analysis.supervised.map_point_evidence()</code> uses the saved ID to retrieve the cell. The result includes both positions and the distance between them, so you can inspect where the reference was placed relative to the cell.</p>
+<p>Before evaluation, <code>validate_training_holdout()</code> checks that training and held-out references share neither cell IDs nor reference-region IDs. During prediction, the native stage checks the model against the selected cell population, measurements, reference classes and training or held-out roles. It returns predictions for review. To prepare the review metadata, Python requests the cell IDs and analysis-region IDs.</p>
+<p><code>cell_analysis.supervised_qc.evaluate_predictions()</code> matches reference and predicted labels for the complete declared held-out cell set. It returns the confusion matrix, full reference-class support, precision, recall, F1, accuracy and rejected-cell IDs. Rejected cells remain in recall and accuracy denominators.</p>
+<p>The supervised stage reads cells in explicit batches and saves prediction columns in the same row order. Training folds, held-out evaluation and model application all pass their selected batches directly to the classifier. The generic QuPath overloads that expect all cells in the project hierarchy report an explicit-batch requirement, because automatic cells are read from their Parquet dataset.</p>
+<p><code>compartment_analysis.classifier_qc.reduce_classifier_confusion()</code> combines complete reference/prediction observations into pooled, image and subject matrices. <code>classifier_metrics_from_confusion()</code> calculates their scores using the same declared class order. <code>evaluation_plots.render_classifier_confusion_figure()</code> encodes the saved region counts and within-reference-class percentages as PNG, PDF or SVG bytes for display/export.</p>
+<p><a href="../tissue-classification/index.html#reference-training-and-evaluation">Training and evaluation</a> gives the matching equations, reference checks, confidence rule and the distinct subject-weighted parameter-selection calculation.</p>
+<p><a id="reference-python-api--vi-analysis-and-batch-operations"></a></p>
+<h2 id="analysis-and-batch-operations">Analysis and batch operations</h2>
+<p><code>tissue_detection</code> implements detector setup, native-resolution selection and accepted tissue regions. <code>analysis_domain</code> handles selected analysis regions. <code>registration</code> handles paired-image transformations and review. <code>cell_analysis</code> provides measured-cell phenotyping and clustering. <code>roi_validation</code> evaluates candidate structures against the selected geometry, cell-count, phenotype and manual-review rules. <code>datasets</code> reads and writes the spatial cell tables and selected result components; <code>cell_analysis.spatial_handoff</code> records those selections with the accepted analysis regions and structure memberships.</p>
+<h3 id="open-a-selected-cell-dataset">Open a selected cell dataset</h3>
+<p>Use <code>datasets.collection.CellDatasetCollection.from_selection()</code> to open the segmentation datasets with their selected measurements, classifications and outline edits. We check the metadata and summary counts, then load the row-group layout and category dictionaries within the reader’s memory allowance.</p>
+<p>If the selection includes outline edits, we read them in batches and check that their cell IDs occur in the segmentation dataset. We build a temporary index on disk so later reads can retrieve the edits for the cells in each batch.</p>
+<p>Use <code>iter_batches(columns=...)</code> to process selected measurements a batch at a time. For each batch, the reader loads the required columns from Parquet into memory. It uses the cell IDs to join accepted results and apply outline edits, then yields a PyArrow <code>RecordBatch</code> containing the columns you requested.</p>
+<p>To include only cells from particular analysis regions, call <code>select_domains(domain_ids)</code> first. The selection keeps the same source datasets. During reading, we also load <code>analysis_domain_id</code> to identify the cells that belong to those regions.</p>
+<p>If you already have the cell IDs, use <code>lookup_ids(ids, columns=...)</code>. The reader uses its ID indexes to locate the relevant row groups and returns the requested columns in batches. The list of IDs in one request must fit the reader’s batch allowance.</p>
+<p>If you have an image field instead, use <code>query(bounds, columns=..., predicate="intersects")</code> with <code>(min_x, min_y, max_x, max_y)</code> in full-resolution pixels. The reader first finds row groups that overlap the rectangle. It then reads the fields required to test the individual cells in those groups. With the default predicate, a cell qualifies if any part of its outline intersects the field. Use <code>"centroid"</code> to include only cells whose centre lies in the field, or <code>"bounds"</code> to test each cell’s bounding rectangle. In all three cases, the returned Arrow batches contain the columns you requested for the matching cells.</p>
+<h3 id="publish-and-reopen-a-spatial-handoff">Publish and reopen a spatial handoff</h3>
+<p><code>cell_analysis.build_spatial_handoff()</code> combines this selection with tissue sections, analysis regions, phenotype results and final structure-review decisions. It uses saved region and tissue counts without constructing a Python object for every cell.</p>
+<p><code>orchestration.exports.write_spatial_handoff()</code> saves a new export version containing the selected dataset references and identity summaries. It then updates the file that selects this export version. <code>load_spatial_handoff()</code> opens the selected metadata and collection, including any saved-edit index described above. Base measurements and outlines are read when a calculation requests them. <code>handoff.iter_cell_records()</code> reads complete cell records, including geometry, and checks their fields and associations as they are requested. Close <code>handoff.cell_dataset</code> when its readers are no longer needed.</p>
+<p>For a saved export, copy the handoff path from Results and use it when calling <code>load_spatial_handoff</code>. Request the fields needed by the calculation. Measurement names retain their exact native feature names, as in the example below.</p>
+<pre class="python"><code>from mif_pipeline.orchestration.exports import load_spatial_handoff
+
+handoff = load_spatial_handoff(&quot;/path/from/Results/spatial-cell-handoff.json&quot;)
+try:
+    for batch in handoff.cell_dataset.iter_batches(
+        columns=(&quot;cell_id&quot;, &quot;x_um&quot;, &quot;y_um&quot;, &quot;measurement:Cell: PDL1: Mean&quot;)
+    ):
+        calculate_from_selected_columns(batch)
+finally:
+    handoff.cell_dataset.close()</code></pre>
+<p><em>Replace the handoff path and measurement name with those from your result. Inside the loop, replace <code>calculate_from_selected_columns(batch)</code> with the calculation to perform on that batch of cells.</em></p>
+<p>The example reads cell IDs, calibrated centres and mean PDL1 intensities into memory for one batch at a time. If you request a categorical field such as a phenotype, the batch stores its values as Int32 codes. Look up a non-null code in <code>handoff.cell_dataset.dictionaries[field].labels[code]</code> to obtain its label. If you need complete cell records, <code>handoff.iter_cell_records()</code> returns them with the labels decoded.</p>
+<p>When transferring a handoff to another computer, include the base dataset, selected result tables and edits. The selection files identify each dataset by its absolute path, so it must be accessible at that path on the destination computer.</p>
+<h3 id="open-an-analysis-service-and-submit-a-review">Open an analysis service and submit a review</h3>
+<p><code>orchestration.batch_service.open_batch_service_provider()</code> is a context manager for one analysis workspace. Resolve that workspace with <code>BatchWorkspaceLayout.resolve(output_root, batch_id)</code>, then use <code>provider.for_workspace(output_root, batch_id)</code> to reopen it or <code>provider.for_manifest(manifest_path)</code> to open its manifest. The lookup must match the provider's workspace. Leaving the <code>with</code> block releases its readers, native processes and processing sessions.</p>
+<p>Read <code>service.status(batch_id).state_head_sha256</code> to identify the current version of the analysis. Then call <code>service.list_interactions(batch_id, BatchInteractionQuery(offset=0, limit=50))</code> for the waiting reviews and their targets. If the response supplies a <code>next_offset</code>, use it to read the next page. After the last page, check the analysis version again. If it changed during the listing, repeat the listing so the choices you present belong to the same version. The <a href="command-line.html#reviews-and-retry">CLI review listing and response envelope</a> expose the same identifiers and selection modes.</p>
+<p>The helper below submits a reviewed response document with the six fields defined in the CLI guide. The caller supplies the existing output root, analysis ID, selected QuPath executable and completed response object. Optional runtime arguments, such as the selected QuPath launch binding or native-library root, are passed through to the provider.</p>
+<pre class="python"><code>from pathlib import Path
+
+from mif_pipeline.orchestration.batch_interactions import (
+    BatchInteractionResponseRequest,
+    BatchTargetSelection,
+)
+from mif_pipeline.orchestration.batch_service import open_batch_service_provider
+from mif_pipeline.orchestration.batch_state import BatchWorkspaceLayout
+
+
+def submit_review(output_root, batch_id, qupath_executable, document, **runtime_options):
+    output_root = Path(output_root)
+    request = BatchInteractionResponseRequest(
+        group_id=document[&quot;group_id&quot;],
+        group_sha256=document[&quot;group_sha256&quot;],
+        selection=BatchTargetSelection(**document[&quot;selection&quot;]),
+        action=document[&quot;action&quot;],
+        response=document[&quot;response&quot;],
+        expected_state_head_sha256=document[&quot;expected_state_head_sha256&quot;],
+    )
+    layout = BatchWorkspaceLayout.resolve(output_root, batch_id)
+    with open_batch_service_provider(
+        workspace_layout=layout,
+        qupath_executable=Path(qupath_executable),
+        **runtime_options,
+    ) as provider:
+        service = provider.for_workspace(output_root, batch_id)
+        return service.apply_interaction_response(batch_id, request)</code></pre>
+<p>Inspect the returned <code>applications</code>, each of which reports acceptance or rejection for its target. The service checks the current state, group identity, offered action and stage-specific answers before recording an accepted decision. A stale-state exception requires listing the review again.</p>
+<p>After the response is accepted, call <code>service.resume(batch_id)</code> within an open provider when ready to continue processing. <a href="https://github.com/04-zain/MIFflow/blob/main/src/python/mif_pipeline/orchestration/batch_service.py">The service implementation</a> defines the available runtime arguments and methods. <a href="../run/execution.html#reference-batch-execution">Batch execution</a> describes shared classifier fits, sample progression and saved pause/resume behavior.</p>
+<p><a id="reference-python-api--vii-defaults-program-compatibility-and-native-scripts"></a></p>
+<h2 id="defaults-program-compatibility-and-native-scripts">Defaults, program compatibility and native scripts</h2>
+<p><code>_defaults.default_section()</code> reads a named group of starting values from its module-specific JSON file. For example, <code>classifier.svm</code> selects the SVM section of <code>config/defaults/classifier.json</code>. New settings are checked by their corresponding settings classes and later saved explicitly with the analysis.</p>
+<p><code>_software.read_software_description()</code> reads the selected installed program definition under <code>config/software</code> and returns an independent copy of its version, download and required-file fields. Program-specific setup operations validate these fields and use them when inspecting or installing the component. <a href="configuration.html#reference-configuration">Analysis and software settings</a> identifies the installed-program descriptions and their setup operations.</p>
+<p><code>_release.py</code> contains the numerical release and message-format identifiers. Program initialization compares these values and the required installed file locations before calculations begin.</p>
+<p><code>qupath_runtime</code> resolves the selected QuPath installation, stages registered scripts, supplies exact project/image requests and reads their completed results. Use those interfaces or the batch service when adding an operation that changes the project, so the saved project changes and accepted analysis result remain associated with the same request.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="source-layout.html">Source organization</a>.</p>
+</main>
+</body>
+</html>

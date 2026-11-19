@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Multichannel image storage and regional access · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/images/storage.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="multichannel-image-storage-and-regional-access">Multichannel image storage and regional access</h1>
+<p><a href="index.html">Images and channels</a> · <a href="processing.html">Preparing image pixels</a></p>
+<p>Each resolution of the prepared OME-Zarr image has its own array with dimensions in channel, row and column order (<code>c, y, x</code>). Within that array, a <strong>chunk</strong> holds all channels for a 256 × 256-pixel area. We compress each chunk independently and store groups of sixteen in a <strong>shard</strong> covering 1024 × 1024 pixels.</p>
+<p>To open a field, the reader selects the array for the requested resolution and uses the index in each intersecting shard to locate its chunks. It can then read and decompress just the chunks that contain pixels in the field.</p>
+<h2 id="i-array-shape-metadata-and-encoding">i) Array shape, metadata and encoding</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Image dimensions</td>
+<td><code>(C, H_l, W_l)</code> at level <code>l</code>; the supported analysis image is a selected two-dimensional plane</td>
+</tr>
+<tr class="even">
+<td>Axis order</td>
+<td>Channel, Y, X; X is contiguous within each channel plane</td>
+</tr>
+<tr class="odd">
+<td>Independent chunk</td>
+<td><code>(C, 256, 256)</code></td>
+</tr>
+<tr class="even">
+<td>Outer shard</td>
+<td><code>(C, 1024, 1024)</code></td>
+</tr>
+<tr class="odd">
+<td>Pixel type</td>
+<td>The approved output dtype, recorded independently of the solver's calculation precision</td>
+</tr>
+<tr class="even">
+<td>Inner encoding</td>
+<td>Little-endian typed values; lossless Blosc/Zstd level 1 with byte shuffle</td>
+</tr>
+<tr class="odd">
+<td>Shard index</td>
+<td>Standard end-of-shard offset/length entries and CRC32C index checksum</td>
+</tr>
+<tr class="even">
+<td>Outer encoding</td>
+<td>Indexed sharding; each inner chunk carries its own lossless encoding</td>
+</tr>
+<tr class="odd">
+<td>Image metadata</td>
+<td>OME-NGFF 0.5 on Zarr v3</td>
+</tr>
+</tbody>
+</table></div>
+<p>In <code>zarr.json</code>, the regular array grid gives the shard dimensions. The <code>sharding_indexed</code> codec gives the dimensions of the chunks inside each shard. The index at the end of each shard records where each compressed chunk begins and how many bytes to read. [1]</p>
+<p>At the image root, the <code>ome</code> attributes in <code>zarr.json</code> list the pyramid levels and identify the axes. Each level records its array dimensions, pixel type and the physical size of a pixel along X and Y in micrometres. The reader uses these scales to locate the same tissue field at different resolutions. The array dimension names follow the axis order declared for the image. [2]</p>
+<p>The channel metadata identifies the fluorophore, its reviewed marker assignment and any role such as nuclear stain or autofluorescence. For an unmixed image, the processing record also identifies the intensity corrections and spectral library used.</p>
+<p>The image directory contains one numbered folder per resolution level.</p>
+<pre class="text"><code>images/&lt;image-version&gt;.ome.zarr/
+    zarr.json                 Image axes, pyramid paths and channel metadata
+    0/
+        zarr.json             Full-resolution array, codec and grid definition
+        c/0/&lt;shard-y&gt;/&lt;shard-x&gt;
+    1/
+        zarr.json             Next resolution level
+        c/0/&lt;shard-y&gt;/&lt;shard-x&gt;
+    ...</code></pre>
+<p>In <code>c/0/&lt;shard-y&gt;/&lt;shard-x&gt;</code>, the first index is always zero because each shard holds all channels. At the right and bottom edges, the stored array dimensions determine which pixels belong to the image. Calculations exclude padding beyond those dimensions.</p>
+<h2 id="ii-channel-grouping-and-decoded-data-cost">ii) Channel grouping and decoded-data cost</h2>
+<p>InstanSeg, KRONOS and multichannel measurements often need several intensities at the same tissue position. Grouping the channels in one chunk lets the reader retrieve those values together. A request for a single channel still decodes the whole chunk. If a second request needs another channel in the same field, it can use the pixels already in memory.</p>
+<p>To estimate how much memory the decoded pixels occupy, multiply the number of spatial positions by the channel count <code>C</code> and the number of bytes <code>s</code> per intensity. A chunk covers 256 × 256 positions and a complete shard covers 1024 × 1024, giving</p>
+<p>[ D_{\mathrm{chunk}}=C,256^2s,\qquad D_{\mathrm{shard}}=C,1024^2s. ]</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Channels and type</th>
+<th style="text-align: right;">Decoded chunk</th>
+<th style="text-align: right;">Decoded shard</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8 channels, float32</td>
+<td style="text-align: right;">2 MiB</td>
+<td style="text-align: right;">32 MiB</td>
+</tr>
+<tr class="even">
+<td>16 channels, float32</td>
+<td style="text-align: right;">4 MiB</td>
+<td style="text-align: right;">64 MiB</td>
+</tr>
+<tr class="odd">
+<td>32 channels, float32</td>
+<td style="text-align: right;">8 MiB</td>
+<td style="text-align: right;">128 MiB</td>
+</tr>
+</tbody>
+</table></div>
+<p>The shard column gives the combined size of its sixteen decoded chunks. A field that intersects only two chunks requires just those two to be decoded. Processing also needs memory for the compressed bytes, decompression buffers and any model or solver used on the returned pixels.</p>
+<p>The native reader identifies each cached tile by the completed image directory’s URI, stored level and pixel origin <code>(y,x)</code> at that level. Requests for different channels share the same read-only tile. The image directory remains unchanged after completion. Model feature caches also identify the sampling and normalization settings because those operations change the values supplied to the model.</p>
+<h2 id="iii-mapping-a-request-to-chunks">iii) Mapping a request to chunks</h2>
+<p>An image request specifies a rectangle in the primary image's full-resolution coordinates and the required pixel size. The adapter selects a stored level using its recorded scale, converts the rectangle to that level's coordinates and includes surrounding pixels when interpolation requires them.</p>
+<p>For a half-open rectangle <code>[x0,x1) × [y0,y1)</code> expressed in the chosen level, the contributing horizontal chunk indices are:</p>
+<p>[ k_x=\left\lfloor\frac{x_0}{256}\right\rfloor,\ldots, \left\lceil\frac{x_1}{256}\right\rceil-1. ]</p>
+<p>The vertical indices are calculated identically. Each shard spans four chunks along each axis, so <code>(floor(k_y/4), floor(k_x/4))</code> identifies the containing shard and <code>(k_y mod 4, k_x mod 4)</code> identifies the chunk's row and column within it. The shard index then supplies the byte offset and encoded length needed to read that chunk.</p>
+<p><a href="../../assets/figures/image-access.svg"><img src="../../assets/figures/image-access.svg" alt="Schematic of a spatial image chunk, its shard-index byte range and the same-JVM QuPath reader." width="700"></a></p>
+<p><em>Chunk A covers pixels <code>[512,768) × [256,512)</code> at the selected level. The reader opens shard <code>c/0/0/0</code> and uses its index to find A’s compressed bytes. After decoding them, it can serve another request for the same tile from memory. The first zero in the shard path is the channel index because each shard holds all channels.</em></p>
+<p>For example, a request for <code>[900,1200) × [400,700)</code> touches horizontal chunks 3–4 and vertical chunks 1–2. The reader retrieves four inner chunks from two shards. With eight float32 channels, their decoded buffers total 8 MiB before cropping.</p>
+<p><a id="vi-native-access-and-result-selection"></a> <a id="iv-native-access-and-result-selection"></a></p>
+<h2 id="iv-open-the-saved-image-and-reuse-regional-reads">iv) Open the saved image and reuse regional reads</h2>
+<p>The image becomes selectable after its shards and resolution levels have been written and its processing checks have passed. QuPath's ImageServer adapter reads the channel order, pixel data type and physical scales from that completed metadata, then uses the pinned Java Zarr reader in the same JVM to retrieve pixels.</p>
+<p>QuPath assembles the requested field from the chunks it intersects. If a chunk is already in memory, the reader can use it immediately and share it with concurrent requests. Otherwise, it looks up the chunk in the shard index, reads its compressed pixels and decompresses them before assembling the field for display or calculation. The reader limits the memory retained for both decoded chunks and shard indexes.</p>
+<p>Python also reads dimensions, channel descriptions and physical pixel sizes from the saved metadata. It opens a pyramid level's Zarr array when a calculation first requests pixels at that level, then reuses the open array. Results can list reconstruction figures using the metadata alone.</p>
+<p><strong>References:</strong> <a href="https://zarr-specs.readthedocs.io/en/latest/v3/codecs/sharding-indexed/index.html">1. Indexed sharding</a>; <a href="https://ngff.openmicroscopy.org/0.5/">2. OME-NGFF 0.5</a>; <a href="https://zarr.readthedocs.io/en/stable/user-guide/performance/">3. Zarr performance guidance</a>.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="index.html">Images and channels</a>.</p>
+</main>
+</body>
+</html>

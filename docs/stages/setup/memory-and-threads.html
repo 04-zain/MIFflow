@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Memory during processing · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/setup/memory-and-threads.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<p><a id="memory-allocation-queues-and-native-lifetimes"></a></p>
+<h1 id="memory-during-processing">Memory during processing</h1>
+<p><a href="computing.html">Computing settings</a> · <a href="../images/processing.html#select-the-number-of-simultaneous-regions">Image-processing allocation</a></p>
+<p>Before starting a task, we estimate how much RAM its calculation will need. We check the available memory and the reservations held by other running tasks. On a cluster, we also check how much RAM the scheduler assigned to the job. We reserve the task’s allowance before loading its inputs and release it when the task ends.</p>
+<p>For a QuPath task, we use this allowance to set the Java heap and cache limits. The task also needs memory for native arrays and any models it loads.</p>
+<h2 id="i-host-and-device-allowances">i) Host and device allowances</h2>
+<p>For local processing, we use 80% of the RAM currently available to the operating system. The remaining 20% leaves room for other processes on the computer. A cluster job also limits the coordinator and its processing tasks together to 80% of the actual job-memory allocation. These allowances are recalculated before starting work.</p>
+<p>Available RAM can include memory that another task has reserved but has yet to use. Before starting a new task, we subtract the unused part of the active reservations. This allows a running task to load a model or allocate a larger array later in its calculation.</p>
+<p>Let <code>R</code> be the RAM currently occupied by the coordinator and its child processes, <code>B</code> the amount they occupied when we started tracking reservations, and <code>L</code> the sum of the active reservations. The amount reserved but not yet resident is</p>
+<p>[ F=\max(0,B+L-R). ]</p>
+<p>A task with estimated memory requirement <code>D</code> can start only when</p>
+<p>[ F+D\leq0.8A_{\mathrm{OS}}, ]</p>
+<p>where <code>A_OS</code> is the RAM currently available to the operating system. As a running task loads data, its occupied RAM increases and the outstanding part of its reservation decreases.</p>
+<p>For a cluster job with allocated memory <code>J</code>, we also require</p>
+<p>[ R+F+D\leq0.8J. ]</p>
+<p>This second check includes the memory already used by the coordinator and its child processes, because they share the job allocation. Worker, CPU, queue and device capacities must also permit the task.</p>
+<p>A GPU task uses host RAM to read the image, load the model and transfer the inputs. It also needs memory on the GPU for model weights and the tiles being processed. The scheduler permits one GPU model task at a time. Before segmentation, we check that the selected device can run a calculation. The model and tile size determine how much device memory the full prediction requires.</p>
+<p><a href="../../assets/figures/memory-threads.svg"><img src="../../assets/figures/memory-threads.svg" alt="Schematic of memory checks, cache shares, queued work and native resource lifetimes." width="630"></a></p>
+<p><em>Schematic of memory reservations, cache shares and native resource lifetimes. The figure labels currently available host RAM as <code>A</code> (<code>A_OS</code> in the equations above). Moving <code>Δ</code> bytes from a reservation into resident memory increases <code>R</code> and decreases <code>F</code> together. The lower bands show model parameters retained across predictions and temporary arrays released after each call. <a href="#iii-cache-allocation-and-keys">Cache allocation</a> explains the shares of an operation’s memory allowance.</em></p>
+<h2 id="ii-per-operation-memory-estimates">ii) Per-operation memory estimates</h2>
+<p>For image processing, we estimate the memory needed to hold the inputs, outputs and temporary arrays used for fitting or prediction. The estimate also includes compressed data and the buffers used to encode or decode it. For cell tables, the estimate depends on which Parquet columns the calculation reads. It includes the outlines needed to test region membership, the arrays used to match cells by ID and the feature matrices needed for fitting.</p>
+<p>For a block of <code>P</code> pixels with <code>B</code> measured bands, unmixing holds <code>B × P</code> corrected intensities and estimates <code>C × P</code> output intensities for <code>C</code> components. To estimate the memory for these arrays, multiply each value count by the number of bytes per value and add the arrays needed at the same time. The table lists the additional buffers used during fitting and the main allocations for other operations.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Main allocation terms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unmixing</td>
+<td>Corrected <code>B × P</code> spectra, <code>C × P</code> outputs, solver microbatch workspace and the array holding the completed shard</td>
+</tr>
+<tr class="even">
+<td>Chunk decoding</td>
+<td>Encoded ranges, decoded <code>C × 256 × 256</code> values and codec workspace</td>
+</tr>
+<tr class="odd">
+<td>Model inference</td>
+<td>Loaded parameters, prepared batch, device activations and required outputs</td>
+</tr>
+<tr class="even">
+<td>Nimbus</td>
+<td>The Python model and tile arrays together with the separate QuPath image and cell-mask reader; both processes share one host-memory allowance</td>
+</tr>
+<tr class="odd">
+<td>Cell query</td>
+<td>Selected row-group columns, decoded candidate geometry and returned batch</td>
+</tr>
+<tr class="even">
+<td>Measurement</td>
+<td>Required intensity blocks, raster masks and accumulators for the selected intensity measures</td>
+</tr>
+<tr class="odd">
+<td>Unsupervised phenotyping</td>
+<td>Selected feature matrix and the chosen method’s neighbour, graph or map-fitting workspaces</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>For a float64 fitting matrix, two million cells with 32 selected features require approximately 488 MiB before the method's other allocations.</em></p>
+<p>The <a href="../images/processing.html#reference-image-processing--v-select-the-number-of-simultaneous-regions">unmixing reference</a> explains the solver, output-shard and encoding buffers included in its estimate.</p>
+<p>Unsupervised phenotyping uses one float64 fitting matrix, with cells in rows and selected features in columns. The operation reserves space for that matrix, cell identities, the selected method’s fitting workspace and output. <a href="../phenotyping/unsupervised.html#phenograph">PhenoGraph</a> constructs neighbour arrays and a graph over the cells; <a href="../phenotyping/unsupervised.html#flowsom">FlowSOM</a> fits map profiles and assigns cells using distances to those profiles. Batched selected-column reads limit the temporary preparation buffers. The complete fitting matrix remains in memory during either method’s fit.</p>
+<h2 id="iii-cache-allocation-and-keys">iii) Cache allocation and keys</h2>
+<p>Within a native operation, we reserve at most 20% of its memory allowance for reusable caches. We divide that cache cap into 50% for decoded image blocks, 36% for saved object/table data, 4% for frozen features and 10% for metadata/indexes. Caches grow as requested data are retained, within these limits; their memory remains part of the operation's total allowance.</p>
+<p>Each cached entry is associated with the inputs and request that produced it. For example, an image-block key identifies the image version, resolution level and chunk coordinates, so returning to that block can reuse its decoded pixels. Model features additionally depend on the encoder and input preparation used to calculate them.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Cached data</th>
+<th>Key elements</th>
+<th>Release condition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Decoded image chunk</td>
+<td>Image version, level and spatial chunk coordinates</td>
+<td>Least-recently-used cache references are removed at the process or image limit</td>
+</tr>
+<tr class="even">
+<td>Shard metadata/index</td>
+<td>Image version and shard location</td>
+<td>Unused metadata exceeds its allowance or the image closes</td>
+</tr>
+<tr class="odd">
+<td>Cell row-group data</td>
+<td>Accepted cell set, row-group layout, measurement or label version, and group number</td>
+<td>Saved group data exceed the object/table allowance</td>
+</tr>
+<tr class="even">
+<td>Prepared model input</td>
+<td>Image selection, patch, scale, panel and normalization</td>
+<td>The session needs space and no active calculation uses the input</td>
+</tr>
+<tr class="odd">
+<td>Frozen embedding</td>
+<td>Encoder/preparation identity and patch key</td>
+<td>In-memory allowance exceeded; a saved feature dataset remains readable</td>
+</tr>
+<tr class="even">
+<td>Display classes</td>
+<td>Dictionary version and category code</td>
+<td>Release after its dictionary or view closes</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>An operation with a 4 GiB allowance has a combined cache cap of approximately 819 MiB. Its image share is approximately 410 MiB. Each decoded 8-channel, 256 × 256, float32 chunk contains 2 MiB of pixel values, so that share holds about 204 chunks before bookkeeping.</em></p>
+<p><code>DecodedImageCache</code> removes its least-recently-used references when space is needed. A calculation already using a returned image keeps that object alive until it releases its own reference; cache eviction alone does not free those actively used bytes.</p>
+<p>Annotation drafts and unsaved edits have separate storage and memory accounting. Clearing reusable image or cell-display data preserves those edits.</p>
+<h2 id="iv-queue-and-thread-allocation">iv) Queue and thread allocation</h2>
+<p>The saved execution settings control the batch worker count and queued work. New analyses start with one worker and one in-flight task. An in-flight task has been submitted and is either waiting to execute or still running. The coordinator caps this count at two even if a larger value is supplied. Each task must also pass the memory and processor checks above. Image preparation has a separate default of two workers and two in-flight regions, with their arrays included in the numerical budget.</p>
+<p>When you open segmentation settings, the coordinator reserves the resources needed for setup. Once you submit the settings, it requests the resources for the model. InstanSeg can process tiles with one or two workers sharing a single predictor. This allows other tile work to overlap even though only one prediction runs at a time. We limit each underlying calculation to one CPU thread.</p>
+<p>To bound the number of tiles held in memory, we admit at most two more tiles than there are workers. That count includes tiles waiting to start and results waiting to be collected. As each result is collected, another tile can enter.</p>
+<p>Interactive cell reads use a separate background worker and an eight-entry queue. A full queue reports a read failure in the overlay; changing the view requests another rectangle. <a href="../run/interactive-viewing.html#ii-background-request-registry">Viewport loading</a> explains pending requests, cached results and displayed errors.</p>
+<p>For <code>W</code> simultaneous tasks with <code>T</code> native threads each, approximately <code>W × T</code> numerical threads can run. The coordinator assigns processor capacity before starting a task, and image preparation also checks active numerical-library thread counts when choosing concurrency. Native model and codec pools receive their thread limits before initialization. Each chunk decode uses one native codec thread; QuPath schedules image-region reads through its image store.</p>
+<p>The coordinator starts a dependent stage after its required inputs have completed. Within image preparation, the coordinating thread writes returned shards and releases their arrays before submitting replacement work. <a href="../images/processing.html#scheduling-the-image-calculation">Regional scheduling</a> describes that sequence and the separate source-reader limit.</p>
+<h2 id="v-native-array-and-model-lifetimes">v) Native array and model lifetimes</h2>
+<p>A runtime may retain released memory for subsequent calls. The following lifetimes describe when each resource stops being needed by its calculation.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Resource</th>
+<th>Managed by</th>
+<th>Lifetime</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Loaded model parameters</td>
+<td>Model session</td>
+<td>Across predictions or fitting calls in that session</td>
+</tr>
+<tr class="even">
+<td>Predictor</td>
+<td>One processing task or limited predictor pool</td>
+<td>Reused within that model session</td>
+</tr>
+<tr class="odd">
+<td>Temporary DJL tensors</td>
+<td>Prediction context or short-lived submanager</td>
+<td>One numerical invocation/batch</td>
+</tr>
+<tr class="even">
+<td>Borrowed input buffer</td>
+<td>Decoder/cache entry or bounded buffer pool</td>
+<td>Until all native consumers using its bytes have completed</td>
+</tr>
+<tr class="odd">
+<td>OpenCV matrices</td>
+<td>Numerical batch</td>
+<td>Released after prediction/fitting consumes the batch</td>
+</tr>
+<tr class="even">
+<td>Arrow buffers</td>
+<td>Reader and consumers of the returned batch</td>
+<td>Retained while the reader or a consumer holds a reference to the batch or its buffers</td>
+</tr>
+</tbody>
+</table></div>
+<p>DJL's predictor context manages temporary translator arrays. Direct NDArray calculations use a short-lived scope under the selected engine/device. An output needed by later calls must be copied or transferred to a model-session allocation before the temporary prediction allocation is released. [1]</p>
+<p>A direct <code>ByteBuffer</code> can supply the memory for a native CPU tensor when its dtype, byte order, shape and strides match the supported API. The buffer must stay allocated until the tensor finishes using it. A GPU tensor requires a device transfer, so the host buffer remains reserved until that transfer completes. Allocating page-locked host memory also requires explicit support from the runtime API. [2]</p>
+<p>Normalization of a borrowed read-only image chunk creates or borrows a separate writable preparation buffer when the operation changes values. This preserves the cached intensities for concurrent consumers.</p>
+<h2 id="vi-releasing-work-and-responding-to-pressure">vi) Releasing work and responding to pressure</h2>
+<p>On cancellation, the processing task stops starting new calculations, cancels unneeded read requests and waits for active native calls to return. It then releases temporary arrays and reservations. Shared reads continue while another active consumer still needs them.</p>
+<p>A task that cannot start waits until enough memory becomes available. Its message identifies the estimated requirement and the limiting available RAM or cluster allocation. Finishing another task releases its reservation and lets the scheduler reconsider waiting work. If more memory is still needed, follow <a href="computing.html#memory-available-for-processing">Computing's memory guidance</a>, then continue the saved analysis.</p>
+<p>With WSL 2, the pipeline sees the memory available to the Linux virtual machine. Windows may have more physical RAM than WSL is allowed to use. The <code>memory</code> setting under <code>[wsl2]</code> in <code>%UserProfile%\.wslconfig</code> controls this limit; leave enough RAM for Windows and its other applications. Save work and close running Linux applications before restarting WSL to apply a changed limit. After the restart, reopen the analysis and continue saved work. Increasing swap provides space for inactive memory pages, but does not increase the physical RAM used by the scheduler's memory check. <a href="https://learn.microsoft.com/en-us/windows/wsl/wsl-config">Microsoft's WSL configuration guide</a> describes these settings and the required restart.</p>
+<h2 id="vii-performance-accounting">vii) Performance accounting</h2>
+<p>To find out why a stage has slowed down, measure the time spent reading and decoding the image, preparing the inputs, transferring them to the device, calculating the result and writing it. A longer read calls for a different investigation from a longer fit.</p>
+<p>When comparing memory use, record the JVM heap, native host allocations, Python arrays, memory reserved for pending work and device memory separately where available. The scheduler’s host measurement sums the resident memory reported by the coordinator and its child processes. If several processes map the same memory, that sum can count the same pages more than once.</p>
+<p>Useful performance measurements include the time to display the first usable view, the delay after later navigation, the rate of processing all selected cells or image regions, bytes read and written, and peak combined memory. Numerical agreement is checked against the selected method before interpreting a faster runtime as an improvement.</p>
+<p><strong>References:</strong> <a href="https://docs.djl.ai/master/docs/development/memory_management.html">1. DJL memory management</a>; <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/ByteBuffer.html">2. Java ByteBuffer</a> and <a href="https://raw.githubusercontent.com/deepjavalibrary/djl/master/engines/pytorch/pytorch-engine/src/main/java/ai/djl/pytorch/jni/JniUtils.java">DJL PyTorch buffer handling</a>.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="computing.html">Computing settings</a>.</p>
+</main>
+</body>
+</html>

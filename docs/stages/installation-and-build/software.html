@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Software setup · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/installation-and-build/software.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="software-setup">Software setup</h1>
+<p><a href="../../../index.html#analysis-stages">Analysis stages</a> · <a href="building-and-releasing.html">Building and releasing</a> · <a href="../setup/command-line.html">Command-line setup</a></p>
+<p><a id="getting-started-installation"></a></p>
+<p><a id="getting-started-installation--install-and-configure-the-desktop"></a></p>
+<p>The MIFflow desktop runs on Windows 11 and Ubuntu 24.04.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>What you have</th>
+<th>How to install MIFflow</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A portable application from <a href="https://github.com/04-zain/MIFflow/releases">MIFflow releases</a></td>
+<td><a href="#open-a-portable-application">Extract the archive and open the desktop</a>. Python and the processing libraries are included.</td>
+</tr>
+<tr class="even">
+<td>A Python wheel (<code>.whl</code>)</td>
+<td><a href="#install-a-shared-wheel">Install the wheel</a> in a Python 3.12 environment. The compiled QuPath extension is included.</td>
+</tr>
+<tr class="odd">
+<td>A repository checkout or GitHub source-code download</td>
+<td><a href="#install-the-python-application">Build the QuPath extension, then install the Python application</a>.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="open-a-portable-application">Open a portable application</h2>
+<p>There are two portable editions of MIFflow. The <strong>CPU edition</strong> runs the analysis on the computer’s CPU. The <strong>NVIDIA edition</strong> includes the libraries that let supported methods use a compatible NVIDIA GPU. To get started:</p>
+<ol type="1">
+<li>Download the archive for your operating system (Windows 11 or Ubuntu 24.04) and edition at <a href="https://github.com/04-zain/MIFflow/releases">MIFflow releases</a></li>
+<li>Extract the complete archive into a writable folder. The executable loads its libraries from the other files in that folder.</li>
+<li>On Windows, open <code>mif-desktop.exe</code>. On Ubuntu, open a terminal in the extracted folder and run <code>./mif-desktop</code>.</li>
+</ol>
+<p>Continue to <a href="#open-software-setup">Software setup</a> after opening the desktop.</p>
+<h2 id="install-a-shared-wheel">Install a shared wheel</h2>
+<p>A wheel (<code>.whl</code>) contains the MIFflow Python package and its compiled QuPath extension. Use a Python 3.12 environment for the installation. Installing the wheel with <code>[desktop]</code> adds the graphical interface. For a processing host that receives jobs from another computer, omit <code>[desktop]</code> and use the <a href="../setup/command-line.html#reference-command-line--software-setup">command-line setup instructions</a>.</p>
+<p>Open a terminal in the folder containing the wheel. The commands below create a Python environment named <code>.venv</code>, install the wheel and launch the desktop. Substitute your wheel’s filename in the installation command. For subsequent launches after installation, run only the last command from the directory containing <code>.venv</code>, or use the full path to the launcher.</p>
+<p><strong>Linux</strong></p>
+<pre class="bash"><code>python3.12 -m venv .venv
+.venv/bin/python -m pip install &quot;./mif_pipeline-0.1.0-py3-none-any.whl[desktop]&quot;
+.venv/bin/mif-desktop</code></pre>
+<p><strong>Windows PowerShell</strong></p>
+<pre class="powershell"><code>py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install &quot;.\mif_pipeline-0.1.0-py3-none-any.whl[desktop]&quot;
+.\.venv\Scripts\mif-desktop.exe</code></pre>
+<p>For the following two methods, you will need additional libraries after installing the wheel:</p>
+<ul>
+<li><strong>Nimbus scoring</strong> uses versions of NumPy and PyTorch that differ from those used by the main application. Install its <a href="#nimbus-for-source-installations">separate scoring program</a> if you plan to use Nimbus, including on a CPU.</li>
+<li><strong>NVIDIA processing</strong> requires GPU-enabled libraries for Python calculations and a matching PyTorch library for models that run in QuPath. Follow <a href="#add-nvidia-processing-libraries">Add NVIDIA processing libraries</a> on the computer that will run those models.</li>
+</ul>
+<p><a id="getting-started-installation--1-install-the-python-application"></a> <a id="install-the-python-application"></a></p>
+<h2 id="install-from-source">Install from source</h2>
+<p>When you install from a repository checkout, pip builds the wheel locally and installs it in the selected Python environment. Supply the compiled Java extension during that build so the installed application can use it in QuPath.</p>
+<p>Install Python 3.12 and <a href="https://github.com/qupath/qupath/releases/tag/v0.7.0">QuPath 0.7.0</a>. Follow <a href="native-extension.html#build-and-install">Build the QuPath extension</a> and keep the resulting JAR in its build folder.</p>
+<p>From the repository root, create a Python environment and set <code>MIF_NATIVE_READER_BUILD_DIR</code> to the extension’s output directory. Run the installation command in the same terminal so pip can read that setting.</p>
+<p><strong>Linux</strong></p>
+<pre class="bash"><code>python3.12 -m venv .venv
+export MIF_NATIVE_READER_BUILD_DIR=&quot;$HOME/mif_pipeline_build/native&quot;</code></pre>
+<p><strong>Windows PowerShell</strong></p>
+<pre class="powershell"><code>py -3.12 -m venv .venv
+$env:MIF_NATIVE_READER_BUILD_DIR = &#39;C:\mif_pipeline_build\native&#39;</code></pre>
+<p>Continue with <strong>Desktop</strong> for an interactive installation or <strong>Processing host without Qt</strong> for a computer that receives jobs from a streaming desktop or runs command-line automation.</p>
+<h3 id="desktop">Desktop</h3>
+<p>From the repository root, install the application with the <code>desktop</code> extra to include Qt. Once installed, open the desktop using the launcher in that environment.</p>
+<p><strong>Linux</strong></p>
+<pre class="bash"><code>.venv/bin/python -m pip install &quot;.[desktop]&quot;
+.venv/bin/mif-desktop</code></pre>
+<p><strong>Windows PowerShell</strong></p>
+<pre class="powershell"><code>.\.venv\Scripts\python.exe -m pip install &quot;.[desktop]&quot;
+.\.venv\Scripts\mif-desktop.exe</code></pre>
+<p>After launching, follow <a href="#qupath-and-application-extensions">QuPath and application extensions</a> to select QuPath and install the extensions it needs.</p>
+<h3 id="processing-host-without-qt">Processing host without Qt</h3>
+<p>Install the base package on the processing host. It supplies the scientific libraries and remote processing commands. For streaming jobs, the desktop on your local computer supplies the interface.</p>
+<p><strong>Linux</strong></p>
+<pre class="bash"><code>.venv/bin/python -m pip install .
+.venv/bin/mif-batch --help</code></pre>
+<p><strong>Windows PowerShell</strong></p>
+<pre class="powershell"><code>.\.venv\Scripts\python.exe -m pip install .
+.\.venv\Scripts\mif-batch.exe --help</code></pre>
+<p><a href="../setup/computing.html#cluster-streaming">Cluster computing</a> explains how the local application connects to this installation. <a href="../setup/command-line.html">Command-line setup</a> documents the commands used for software selection, processing and review responses.</p>
+<h3 id="update-an-existing-source-installation">Update an existing source installation</h3>
+<p>Close the desktop and open a terminal in the updated checkout. If the Java sources changed, <a href="native-extension.html#build-and-install">rebuild the extension</a>. Set <code>MIF_NATIVE_READER_BUILD_DIR</code> to the current JAR folder and repeat the <a href="#desktop">desktop</a> or <a href="#processing-host-without-qt">processing-host</a> install command using the existing environment. The next desktop launch picks up the updated Python and Groovy code and refreshes the bundled extension if it changed.</p>
+<p><a id="nimbus-for-source-installations"></a> <a id="add-libraries-for-nimbus-or-nvidia-processing"></a></p>
+<h2 id="add-nimbus-processing-libraries">Add Nimbus processing libraries</h2>
+<p>The portable editions include the Nimbus scoring program. For a wheel or source installation, you can build it from the repository on the computer where scoring will run. The builder creates a separate Python environment and packages the model code with the versions of NumPy and PyTorch it requires. <a href="building-and-releasing.html#bundled-numerical-workers">Libraries included with Nimbus</a></p>
+<p>From the repository root, run the command below for your operating system. Give it a directory outside the checkout for temporary build files and a separate, new output directory where the scoring program will stay. The commands build the CPU edition by default. For NVIDIA processing, add <code>--accelerator cuda</code>.</p>
+<p><strong>Linux</strong></p>
+<pre class="bash"><code>.venv/bin/python scripts/build_nimbus_runtime.py \
+  --source-root &quot;$PWD&quot; \
+  --build-root /absolute/external-build/nimbus \
+  --output-root &quot;$PWD/.venv/runtimes/nimbus&quot;</code></pre>
+<p><strong>Windows PowerShell</strong></p>
+<pre class="powershell"><code>.\.venv\Scripts\python.exe scripts\build_nimbus_runtime.py `
+  --source-root &quot;$PWD&quot; `
+  --build-root &#39;C:\external-build\nimbus&#39; `
+  --output-root &quot;$PWD\.venv\runtimes\nimbus&quot;</code></pre>
+<p>Keep the completed folder at <code>.venv/runtimes/nimbus</code>, where the application looks for the scoring executable. Select or download the model weights separately under <strong>Software setup → Cell phenotyping → Nimbus</strong>.</p>
+<h2 id="add-nvidia-processing-libraries">Add NVIDIA processing libraries</h2>
+<p>The Python application and QuPath models require different versions of PyTorch for NVIDIA processing. The portable NVIDIA edition supplies both. For a wheel or source installation, install each version in the location used by its program.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Calculations</th>
+<th>Library installation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Main application's Python calculations, including Cellpose</td>
+<td>PyTorch 2.6.0 and Torchvision 0.21.0 with CUDA 12.6, installed in the application's Python environment</td>
+</tr>
+<tr class="even">
+<td>InstanSeg and KRONOS calculations in QuPath</td>
+<td>PyTorch 2.7.1 with CUDA 12.8 and its matching Java adapter, stored in <code>.venv/runtimes/torch-native</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="calculations-in-the-main-application">Calculations in the main application</h3>
+<p>Install CUDA-enabled PyTorch and Torchvision in the application’s Python environment.</p>
+<p><strong>Linux</strong></p>
+<pre class="bash"><code>.venv/bin/python -m pip install torch==2.6.0+cu126 torchvision==0.21.0+cu126 --index-url https://download.pytorch.org/whl/cu126</code></pre>
+<p><strong>Windows PowerShell</strong></p>
+<pre class="powershell"><code>.\.venv\Scripts\python.exe -m pip install torch==2.6.0+cu126 torchvision==0.21.0+cu126 --index-url https://download.pytorch.org/whl/cu126</code></pre>
+<p>These versions follow the <a href="https://docs.pytorch.org/get-started/previous-versions/#v260">PyTorch 2.6 installation matrix</a>.</p>
+<h3 id="calculations-in-qupath">Calculations in QuPath</h3>
+<p>Build the QuPath library package on the operating system where it will run. From the repository root, choose a fresh build directory outside the checkout and an output directory that does not already exist.</p>
+<p><strong>Linux</strong></p>
+<pre class="bash"><code>.venv/bin/python scripts/build_native_gpu_runtime.py \
+  --source-root &quot;$PWD&quot; \
+  --build-root /absolute/external-build/torch-native \
+  --output-root &quot;$PWD/.venv/runtimes/torch-native&quot;</code></pre>
+<p><strong>Windows PowerShell</strong></p>
+<pre class="powershell"><code>.\.venv\Scripts\python.exe scripts\build_native_gpu_runtime.py `
+  --source-root &quot;$PWD&quot; `
+  --build-root &#39;C:\external-build\torch-native&#39; `
+  --output-root &quot;$PWD\.venv\runtimes\torch-native&quot;</code></pre>
+<p>The builder downloads the pinned Torch and NVIDIA libraries and their Java adapter. Keep the completed folder at <code>.venv/runtimes/torch-native</code>. MIFflow passes these library locations to QuPath when it launches, allowing QuPath’s Java model code to call Torch.</p>
+<p>Finish by checking <a href="#nvidia-processing-libraries">NVIDIA processing libraries</a> in Software setup, then select the processor and run its check in <a href="../setup/computing.html#this-computer">Computing</a>. Software setup checks the installed libraries; Computing checks whether the chosen processing computer can use its GPU. That computer needs an NVIDIA driver compatible with CUDA 12.8.</p>
+<p><a id="getting-started-installation--2-open-software-setup"></a></p>
+<h2 id="open-software-setup">Open Software setup</h2>
+<p>On first launch, select <strong>Get started</strong>. To reopen <strong>Software setup</strong> later, use <strong>Home</strong>.</p>
+<ol type="1">
+<li><a href="#qupath-and-application-extensions">Connect QuPath</a> to open images and annotations from MIFflow.</li>
+<li><a href="#check-the-combined-runtime">Set up the image reader</a> so MIFflow can open your image files with Bio-Formats.</li>
+<li>Open the entries for the methods you plan to use. Choose <strong>Use existing…</strong> for files already on disk or <strong>Install…</strong> to review the download and its destination.</li>
+<li>If using the NVIDIA edition, <a href="#nvidia-processing-libraries">check the GPU libraries</a>. Then open <a href="../setup/computing.html#this-computer">Computing</a> to select and test the processor before creating your analysis.</li>
+</ol>
+<p><a href="../../assets/screenshots/welcome-first-launch-current.png"><img src="../../assets/screenshots/welcome-first-launch-current.png" alt="First-launch welcome page with a Get started button leading to Software setup." width="480"></a></p>
+<h3 id="qupath-and-application-extensions">QuPath and application extensions</h3>
+<p>Install QuPath 0.7.0 if it is missing. QuPath provides <a href="https://qupath.readthedocs.io/en/stable/docs/intro/installation.html">installation instructions for each operating system</a>.</p>
+<p>Under <strong>Connect QuPath</strong>, choose <strong>Use QuPath</strong> for a detected installation or <strong>Select QuPath</strong> to locate its executable. We keep the extensions for MIFflow in a dedicated QuPath user directory. If the required files are missing, select <strong>Install application extensions</strong> to populate its <code>extensions</code> folder.</p>
+<ul>
+<li><strong>MIFflow extension.</strong> We copy the bundled extension into the <code>extensions</code> subfolder.</li>
+<li><strong>InstanSeg and Warpy.</strong> On first setup we look for these extensions in the selected QuPath installation. On subsequent installations we check the folder prepared during setup. We copy each verified file into the folder and download the required version if a suitable local copy is unavailable.</li>
+</ul>
+<p>When we open QuPath from MIFflow, a launch option selects the preferences that point to this user directory. QuPath then loads the extensions from its <code>extensions</code> folder. If QuPath was already open during setup, reopen it from MIFflow. <a href="native-extension.html#how-qupath-loads-the-extension">QuPath launch option and profile</a></p>
+<p><a href="../../assets/screenshots/software-qupath.png"><img src="../../assets/screenshots/software-qupath.png" alt="Connect QuPath showing Install application extensions after the QuPath executable has been selected." width="600"></a></p>
+<p><a id="check-the-combined-runtime"></a> <a id="getting-started-installation--3-check-the-combined-runtime"></a></p>
+<h3 id="check-the-image-reader">Check the image reader</h3>
+<p>Under <strong>Image-reading setup</strong>, install or select Java 21 and Bio-Formats 8.5.0. We start Java and check that it can load the required Bio-Formats version and its image readers. Both entries should show <strong>Ready</strong>. If a check fails, open <strong>Details</strong> for the selected location and the error.</p>
+<p>The image reader retains that Java runtime and those libraries until the application closes. If the reader has already started and you need to change Java or Bio-Formats, restart the desktop and make your selection before opening an image.</p>
+<p><a href="../../assets/screenshots/software-image-reader.png"><img src="../../assets/screenshots/software-image-reader.png" alt="Java and Bio-Formats selections and status checks." width="600"></a></p>
+<h3 id="paired-image-alignment">Paired-image alignment</h3>
+<p>If your analysis includes a paired image, such as an H&amp;E section, open <strong>Paired-image alignment setup</strong>. We use Warpy 0.5.0 to display the aligned image over the mIF tissue. For <a href="../alignment/index.html">automatic alignment</a>, Elastix fits the transformation and Transformix calculates the corresponding positions in the paired image.</p>
+<p>Complete the <strong>Warpy extension</strong> and <strong>Elastix and Transformix</strong> checks. To reuse an Elastix installation, choose <strong>Use existing…</strong> and select the folder containing both programs from Elastix 5.3.1.</p>
+<p><a href="../../assets/screenshots/software-alignment.png"><img src="../../assets/screenshots/software-alignment.png" alt="Warpy and Elastix and Transformix setup controls." width="600"></a></p>
+<h3 id="cell-segmentation">Cell segmentation</h3>
+<p>Under <strong>Cell segmentation</strong>, open the entry for the method you intend to use. Select the model files and check the listed processing libraries.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Required software or model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>InstanSeg</td>
+<td>Use extension 0.1.7 with the <code>fluorescence_nuclei_and_cells</code> 0.1.1 model. Keep its description and weights together in the downloaded folder.</td>
+</tr>
+<tr class="even">
+<td>Cellpose-SAM</td>
+<td>Use Cellpose 4.0.9.</td>
+</tr>
+<tr class="odd">
+<td>StarDist</td>
+<td>Use the StarDist 0.6.0 QuPath extension.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="../cells/index.html">segmentation guide</a> explains which outlines each method predicts and which image channels it requires.</p>
+<p><a href="../../assets/screenshots/software-cell-segmentation.png"><img src="../../assets/screenshots/software-cell-segmentation.png" alt="Cell segmentation software entries for InstanSeg, Cellpose-SAM and StarDist, with their installation status and actions." width="600"></a></p>
+<h3 id="nimbus-and-kronos">Nimbus and KRONOS</h3>
+<h4 id="nimbus">Nimbus</h4>
+<p>Nimbus needs its scoring software and its trained model. Portable editions include the scoring software. For a wheel or source installation, first add the <a href="#nimbus-for-source-installations">Nimbus processing package</a>.</p>
+<p>Under <strong>Cell phenotyping → Nimbus</strong>, select <strong>Install model…</strong> to download the public V1 weights, or <strong>Use existing…</strong> to select them on disk. Under <strong>Nimbus scoring software</strong>, look for <strong>Ready</strong>. After installing a missing runtime, select <strong>Check again</strong> to verify it. <a href="../phenotyping/nimbus.html#reference-nimbus--runtime-setup">Nimbus setup</a></p>
+<p>For cluster processing, install the application and Nimbus libraries on the processing host. Model and imported-score paths must be accessible there. <strong>Browse…</strong> can select a mounted file; the application translates its location using the saved cluster mount mapping.</p>
+<h4 id="kronos">KRONOS</h4>
+<p>For KRONOS tissue or cell classification, select the approved model folder under <strong>Cell phenotyping → KRONOS</strong>. <a href="#access-and-download-kronos">Request access and download the model</a></p>
+<p><a href="../../assets/screenshots/software-phenotyping-setup.png"><img src="../../assets/screenshots/software-phenotyping-setup.png" alt="Full Cell phenotyping panel with Nimbus model weights, its scoring software and the KRONOS model controls." width="600"></a></p>
+<p><a id="unsupervised-phenotyping"></a></p>
+<p><a href="../phenotyping/unsupervised.html">Unsupervised phenotyping</a> uses the FlowSOM and PhenoGraph libraries included with MIFflow.</p>
+<p><a id="nvidia-processing-libraries"></a></p>
+<h2 id="check-nvidia-processing-in-software-setup">Check NVIDIA processing in Software setup</h2>
+<p>Use <strong>Software setup → NVIDIA processing libraries</strong> to verify that QuPath’s Torch libraries and Java adapter are present. InstanSeg and KRONOS use this adapter for model calculations. Open <strong>Details</strong> to inspect the application’s Python libraries as well. Portable NVIDIA releases include these libraries; source installations follow <a href="#add-nvidia-processing-libraries">Add NVIDIA processing libraries</a>.</p>
+<p>If the Java adapter is missing, select <strong>Install…</strong>. We install the matching 3.4 MB adapter and check that it can load the QuPath libraries. To add complete NVIDIA support to a CPU portable application, use the NVIDIA release.</p>
+<p>Running QuPath with these libraries requires a compatible NVIDIA driver, including when a calculation uses the CPU. Select and check the processing device in <a href="../setup/computing.html#this-computer">Computing</a>. For cluster streaming, install the libraries on the processing computer and use Computing's processor check to test a cluster node assigned to the job.</p>
+<p><a href="../../assets/screenshots/software-nvidia.png"><img src="../../assets/screenshots/software-nvidia.png" alt="NVIDIA processing libraries and the QuPath GPU adapter check." width="600"></a></p>
+<p><a id="getting-started-installation--4-prepare-storage-and-computing"></a></p>
+<h2 id="prepare-storage-and-computing">Prepare storage and computing</h2>
+<p>Choose an analysis location with enough free disk space for the prepared images, QuPath projects, cell measurements, fitted models and exported results. Also allow space for model downloads and temporary processing files. Keep the original images available throughout the analysis.</p>
+<p>We store prepared images in <code>.ome.zarr</code> folders containing the full-resolution image and smaller versions for viewing at different magnifications. The storage check estimates their uncompressed size because compression depends on the image data. Open <a href="../setup/computing.html#this-computer">Computing</a> to check available disk space and memory and select the processor.</p>
+<p>For cluster processing, install the application and required software on the cluster and choose an analysis folder accessible to its processing jobs. <a href="../setup/computing.html#getting-started-cluster-setup">Cluster setup</a> explains the connection, storage and computing settings.</p>
+<p><a id="getting-started-installation--5-create-a-test-analysis"></a> <a id="luca-example"></a></p>
+<h2 id="create-a-test-analysis">Create a test analysis</h2>
+<p>Once the software required for your analysis is ready, return to Home and follow <a href="../setup/analysis.html#getting-started-first-analysis">First analysis</a> with a small image representative of your study. Open it with the selected image reader and run the methods you intend to use. For a worked example, the <a href="../../data/luca.html">LuCa guide</a> provides the public vendor image, channel panel and stage walkthroughs.</p>
+<p>The <a href="https://github.com/04-zain/MIFflow/tree/main/src/python/mif_pipeline/config/software">software definitions</a> record supported downloads and versions. Use <a href="building-and-releasing.html">Building and releasing</a> to prepare packages and <a href="../../troubleshooting.html">Troubleshooting</a> to investigate installation errors.</p>
+<h2 id="access-and-download-kronos">Access and download KRONOS</h2>
+<p>MIFflow includes the libraries that run the KRONOS encoder. MahmoodLab distributes the <strong>KRONOS2</strong> weights under a separate access agreement. <a href="../tissue-classification/model-execution.html">How KRONOS encodes the images</a></p>
+<h3 id="request-model-access">Request model access</h3>
+<p>Open <strong>Software setup → Cell phenotyping → KRONOS → Open KRONOS access page</strong>, or visit <a href="https://huggingface.co/MahmoodLab/KRONOS2">MahmoodLab/KRONOS2</a>. Sign in with a Hugging Face account whose primary email matches your institutional email. Complete the access form with your affiliation and intended research use, review the <a href="https://huggingface.co/MahmoodLab/KRONOS2/blob/main/README.md#requesting-access">model’s terms</a>, and wait for approval before downloading.</p>
+<h3 id="download-the-model-folder">Download the model folder</h3>
+<p>Use a software directory outside the application and analysis folders. Install Hugging Face's <code>hf</code> download tool using its <a href="https://huggingface.co/docs/huggingface_hub/guides/cli#standalone-installer-recommended">standalone installer</a>. Run <code>hf auth login</code> with the account granted access, then download the model into the software directory.</p>
+<pre class="text"><code>hf auth login
+hf download MahmoodLab/KRONOS2 --local-dir KRONOS2 --exclude &quot;demo_image/*&quot;</code></pre>
+<p>The download creates a <code>KRONOS2</code> folder with the model’s subdirectories, excluding the optional demonstration image. To retrieve the same model revision as an earlier download, add <code>--revision</code> followed by its commit identifier. Hugging Face documents <a href="https://huggingface.co/docs/huggingface_hub/guides/cli">authentication, local folders and revision selection</a>.</p>
+<p>The following files supply the model inputs used by MIFflow. Keep the complete downloaded directory together.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>File or directory</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>config.json</code></td>
+<td>Model dimensions, backbone architecture and the filenames of the weights and marker table</td>
+</tr>
+<tr class="even">
+<td><code>kronos2_vitb16_teacher.pth</code></td>
+<td>Pretrained encoder weights; the download listing reports approximately 440 MB</td>
+</tr>
+<tr class="odd">
+<td><code>marker_metadata.csv</code></td>
+<td>Marker names, biological descriptions and intensity normalization values</td>
+</tr>
+<tr class="even">
+<td><code>marker_utils.py</code> and <code>dinov2/</code></td>
+<td>Code that constructs the marker-aware encoder</td>
+</tr>
+<tr class="odd">
+<td><code>requirements.txt</code></td>
+<td>Dependencies for the downloaded model code</td>
+</tr>
+</tbody>
+</table></div>
+<p>These filenames match the <a href="https://huggingface.co/MahmoodLab/KRONOS2/tree/main">published model listing</a>. We read the weight and marker-table filenames from <code>config.json</code> and check that the model uses the supported KRONOS2 architecture with 768 output features.</p>
+<h3 id="select-the-model-in-software-setup">Select the model in Software setup</h3>
+<p>Open <strong>Software setup → Cell phenotyping → KRONOS</strong> and choose <strong>Use existing…</strong> to select the <code>KRONOS2</code> directory containing <code>config.json</code>. If you started with <strong>Install model…</strong>, follow its access and download instructions, then choose <strong>Select downloaded folder…</strong>. Keep the model at the selected location. After moving it, use <strong>Use existing…</strong> to update its path.</p>
+<p>For a cluster desktop, select the model folder on that computer. For streaming, select it through the mounted cluster folder in local <strong>Software setup</strong>. The application translates this location to the cluster path; the processing node reads the model there.</p>
+<p>If download access is denied, confirm that the account used for <code>hf auth login</code> has approval. If files are missing, repeat the download into the same folder and select it again.</p>
+<h3 id="prepare-the-description-model-for-new-markers">Prepare the description model for new markers</h3>
+<p>If your selected markers include one absent from the KRONOS marker table, prepare <strong>BioLinkBERT-large</strong> so we can encode that marker’s biological description. Open <strong>Software setup → Cell phenotyping → KRONOS → Install model…</strong>, expand <strong>Additional markers</strong>, then select <strong>Install marker model…</strong>. The dialog shows the download source, size, licence and destination before installation. We save the approximately 1.33 GB download in the application’s data folder. To reuse a complete copy of the supported version, choose <strong>Use existing marker model…</strong>.</p>
+<p>For a cluster desktop, install or select the description model on that computer. For streaming, select it through the mounted cluster folder, then save <strong>Computing</strong> again to pass the location to the processing node.</p>
+<hr />
+<p><strong>Next</strong> <a href="../setup/analysis.html">Create an analysis and add samples</a>.</p>
+</main>
+</body>
+</html>

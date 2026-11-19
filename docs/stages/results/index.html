@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Results and export · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/results/index.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="results-and-export">Results and export</h1>
+<p><a href="../../../index.html#analysis-stages">Analysis stages</a> · <a href="figures.html">Result figures and tables</a> · <a href="../../reference/data-formats.html">Saved data formats</a> · <a href="../../reference/cell-storage.html">Cell-table structure</a></p>
+<p><strong>On this page:</strong> <a href="#confirm-completion-and-selection">Open a result</a> · <a href="#reopen-a-stage-review">Stage reviews</a> · <a href="#additional-figures">Cell and structure summaries</a> · <a href="#open-and-export-figures">Export figures and data</a> · <a href="#locate-the-final-outputs">Complete files</a></p>
+<p><a id="user-guide-results-and-exports"></a> <a id="user-guide-results-and-exports--results-and-export"></a></p>
+<p><strong>Results &amp; export</strong> collects saved stage views, additional cell summaries and accepted output files. Results become available as stages finish. Complete pending decisions in <strong>Run</strong>; use Results to inspect or export their saved outputs.</p>
+<p><a id="user-guide-results-and-exports--1-confirm-completion-and-selection"></a> <a id="confirm-completion-and-selection"></a></p>
+<h2 id="open-a-saved-result">Open a saved result</h2>
+<p>Open the analysis from <strong>Home → Open analysis…</strong>, then select <strong>Results &amp; export</strong>. From an open analysis, you can also select the completed <strong>Results &amp; export</strong> node on the Run graph.</p>
+<p>Choose the <strong>Completed stage</strong> that produced the result. Under <strong>Sample or result</strong>, select the sample or the type of saved result you want to inspect, such as <strong>Marker gates</strong>, <strong>Classifiers</strong> or <strong>Cluster labels</strong>. The <strong>Figure or table</strong> list then identifies the available views, including the categories or measurements on each page of a multipage figure.</p>
+<p><a href="../../assets/screenshots/results-marker-fit-current.png"><img src="../../assets/screenshots/results-marker-fit-current.png" alt="Cell phenotyping selected in Results, showing the saved LuCa CD68 fitted distribution." width="650"></a></p>
+<p><em>Cell phenotyping → Marker gates reopens the accepted LuCa CD68 gate and its fitted distribution. The Accepted cell results entry provides phenotype summaries and marker combinations.</em></p>
+<p><a id="reopen-a-stage-review"></a></p>
+<h2 id="stage-reviews">Stage reviews</h2>
+<p>These views reopen the saved results in their stage viewers. The linked analysis guides explain how to interpret each result and inspect the tissue.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Saved result</th>
+<th>Choose in Results</th>
+<th>Review guide</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unmixing</td>
+<td><strong>Spectral unmixing → Accepted reference spectra</strong>, <strong>Acquired bands and components</strong>, <strong>Reconstruction images</strong> or <strong>Reconstruction mean spectra</strong></td>
+<td><a href="../unmixing/index.html#inspect-the-spectra">Spectra</a>, <a href="../unmixing/index.html#compare-acquired-bands-and-components">matched fields</a> and <a href="../unmixing/index.html#examine-the-reconstructed-signal">reconstruction</a></td>
+</tr>
+<tr class="even">
+<td>Tissue and analysis regions</td>
+<td><strong>Tissue detection → Tissue outlines</strong> or <strong>Analysis regions → Analysis-region outlines</strong></td>
+<td><a href="../tissue/index.html#select-the-analysis-regions">Accepted region outlines</a></td>
+</tr>
+<tr class="odd">
+<td>Paired-image alignment</td>
+<td><strong>Image alignment → Inspect aligned images</strong></td>
+<td><a href="../alignment/index.html#use-the-accepted-alignment">Inspect the accepted alignment</a></td>
+</tr>
+<tr class="even">
+<td><a id="review-saved-classifier-results"></a>Tissue or secondary-structure classifier</td>
+<td><strong>Tissue classification</strong> or <strong>Secondary structures</strong>, <strong>Classifiers</strong> result → <strong>Classifier review and data</strong>, or a saved <strong>… confusion</strong> figure</td>
+<td><a href="../tissue-classification/index.html#inspecting-and-accepting-the-model">Classifier evaluation</a></td>
+</tr>
+<tr class="odd">
+<td>Classified tissue objects</td>
+<td><strong>Tissue classification</strong>, <strong>Regions</strong> result → <strong>Classified regions</strong></td>
+<td><a href="../tissue-classification/index.html#saved-result-and-later-changes">Class areas and object sizes</a></td>
+</tr>
+<tr class="even">
+<td>Cell and nuclear outlines</td>
+<td><strong>Cell segmentation → Review cell and nucleus outlines</strong>; saved shape distributions are also available in the figure selector.</td>
+<td><a href="../cells/index.html#review-cell-and-nucleus-outlines">Segmentation review</a></td>
+</tr>
+<tr class="odd">
+<td>Cell measurements</td>
+<td><strong>Cell measurements → Measurement distribution ·</strong> the saved measurement</td>
+<td><a href="../cell-measurements/index.html#inspect-the-saved-results">Linked histogram and tissue review</a></td>
+</tr>
+<tr class="even">
+<td>Accepted marker gates</td>
+<td><strong>Cell phenotyping</strong>, <strong>Marker gates</strong> result → <strong>Intensity</strong>, <strong>Nimbus scores</strong> or <strong>Fitted distribution</strong></td>
+<td><a href="../phenotyping/marker-rules.html#review-the-marker-decision">Gate review</a>, <a href="../phenotyping/marker-rules.html#review-nimbus-scores-and-optional-intensity-distillation">Nimbus</a> and <a href="../phenotyping/marker-rules.html#inspect-the-fitted-distribution">fitted components</a></td>
+</tr>
+<tr class="odd">
+<td>Supervised classifier</td>
+<td><strong>Cell phenotyping</strong>, <strong>Classifiers</strong> result → <strong>Classifier review and data → Cell classifier evaluation</strong></td>
+<td><a href="../phenotyping/supervised.html#review-validation-and-independent-test-results">Validation and independent-test review</a></td>
+</tr>
+<tr class="even">
+<td>Supervised cell assignments</td>
+<td><strong>Cell phenotyping</strong>, <strong>Supervised phenotypes</strong> result → <strong>Review cell assignments</strong></td>
+<td><a href="../phenotyping/supervised.html#review-cell-assignments">Image and processing-group cutoff review</a></td>
+</tr>
+<tr class="odd">
+<td>Unsupervised fit</td>
+<td><strong>Cell phenotyping</strong>, <strong>Unsupervised phenotyping</strong> result → <strong>UMAP · Current fit</strong>, <strong>FlowSOM learned profiles</strong> when available, or <strong>Cluster memberships and lineage</strong></td>
+<td><a href="../phenotyping/unsupervised.html#inspect-a-umap-view">UMAP</a>, <a href="../phenotyping/unsupervised.html#inspect-the-learned-flowsom-map">learned profiles</a> and <a href="../phenotyping/unsupervised.html#split-groups">reclustering</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>A prepared image without a saved unmixing basis has no reference-spectrum or reconstruction figure. To inspect final marker-rule assignments, accepted cluster labels or included secondary structures, choose the corresponding summary below. The <a href="../../reference/data-formats.html#input-files-for-spatial-analysis">complete cell-data reference</a> provides the accepted per-cell assignments and memberships.</p>
+<p><a id="additional-figures"></a></p>
+<h2 id="cell-and-structure-summaries">Cell and structure summaries</h2>
+<p>Choose the relevant completed stage and the named figure. Final assignments and structures are under <strong>Accepted cell results</strong> in <strong>Sample or result</strong>. The <a href="figures.html">figure guide</a> explains each quantity and denominator.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Completed stage</th>
+<th>Figure or table</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tissue classification</td>
+<td><a id="phenotype-composition-and-tissue-compartments"></a><a href="figures.html#phenotype-composition-and-tissue-compartments">Phenotype percentages within primary tissue compartments</a></td>
+</tr>
+<tr class="even">
+<td>Cell segmentation</td>
+<td><a id="compare-image-crops-around-individual-cells"></a><a href="figures.html#cell-gallery">Cell gallery</a> from the accepted segmentation, with controls to <a id="select-the-cells-and-field-size"></a><a href="figures.html#select-the-cells">select cells and field size</a> and <a id="select-channels-brightness-and-colour"></a><a href="figures.html#choose-the-channels-and-display">choose channels and display</a></td>
+</tr>
+<tr class="odd">
+<td>Cell measurements</td>
+<td>Cell gallery from the measurement result; <a id="inspect-cell-measurements-and-phenotype-counts"></a><a id="measurement-distributions"></a><a href="figures.html#measurement-distributions">measurement distributions of the final accepted cells</a>, with phenotype and region filters</td>
+</tr>
+<tr class="even">
+<td>Cell phenotyping</td>
+<td><a href="figures.html#phenotype-composition-and-tissue-compartments">Phenotype composition</a>, <a id="marker-profiles"></a><a href="figures.html#marker-profiles">marker profiles</a>, <a id="inspect-marker-combinations"></a><a id="marker-combinations"></a><a href="figures.html#marker-combinations">co-expression</a>, <a id="phenotype-rule-assignments"></a><a href="figures.html#phenotype-rule-assignments">rule assignments</a> and the final-cell gallery</td>
+</tr>
+<tr class="odd">
+<td>Secondary structures</td>
+<td><a id="secondary-results"></a><a href="figures.html#accepted-secondary-structures">Final outcomes, count decisions, memberships and outlines</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>For final measurement distributions, choose the <strong>Accepted cell results</strong> entry. The stage's earlier measurement-result entry retains its original saved cell population.</p>
+<p><a href="../../assets/screenshots/results-maps-profile-current.png"><img src="../../assets/screenshots/results-maps-profile-current.png" alt="Cell phenotyping selected in Results, showing the accepted MAPS marker profiles and export controls." width="650"></a></p>
+<p><em>Cell phenotyping → Accepted cell results → Marker profiles shows the accepted MAPS measurements. The same saved means and contributing counts supply the preview and its data export.</em></p>
+<h2 id="open-and-export-figures">Open and export figures</h2>
+<p><strong>Export figure…</strong> saves the complete figure as SVG, PDF or PNG. SVG and PDF keep text editable and retain sharp axes and labels when assembled into a manuscript. Cell-summary exports have a defined physical width, which determines their text size when placed in a manuscript. The larger preview and zoom controls help inspect dense figures before export.</p>
+<p><strong>Export data…</strong> saves the selected figure's data. Choose the required table or array archive in the save dialog. The <a href="../../reference/data-formats.html#figure-data">figure-data inventory</a> lists each CSV and NPZ export, including classifier tables, cluster lineage, image fields and gallery arrays. Expand <strong>Saved result file</strong> beneath the view to locate or copy the source result's path.</p>
+<p>For measurement distributions, phenotype composition, co-expression, marker profiles and phenotype-by-compartment figures, <strong>Export palette</strong> changes the exported colours while retaining the preview. <strong>Outline palette</strong> changes both preview and export for tissue and analysis-region maps. <a id="locate-the-final-outputs"></a> <a id="locate-the-image-and-qupath-project"></a> <a id="user-guide-results-and-exports--2-locate-the-image-and-qupath-project"></a></p>
+<h2 id="find-the-complete-files">Find the complete files</h2>
+<p>Under <strong>Accepted outputs</strong>, select the sample whose files you need. Its <strong>Prepared OME-Zarr image</strong>, <strong>Analysis result</strong> and <strong>Cell-data reference</strong> each have a <strong>Copy path</strong> action. To locate a file on disk, hover over its name for the full path or select <strong>Show in folder</strong>.</p>
+<p><a href="../../assets/screenshots/results-luca-files-current.png"><img src="../../assets/screenshots/results-luca-files-current.png" alt="One accepted-file list for LuCa-01: prepared image, analysis provenance and cell-data reference, each with a Copy path button." width="700"></a></p>
+<p><em>The accepted LuCa output links its prepared image, region/provenance record and complete cell-data reference.</em></p>
+<p><a id="inspect-the-image-and-cells-in-qupath"></a></p>
+<h3 id="open-the-accepted-image">Open the accepted image</h3>
+<p><strong>Open QuPath</strong> opens the accepted image, annotations and cell overlays. The <a href="../run/interactive-viewing.html#export-an-image-with-cell-outlines">image-viewing guide</a> describes <strong>mIF → Export image…</strong>, including channel appearance, field bounds, scale bar and display metadata.</p>
+<p><a id="user-guide-results-and-exports--3-inspect-the-cell-table"></a> <a id="inspect-the-cell-table"></a> <a id="geometry-measurements-and-selected-labels"></a> <a id="reviewing-the-completed-image-and-tables-together"></a></p>
+<h3 id="read-complete-cell-and-region-data">Read complete cell and region data</h3>
+<p>Open the <strong>Cell-data reference</strong> with the <a href="../../reference/data-formats.html#input-files-for-spatial-analysis">Python reader</a> to retrieve the selected cells, measurements, phenotype assignments and accepted edits. Request only the columns needed. <a href="../../reference/cell-storage.html">Cell-table structure</a> explains identities, category codes, geometry and spatial queries; <a href="../../reference/data-formats.html">saved data formats</a> describes the image, region and model files.</p>
+<p><a id="user-guide-results-and-exports--5-export-or-analyse-downstream"></a> <a id="export-or-analyse-downstream"></a> <a id="user-guide-results-and-exports--revisions-and-retention"></a> <a id="revisions-and-retention"></a></p>
+<h3 id="retain-the-files-needed-to-reopen-results">Retain the files needed to reopen results</h3>
+<p>To reopen the analysis in the desktop, keep the complete analysis folder and its processing workspace, including the saved setup, computing and manifest files, plans, state, reviews and result records. Keep the prepared images, QuPath project and referenced source images, models and cell datasets accessible at their recorded locations. <a href="../setup/analysis-folder.html#locations-of-saved-files">Analysis-folder contents</a> identifies these locations; <a href="../run/saving-and-recovery.html#retain-results-and-clean-up-temporary-files">saving and recovery</a> explains retention across revisions.</p>
+<p>To read an exported cell result independently, keep its cell-data reference together with the hidden generation directory and all referenced datasets. Copying the reference alone does not copy those data: the collection records absolute dataset locations. <a href="../../reference/data-formats.html#file-identifiers-and-selection-checks">Handoff files and selection checks</a> describes the required files and the <a href="../../reference/data-formats.html#input-files-for-spatial-analysis">Python reader</a>.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="figures.html">Result figures and tables</a> or <a href="../../reference/data-formats.html">read exported data</a>.</p>
+</main>
+</body>
+</html>

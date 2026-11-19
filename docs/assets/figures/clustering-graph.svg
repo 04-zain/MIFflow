@@ -1,0 +1,252 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1740" viewBox="0 0 1000 1740" role="img" aria-labelledby="title description">
+<title id="title">PhenoGraph: marker measurements, neighbour weights and Leiden groups</title>
+<desc id="description">Selected per-cell marker measurements are centred by their full-population medians, divided by interquartile ranges with a unit fallback and multiplied by their configured feature weights. The application supplies training-set Euclidean neighbours with each cell excluded by identity to Python PhenoGraph’s Jaccard graph and Leiden functions. The illustrative k equals two example has N(i)={j,a} and N(j)={i,a}, so their Jaccard similarity is one third. Symmetrizing selected directed candidate weights preserves J for reciprocal pairs and yields J/2 for a one-way pair. Positive undirected edges supply weighted Leiden partitioning and neutral keyed cluster names. Optional UMAP separately uses a stratified display sample with the full-population feature scaling; cluster names contribute sampling strata and display colours. The nearest-neighbour example uses explicit illustrative coordinates, the weighted graph uses the retained nine-cell calculation, and the UMAP drawing is schematic. None is an observed biological result.</desc>
+<rect width="1000" height="1740" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="35.000" y="37.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Marker measurements</text>
+<rect x="70.0" y="106.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.1"/>
+<rect x="110.16666666666666" y="106.0" width="36.166666666666664" height="34.0" fill="#007D83" opacity="0.36"/>
+<rect x="150.33333333333331" y="106.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.24000000000000002"/>
+<rect x="190.5" y="106.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.31000000000000005"/>
+<rect x="270.8333333333333" y="106.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.17"/>
+<rect x="70.0" y="144.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.24000000000000002"/>
+<rect x="110.16666666666666" y="144.0" width="36.166666666666664" height="34.0" fill="#007D83" opacity="0.36"/>
+<rect x="150.33333333333331" y="144.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.1"/>
+<rect x="190.5" y="144.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.17"/>
+<rect x="270.8333333333333" y="144.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.31000000000000005"/>
+<rect x="70.0" y="220.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.24000000000000002"/>
+<rect x="110.16666666666666" y="220.0" width="36.166666666666664" height="34.0" fill="#007D83" opacity="0.36"/>
+<rect x="150.33333333333331" y="220.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.1"/>
+<rect x="190.5" y="220.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.17"/>
+<rect x="270.8333333333333" y="220.0" width="36.166666666666664" height="34.0" fill="#356E9A" opacity="0.31000000000000005"/>
+<text x="248.750" y="128.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="248.750" y="166.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="248.750" y="242.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="88.083" y="205.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="128.250" y="205.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="168.417" y="205.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="208.583" y="205.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="288.917" y="205.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<path d="M72 100 H63 V260 H72" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M305 100 H314 V260 H305" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="90.000" y="83.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">M₁</text>
+<text x="132.000" y="83.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">M₂</text>
+<text x="288.000" y="83.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">Mₚ</text>
+<text x="43.000" y="132.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">i₁</text>
+<text x="43.000" y="171.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">i₂</text>
+<text x="43.000" y="241.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">iₙ</text>
+<text x="188.000" y="297.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">n cells × p measurements</text>
+<path d="M314 180 L396 180" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="414.000" y="37.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Scale and weight each marker</text>
+<rect x="396.000" y="55.000" width="566.000" height="258.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<path d="M430 128 L927 128" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M490 110 L490 146" fill="none" stroke="#007D83" stroke-width="2" stroke-linejoin="round"/>
+<text x="490.000" y="89.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">Q₁</text>
+<path d="M651 110 L651 146" fill="none" stroke="#007D83" stroke-width="2" stroke-linejoin="round"/>
+<text x="651.000" y="89.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">Median</text>
+<path d="M818 110 L818 146" fill="none" stroke="#007D83" stroke-width="2" stroke-linejoin="round"/>
+<text x="818.000" y="89.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">Q₃</text>
+<path d="M490 158 V172 H818 V158" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="654.000" y="202.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">sⱼ = Q₃ − Q₁; use 1 if zero</text>
+<text x="671.000" y="266.000" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" fill="#007D83" text-anchor="middle">zᵢⱼ = wⱼ (xᵢⱼ − medianⱼ) / sⱼ</text>
+<path d="M900 313 V349 H350 V430" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M679 313 V337 H17 V1600 H35" fill="none" stroke="#356E9A" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="5 5" marker-end="url(#arrow-blue)"/>
+<text x="35.000" y="398.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Find k nearest cells</text>
+<text x="452.000" y="398.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">PhenoGraph neighbour weights</text>
+<rect x="35.000" y="430.000" width="330.000" height="284.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<path d="M65 675 L344 675" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<path d="M65 675 L65 450" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<text x="341.000" y="701.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="end">z₁</text>
+<text x="80.000" y="467.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="start">z₂</text>
+<circle cx="160" cy="564" r="90" fill="#EAF5F4" fill-opacity=".45" stroke="#007D83" stroke-width="1.2" stroke-dasharray="5 5"/>
+<path d="M173 564 L231 564" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M168 575 L196 608" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<circle cx="160.000" cy="564.000" r="13" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<text x="160.000" y="570.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">i</text>
+<circle cx="244.000" cy="564.000" r="13" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<text x="244.000" y="570.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">j</text>
+<circle cx="204.000" cy="619.000" r="13" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<text x="204.000" y="625.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">a</text>
+<circle cx="113.000" cy="459.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="113.000" y="465.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#526773" text-anchor="middle">b</text>
+<circle cx="319.000" cy="467.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="319.000" y="473.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#526773" text-anchor="middle">c</text>
+<text x="203.000" y="702.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">k = 2</text>
+<path d="M365 564 L444 564" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="444.000" y="430.000" width="510.000" height="284.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="810.000" y="454.000" width="78.000" height="116.000" fill="#EAF5F4" stroke="#EAF5F4" stroke-width="1"/>
+<text x="475.000" y="482.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#243746" text-anchor="start">N(i) =</text>
+<text x="650.000" y="482.000" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="400" fill="#526773" text-anchor="start">{</text>
+<text x="702.000" y="482.000" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#356E9A" text-anchor="middle">j</text>
+<text x="758.000" y="482.000" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="400" fill="#526773" text-anchor="start">,</text>
+<text x="849.000" y="482.000" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#007D83" text-anchor="middle">a</text>
+<text x="916.000" y="482.000" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="400" fill="#526773" text-anchor="start">}</text>
+<text x="475.000" y="550.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#243746" text-anchor="start">N(j) =</text>
+<text x="650.000" y="550.000" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="400" fill="#526773" text-anchor="start">{</text>
+<text x="702.000" y="550.000" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#356E9A" text-anchor="middle">i</text>
+<text x="758.000" y="550.000" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="400" fill="#526773" text-anchor="start">,</text>
+<text x="849.000" y="550.000" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#007D83" text-anchor="middle">a</text>
+<text x="916.000" y="550.000" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="400" fill="#526773" text-anchor="start">}</text>
+<text x="475.000" y="611.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#007D83" text-anchor="start">Intersection: {a}</text>
+<text x="475.000" y="648.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#526773" text-anchor="start">Union: {i, j, a}</text>
+<text x="828.000" y="683.000" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600" fill="#007D83" text-anchor="middle">Jᵢⱼ = 1 / 3</text>
+<text x="35.000" y="786.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Combine the selected directions</text>
+<path d="M699 714 V750 H500 V815" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="35.000" y="815.000" width="930.000" height="214.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<path d="M500 837 L500 977" fill="none" stroke="#E8EEF0" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="56.000" y="850.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Reciprocal</text>
+<circle cx="86.000" cy="922.000" r="17" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<text x="86.000" y="929.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">i</text>
+<circle cx="287.000" cy="922.000" r="17" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<text x="287.000" y="929.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">j</text>
+<path d="M103 919 C156 885, 217 885, 270 919" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="186.500" y="879.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">J</text>
+<path d="M270 925 C217 959, 156 959, 103 925" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="186.500" y="975.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">J</text>
+<path d="M310 922 L337 922" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="406.000" y="929.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">Wᵢⱼ = J</text>
+<text x="545.000" y="850.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">One direction</text>
+<circle cx="575.000" cy="922.000" r="17" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<text x="575.000" y="929.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">u</text>
+<circle cx="776.000" cy="922.000" r="17" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<text x="776.000" y="929.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">v</text>
+<path d="M592 919 C645 885, 706 885, 759 919" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="675.500" y="879.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">J</text>
+<text x="675.500" y="975.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">Aᵥᵤ = 0</text>
+<path d="M799 922 L826 922" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="895.000" y="929.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">Wᵤᵥ = J/2</text>
+<text x="500.000" y="1009.000" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" fill="#007D83" text-anchor="middle">W = (A + Aᵀ) / 2</text>
+<path d="M500 1029 V1054 H200 V1090" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="35.000" y="1090.000" width="330.000" height="249.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="420.000" y="1090.000" width="330.000" height="249.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="52.000" y="1122.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Positive weighted edges</text>
+<text x="438.000" y="1122.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Leiden communities</text>
+<path d="M86 1181 L148 1181" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M86 1181 L117 1233" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M148 1181 L117 1233" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M234 1181 L296 1181" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M234 1181 L265 1233" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M296 1181 L265 1233" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M148 1280 L210 1280" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M148 1280 L179 1320" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M210 1280 L179 1320" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<circle cx="86.000" cy="1181.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="86.000" y="1186.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">i</text>
+<circle cx="148.000" cy="1181.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="148.000" y="1186.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">j</text>
+<circle cx="117.000" cy="1233.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="117.000" y="1238.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">a</text>
+<circle cx="234.000" cy="1181.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="234.000" y="1186.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">4</text>
+<circle cx="296.000" cy="1181.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="296.000" y="1186.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">5</text>
+<circle cx="265.000" cy="1233.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="265.000" y="1238.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">6</text>
+<circle cx="148.000" cy="1280.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="148.000" y="1285.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">7</text>
+<circle cx="210.000" cy="1280.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="210.000" y="1285.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">8</text>
+<circle cx="179.000" cy="1320.000" r="13" fill="#FFFFFF" stroke="#526773" stroke-width="1.5"/>
+<text x="179.000" y="1325.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#526773" text-anchor="middle">9</text>
+<path d="M471 1181 L533 1181" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M471 1181 L502 1233" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M533 1181 L502 1233" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M619 1181 L681 1181" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M619 1181 L650 1233" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M681 1181 L650 1233" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M533 1280 L595 1280" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M533 1280 L564 1320" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<path d="M595 1280 L564 1320" fill="none" stroke="#B8C8CE" stroke-width="2.333333333333333" stroke-linejoin="round"/>
+<circle cx="471.000" cy="1181.000" r="13" fill="#EAF5F4" stroke="#007D83" stroke-width="1.5"/>
+<text x="471.000" y="1186.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">i</text>
+<circle cx="533.000" cy="1181.000" r="13" fill="#EAF5F4" stroke="#007D83" stroke-width="1.5"/>
+<text x="533.000" y="1186.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">j</text>
+<circle cx="502.000" cy="1233.000" r="13" fill="#EAF5F4" stroke="#007D83" stroke-width="1.5"/>
+<text x="502.000" y="1238.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">a</text>
+<circle cx="619.000" cy="1181.000" r="13" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.5"/>
+<text x="619.000" y="1186.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#356E9A" text-anchor="middle">4</text>
+<circle cx="681.000" cy="1181.000" r="13" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.5"/>
+<text x="681.000" y="1186.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#356E9A" text-anchor="middle">5</text>
+<circle cx="650.000" cy="1233.000" r="13" fill="#EDF3F8" stroke="#356E9A" stroke-width="1.5"/>
+<text x="650.000" y="1238.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#356E9A" text-anchor="middle">6</text>
+<circle cx="533.000" cy="1280.000" r="13" fill="#FBF6EB" stroke="#946A21" stroke-width="1.5"/>
+<text x="533.000" y="1285.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#946A21" text-anchor="middle">7</text>
+<circle cx="595.000" cy="1280.000" r="13" fill="#FBF6EB" stroke="#946A21" stroke-width="1.5"/>
+<text x="595.000" y="1285.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#946A21" text-anchor="middle">8</text>
+<circle cx="564.000" cy="1320.000" r="13" fill="#FBF6EB" stroke="#946A21" stroke-width="1.5"/>
+<text x="564.000" y="1325.000" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#946A21" text-anchor="middle">9</text>
+<path d="M365 1233 L420 1233" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="585.000" y="1374.000" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">Resolution γ · retain every community</text>
+<path d="M750 1233 L791 1233" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="791.000" y="1134.000" width="174.000" height="205.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="791.000" y="1134.000" width="174.000" height="42.000" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="804.000" y="1162.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">ID</text>
+<text x="847.000" y="1162.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">Cluster</text>
+<text x="807.000" y="1209.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="start">i</text>
+<text x="842.000" y="1209.000" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="500" fill="#007D83" text-anchor="start">Cluster_001</text>
+<text x="807.000" y="1256.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="start">4</text>
+<text x="842.000" y="1256.000" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="500" fill="#356E9A" text-anchor="start">Cluster_002</text>
+<text x="807.000" y="1310.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="start">7</text>
+<text x="842.000" y="1310.000" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="500" fill="#946A21" text-anchor="start">Cluster_003</text>
+<text x="35.000" y="1442.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Optional UMAP display</text>
+<path d="M878 1339 V1413 H361 V1485" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="704.000" y="1403.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">cluster strata</text>
+<rect x="35.000" y="1485.000" width="360.000" height="220.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="54.000" y="1518.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Stratified display sample</text>
+<text x="54.000" y="1550.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="start">Same scaled marker columns</text>
+<circle cx="69.000" cy="1580.000" r="6" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<rect x="91.000" y="1568.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="137.000" y="1568.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="183.000" y="1568.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="229.000" y="1568.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="275.000" y="1568.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="321.000" y="1568.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="295.000" y="1586.000" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<circle cx="69.000" cy="1611.000" r="6" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<rect x="91.000" y="1599.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="137.000" y="1599.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="183.000" y="1599.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="229.000" y="1599.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="275.000" y="1599.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="321.000" y="1599.000" width="42.000" height="25.000" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="295.000" y="1617.000" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<circle cx="69.000" cy="1642.000" r="6" fill="#356E9A" stroke="#356E9A" stroke-width="1.5"/>
+<rect x="91.000" y="1630.000" width="42.000" height="25.000" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="137.000" y="1630.000" width="42.000" height="25.000" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="183.000" y="1630.000" width="42.000" height="25.000" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="229.000" y="1630.000" width="42.000" height="25.000" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="275.000" y="1630.000" width="42.000" height="25.000" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="321.000" y="1630.000" width="42.000" height="25.000" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="295.000" y="1648.000" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<circle cx="69.000" cy="1673.000" r="6" fill="#946A21" stroke="#946A21" stroke-width="1.5"/>
+<rect x="91.000" y="1661.000" width="42.000" height="25.000" fill="#FBF6EB" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="137.000" y="1661.000" width="42.000" height="25.000" fill="#FBF6EB" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="183.000" y="1661.000" width="42.000" height="25.000" fill="#FBF6EB" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="229.000" y="1661.000" width="42.000" height="25.000" fill="#FBF6EB" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="275.000" y="1661.000" width="42.000" height="25.000" fill="#FBF6EB" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="321.000" y="1661.000" width="42.000" height="25.000" fill="#FBF6EB" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="295.000" y="1679.000" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<path d="M395 1600 L514 1600" fill="none" stroke="#356E9A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="455.000" y="1580.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">UMAP</text>
+<rect x="514.000" y="1485.000" width="451.000" height="220.000" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<path d="M550 1676 L940 1676" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<path d="M550 1676 L550 1506" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<text x="930.000" y="1697.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="end">u₁</text>
+<text x="562.000" y="1511.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">u₂</text>
+<circle cx="596.000" cy="1603.000" r="6" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<circle cx="610.000" cy="1579.000" r="6" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<circle cx="624.000" cy="1609.000" r="6" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<circle cx="643.000" cy="1585.000" r="6" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<circle cx="652.000" cy="1630.000" r="6" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<circle cx="676.000" cy="1604.000" r="6" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<circle cx="769.000" cy="1579.000" r="6" fill="#356E9A" stroke="#356E9A" stroke-width="1.5"/>
+<circle cx="786.000" cy="1550.000" r="6" fill="#356E9A" stroke="#356E9A" stroke-width="1.5"/>
+<circle cx="807.000" cy="1568.000" r="6" fill="#356E9A" stroke="#356E9A" stroke-width="1.5"/>
+<circle cx="825.000" cy="1535.000" r="6" fill="#356E9A" stroke="#356E9A" stroke-width="1.5"/>
+<circle cx="848.000" cy="1557.000" r="6" fill="#356E9A" stroke="#356E9A" stroke-width="1.5"/>
+<circle cx="869.000" cy="1531.000" r="6" fill="#356E9A" stroke="#356E9A" stroke-width="1.5"/>
+<circle cx="832.000" cy="1642.000" r="6" fill="#946A21" stroke="#946A21" stroke-width="1.5"/>
+<circle cx="860.000" cy="1650.000" r="6" fill="#946A21" stroke="#946A21" stroke-width="1.5"/>
+<circle cx="889.000" cy="1628.000" r="6" fill="#946A21" stroke="#946A21" stroke-width="1.5"/>
+<circle cx="915.000" cy="1643.000" r="6" fill="#946A21" stroke="#946A21" stroke-width="1.5"/>
+</svg>

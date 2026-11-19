@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Execution, scheduling and result reuse · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/run/execution.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="execution-scheduling-and-result-reuse">Execution, scheduling and result reuse</h1>
+<p><a id="reference-batch-execution"></a></p>
+<p><a id="reference-batch-execution--batch-execution"></a></p>
+<p><a href="index.html#user-guide-workflow">Run and review</a> · <a href="saving-and-recovery.html">Saving and recovery</a></p>
+<p>The plan records the operations each sample needs and which ones share inputs across images. During the run, the Python coordinator uses that plan to decide when to start a calculation, which files to give it and when its result can be used by the next stage.</p>
+<p><a id="reference-batch-execution--i-record-samples-subjects-and-processing-groups"></a> <a id="reference-batch-execution--ii-prepare-the-plan-and-expand-it-after-region-review"></a></p>
+<h2 id="build-the-plan-from-accepted-inputs">Build the plan from accepted inputs</h2>
+<p>The coordinator builds the plan from the <a href="../setup/analysis.html">sample, subject and processing-group assignments</a> and computing settings. These identify which images each operation reads and which subjects can contribute to shared fitting. Image inspection and channel review establish the inputs for spectral preparation. Tissue detection and subsequent QuPath operations then read the prepared OME-Zarr image. <a href="../images/processing.html#reference-image-processing">Image preparation</a> explains that data conversion.</p>
+<p>Accepted tissue sections and <a href="../tissue/index.html#selecting-analysis-regions">analysis regions</a> determine the region-specific operations. Their final count and identifiers become available after review, so the coordinator expands the plan at that point. The revised plan retains completed work and records which earlier plan it replaces. Run can display future stages while they wait for their image or region inputs.</p>
+<p><a id="reference-batch-execution--iii-start-independent-work-and-wait-for-shared-inputs"></a></p>
+<h2 id="schedule-independent-and-shared-work">Schedule independent and shared work</h2>
+<p>An image can move to its next stage as soon as the required results and processing resources are available. If one sample is waiting for annotations, the scheduler can still start independent work on other samples. A fit shared across images must wait until every participating image has supplied its inputs.</p>
+<p><a id="reference-batch-execution--vi-fit-a-shared-classifier"></a></p>
+<p>For a shared tissue classifier, the inputs for fitting include the accepted reference annotations and subject assignments. The fitted model can then be evaluated on the subjects reserved for testing and applied to the remaining images as requested. <a href="../tissue-classification/index.html#reference-training-and-evaluation">Training and evaluation</a> explains how subjects are allocated and scored. The <a href="../tissue-classification/model-execution.html#v-subject-grouped-fitting">model execution guide</a> describes the data passed to each fit.</p>
+<p><a id="reference-batch-execution--vii-preserve-cell-populations-through-measurements-and-phenotyping"></a></p>
+<p>For pooled cell analysis, the coordinator waits for the accepted measurements from every participating image. It checks that each table contains the expected tissue sections, analysis regions and cells, then reads the requested feature columns in the order used for fitting. If you remove an image from the pool, the other images can keep their measurement tables. The shared fit may need repeating because the cell population used to estimate the scaling or fit the model has changed. <a href="../cells/processing.html">Cell construction and measurements</a> · <a href="../../reference/cell-storage.html#v-matching-new-results-to-the-same-cells">Matching results to the same cells</a></p>
+<p>When an analysis continues or reopens, we check the software needed for unfinished stages and later stages waiting for their inputs. For example, segmentation requires the libraries for the selected segmentation method even when image preparation is already complete. Reopening an earlier stage also checks the software needed to run it again.</p>
+<p><a id="reference-batch-execution--v-limit-simultaneous-work-and-temporary-memory"></a></p>
+<h2 id="limit-simultaneous-work">Limit simultaneous work</h2>
+<p>A ready task can start once enough CPU capacity and memory are available and it has access to the files it needs. Two tasks that write the same QuPath project or classifier must take turns. Independent tasks can run together within the available resources.</p>
+<p>One operation can also start several calculations. During unmixing, each <a href="../images/processing.html#select-the-number-of-simultaneous-regions">regional fit</a> needs memory for its image data and working arrays, and the matrix library may use several threads per fit. We limit concurrent fits using both the <a href="../setup/memory-and-threads.html">memory allowance</a> and the available threads. Cluster processing initially permits one pipeline operation at a time and limits its memory to the allowance for the Slurm job.</p>
+<p><a id="reference-batch-execution--iv-prepare-and-record-one-processing-attempt"></a></p>
+<h2 id="prepare-and-record-one-processing-attempt">Prepare and record one processing attempt</h2>
+<p>Before launching a calculation, the coordinator saves a request identifying the task, this attempt and the result it expects back. For a QuPath calculation, the request names the project, image entry and script. For a Python calculation, it identifies the input datasets and method. In both cases the worker receives the settings, versions and locations of the inputs, its resource allowance and the destination for the result.</p>
+<p>The inputs depend on the calculation. To measure a region, the worker needs its tissue section, analysis region and cell population. To evaluate a classifier, it also needs the fitted model and the subjects assigned to each role or fold. The worker opens the recorded inputs directly, writes the result and returns its location with the attempt ID and outcome.</p>
+<p><a href="../../assets/figures/execution-ownership.svg"><img src="../../assets/figures/execution-ownership.svg" alt="Three representative computations show task dispatch separately from direct image and cell-table reads and writes." width="800"></a></p>
+<p><em>The dashed arrows carry settings and file locations. Each processing program reads its own inputs (blue) and writes its result to storage (teal). The marker fit, for example, reads the mean intensities saved during measurement.</em></p>
+<p>We record the worker’s exit status and check the returned result. This record determines what happens after an interruption. If the worker reported a failure, a retry starts a new attempt and preserves the earlier log. If there is no recorded outcome, the coordinator inspects the pending request and its inputs to determine whether the existing attempt can continue. <a href="saving-and-recovery.html#offered-recovery-actions">Recovery after interruption</a></p>
+<p><a id="reference-batch-execution--viii-collect-settings-annotations-and-review-decisions"></a> <a id="reference-batch-execution--ix-check-outputs-before-recording-completion"></a></p>
+<h2 id="accept-reviews-and-completed-results">Accept reviews and completed results</h2>
+<p>When a stage needs a decision, the coordinator saves a request for the affected image, model or region. Submitting the review checks that its inputs still match. If a different result has since been selected, reopen the current review. Submitting an already accepted response returns the recorded result.</p>
+<p>After a program finishes successfully, the coordinator checks whether its output contains what the stage requested. For an unmixed image we check the component channels and physical calibration. For cell tables we check the cell identities and assigned regions, and for predictions we check the class labels against the saved model and the coverage against the requested cells or regions. Once the result passes these checks and any required review or project save is complete, subsequent tasks can use it. <a href="saving-and-recovery.html#iv-selecting-a-complete-dataset">Selecting a completed dataset</a></p>
+<p><a id="reference-batch-execution--x-save-progress-and-compare-qupath-changes"></a></p>
+<h3 id="save-progress-against-the-current-analysis">Save progress against the current analysis</h3>
+<p>One coordinator writes progress at a time. Its update checks the saved version against the version read at the start, preventing a delayed form or process from replacing newer progress. QuPath changes are compared through their recorded image inputs and the annotations, geometry or models consumed by the affected step. <a href="qupath-review.html#reference-qupath-integration--ii-saving-the-project-and-returning-annotations">Project comparison</a> explains why display-only saves can retain the same processing inputs; <a href="saving-and-recovery.html#completing-a-native-project-stage">native completion</a> explains saved-state checks after interruption.</p>
+<p><a id="reference-batch-execution--xi-pause-reopen-and-retry"></a></p>
+<h3 id="pause-and-reopen-processing">Pause and reopen processing</h3>
+<p>Pausing stops new operations from starting while active work reaches its supported stopping point. Reopening inspects the saved attempt and results before continuing or offering a retry. Follow <a href="index.html#pause-processing">Run's pause and reopen procedures</a> for the controls and <a href="saving-and-recovery.html#offered-recovery-actions">offered recovery actions</a> for the conditions that permit each action.</p>
+<p><a id="reference-batch-execution--xii-execute-cluster-work-and-return-streamed-annotations"></a></p>
+<h2 id="dispatch-cluster-work">Dispatch cluster work</h2>
+<p>The cluster analysis folder holds the processing history, the main QuPath project and the accepted results. The desktop sends settings and review decisions over SSH. During annotation, QuPath saves a draft on the local computer. Returning that draft sends the permitted edits to the cluster project. <a href="../setup/computing.html">Cluster paths and resources</a> · <a href="interactive-viewing.html">Reading images and cells during review</a></p>
+<p>A review can send work to the cluster more than once. During manual alignment, for example, the first request sends the starting position for affine fitting. Once you have inspected the returned affine, the final request identifies that fit and any landmarks to use for local refinement. Both requests identify the review and image pair so the returned fit opens in the correct analysis. <a href="../alignment/index.html#return-alignment-work-to-the-cluster">Manual alignment on a cluster</a></p>
+<p>Each Slurm submission records its job ID and submission result. If the connection ends before the response is clear, the application checks the scheduler before issuing another equivalent job. The selected activation script is sourced at the start of allocated jobs and before direct <code>mif-batch</code> commands that require that environment. Scheduler queries and ordinary file checks use the cluster's normal SSH environment.</p>
+<p>Processing programs compare installed release and message-format identifiers before accepting requests. They require the selected script and records identifying the source image, model, references and output.</p>
+<p><a href="../../assets/figures/streaming-execution.svg"><img src="../../assets/figures/streaming-execution.svg" alt="Cluster processing uses cluster storage while the desktop submits settings through SSH and reads viewport chunks through a read-only mount." width="770"></a></p>
+<p><em>Slurm allocates the requested CPUs and memory on a compute node. The processing programs read and write cluster storage. For local review of an OME-Zarr image, QuPath uses the mounted folder to read the compressed chunks for the field on screen. Vendor files are read through their own image readers.</em></p>
+<p><a id="reference-batch-execution--implementation"></a></p>
+<h2 id="implementation">Implementation</h2>
+<details>
+<summary>Source modules for scheduling and saved progress</summary>
+
+<p><code>orchestration/batch_service.py</code> provides analysis operations. <code>batch_scheduler.py</code> selects ready work and applies resource limits. <code>batch_state.py</code> reads and writes saved progress and the records connecting requests, attempts and accepted results.</p>
+<p><code>batch_training/</code> handles references, fitting, model review, independent evaluation and application to additional images. <code>batch_phenotyping/</code> handles accepted measured cells, marker rules, pooled clustering and selected phenotype results. The step-specific preparation functions construct the concrete Python and QuPath requests.</p>
+<p><a href="../setup/analysis-folder.html#reference-analysis-folder">Analysis-folder contents</a> describes the saved files. <a href="../setup/source-layout.html">Source layout</a> identifies the code modules used by each calculation.</p>
+</details>
+
+<hr />
+<p><strong>Continue:</strong> <a href="index.html">Run and review</a>.</p>
+</main>
+</body>
+</html>

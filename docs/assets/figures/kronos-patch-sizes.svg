@@ -1,0 +1,302 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="820" viewBox="0 0 1000 820" role="img" aria-labelledby="title description">
+<title id="title">KRONOS image patch sizes</title>
+<desc id="description">Four alternative input sizes at 0.5 micrometres per pixel: 32,64,128,256. Crop width increases from16 to128 micrometres. Fixed16pixel tokenization gives4,16,64,256image tokens per marker. For cell phenotyping, the same nucleus-centred cell outline masks each crop before channel normalization and encoding. Outside-cell raw pixels become zero. Each input produces a768value embedding.</desc>
+<rect width="1000" height="820" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="140" y="32" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">32 × 32 pixels</text>
+<rect x="50" y="62" width="180" height="180" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="1"/>
+<ellipse cx="140" cy="152" rx="7" ry="9" fill="#356E9A" opacity="0.13"/>
+<circle cx="140" cy="152" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="102" cy="110" rx="12" ry="9" fill="#356E9A" opacity="0.13"/>
+<circle cx="102" cy="110" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="182" cy="130" rx="10" ry="15" fill="#356E9A" opacity="0.13"/>
+<circle cx="182" cy="130" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="85" cy="195" rx="9" ry="12" fill="#356E9A" opacity="0.13"/>
+<circle cx="85" cy="195" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="165" cy="209" rx="13" ry="8" fill="#356E9A" opacity="0.13"/>
+<circle cx="165" cy="209" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="203" cy="200" rx="10" ry="14" fill="#356E9A" opacity="0.13"/>
+<circle cx="203" cy="200" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="132" cy="84" rx="11" ry="8" fill="#356E9A" opacity="0.13"/>
+<circle cx="132" cy="84" r="3" fill="#356E9A" stroke="#356E9A"/>
+<rect x="128.75" y="140.75" width="22.5" height="22.5" rx="0" fill="none" stroke="#007D83" stroke-width="2.5"/>
+<path d="M136 152 L144 152" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M140 148 L140 156" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="140" y="269" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">16 × 16 µm</text>
+<path d="M140 282 L140 313" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="68" y="335" width="144" height="144" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<ellipse cx="140" cy="407" rx="44.800000000000004" ry="57.6" fill="#356E9A" fill-opacity="0.22" stroke="#007D83" stroke-width="1.6"/>
+<circle cx="140" cy="407" r="19.200000000000003" fill="#356E9A" stroke="#356E9A"/>
+<path d="M136 407 L144 407" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M140 403 L140 411" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M140.0 335 L140.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M68 407.0 L212 407.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<text x="140" y="325" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Apply the cell mask</text>
+<text x="140" y="508" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="middle">4 tokens per marker</text>
+<text x="140" y="534" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">4C + 17 total tokens</text>
+<path d="M140 546 L140 568" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="64" y="578" width="152" height="46" rx="8" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="140" y="607" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Normalize</text>
+<path d="M140 630 L140 650" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="64" y="660" width="152" height="46" rx="8" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="140" y="689" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">KRONOS</text>
+<path d="M140 712 L140 733" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="68" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="68" y="746" width="10" height="20" fill="#356E9A" opacity="0.12"/>
+<rect x="80" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="80" y="746" width="10" height="20" fill="#356E9A" opacity="0.42"/>
+<rect x="92" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="92" y="746" width="10" height="20" fill="#356E9A" opacity="0.72"/>
+<rect x="104" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="104" y="746" width="10" height="20" fill="#356E9A" opacity="0.32"/>
+<rect x="116" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="116" y="746" width="10" height="20" fill="#356E9A" opacity="0.62"/>
+<rect x="128" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="128" y="746" width="10" height="20" fill="#356E9A" opacity="0.22"/>
+<rect x="140" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="140" y="746" width="10" height="20" fill="#356E9A" opacity="0.52"/>
+<rect x="152" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="152" y="746" width="10" height="20" fill="#356E9A" opacity="0.12"/>
+<rect x="164" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="164" y="746" width="10" height="20" fill="#356E9A" opacity="0.42"/>
+<rect x="176" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="176" y="746" width="10" height="20" fill="#356E9A" opacity="0.72"/>
+<rect x="188" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="188" y="746" width="10" height="20" fill="#356E9A" opacity="0.32"/>
+<rect x="200" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="200" y="746" width="10" height="20" fill="#356E9A" opacity="0.62"/>
+<text x="140" y="802" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="middle">768-value embedding</text>
+<text x="380" y="32" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">64 × 64 pixels</text>
+<rect x="290" y="62" width="180" height="180" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="1"/>
+<ellipse cx="380" cy="152" rx="7" ry="9" fill="#356E9A" opacity="0.13"/>
+<circle cx="380" cy="152" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="342" cy="110" rx="12" ry="9" fill="#356E9A" opacity="0.13"/>
+<circle cx="342" cy="110" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="422" cy="130" rx="10" ry="15" fill="#356E9A" opacity="0.13"/>
+<circle cx="422" cy="130" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="325" cy="195" rx="9" ry="12" fill="#356E9A" opacity="0.13"/>
+<circle cx="325" cy="195" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="405" cy="209" rx="13" ry="8" fill="#356E9A" opacity="0.13"/>
+<circle cx="405" cy="209" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="443" cy="200" rx="10" ry="14" fill="#356E9A" opacity="0.13"/>
+<circle cx="443" cy="200" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="372" cy="84" rx="11" ry="8" fill="#356E9A" opacity="0.13"/>
+<circle cx="372" cy="84" r="3" fill="#356E9A" stroke="#356E9A"/>
+<rect x="357.5" y="129.5" width="45.0" height="45.0" rx="0" fill="none" stroke="#007D83" stroke-width="2.5"/>
+<path d="M376 152 L384 152" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M380 148 L380 156" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="380" y="269" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">32 × 32 µm</text>
+<path d="M380 282 L380 313" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="308" y="335" width="144" height="144" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<ellipse cx="380" cy="407" rx="22.400000000000002" ry="28.8" fill="#356E9A" fill-opacity="0.22" stroke="#007D83" stroke-width="1.6"/>
+<circle cx="380" cy="407" r="9.600000000000001" fill="#356E9A" stroke="#356E9A"/>
+<path d="M376 407 L384 407" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M380 403 L380 411" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M344.0 335 L344.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M308 371.0 L452 371.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M380.0 335 L380.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M308 407.0 L452 407.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M416.0 335 L416.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M308 443.0 L452 443.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<text x="380" y="325" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Apply the cell mask</text>
+<text x="380" y="508" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="middle">16 tokens per marker</text>
+<text x="380" y="534" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">16C + 17 total tokens</text>
+<path d="M380 546 L380 568" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="304" y="578" width="152" height="46" rx="8" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="380" y="607" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Normalize</text>
+<path d="M380 630 L380 650" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="304" y="660" width="152" height="46" rx="8" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="380" y="689" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">KRONOS</text>
+<path d="M380 712 L380 733" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="308" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="308" y="746" width="10" height="20" fill="#356E9A" opacity="0.32"/>
+<rect x="320" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="320" y="746" width="10" height="20" fill="#356E9A" opacity="0.62"/>
+<rect x="332" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="332" y="746" width="10" height="20" fill="#356E9A" opacity="0.22"/>
+<rect x="344" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="344" y="746" width="10" height="20" fill="#356E9A" opacity="0.52"/>
+<rect x="356" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="356" y="746" width="10" height="20" fill="#356E9A" opacity="0.12"/>
+<rect x="368" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="368" y="746" width="10" height="20" fill="#356E9A" opacity="0.42"/>
+<rect x="380" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="380" y="746" width="10" height="20" fill="#356E9A" opacity="0.72"/>
+<rect x="392" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="392" y="746" width="10" height="20" fill="#356E9A" opacity="0.32"/>
+<rect x="404" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="404" y="746" width="10" height="20" fill="#356E9A" opacity="0.62"/>
+<rect x="416" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="416" y="746" width="10" height="20" fill="#356E9A" opacity="0.22"/>
+<rect x="428" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="428" y="746" width="10" height="20" fill="#356E9A" opacity="0.52"/>
+<rect x="440" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="440" y="746" width="10" height="20" fill="#356E9A" opacity="0.12"/>
+<text x="380" y="802" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="middle">768-value embedding</text>
+<text x="620" y="32" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">128 × 128 pixels</text>
+<rect x="530" y="62" width="180" height="180" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="1"/>
+<ellipse cx="620" cy="152" rx="7" ry="9" fill="#356E9A" opacity="0.13"/>
+<circle cx="620" cy="152" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="582" cy="110" rx="12" ry="9" fill="#356E9A" opacity="0.13"/>
+<circle cx="582" cy="110" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="662" cy="130" rx="10" ry="15" fill="#356E9A" opacity="0.13"/>
+<circle cx="662" cy="130" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="565" cy="195" rx="9" ry="12" fill="#356E9A" opacity="0.13"/>
+<circle cx="565" cy="195" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="645" cy="209" rx="13" ry="8" fill="#356E9A" opacity="0.13"/>
+<circle cx="645" cy="209" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="683" cy="200" rx="10" ry="14" fill="#356E9A" opacity="0.13"/>
+<circle cx="683" cy="200" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="612" cy="84" rx="11" ry="8" fill="#356E9A" opacity="0.13"/>
+<circle cx="612" cy="84" r="3" fill="#356E9A" stroke="#356E9A"/>
+<rect x="575.0" y="107.0" width="90.0" height="90.0" rx="0" fill="none" stroke="#007D83" stroke-width="2.5"/>
+<path d="M616 152 L624 152" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M620 148 L620 156" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="620" y="269" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">64 × 64 µm</text>
+<path d="M620 282 L620 313" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="548" y="335" width="144" height="144" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<ellipse cx="620" cy="407" rx="11.200000000000001" ry="14.4" fill="#356E9A" fill-opacity="0.22" stroke="#007D83" stroke-width="1.6"/>
+<circle cx="620" cy="407" r="4.800000000000001" fill="#356E9A" stroke="#356E9A"/>
+<path d="M616 407 L624 407" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M620 403 L620 411" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M566.0 335 L566.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M548 353.0 L692 353.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M584.0 335 L584.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M548 371.0 L692 371.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M602.0 335 L602.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M548 389.0 L692 389.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M620.0 335 L620.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M548 407.0 L692 407.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M638.0 335 L638.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M548 425.0 L692 425.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M656.0 335 L656.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M548 443.0 L692 443.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M674.0 335 L674.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M548 461.0 L692 461.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<text x="620" y="325" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Apply the cell mask</text>
+<text x="620" y="508" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="middle">64 tokens per marker</text>
+<text x="620" y="534" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">64C + 17 total tokens</text>
+<path d="M620 546 L620 568" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="544" y="578" width="152" height="46" rx="8" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="620" y="607" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Normalize</text>
+<path d="M620 630 L620 650" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="544" y="660" width="152" height="46" rx="8" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="620" y="689" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">KRONOS</text>
+<path d="M620 712 L620 733" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="548" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="548" y="746" width="10" height="20" fill="#356E9A" opacity="0.52"/>
+<rect x="560" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="560" y="746" width="10" height="20" fill="#356E9A" opacity="0.12"/>
+<rect x="572" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="572" y="746" width="10" height="20" fill="#356E9A" opacity="0.42"/>
+<rect x="584" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="584" y="746" width="10" height="20" fill="#356E9A" opacity="0.72"/>
+<rect x="596" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="596" y="746" width="10" height="20" fill="#356E9A" opacity="0.32"/>
+<rect x="608" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="608" y="746" width="10" height="20" fill="#356E9A" opacity="0.62"/>
+<rect x="620" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="620" y="746" width="10" height="20" fill="#356E9A" opacity="0.22"/>
+<rect x="632" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="632" y="746" width="10" height="20" fill="#356E9A" opacity="0.52"/>
+<rect x="644" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="644" y="746" width="10" height="20" fill="#356E9A" opacity="0.12"/>
+<rect x="656" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="656" y="746" width="10" height="20" fill="#356E9A" opacity="0.42"/>
+<rect x="668" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="668" y="746" width="10" height="20" fill="#356E9A" opacity="0.72"/>
+<rect x="680" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="680" y="746" width="10" height="20" fill="#356E9A" opacity="0.32"/>
+<text x="620" y="802" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="middle">768-value embedding</text>
+<text x="860" y="32" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">256 × 256 pixels</text>
+<rect x="770" y="62" width="180" height="180" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="1"/>
+<ellipse cx="860" cy="152" rx="7" ry="9" fill="#356E9A" opacity="0.13"/>
+<circle cx="860" cy="152" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="822" cy="110" rx="12" ry="9" fill="#356E9A" opacity="0.13"/>
+<circle cx="822" cy="110" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="902" cy="130" rx="10" ry="15" fill="#356E9A" opacity="0.13"/>
+<circle cx="902" cy="130" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="805" cy="195" rx="9" ry="12" fill="#356E9A" opacity="0.13"/>
+<circle cx="805" cy="195" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="885" cy="209" rx="13" ry="8" fill="#356E9A" opacity="0.13"/>
+<circle cx="885" cy="209" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="923" cy="200" rx="10" ry="14" fill="#356E9A" opacity="0.13"/>
+<circle cx="923" cy="200" r="3" fill="#356E9A" stroke="#356E9A"/>
+<ellipse cx="852" cy="84" rx="11" ry="8" fill="#356E9A" opacity="0.13"/>
+<circle cx="852" cy="84" r="3" fill="#356E9A" stroke="#356E9A"/>
+<rect x="770.0" y="62.0" width="180.0" height="180.0" rx="0" fill="none" stroke="#007D83" stroke-width="2.5"/>
+<path d="M856 152 L864 152" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M860 148 L860 156" fill="none" stroke="#007D83" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="860" y="269" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">128 × 128 µm</text>
+<path d="M860 282 L860 313" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="788" y="335" width="144" height="144" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<ellipse cx="860" cy="407" rx="5.6000000000000005" ry="7.2" fill="#356E9A" fill-opacity="0.22" stroke="#007D83" stroke-width="1.6"/>
+<circle cx="860" cy="407" r="2.4000000000000004" fill="#356E9A" stroke="#356E9A"/>
+<path d="M856 407 L864 407" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M860 403 L860 411" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M797.0 335 L797.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 344.0 L932 344.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M806.0 335 L806.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 353.0 L932 353.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M815.0 335 L815.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 362.0 L932 362.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M824.0 335 L824.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 371.0 L932 371.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M833.0 335 L833.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 380.0 L932 380.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M842.0 335 L842.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 389.0 L932 389.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M851.0 335 L851.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 398.0 L932 398.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M860.0 335 L860.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 407.0 L932 407.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M869.0 335 L869.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 416.0 L932 416.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M878.0 335 L878.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 425.0 L932 425.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M887.0 335 L887.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 434.0 L932 434.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M896.0 335 L896.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 443.0 L932 443.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M905.0 335 L905.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 452.0 L932 452.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M914.0 335 L914.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 461.0 L932 461.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M923.0 335 L923.0 479" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<path d="M788 470.0 L932 470.0" fill="none" stroke="#007D83" stroke-width="0.65" stroke-linejoin="round"/>
+<text x="860" y="325" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Apply the cell mask</text>
+<text x="860" y="508" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="middle">256 tokens per marker</text>
+<text x="860" y="534" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">256C + 17 total tokens</text>
+<path d="M860 546 L860 568" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="784" y="578" width="152" height="46" rx="8" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="860" y="607" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Normalize</text>
+<path d="M860 630 L860 650" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="784" y="660" width="152" height="46" rx="8" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="860" y="689" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">KRONOS</text>
+<path d="M860 712 L860 733" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="788" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="788" y="746" width="10" height="20" fill="#356E9A" opacity="0.72"/>
+<rect x="800" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="800" y="746" width="10" height="20" fill="#356E9A" opacity="0.32"/>
+<rect x="812" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="812" y="746" width="10" height="20" fill="#356E9A" opacity="0.62"/>
+<rect x="824" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="824" y="746" width="10" height="20" fill="#356E9A" opacity="0.22"/>
+<rect x="836" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="836" y="746" width="10" height="20" fill="#356E9A" opacity="0.52"/>
+<rect x="848" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="848" y="746" width="10" height="20" fill="#356E9A" opacity="0.12"/>
+<rect x="860" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="860" y="746" width="10" height="20" fill="#356E9A" opacity="0.42"/>
+<rect x="872" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="872" y="746" width="10" height="20" fill="#356E9A" opacity="0.72"/>
+<rect x="884" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="884" y="746" width="10" height="20" fill="#356E9A" opacity="0.32"/>
+<rect x="896" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="896" y="746" width="10" height="20" fill="#356E9A" opacity="0.62"/>
+<rect x="908" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="908" y="746" width="10" height="20" fill="#356E9A" opacity="0.22"/>
+<rect x="920" y="746" width="10" height="20" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="0.5"/>
+<rect x="920" y="746" width="10" height="20" fill="#356E9A" opacity="0.52"/>
+<text x="860" y="802" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#243746" text-anchor="middle">768-value embedding</text>
+</svg>

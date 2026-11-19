@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Viewing images and cells in QuPath · MIFflow</title>
+<link rel="stylesheet" href="../../../guide.css">
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<header class="site-bar">
+  <nav class="site-width" aria-label="Documentation">
+    <a class="brand" href="../../../index.html">MIFflow</a>
+    <a href="../../../index.html#analysis-stages">Analysis stages</a>
+    <a href="https://github.com/04-zain/MIFflow/blob/main/docs/stages/run/interactive-viewing.md">View source</a>
+  </nav>
+</header>
+<main id="guide" class="site-width">
+<h1 id="viewing-images-and-cells-in-qupath">Viewing images and cells in QuPath</h1>
+<p><a href="index.html">Run and review</a> · <a href="qupath-review.html">QuPath annotations</a></p>
+<p>To inspect an accepted result, choose <strong>Open QuPath</strong> on <strong>Run</strong> or <strong>Results</strong> and select the image. QuPath reads the pixels, cell outlines and phenotype labels for the area in view as you pan and zoom. To change a drawing, open the editing action in the relevant stage review so the saved draft returns to that stage.</p>
+<h2 id="navigate-the-image">Navigate the image</h2>
+<p>Zoom in on a tissue region to inspect its cells against the underlying staining. QuPath reads the image tiles and cell outlines separately. If the staining appears first, <strong>Loading cell outlines</strong> indicates that QuPath is still retrieving the cells for the visible field.</p>
+<p><a id="iv-object-detail-and-overview-scale"></a> When the visible field contains too many cells to draw within the count or memory limit, <strong>Cell density overview</strong> shows how the cells are distributed across the tissue. Each grid square is shaded by the number of cell centres it contains. Zoom in to inspect individual outlines in a smaller field.</p>
+<p>If <strong>Cell data unavailable</strong> appears, read the accompanying explanation. For a memory-related error, zoom into a smaller area. If a read failed while the storage connection was unavailable, restore that connection, then pan or zoom to request a new view.</p>
+<h2 id="choose-grayscale-or-channel-colours">Choose grayscale or channel colours</h2>
+<p>QuPath opens each image with the channels, colours and brightness limits saved under <a href="index.html#adjust-image-appearance"><strong>Image appearance</strong> on Run</a>. Use QuPath’s <strong>Brightness/Contrast</strong> controls to adjust the display. When you close QuPath, the review uses the updated settings. Switching to grayscale preserves the assigned channel colours.</p>
+<h2 id="inspect-a-cell">Inspect a cell</h2>
+<p>Turn on QuPath’s <strong>Show detections</strong> and choose <strong>Cell boundaries only</strong>, <strong>Nuclei only</strong> or <strong>Nuclei &amp; cell boundaries</strong>. Clear <strong>Fill detections</strong> to examine staining inside the outlines. Click a cell to load its saved measurements. Selecting another phenotyping result changes the class names and colours displayed on the cells.</p>
+<p>When you hide detections, the viewer stops requesting cell outlines. You can continue to pan and zoom through the image.</p>
+<h2 id="save-annotations-and-cell-edits">Save annotations and cell edits</h2>
+<p>Open tissue or analysis-region annotations for editing from their stage review. For cells, use segmentation review to <a href="../cells/index.html#reshape-or-remove-a-selected-cell">collect corrections</a> before reshaping, splitting or merging outlines, drawing missing cells or nuclei, or deleting cells. Review the proposed changes before applying them. If the cells have already been measured, the affected results require recalculation.</p>
+<p>For a stopped measurement in local or cluster-desktop mode, <strong>Change cell measurements… → Remove cells in QuPath</strong> opens a draft for explicit removals. Inspect and select the cell, delete it, save and close QuPath to return the removal. Keep other outlines, labels and annotations unchanged in this draft.</p>
+<p>Review and apply the returned removal, then continue processing to recalculate measurements and phenotyping with that cell excluded. <a href="index.html#change-a-completed-or-stopped-step">Changing a completed or stopped step</a> explains how to review the affected work and continue.</p>
+<h2 id="paired-images-and-cluster-streaming">Paired images and cluster streaming</h2>
+<h3 id="inspect-an-aligned-image-pair">Inspect an aligned image pair</h3>
+<p>An aligned paired image, such as H&amp;E, is displayed in the mIF coordinate frame. The saved alignment determines which H&amp;E pixels correspond to the area being viewed. <a href="../alignment/index.html#display-the-original-paired-image">Display the original paired image</a> explains how the Java reader evaluates that mapping and Warpy reads the pixels. The same transformation supplies the reverse mapping for annotation transfer.</p>
+<h3 id="review-an-image-on-the-cluster">Review an image on the cluster</h3>
+<p>In a streaming review, QuPath runs on your computer. It uses the <a href="../setup/computing.html#getting-started-cluster-setup--5-map-the-image-locations-for-local-review">mounted cluster folder</a> to find the image and cell tables for the selected sample. Save any annotation edits in the local draft, close QuPath and return the draft through the review page. If the connection closes before the return finishes, the drawings are still in the local draft and you can <a href="index.html#return-a-qupath-annotation-draft">return them after reconnecting</a>.</p>
+<h2 id="export-an-image-with-cell-outlines">Export an image with cell outlines</h2>
+<p>Choose <strong>mIF → Export image…</strong> in QuPath. Under <strong>Region</strong>, select the area to include.</p>
+<ul>
+<li><strong>Current view</strong> exports the visible image rectangle. Reset viewer rotation before using this option.</li>
+<li><strong>Selected annotation bounds</strong> exports the rectangle enclosing the selected annotation, including image pixels outside the annotation's shape. Select an annotation on the displayed image plane before exporting.</li>
+<li><strong>Whole image</strong> exports the full image extent. For a large image, its initial resolution produces an overview of approximately four million pixels.</li>
+</ul>
+<p>Set <strong>Downsample</strong> to choose the export resolution. A value of <strong>1</strong> uses the original image resolution. A value of <strong>2</strong> halves the output width and height. The dialog shows the resulting dimensions. If they exceed the PNG limit of <strong>16 million pixels</strong>, increase Downsample.</p>
+<p>Keep <strong>Show scale bar</strong> selected to add a bar labelled in physical units using the image’s recorded pixel size. If physical calibration is unavailable, we label the bar in pixels. Confirm the settings and choose a PNG filename.</p>
+<p>The export uses the current channel colours, brightness limits, cell or nucleus display, fill and overlay opacity. It reads the complete cell outlines intersecting the requested rectangle in the background, including outlines that cross its edge.</p>
+<p>The PNG metadata records the exported rectangle, pixel size, channel colours, brightness, gamma and outline-display settings. These values identify the field and the display used to produce the figure.</p>
+<h2 id="how-the-saved-cells-reach-qupath">How the saved cells reach QuPath</h2>
+<p>QuPath keeps manual annotations in the open image’s object hierarchy. For a segmented slide, we save the complete cell population in Spatial Parquet. The viewer requests the outlines and labels for the area on screen as you navigate.</p>
+<h3 id="read-the-image-and-its-cell-outlines">Read the image and its cell outlines</h3>
+<p>QuPath requests image pixels and cell outlines for the same field. The Java image server reads the OME-Zarr pyramid level appropriate for the current zoom. Cell outlines are stored in full-resolution image coordinates, so the cell reader uses the field’s bounds at full resolution to find the outlines to draw over those pixels.</p>
+<p>To find cells in the displayed field, we first select the table’s row groups whose bounding rectangles intersect it. Those rectangles enclose complete outlines, so the search includes a cell whose outline crosses the field edge even when its centre lies outside. At detailed zoom we read the IDs, bounds, outlines and selected phenotype labels from those groups and draw the cells that intersect the field. Clicking an outline then retrieves that cell’s measurements by ID.</p>
+<p>To decide whether individual outlines will fit in memory, we add the row counts and estimated outline sizes of the intersecting groups. If their total exceeds <strong>20,000 rows</strong> or the outline-memory allowance, we read the centres and count them in a <strong>64 × 64 grid</strong> across the visible field. Zooming in can reduce the number of required groups enough to display their outlines again.</p>
+<h3 id="update-the-display-during-navigation">Update the display during navigation</h3>
+<p>Reading files and decoding outlines run on background threads. The completed cell result is then passed to the JavaFX thread that updates QuPath's interface. Each navigation request has a sequence number, allowing the interface to check that the returned cells belong to the current view.</p>
+<p>When you revisit a field, QuPath can reuse its recently read tiles and cells within the <a href="../setup/memory-and-threads.html">memory allowance</a>. If two requests need data that are still loading, both use the result of the same read.</p>
+<p><a id="ii-background-request-registry"></a> <a href="../../assets/figures/viewport.svg"><img src="../../assets/figures/viewport.svg" alt="Image and cell reads for a changing QuPath view." width="620"></a></p>
+<p><em>Moving from A to B requests a new set of image tiles and cells. If the geometry for A arrives after the move, QuPath keeps it off the current view. B can show individual outlines or a grid of cell counts, depending on how many rows its field would require.</em></p>
+<h3 id="select-cells-for-qupath-tools">Select cells for QuPath tools</h3>
+<p>QuPath tools work with objects in the image’s hierarchy. When you select a segmented cell, we retrieve its record from Parquet and add it to that hierarchy. Selecting another cell removes the previous selection if it has not been edited. Manual annotations remain in the hierarchy, and the saved <a href="../../reference/cell-storage.html">cell tables</a> continue to supply the outlines, measurements and classifications for the full population.</p>
+<p>Pipeline calculations read the saved dataset directly, including cells outside the view. A QuPath script that reads only the object hierarchy will see the cells loaded there. For additional analysis of the full population, use the <a href="../results/index.html">exported cell tables</a> or the extension's <code>NativeCellScope</code> interface.</p>
+<hr />
+<p><strong>Continue:</strong> <a href="qupath-review.html">QuPath annotations and reviews</a>.</p>
+</main>
+</body>
+</html>

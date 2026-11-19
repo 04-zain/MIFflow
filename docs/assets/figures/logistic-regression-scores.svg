@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1030" viewBox="0 0 1000 1030" role="img" aria-labelledby="title description">
+<title id="title">Logistic responses and normalized multiclass cell scores</title>
+<desc id="description">A hypothetical three-class model multiplies its three-by-three coefficient matrix by the augmented query vector (1, 2, −1). The intercept is the first coefficient in each class row. Linear responses 1.8, zero and −1.2 become sigmoid responses 0.8581, 0.5 and 0.2315. Dividing each by their sum 1.5896 gives cell scores 0.5398, 0.3145 and 0.1456; A has the largest score. The classes have separate class-against-rest responses.</desc>
+<rect width="1000" height="1030" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="35.000" y="38.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">A  Weighted responses to one prepared row</text>
+<text x="231.000" y="88.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">Fitted coefficients</text>
+<text x="133.000" y="126.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Intercept</text>
+<text x="230.000" y="126.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">x₁</text>
+<text x="327.000" y="126.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">x₂</text>
+<rect x="91.000" y="144.000" width="284.000" height="43.000" fill="#EAF5F4" stroke="none" stroke-width="1"/>
+<text x="59.000" y="173.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">A</text>
+<text x="133.000" y="173.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">0.2</text>
+<text x="230.000" y="173.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">0.6</text>
+<text x="327.000" y="173.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">−0.4</text>
+<rect x="91.000" y="198.000" width="284.000" height="43.000" fill="#FBF6EB" stroke="none" stroke-width="1"/>
+<text x="59.000" y="227.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#946A21" text-anchor="middle">B</text>
+<text x="133.000" y="227.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">−0.1</text>
+<text x="230.000" y="227.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">0.2</text>
+<text x="327.000" y="227.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">0.3</text>
+<rect x="91.000" y="252.000" width="284.000" height="43.000" fill="#EDF3F8" stroke="none" stroke-width="1"/>
+<text x="59.000" y="281.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#356E9A" text-anchor="middle">C</text>
+<text x="133.000" y="281.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">0.3</text>
+<text x="230.000" y="281.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">−0.4</text>
+<text x="327.000" y="281.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">0.7</text>
+<path d="M94 138 H86 V301 H94 M373 138 H381 V301 H373" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="431.000" y="228.000" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="400" fill="#243746" text-anchor="middle">×</text>
+<text x="538.000" y="88.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">Prepared row</text>
+<text x="538.000" y="126.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">[1, x₁, x₂]ᵀ</text>
+<path d="M507 138 H499 V301 H507 M569 138 H577 V301 H569" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="538.000" y="173.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#243746" text-anchor="middle">1</text>
+<text x="538.000" y="227.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#243746" text-anchor="middle">2</text>
+<text x="538.000" y="281.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#243746" text-anchor="middle">−1</text>
+<text x="636.000" y="228.000" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="400" fill="#243746" text-anchor="middle">=</text>
+<text x="810.000" y="88.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">Linear response zₖ</text>
+<path d="M758 138 H750 V301 H758 M861 138 H869 V301 H861" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="810.000" y="173.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">1.8</text>
+<text x="810.000" y="227.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#946A21" text-anchor="middle">0.0</text>
+<text x="810.000" y="281.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="middle">−1.2</text>
+<text x="940.000" y="173.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="start">zA</text>
+<text x="940.000" y="227.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#946A21" text-anchor="start">zB</text>
+<text x="940.000" y="281.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="start">zC</text>
+<text x="498.000" y="353.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="500" fill="#007D83" text-anchor="middle">zA = 0.2 × 1 + 0.6 × 2 + (−0.4) × (−1) = 1.8</text>
+<path d="M35.000 385.000 L965.000 385.000" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="35.000" y="427.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">B  Map each response through the sigmoid</text>
+<path d="M81.000 789.000 L543.000 789.000" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="64.000" y="795.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<path d="M81.000 639.000 L543.000 639.000" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="64.000" y="645.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="end">0.5</text>
+<path d="M81.000 489.000 L543.000 489.000" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="64.000" y="495.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="end">1</text>
+<path d="M81.000 789.000 L553.000 789.000" fill="none" stroke="#243746" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M81.000 789.000 L81.000 478.000" fill="none" stroke="#243746" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<text x="81.000" y="462.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#243746" text-anchor="start">p = 1 / (1 + e⁻ᶻ)</text>
+<text x="557.000" y="794.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#243746" text-anchor="start">z</text>
+<text x="81.000" y="817.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">−4</text>
+<text x="196.500" y="817.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">−2</text>
+<text x="312.000" y="817.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0</text>
+<text x="427.500" y="817.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<text x="543.000" y="817.000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<path d="M81.000 783.604 L83.110 783.407 L85.219 783.203 L87.329 782.992 L89.438 782.773 L91.548 782.546 L93.658 782.311 L95.767 782.068 L97.877 781.817 L99.986 781.556 L102.096 781.286 L104.205 781.007 L106.315 780.718 L108.425 780.418 L110.534 780.108 L112.644 779.788 L114.753 779.456 L116.863 779.112 L118.973 778.757 L121.082 778.390 L123.192 778.009 L125.301 777.616 L127.411 777.209 L129.521 776.788 L131.630 776.353 L133.740 775.903 L135.849 775.438 L137.959 774.957 L140.068 774.460 L142.178 773.946 L144.288 773.415 L146.397 772.866 L148.507 772.299 L150.616 771.714 L152.726 771.109 L154.836 770.484 L156.945 769.839 L159.055 769.174 L161.164 768.487 L163.274 767.777 L165.384 767.046 L167.493 766.291 L169.603 765.512 L171.712 764.709 L173.822 763.881 L175.932 763.027 L178.041 762.147 L180.151 761.240 L182.260 760.306 L184.370 759.344 L186.479 758.354 L188.589 757.334 L190.699 756.284 L192.808 755.204 L194.918 754.093 L197.027 752.950 L199.137 751.776 L201.247 750.568 L203.356 749.327 L205.466 748.053 L207.575 746.744 L209.685 745.400 L211.795 744.021 L213.904 742.607 L216.014 741.156 L218.123 739.669 L220.233 738.144 L222.342 736.583 L224.452 734.984 L226.562 733.347 L228.671 731.672 L230.781 729.959 L232.890 728.207 L235.000 726.417 L237.110 724.589 L239.219 722.722 L241.329 720.817 L243.438 718.873 L245.548 716.891 L247.658 714.871 L249.767 712.813 L251.877 710.718 L253.986 708.587 L256.096 706.418 L258.205 704.214 L260.315 701.975 L262.425 699.701 L264.534 697.393 L266.644 695.052 L268.753 692.679 L270.863 690.275 L272.973 687.840 L275.082 685.376 L277.192 682.885 L279.301 680.366 L281.411 677.823 L283.521 675.255 L285.630 672.664 L287.740 670.052 L289.849 667.420 L291.959 664.769 L294.068 662.102 L296.178 659.420 L298.288 656.725 L300.397 654.018 L302.507 651.301 L304.616 648.576 L306.726 645.845 L308.836 643.109 L310.945 640.370 L313.055 637.630 L315.164 634.891 L317.274 632.155 L319.384 629.424 L321.493 626.699 L323.603 623.982 L325.712 621.275 L327.822 618.580 L329.932 615.898 L332.041 613.231 L334.151 610.580 L336.260 607.948 L338.370 605.336 L340.479 602.745 L342.589 600.177 L344.699 597.634 L346.808 595.115 L348.918 592.624 L351.027 590.160 L353.137 587.725 L355.247 585.321 L357.356 582.948 L359.466 580.607 L361.575 578.299 L363.685 576.025 L365.795 573.786 L367.904 571.582 L370.014 569.413 L372.123 567.282 L374.233 565.187 L376.342 563.129 L378.452 561.109 L380.562 559.127 L382.671 557.183 L384.781 555.278 L386.890 553.411 L389.000 551.583 L391.110 549.793 L393.219 548.041 L395.329 546.328 L397.438 544.653 L399.548 543.016 L401.658 541.417 L403.767 539.856 L405.877 538.331 L407.986 536.844 L410.096 535.393 L412.205 533.979 L414.315 532.600 L416.425 531.256 L418.534 529.947 L420.644 528.673 L422.753 527.432 L424.863 526.224 L426.973 525.050 L429.082 523.907 L431.192 522.796 L433.301 521.716 L435.411 520.666 L437.521 519.646 L439.630 518.656 L441.740 517.694 L443.849 516.760 L445.959 515.853 L448.068 514.973 L450.178 514.119 L452.288 513.291 L454.397 512.488 L456.507 511.709 L458.616 510.954 L460.726 510.223 L462.836 509.513 L464.945 508.826 L467.055 508.161 L469.164 507.516 L471.274 506.891 L473.384 506.286 L475.493 505.701 L477.603 505.134 L479.712 504.585 L481.822 504.054 L483.932 503.540 L486.041 503.043 L488.151 502.562 L490.260 502.097 L492.370 501.647 L494.479 501.212 L496.589 500.791 L498.699 500.384 L500.808 499.991 L502.918 499.610 L505.027 499.243 L507.137 498.888 L509.247 498.544 L511.356 498.212 L513.466 497.892 L515.575 497.582 L517.685 497.282 L519.795 496.993 L521.904 496.714 L524.014 496.444 L526.123 496.183 L528.233 495.932 L530.342 495.689 L532.452 495.454 L534.562 495.227 L536.671 495.008 L538.781 494.797 L540.890 494.593 L543.000 494.396" fill="none" stroke="#243746" stroke-width="2.3" stroke-linejoin="round"/>
+<path d="M415.950 531.555 L415.950 789.000" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<path d="M81.000 531.555 L415.950 531.555" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="415.950" cy="531.555" r="7" fill="#007D83" stroke="#007D83" stroke-width="1.5"/>
+<text x="426.950" y="515.555" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="start">A</text>
+<path d="M312.000 639.000 L312.000 789.000" fill="none" stroke="#946A21" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<path d="M81.000 639.000 L312.000 639.000" fill="none" stroke="#946A21" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="312.000" cy="639.000" r="7" fill="#946A21" stroke="#946A21" stroke-width="1.5"/>
+<text x="326.000" y="622.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="start">B</text>
+<path d="M242.700 719.557 L242.700 789.000" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<path d="M81.000 719.557 L242.700 719.557" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="242.700" cy="719.557" r="7" fill="#356E9A" stroke="#356E9A" stroke-width="1.5"/>
+<text x="229.700" y="701.557" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="end">C</text>
+<text x="640.000" y="472.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Class-against-rest responses</text>
+<text x="640.000" y="526.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="start">A</text>
+<text x="962.000" y="526.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#007D83" text-anchor="end">pA = 0.8581</text>
+<rect x="640.000" y="541.000" width="322.000" height="27.000" fill="#E8EEF0" stroke="none" stroke-width="1"/>
+<rect x="640.000" y="541.000" width="276.324" height="27.000" fill="#007D83" stroke="none" stroke-width="1"/>
+<text x="640.000" y="616.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="start">B</text>
+<text x="962.000" y="616.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="end">pB = 0.5000</text>
+<rect x="640.000" y="631.000" width="322.000" height="27.000" fill="#E8EEF0" stroke="none" stroke-width="1"/>
+<rect x="640.000" y="631.000" width="161.000" height="27.000" fill="#946A21" stroke="none" stroke-width="1"/>
+<text x="640.000" y="706.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">C</text>
+<text x="962.000" y="706.000" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="end">pC = 0.2315</text>
+<rect x="640.000" y="721.000" width="322.000" height="27.000" fill="#E8EEF0" stroke="none" stroke-width="1"/>
+<rect x="640.000" y="721.000" width="74.535" height="27.000" fill="#356E9A" stroke="none" stroke-width="1"/>
+<path d="M640 774 V787 H962 V774" fill="none" stroke="#243746" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="801.000" y="820.000" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#243746" text-anchor="middle">Σ pₖ = 1.5896</text>
+<path d="M801 837 V869" fill="none" stroke="#243746" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M35.000 850.000 L575.000 850.000" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="35.000" y="896.000" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">C  Divide each response by their sum</text>
+<rect x="68.000" y="929.000" width="396.785" height="65.000" fill="#007D83" stroke="none" stroke-width="1"/>
+<text x="266.393" y="955.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#FFFFFF" text-anchor="middle">A</text>
+<text x="266.393" y="981.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500" fill="#FFFFFF" text-anchor="middle">0.5398</text>
+<rect x="464.785" y="929.000" width="231.187" height="65.000" fill="#946A21" stroke="none" stroke-width="1"/>
+<text x="580.379" y="955.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#FFFFFF" text-anchor="middle">B</text>
+<text x="580.379" y="981.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500" fill="#FFFFFF" text-anchor="middle">0.3145</text>
+<rect x="695.972" y="929.000" width="107.028" height="65.000" fill="#356E9A" stroke="none" stroke-width="1"/>
+<text x="749.486" y="955.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#FFFFFF" text-anchor="middle">C</text>
+<text x="749.486" y="981.000" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500" fill="#FFFFFF" text-anchor="middle">0.1456</text>
+<path d="M823.000 961.000 L859.000 961.000" fill="none" stroke="#243746" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<text x="882.000" y="968.000" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="start">Class A</text>
+</svg>

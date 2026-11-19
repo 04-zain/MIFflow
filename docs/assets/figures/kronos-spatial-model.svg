@@ -1,0 +1,381 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1460" viewBox="0 0 1000 1460" role="img" aria-labelledby="title description">
+<title id="title">KRONOS spatial adaptation and final classifier</title>
+<desc id="description">Each patch has a frozen 768-value KRONOS embedding. Only available orthogonal neighbours in the same permitted scope enter a uniform mean; no neighbours gives zero. Learned self and neighbour matrices plus bias and ReLU produce H spatial features. Labelled training patches fit the spatial map and a temporary linear head with bias using cross-entropy and Adam. Dedicated update arrows name all fitted parameters. The spatial map is then frozen; the same labelled targets fit selected normalization and either RF or SVM. Application uses the fixed encoder, saved spatial map, normalization and chosen classifier, and rasterizes patch classes inside eligible scope. All grids, features, parameters, trees and SVM positions are schematic.</desc>
+<rect width="1000" height="1460" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="35" y="38" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Patch neighbourhood</text>
+<text x="344" y="38" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Learned spatial map</text>
+<rect x="35" y="91" width="67" height="67" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="0.7"/>
+<rect x="114" y="91" width="67" height="67" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.5"/>
+<text x="147.5" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">j₁</text>
+<rect x="121.0" y="130" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="131.6" y="130" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="142.2" y="130" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="152.8" y="130" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="163.4" y="130" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="160.75" y="145.01" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="193" y="91" width="67" height="67" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="0.7"/>
+<rect x="35" y="170" width="67" height="67" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.5"/>
+<text x="68.5" y="195" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">j₂</text>
+<rect x="42.0" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="52.6" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="63.2" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="73.8" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="84.4" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="81.75" y="224.01" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="114" y="170" width="67" height="67" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1.5"/>
+<text x="147.5" y="195" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">i</text>
+<rect x="121.0" y="209" width="9.6" height="19" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="131.6" y="209" width="9.6" height="19" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="142.2" y="209" width="9.6" height="19" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="152.8" y="209" width="9.6" height="19" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="163.4" y="209" width="9.6" height="19" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="160.75" y="224.01" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="193" y="170" width="67" height="67" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.5"/>
+<text x="226.5" y="195" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">j₃</text>
+<rect x="200.0" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="210.6" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="221.2" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="231.8" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="242.4" y="209" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="239.75" y="224.01" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="35" y="249" width="67" height="67" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="0.7"/>
+<rect x="114" y="249" width="67" height="67" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.5"/>
+<text x="147.5" y="274" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">j₄</text>
+<rect x="121.0" y="288" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="131.6" y="288" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="142.2" y="288" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="152.8" y="288" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="163.4" y="288" width="9.6" height="19" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="160.75" y="303.01" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="193" y="249" width="67" height="67" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="0.7"/>
+<path d="M147.5 158 L147.5 170" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M102 203.5 L114 203.5" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M193 203.5 L181 203.5" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M147.5 249 L147.5 237" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="147" y="350" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Same permitted scope</text>
+<text x="147" y="378" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">768 values per patch</text>
+<text x="344" y="97" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">eᵢ</text>
+<rect x="344.0" y="111" width="17.875" height="27" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="362.875" y="111" width="17.875" height="27" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="381.75" y="111" width="17.875" height="27" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="400.625" y="111" width="17.875" height="27" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="419.5" y="111" width="17.875" height="27" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="438.375" y="111" width="17.875" height="27" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="457.25" y="111" width="17.875" height="27" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="476.125" y="111" width="17.875" height="27" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="457.25" y="132.33" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<path d="M495 124 L539 124" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="590.0" y="69" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">Wₛ</text>
+<rect x="539.0" y="85.0" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="559.4" y="85.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.8" y="85.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="600.2" y="85.0" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="620.6" y="85.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="539.0" y="104.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="559.4" y="104.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.8" y="104.5" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="600.2" y="104.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="620.6" y="104.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="539.0" y="124.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="559.4" y="124.0" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.8" y="124.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="600.2" y="124.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="620.6" y="124.0" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="539.0" y="143.5" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="559.4" y="143.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.8" y="143.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="600.2" y="143.5" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="620.6" y="143.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="590.0" y="189" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">768 × H</text>
+<text x="344" y="247" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="start">Mean of j₁ … j₄</text>
+<rect x="344.0" y="267" width="17.875" height="27" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="362.875" y="267" width="17.875" height="27" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="381.75" y="267" width="17.875" height="27" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="400.625" y="267" width="17.875" height="27" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="419.5" y="267" width="17.875" height="27" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="438.375" y="267" width="17.875" height="27" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="457.25" y="267" width="17.875" height="27" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="476.125" y="267" width="17.875" height="27" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="457.25" y="288.33" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="344" y="320" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#356E9A" text-anchor="start">mᵢ</text>
+<path d="M495 280 L539 280" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="590.0" y="225" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">Wₙ</text>
+<rect x="539.0" y="241.0" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="559.4" y="241.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.8" y="241.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="600.2" y="241.0" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="620.6" y="241.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="539.0" y="260.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="559.4" y="260.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.8" y="260.5" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="600.2" y="260.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="620.6" y="260.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="539.0" y="280.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="559.4" y="280.0" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.8" y="280.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="600.2" y="280.0" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="620.6" y="280.0" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="539.0" y="299.5" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="559.4" y="299.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.8" y="299.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="600.2" y="299.5" width="20.4" height="19.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="620.6" y="299.5" width="20.4" height="19.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="590.0" y="345" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">768 × H</text>
+<path d="M641 124 H710 V183" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M641 280 H710 V225" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<circle cx="710" cy="204" r="21" fill="#FFFFFF" stroke="#007D83"/>
+<text x="710" y="212" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="600" fill="#007D83" text-anchor="middle">+</text>
+<path d="M731 204 L772 204" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<circle cx="790" cy="204" r="18" fill="#FFFFFF" stroke="#007D83"/>
+<text x="790" y="212" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#007D83" text-anchor="middle">+</text>
+<rect x="768" y="276" width="44" height="42" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="790" y="304" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">b</text>
+<path d="M790 276 L790 222" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M808 204 L841 204" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="841" y="182" width="115" height="44" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1.1"/>
+<text x="898.5" y="211" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">ReLU</text>
+<path d="M898 226 L898 275" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="837.0" y="275" width="14.25" height="29" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="852.25" y="275" width="14.25" height="29" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="867.5" y="275" width="14.25" height="29" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="882.75" y="275" width="14.25" height="29" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="898.0" y="275" width="14.25" height="29" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="913.25" y="275" width="14.25" height="29" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="928.5" y="275" width="14.25" height="29" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="943.75" y="275" width="14.25" height="29" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="928.5" y="297.91" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="898" y="338" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">hᵢ ∈ ℝᴴ</text>
+<text x="357" y="378" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#356E9A" text-anchor="start">mᵢ = |N(i)|⁻¹ Σⱼ∈N(i) eⱼ</text>
+<text x="357" y="407" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Empty neighbourhood: mᵢ = 0</text>
+<text x="965" y="407" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="end">hᵢ = ReLU(eᵢWₛ + mᵢWₙ + b)</text>
+<path d="M35 443 L965 443" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="35" y="482" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Learn from reference-labelled patches</text>
+<text x="35" y="523" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Spatial feature rows</text>
+<text x="35" y="563" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="start">i₁</text>
+<rect x="75.0" y="540" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="98.75" y="540" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="122.5" y="540" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="146.25" y="540" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="170.0" y="540" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="193.75" y="540" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="217.5" y="540" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="241.25" y="540" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="217.5" y="560.54" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="35" y="596" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="start">i₂</text>
+<rect x="75.0" y="573" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="98.75" y="573" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="122.5" y="573" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="146.25" y="573" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="170.0" y="573" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="193.75" y="573" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="217.5" y="573" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="241.25" y="573" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="217.5" y="593.54" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="35" y="629" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="start">i₃</text>
+<rect x="75.0" y="606" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="98.75" y="606" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="122.5" y="606" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="146.25" y="606" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="170.0" y="606" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="193.75" y="606" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="217.5" y="606" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="241.25" y="606" width="22.75" height="26" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="217.5" y="626.54" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<path d="M265 587 L328 587" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="403" y="523" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Temporary head</text>
+<text x="397.0" y="535" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle"></text>
+<rect x="342.0" y="551.0" width="22.0" height="18.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="364.0" y="551.0" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="386.0" y="551.0" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="408.0" y="551.0" width="22.0" height="18.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="430.0" y="551.0" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="342.0" y="569.5" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="364.0" y="569.5" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="386.0" y="569.5" width="22.0" height="18.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="408.0" y="569.5" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="430.0" y="569.5" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="342.0" y="588.0" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="364.0" y="588.0" width="22.0" height="18.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="386.0" y="588.0" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="408.0" y="588.0" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="430.0" y="588.0" width="22.0" height="18.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="342.0" y="606.5" width="22.0" height="18.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="364.0" y="606.5" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="386.0" y="606.5" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="408.0" y="606.5" width="22.0" height="18.5" rx="0" fill="#C9E3E2" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="430.0" y="606.5" width="22.0" height="18.5" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="397.0" y="651" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">U: H × K</text>
+<path d="M452 587 L490 587" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<circle cx="508" cy="587" r="18" fill="#FFFFFF" stroke="#007D83"/>
+<text x="508" y="595" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#007D83" text-anchor="middle">+</text>
+<rect x="486" y="640" width="44" height="33" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="508" y="663" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">a</text>
+<path d="M508 640 L508 605" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M526 587 L574 587" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="644" y="552" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">K class logits</text>
+<rect x="574.0" y="571" width="27.0" height="33" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="602.0" y="571" width="27.0" height="33" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="630.0" y="571" width="27.0" height="33" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="658.0" y="571" width="27.0" height="33" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="686.0" y="571" width="27.0" height="33" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="679.0" y="597.07" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="644" y="641" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">zᵢ = hᵢU + a</text>
+<path d="M714 587 L776 587" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<rect x="776" y="546" width="189" height="91" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1.2"/>
+<text x="870.5" y="577" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">Cross-entropy</text>
+<text x="870.5" y="613" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">−log softmax(zᵢ)[yᵢ]</text>
+<text x="35" y="693" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Reference classes yᵢ</text>
+<rect x="35" y="711" width="77" height="34" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="73.5" y="735" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">A</text>
+<rect x="112" y="711" width="77" height="34" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="150.5" y="735" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">B</text>
+<rect x="189" y="711" width="77" height="34" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="227.5" y="735" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">A</text>
+<path d="M266 728 H738 V661 H817 V637" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<path d="M917 637 L917 773" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-muted)" stroke-dasharray="5 5"/>
+<rect x="822" y="773" width="143" height="53" rx="0" fill="#E8EEF0" stroke="#B8C8CE" stroke-width="1"/>
+<text x="893.5" y="807" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">Adam</text>
+<text x="35" y="791" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Update the learned parameters</text>
+<rect x="35" y="814" width="121" height="68" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="95.5" y="841" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">Wₛ</text>
+<text x="95.5" y="868" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">768 × H</text>
+<rect x="180" y="814" width="121" height="68" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="240.5" y="841" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">Wₙ</text>
+<text x="240.5" y="868" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">768 × H</text>
+<rect x="325" y="814" width="121" height="68" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="385.5" y="841" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">b</text>
+<text x="385.5" y="868" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">H</text>
+<rect x="470" y="814" width="121" height="68" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="530.5" y="841" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">U</text>
+<text x="530.5" y="868" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">H × K</text>
+<rect x="615" y="814" width="121" height="68" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="675.5" y="841" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">a</text>
+<text x="675.5" y="868" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">K</text>
+<path d="M822 799 H789 V910 H95.5" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<path d="M95.5 910 L95.5 882" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-muted)" stroke-dasharray="5 5"/>
+<path d="M240.5 910 L240.5 882" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-muted)" stroke-dasharray="5 5"/>
+<path d="M385.5 910 L385.5 882" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-muted)" stroke-dasharray="5 5"/>
+<path d="M530.5 910 L530.5 882" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-muted)" stroke-dasharray="5 5"/>
+<path d="M675.5 910 L675.5 882" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-muted)" stroke-dasharray="5 5"/>
+<path d="M35 947 L965 947" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="35" y="988" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Freeze the spatial map; fit the selected final classifier</text>
+<text x="35" y="1030" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Labelled H-feature rows</text>
+<rect x="35.0" y="1051" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="61.125" y="1051" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="87.25" y="1051" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="113.375" y="1051" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="139.5" y="1051" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="165.625" y="1051" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="191.75" y="1051" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="217.875" y="1051" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="191.75" y="1069.96" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="35.0" y="1079" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="61.125" y="1079" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="87.25" y="1079" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="113.375" y="1079" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="139.5" y="1079" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="165.625" y="1079" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="191.75" y="1079" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="217.875" y="1079" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="191.75" y="1097.96" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="35.0" y="1107" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="61.125" y="1107" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="87.25" y="1107" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="113.375" y="1107" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="139.5" y="1107" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="165.625" y="1107" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="191.75" y="1107" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="217.875" y="1107" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="191.75" y="1125.96" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="35.0" y="1135" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="61.125" y="1135" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="87.25" y="1135" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="113.375" y="1135" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="139.5" y="1135" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="165.625" y="1135" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="191.75" y="1135" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="217.875" y="1135" width="25.125" height="24" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="191.75" y="1153.96" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="35" y="1197" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="start">Fixed Wₛ, Wₙ and b</text>
+<path d="M244 1104 L312 1104" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="312" y="1046" width="208" height="122" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1.1"/>
+<text x="416" y="1078" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Fit normalization</text>
+<text x="416" y="1121" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#007D83" text-anchor="middle">T(h)</text>
+<text x="416" y="1154" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Save and reuse</text>
+<path d="M520 1104 H553 V1036 H650 V1050" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M553 1036 H864 V1050" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<circle cx="553" cy="1036" r="3" fill="#007D83" stroke="#007D83"/>
+<rect x="565" y="1050" width="176" height="146" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="653" y="1080" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">RF</text>
+<path d="M616 1102 L595 1134" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M616 1102 L637 1134" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M595 1134 L585 1167" fill="none" stroke="#B8C8CE" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M595 1134 L607 1167" fill="none" stroke="#B8C8CE" stroke-width="1.4" stroke-linejoin="round"/>
+<circle cx="616" cy="1102" r="5" fill="#FFFFFF" stroke="#526773"/>
+<circle cx="595" cy="1134" r="4" fill="#FFFFFF" stroke="#526773"/>
+<rect x="581" y="1163" width="8" height="8" rx="0" fill="#007D83" stroke="#007D83" stroke-width="1"/>
+<rect x="603" y="1163" width="8" height="8" rx="0" fill="#356E9A" stroke="#356E9A" stroke-width="1"/>
+<rect x="633" y="1130" width="8" height="8" rx="0" fill="#007D83" stroke="#007D83" stroke-width="1"/>
+<path d="M690 1102 L669 1134" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M690 1102 L711 1134" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M669 1134 L659 1167" fill="none" stroke="#B8C8CE" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M669 1134 L681 1167" fill="none" stroke="#B8C8CE" stroke-width="1.4" stroke-linejoin="round"/>
+<circle cx="690" cy="1102" r="5" fill="#FFFFFF" stroke="#526773"/>
+<circle cx="669" cy="1134" r="4" fill="#FFFFFF" stroke="#526773"/>
+<rect x="655" y="1163" width="8" height="8" rx="0" fill="#007D83" stroke="#007D83" stroke-width="1"/>
+<rect x="677" y="1163" width="8" height="8" rx="0" fill="#356E9A" stroke="#356E9A" stroke-width="1"/>
+<rect x="707" y="1130" width="8" height="8" rx="0" fill="#007D83" stroke="#007D83" stroke-width="1"/>
+<text x="766" y="1133" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">or</text>
+<rect x="790" y="1050" width="175" height="146" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="877" y="1080" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="middle">SVM</text>
+<path d="M811 1176 L950 1176" fill="none" stroke="#526773" stroke-width="1.1" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<path d="M811 1176 L811 1092" fill="none" stroke="#526773" stroke-width="1.1" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+<path d="M860 1170 L908 1095" fill="none" stroke="#243746" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M848 1170 L896 1095" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<path d="M872 1170 L920 1095" fill="none" stroke="#B8C8CE" stroke-width="1.1" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="835" cy="1141" r="4" fill="#007D83" stroke="#007D83"/>
+<circle cx="850" cy="1125" r="4" fill="#007D83" stroke="#007D83"/>
+<circle cx="852" cy="1158" r="4" fill="#007D83" stroke="#007D83"/>
+<circle cx="912" cy="1138" r="4" fill="#356E9A" stroke="#356E9A"/>
+<circle cx="935" cy="1117" r="4" fill="#356E9A" stroke="#356E9A"/>
+<circle cx="926" cy="1160" r="4" fill="#356E9A" stroke="#356E9A"/>
+<path d="M35 1236 L965 1236" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="35" y="1277" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Apply the saved calculation to eligible patches</text>
+<text x="111.5" y="1314" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Frozen KRONOS</text>
+<rect x="35" y="1334" width="153" height="45" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="111.5" y="1363" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">eᵢ: 768</text>
+<text x="315.5" y="1314" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Self + neighbours</text>
+<rect x="224" y="1334" width="183" height="45" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="315.5" y="1363" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">eᵢ, mᵢ</text>
+<text x="535.0" y="1314" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Frozen spatial map</text>
+<rect x="443" y="1334" width="184" height="45" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="535.0" y="1363" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">hᵢ: H</text>
+<text x="727.5" y="1314" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Saved T</text>
+<rect x="663" y="1334" width="129" height="45" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="727.5" y="1363" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">T(hᵢ)</text>
+<text x="896.5" y="1314" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Chosen model</text>
+<rect x="828" y="1334" width="137" height="45" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="896.5" y="1363" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">RF / SVM</text>
+<path d="M188 1357 L224 1357" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M407 1357 L443 1357" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M627 1357 L663 1357" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M792 1357 L828 1357" fill="none" stroke="#007D83" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M897 1379 V1418 H761" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="540" y="1395" width="28" height="23" rx="0" fill="#007D83" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="568" y="1395" width="28" height="23" rx="0" fill="#007D83" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="596" y="1395" width="28" height="23" rx="0" fill="#007D83" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="624" y="1395" width="28" height="23" rx="0" fill="#356E9A" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="652" y="1395" width="28" height="23" rx="0" fill="#356E9A" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="680" y="1395" width="28" height="23" rx="0" fill="#356E9A" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="708" y="1395" width="28" height="23" rx="0" fill="#356E9A" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="540" y="1418" width="28" height="23" rx="0" fill="#007D83" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="568" y="1418" width="28" height="23" rx="0" fill="#007D83" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="596" y="1418" width="28" height="23" rx="0" fill="#007D83" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="624" y="1418" width="28" height="23" rx="0" fill="#356E9A" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="652" y="1418" width="28" height="23" rx="0" fill="#356E9A" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="680" y="1418" width="28" height="23" rx="0" fill="#356E9A" stroke="#FFFFFF" stroke-width="0.7"/>
+<rect x="708" y="1418" width="28" height="23" rx="0" fill="#356E9A" stroke="#FFFFFF" stroke-width="0.7"/>
+<text x="35" y="1413" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Class for each patch</text>
+<text x="35" y="1439" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">within eligible scope</text>
+</svg>
