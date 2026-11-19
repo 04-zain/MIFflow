@@ -1,0 +1,11 @@
+{
+  "schema": "mif-authoring-defaults/v1",
+  "sections": {
+    "clustering": {
+      "initial_feature_weight": 1.0,
+      "k": 15,
+      "resolution": 1.0,
+      "seed": 0
+    }
+  }
+}

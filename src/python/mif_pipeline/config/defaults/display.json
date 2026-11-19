@@ -1,0 +1,8 @@
+{
+  "schema": "mif-authoring-defaults/v1",
+  "sections": {
+    "display": {
+      "use_biomarkers_as_channel_names": true
+    }
+  }
+}

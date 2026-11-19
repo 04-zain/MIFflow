@@ -1,0 +1,43 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "biolinkbert",
+  "model": {
+    "repository": "michiyasunaga/BioLinkBERT-large",
+    "revision": "1eb6d81c5fc1c42d3a43c71956b0e526558ae053",
+    "sha256": "99e5d266f25e3547d3b4eebb8afa2de5ae274751f790a5f036b526ade75237d2",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/michiyasunaga/BioLinkBERT-large/blob/1eb6d81c5fc1c42d3a43c71956b0e526558ae053/README.md",
+    "files": {
+      "config.json": {
+        "url": "https://huggingface.co/michiyasunaga/BioLinkBERT-large/resolve/1eb6d81c5fc1c42d3a43c71956b0e526558ae053/config.json",
+        "sha256": "ba7be72cf4013c5a69166e88d51f922aee44bfde6927cf9315580c23a6e020a6",
+        "size_bytes": 560
+      },
+      "pytorch_model.bin": {
+        "url": "https://huggingface.co/michiyasunaga/BioLinkBERT-large/resolve/1eb6d81c5fc1c42d3a43c71956b0e526558ae053/pytorch_model.bin",
+        "sha256": "fed75e5716547b54198d4dd123e7a3f3c64a82e1172b3492a11deebd6ab4cd4d",
+        "size_bytes": 1334073393
+      },
+      "special_tokens_map.json": {
+        "url": "https://huggingface.co/michiyasunaga/BioLinkBERT-large/resolve/1eb6d81c5fc1c42d3a43c71956b0e526558ae053/special_tokens_map.json",
+        "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "size_bytes": 112
+      },
+      "tokenizer.json": {
+        "url": "https://huggingface.co/michiyasunaga/BioLinkBERT-large/resolve/1eb6d81c5fc1c42d3a43c71956b0e526558ae053/tokenizer.json",
+        "sha256": "5a797027c356bfdc779fd021b4a7a2b2f341242ddd7035d385f56b8e242dac2a",
+        "size_bytes": 446604
+      },
+      "tokenizer_config.json": {
+        "url": "https://huggingface.co/michiyasunaga/BioLinkBERT-large/resolve/1eb6d81c5fc1c42d3a43c71956b0e526558ae053/tokenizer_config.json",
+        "sha256": "98632482a9851173e796e4366ede775ddc2900564a0ac659acb89248e39fbbd3",
+        "size_bytes": 379
+      },
+      "vocab.txt": {
+        "url": "https://huggingface.co/michiyasunaga/BioLinkBERT-large/resolve/1eb6d81c5fc1c42d3a43c71956b0e526558ae053/vocab.txt",
+        "sha256": "7b36651908a88bc38bda41b728b2a598191e0d3b553cbacf7b1e5f026d5b5b9f",
+        "size_bytes": 225062
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "instanseg",
+  "extension": {
+    "version": "0.1.7",
+    "archive": {
+      "url": "https://github.com/qupath/qupath-extension-instanseg/releases/download/v0.1.7/qupath-extension-instanseg-0.1.7.jar",
+      "size_bytes": 118833,
+      "sha256": "6a03786ad9cfd4ca8391793129b57a53164c07f90ac38960b329a3a7af333ade"
+    }
+  },
+  "model": {
+    "name": "fluorescence_nuclei_and_cells",
+    "version": "0.1.1",
+    "archive": {
+      "url": "https://github.com/instanseg/instanseg/releases/download/instanseg_models_v0.1.1/fluorescence_nuclei_and_cells.zip",
+      "size_bytes": 19173946,
+      "sha256": "d5289ce1c74bc33e72b60551782210a3842d23c820dee86103c9a4fae5f0526e"
+    },
+    "files": [
+      {
+        "path": "cover.png",
+        "sha256": "5516689c2e8e403d7ea7f7ac4f694ee6019905ff91f5ade55bcade10dae8f8c5"
+      },
+      {
+        "path": "instanseg_preprocess.ijm",
+        "sha256": "53376aec6738fb19eab1ace9308c383ee04e46af2a3acf7e70b5862919dca86c"
+      },
+      {
+        "path": "instanseg_postprocess.ijm",
+        "sha256": "0886f52737326dba0c6d53528909d746e75e0dce7a0cb41e855a648f8133ba88"
+      },
+      {
+        "path": "fluorescence_nuclei_and_cells_README.md",
+        "sha256": "4e75c20db5d273d8849dc5a9793e509c00adb098905b9145d3a865b9951a2f21"
+      },
+      {
+        "path": "test-input.npy",
+        "sha256": "2c65ea28d752e79281f530ef5292b06fb221e9b314908d7e9092efaba02168ff"
+      },
+      {
+        "path": "test-output_instance_segmentation.npy",
+        "sha256": "c723b2b160a1803dbe1933757334416ae8c0b29e561175a145d27669bd9f2924"
+      },
+      {
+        "path": "instanseg.pt",
+        "sha256": "636833d26b5afcc03bde1357b3e669cf015e91dd1edda863aa51c19eee986562"
+      },
+      {
+        "path": "rdf.yaml",
+        "sha256": "d2b741585fb88cda1bfb552f2829cbdeeed1e814638ea45bbb111bfd6a326281"
+      }
+    ]
+  }
+}

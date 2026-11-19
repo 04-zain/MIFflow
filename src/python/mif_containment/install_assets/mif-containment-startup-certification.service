@@ -1,0 +1,12 @@
+[Unit]
+Description=mIF containment startup certification
+Before=mif-containment-broker.service
+
+[Service]
+Type=notify
+NotifyAccess=main
+ExecStart=/usr/libexec/mif-pipeline/mif-containment-startup-certification
+TimeoutStartSec=45s
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1570" viewBox="0 0 1000 1570" role="img" aria-labelledby="title description">
+<title id="title">Fitting a subset and reviewing one gate across the full cell population</title>
+<desc id="description">Schematic pooled and per-slide vectors define the model-fitting scope. All included finite intensities X supply quantile bounds and the full application population. A stable-ID subset, with a default cap of 200000, supplies the two-component Gaussian or two-component Gamma fit. Follow the fitted model down to higher-mean responsibilities at distinct fitting intensities, then left through increasing score correction to saved intensity-score pairs and their interpolated score. The score cutoff determines the proposed intensity gate before review across all X. A separate path supplies all included intensities to the proposed-gate panel. Its score cutoff, intensity gate and cell counts appear together on the left; review can keep or adjust this gate in the right panel. Both plots preserve the same measurement positions. Brackets show counts below and at or above each gate; equality is positive. Review can keep or change the gate without refitting, then save a shared pooled decision or each per-slide decision. Symbols and gate positions are schematic. The caption explains constant outcomes and Gamma exact-zero handling.</desc>
+<rect width="1000" height="1570" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="35" y="39" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Pooled</text>
+<text x="547" y="39" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#243746" text-anchor="start">Per slide</text>
+<text x="35" y="115" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#356E9A" text-anchor="start">S₁</text>
+<rect x="78.0" y="86" width="52.666666666666664" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="104.33333333333333" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₁₁</text>
+<rect x="130.66666666666666" y="86" width="52.666666666666664" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="157.0" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₁₂</text>
+<rect x="183.33333333333331" y="86" width="52.666666666666664" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="209.66666666666666" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">…</text>
+<path d="M80 83 H74 V132 H80" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M234 83 H240 V132 H234" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="547" y="115" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#356E9A" text-anchor="start">S₁</text>
+<rect x="594.0" y="86" width="61.0" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="624.5" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₁₁</text>
+<rect x="655.0" y="86" width="61.0" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="685.5" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₁₂</text>
+<rect x="716.0" y="86" width="61.0" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="746.5" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">…</text>
+<path d="M596 83 H590 V132 H596" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M775 83 H781 V132 H775" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="35" y="193" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">S₂</text>
+<rect x="78.0" y="164" width="52.666666666666664" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="104.33333333333333" y="193" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">x₂₁</text>
+<rect x="130.66666666666666" y="164" width="52.666666666666664" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="157.0" y="193" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">x₂₂</text>
+<rect x="183.33333333333331" y="164" width="52.666666666666664" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="209.66666666666666" y="193" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">…</text>
+<path d="M80 161 H74 V210 H80" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M234 161 H240 V210 H234" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="547" y="193" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">S₂</text>
+<rect x="594.0" y="164" width="61.0" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="624.5" y="193" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">x₂₁</text>
+<rect x="655.0" y="164" width="61.0" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="685.5" y="193" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">x₂₂</text>
+<rect x="716.0" y="164" width="61.0" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="746.5" y="193" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">…</text>
+<path d="M596 161 H590 V210 H596" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M775 161 H781 V210 H775" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<rect x="294" y="76" width="178" height="137" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="308.0" y="86" width="50.0" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="333.0" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₁₁</text>
+<rect x="358.0" y="86" width="50.0" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="383.0" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₁₂</text>
+<rect x="408.0" y="86" width="50.0" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="433.0" y="115" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">…</text>
+<path d="M310 83 H304 V132 H310" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M456 83 H462 V132 H456" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<rect x="308.0" y="155" width="50.0" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="333.0" y="184" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">x₂₁</text>
+<rect x="358.0" y="155" width="50.0" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="383.0" y="184" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">x₂₂</text>
+<rect x="408.0" y="155" width="50.0" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="433.0" y="184" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">…</text>
+<path d="M310 152 H304 V201 H310" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M456 152 H462 V201 H456" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M240 107.5 L294 107.5" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<path d="M240 185.5 H265 V176.5 H294" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M383 213 L383 236" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<circle cx="383" cy="263" r="27" fill="#FFFFFF" stroke="#243746"/>
+<text x="383" y="271" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#243746" text-anchor="middle">θ</text>
+<text x="35" y="272" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="start">One fitted parameter set</text>
+<path d="M781 107.5 L851 107.5" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<circle cx="878" cy="107.5" r="27" fill="#FFFFFF" stroke="#243746"/>
+<text x="878" y="115.5" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#243746" text-anchor="middle">θ₁</text>
+<path d="M781 185.5 L851 185.5" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<circle cx="878" cy="185.5" r="27" fill="#FFFFFF" stroke="#243746"/>
+<text x="878" y="193.5" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" fill="#243746" text-anchor="middle">θ₂</text>
+<text x="547" y="272" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="start">A parameter set for each slide</text>
+<path d="M35 304 L965 304" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="35" y="338" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">All finite intensities X</text>
+<text x="654" y="338" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Fitting subset</text>
+<rect x="40.0" y="361" width="76.8" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="78.4" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₁</text>
+<rect x="116.8" y="361" width="76.8" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="155.2" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₂</text>
+<rect x="193.6" y="361" width="76.8" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="232.0" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₃</text>
+<rect x="270.4" y="361" width="76.8" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="308.8" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">…</text>
+<rect x="347.2" y="361" width="76.8" height="43" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="385.59999999999997" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#356E9A" text-anchor="middle">x<tspan dy="6" font-size="14">N</tspan></text>
+<path d="M42 358 H36 V407 H42" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M422 358 H428 V407 H422" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<rect x="658.0" y="361" width="75.5" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="695.75" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#007D83" text-anchor="middle">x<tspan dy="6" font-size="14">a</tspan></text>
+<rect x="733.5" y="361" width="75.5" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="771.25" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#007D83" text-anchor="middle">x<tspan dy="6" font-size="14">b</tspan></text>
+<rect x="809.0" y="361" width="75.5" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="846.75" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">…</text>
+<rect x="884.5" y="361" width="75.5" height="43" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="922.25" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#007D83" text-anchor="middle">x<tspan dy="6" font-size="14">k</tspan></text>
+<path d="M660 358 H654 V407 H660" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M958 358 H964 V407 H958" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M428 382.5 L654 382.5" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="541" y="367" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">stable-ID selection</text>
+<path d="M232 407 L232 457" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<rect x="40" y="457" width="384" height="168" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.1"/>
+<text x="61" y="490" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">Quantile bounds Q(q; X)</text>
+<path d="M80 541 L348 541" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M80 534 L80 548" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M202 534 L202 548" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M348 534 L348 548" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="80" y="589" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₍₁₎</text>
+<text x="202" y="589" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">Q(q)</text>
+<text x="348" y="589" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">x₍N₎</text>
+<path d="M424 541 L649 541" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="535" y="520" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">optional bounds</text>
+<path d="M807 407 L807 457" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="825" y="422" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">200,000 cells</text>
+<text x="825" y="445" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="start">default cap</text>
+<rect x="649" y="457" width="316" height="168" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1.2"/>
+<text x="807" y="487" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Two-component Gaussian</text>
+<text x="807" y="515" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">or Two-component Gamma</text>
+<text x="807" y="557" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">Fit θ</text>
+<text x="807" y="596" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#243746" text-anchor="middle">fθ(x) = π₀ f₀(x) + π₁ f₁(x)</text>
+<path d="M807 625 L807 666" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="649" y="666" width="316" height="132" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.1"/>
+<text x="807" y="700" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Higher-mean responsibility</text>
+<text x="807" y="740" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="600" fill="#007D83" text-anchor="middle">r(uⱼ)</text>
+<text x="807" y="777" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Distinct fitting intensities</text>
+<rect x="40" y="666" width="584" height="132" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.1"/>
+<text x="482" y="694" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Increasing score</text>
+<text x="482" y="716" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">correction</text>
+<text x="482" y="759" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#007D83" text-anchor="middle">rⱼ → sⱼ</text>
+<path d="M649 732 L624 732" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M349 744 L307 744" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="177" y="700" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">Saved score s(x)</text>
+<text x="177" y="740" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#007D83" text-anchor="middle">Intensity uⱼ; score sⱼ</text>
+<text x="177" y="777" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Linear interpolation</text>
+<path d="M177 798 L177 850" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M36 382 H17 V1024 H40" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<rect x="40" y="850" width="406" height="306" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.1"/>
+<rect x="559" y="850" width="406" height="306" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.1"/>
+<text x="64" y="885" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Proposed gate</text>
+<text x="584" y="885" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Review gate</text>
+<text x="64" y="930" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#007D83" text-anchor="start">s(t₀) ≥ c</text>
+<text x="269" y="930" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="start">c = 0.5 initially</text>
+<text x="584" y="920" font-family="Arial, Helvetica, sans-serif" font-size="16.5" font-weight="400" fill="#526773" text-anchor="start">Inspect cells in image - keep t₀ or adjust t*</text>
+<rect x="64" y="998" width="143.20000000000002" height="52" rx="0" fill="#EDF3F8" stroke="none" stroke-width="0"/>
+<rect x="207.20000000000002" y="998" width="214.79999999999998" height="52" rx="0" fill="#EAF5F4" stroke="none" stroke-width="0"/>
+<path d="M207.20000000000002 989 L207.20000000000002 1057" fill="none" stroke="#356E9A" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="207.20000000000002" y="978" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="middle">t₀</text>
+<path d="M64 1050 L422 1050" fill="none" stroke="#B8C8CE" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M85.48 1027 L85.48 1050" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="85.48" cy="1023" r="4.5" fill="#356E9A" stroke="#356E9A"/>
+<path d="M135.60000000000002 1027 L135.60000000000002 1050" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="135.60000000000002" cy="1023" r="4.5" fill="#356E9A" stroke="#356E9A"/>
+<path d="M228.68 1027 L228.68 1050" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="228.68" cy="1023" r="4.5" fill="#007D83" stroke="#007D83"/>
+<path d="M275.22 1027 L275.22 1050" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="275.22" cy="1023" r="4.5" fill="#007D83" stroke="#007D83"/>
+<path d="M396.94 1027 L396.94 1050" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="396.94" cy="1023" r="4.5" fill="#007D83" stroke="#007D83"/>
+<text x="182.14" y="1030" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#526773" text-anchor="middle">…</text>
+<text x="343.24" y="1030" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#526773" text-anchor="middle">…</text>
+<text x="85.48" y="1080" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">x₍₁₎</text>
+<text x="396.94" y="1080" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">x₍N₎</text>
+<path d="M67 1093 V1101 H204.20000000000002 V1093" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M210.20000000000002 1093 V1101 H419 V1093" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="135.60000000000002" y="1129" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#356E9A" text-anchor="middle">n₋(t₀)</text>
+<text x="314.6" y="1129" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="middle">n₊(t₀)</text>
+<rect x="584" y="998" width="239.86" height="52" rx="0" fill="#EDF3F8" stroke="none" stroke-width="0"/>
+<rect x="823.86" y="998" width="118.13999999999999" height="52" rx="0" fill="#EAF5F4" stroke="none" stroke-width="0"/>
+<rect x="727.2" y="998" width="96.65999999999997" height="52" rx="0" fill="#F8F0DF" stroke="none" stroke-width="0"/>
+<path d="M727.2 989 L727.2 1057" fill="none" stroke="#356E9A" stroke-width="1.3" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="727.2" y="978" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#356E9A" text-anchor="middle">t₀</text>
+<path d="M823.86 989 L823.86 1057" fill="none" stroke="#007D83" stroke-width="1.8" stroke-linejoin="round"/>
+<text x="823.86" y="978" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">t*</text>
+<path d="M584 1050 L942 1050" fill="none" stroke="#B8C8CE" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M605.48 1027 L605.48 1050" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="605.48" cy="1023" r="4.5" fill="#356E9A" stroke="#356E9A"/>
+<path d="M655.6 1027 L655.6 1050" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="655.6" cy="1023" r="4.5" fill="#356E9A" stroke="#356E9A"/>
+<path d="M748.6800000000001 1027 L748.6800000000001 1050" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="748.6800000000001" cy="1023" r="4.5" fill="#356E9A" stroke="#356E9A"/>
+<circle cx="748.6800000000001" cy="1023" r="7.5" fill="none" stroke="#946A21"/>
+<path d="M795.22 1027 L795.22 1050" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="795.22" cy="1023" r="4.5" fill="#356E9A" stroke="#356E9A"/>
+<circle cx="795.22" cy="1023" r="7.5" fill="none" stroke="#946A21"/>
+<path d="M916.94 1027 L916.94 1050" fill="none" stroke="#007D83" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="916.94" cy="1023" r="4.5" fill="#007D83" stroke="#007D83"/>
+<text x="702.14" y="1030" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#526773" text-anchor="middle">…</text>
+<text x="863.24" y="1030" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#526773" text-anchor="middle">…</text>
+<text x="605.48" y="1080" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">x₍₁₎</text>
+<text x="916.94" y="1080" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">x₍N₎</text>
+<path d="M587 1093 V1101 H820.86 V1093" fill="none" stroke="#356E9A" stroke-width="1.1" stroke-linejoin="round"/>
+<path d="M826.86 1093 V1101 H939 V1093" fill="none" stroke="#007D83" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="703.9300000000001" y="1129" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#356E9A" text-anchor="middle">n₋(t*)</text>
+<text x="882.9300000000001" y="1129" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="middle">n₊(t*)</text>
+<path d="M446 1024 L559 1024" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M762 1156 V1198 H369.5 V1228" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="40" y="1228" width="925" height="90" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1.1"/>
+<text x="64" y="1281" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#243746" text-anchor="start">Final intensity gate</text>
+<rect x="281" y="1250" width="177" height="47" rx="3" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="301" y="1281" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="start">t*</text>
+<path d="M458 1273.5 L634 1273.5" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="634" y="1250" width="310" height="47" rx="3" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="789" y="1280" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">Save marker and continue</text>
+<path d="M789 1297 V1340 H402 V1410" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M789 1340 H922 V1410" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<circle cx="789" cy="1340" r="3" fill="#007D83" stroke="#007D83"/>
+<text x="64" y="1388" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Pooled: shared decision</text>
+<text x="584" y="1388" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Per slide: image decisions</text>
+<rect x="64" y="1410" width="358" height="120" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="64" y="1410" width="358" height="40" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="84" y="1438" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Image</text>
+<text x="301" y="1438" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Final gate</text>
+<path d="M64 1490 L422 1490" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="84" y="1478" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#356E9A" text-anchor="start">S₁</text>
+<text x="343" y="1478" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="middle">t*</text>
+<text x="84" y="1518" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="start">S₂</text>
+<text x="343" y="1518" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="middle">t*</text>
+<rect x="584" y="1410" width="358" height="120" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="584" y="1410" width="358" height="40" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="604" y="1438" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Image</text>
+<text x="821" y="1438" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Final gate</text>
+<path d="M584 1490 L942 1490" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="604" y="1478" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#356E9A" text-anchor="start">S₁</text>
+<text x="863" y="1478" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="middle">t₁*</text>
+<text x="604" y="1518" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="start">S₂</text>
+<text x="863" y="1518" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="middle">t₂*</text>
+</svg>

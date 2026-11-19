@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>$pagetitle$</title>
+<link rel="stylesheet" href="$site-root$guide.css">
+<script defer src="$site-root$guide.js"></script>
+</head>
+<body>
+<a class="skip" href="#guide">Skip to guide</a>
+<aside class="library">
+  <header class="masthead">
+    <a class="brand" href="$site-root$index.html">MIFflow <span>Documentation</span></a>
+    <button class="menu" type="button" aria-controls="contents" aria-expanded="false">Guides</button>
+  </header>
+  <nav id="contents" aria-label="Guide library"><!--guide-navigation--></nav>
+</aside>
+<div class="reading-pane">
+  <header class="context">
+    <span class="location"><!--guide-location--></span>
+    <div class="tools"><!--guide-outline--><a href="$source-url$">View source</a></div>
+  </header>
+  <main id="guide" class="site-width" tabindex="-1">
+$body$
+  </main>
+</div>
+</body>
+</html>

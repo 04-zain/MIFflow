@@ -1,0 +1,17 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "nimbus",
+  "model": {
+    "name": "V1",
+    "revision": "3affc9e774d68408701e44ed6136b1e13503c639",
+    "filename": "V1.pt",
+    "package_version": "0.0.5",
+    "license": "MIT",
+    "license_url": "https://huggingface.co/JLrumberger/Nimbus-Inference/blob/3affc9e774d68408701e44ed6136b1e13503c639/README.md",
+    "archive": {
+      "url": "https://huggingface.co/JLrumberger/Nimbus-Inference/resolve/3affc9e774d68408701e44ed6136b1e13503c639/V1.pt",
+      "size_bytes": 142552114,
+      "sha256": "0651a3852fbafc03be415a1ec80ef947cc1913a081cf0bc649301ade887a82a9"
+    }
+  }
+}

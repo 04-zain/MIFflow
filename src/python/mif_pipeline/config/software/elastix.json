@@ -1,0 +1,83 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "elastix",
+  "platforms": {
+    "linux-x86_64": {
+      "files": {
+        "LICENSE": {
+          "executable": false,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358
+        },
+        "NOTICE": {
+          "executable": false,
+          "sha256": "d7e1f2979376da412d551c99a802e834d5a893f866d1443addae046ef09dac58",
+          "size_bytes": 3218
+        },
+        "bin/elastix": {
+          "executable": true,
+          "sha256": "00ede9e9ec8b37b7619639f2a51cfa44099432acfcdde1d951715bb393676e14",
+          "size_bytes": 69962760
+        },
+        "bin/transformix": {
+          "executable": true,
+          "sha256": "ccee658b54f76b59f4de2ce99ebf7a7c1fd34eb6fbb0c92981a85fae86f227c2",
+          "size_bytes": 69931896
+        },
+        "lib/libImpactMetric.so": {
+          "executable": true,
+          "sha256": "8274da2492780968860b7fa2221342958ba035852ab8c5bd4dc7479045f8f91d",
+          "size_bytes": 40007536
+        },
+        "lib/libelx-ANNlib.so": {
+          "executable": true,
+          "sha256": "4a36246c8e5faa5a41825ddf98189ef7e1cf019be40c8f39ad8a5ea4952bc50e",
+          "size_bytes": 82304
+        }
+      },
+      "program_directory": "bin",
+      "sha256": "3ca363cc4fb69a2c27c7639263f72a3cc383573fea1c04dc57b9ab72e8648876",
+      "size_bytes": 51339372,
+      "url": "https://github.com/SuperElastix/elastix/releases/download/5.3.1/elastix-5.3.1-ubuntu.zip"
+    },
+    "win-x86_64": {
+      "files": {
+        "ImpactMetric.dll": {
+          "executable": false,
+          "sha256": "bb2990b5d91d15c5acc37a09d5bb954d1fd930b134285486411d23f133fd79f3",
+          "size_bytes": 12948480
+        },
+        "LICENSE": {
+          "executable": false,
+          "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
+          "size_bytes": 11560
+        },
+        "NOTICE": {
+          "executable": false,
+          "sha256": "28774482be6fa32b58462788946919bd13060cf3af63d139751f7fcb6d28a00f",
+          "size_bytes": 3289
+        },
+        "elastix.exe": {
+          "executable": false,
+          "sha256": "549af8bb8aafbbe5d0de3cc6aff83f40c6d48f260d69dabad38eb746db66e120",
+          "size_bytes": 24617984
+        },
+        "elx-ANNlib.dll": {
+          "executable": false,
+          "sha256": "82ed0904ace75178fc2dfeb058109963e5dffd7c368225bddc07e27a4775d452",
+          "size_bytes": 65024
+        },
+        "transformix.exe": {
+          "executable": false,
+          "sha256": "a1fdbc119bd885ee2358a66a45eb6496e7153ffcc1e32b3088e893fadf838dd7",
+          "size_bytes": 24596480
+        }
+      },
+      "program_directory": ".",
+      "sha256": "746fb1b37d6b713a132b0149fcc3b24e06fd20e9d2ea0fe2d9aa9fa7f4e35dad",
+      "size_bytes": 19145595,
+      "url": "https://github.com/SuperElastix/elastix/releases/download/5.3.1/elastix-5.3.1-windows.zip"
+    }
+  },
+  "version": "5.3.1"
+}

@@ -1,0 +1,304 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="562" viewBox="0 0 1320 562" role="img" aria-labelledby="title description">
+<title id="title">Review cycles stored in T or in source C channels</title>
+<desc id="description">Illustrative source organization, not measured image data. The upper lane has two T positions, each containing C0, C1 and C2. The researcher confirms that T represents imaging cycles and that the cycles are already registered. T0 supplies cycle 1 and T1 supplies cycle 2. The lower lane has one T position containing C0 through C5 in source order. The Recorded row shows explicit per-channel cycle metadata: C0, C2 and C4 have cycle 1; C1 and C5 have cycle 2; C3 has no recorded cycle. The researcher manually enters cycle 2 for C3 using imaging notes. The Reviewed row retains the five recorded values and shows C3 as an outlined editable field with the manually entered 2. C0, C2 and C4 therefore form cycle 1, and C1, C3 and C5 form cycle 2. Source C order alone does not determine cycle membership. Both lanes retain the original source addresses and yield reviewed cycle groups; marker and fluorophore assignments are not part of this diagram. The numbered badges indicate one-based source-row positions, not raw C coordinates. Raw C and T addresses are zero based and remain attached to the same plane cards in the grouped view. All illustrated planes have Z0. Neutral source thumbnails do not imply cycle identity or registration.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5"/></marker></defs>
+<rect width="1320" height="562" fill="white"/>
+<text x="24" y="30" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Source addresses</text>
+<text x="520" y="30" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Cycle association</text>
+<text x="950" y="30" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Cycle groups</text>
+<path d="M24 48 H1296" fill="none" stroke="#B8C8CE" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="24" y="78" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Two T positions</text>
+<rect x="24" y="92" width="194" height="138" fill="none" stroke="#DCE5E8"/>
+<text x="121" y="116" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">T0</text>
+<g aria-label="T0 C0, source position 1" data-source-t="0" data-source-c="0" data-source-ordinal="1">
+<rect x="33" y="134" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="49" cy="156" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="72" cy="154" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="62" cy="175" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="41" cy="142" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="41" y="146" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<text x="60" y="211" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C0</text>
+</g>
+<g aria-label="T0 C1, source position 2" data-source-t="0" data-source-c="1" data-source-ordinal="2">
+<rect x="95" y="134" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="111" cy="156" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="134" cy="154" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="124" cy="175" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="103" cy="142" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="103" y="146" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<text x="122" y="211" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C1</text>
+</g>
+<g aria-label="T0 C2, source position 3" data-source-t="0" data-source-c="2" data-source-ordinal="3">
+<rect x="157" y="134" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="173" cy="156" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="196" cy="154" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="186" cy="175" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="165" cy="142" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="165" y="146" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<text x="184" y="211" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C2</text>
+</g>
+<rect x="244" y="92" width="194" height="138" fill="none" stroke="#DCE5E8"/>
+<text x="341" y="116" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">T1</text>
+<g aria-label="T1 C0, source position 4" data-source-t="1" data-source-c="0" data-source-ordinal="4">
+<rect x="253" y="134" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="269" cy="156" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="292" cy="154" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="282" cy="175" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="261" cy="142" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="261" y="146" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<text x="280" y="211" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C0</text>
+</g>
+<g aria-label="T1 C1, source position 5" data-source-t="1" data-source-c="1" data-source-ordinal="5">
+<rect x="315" y="134" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="331" cy="156" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="354" cy="154" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="344" cy="175" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="323" cy="142" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="323" y="146" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<text x="342" y="211" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C1</text>
+</g>
+<g aria-label="T1 C2, source position 6" data-source-t="1" data-source-c="2" data-source-ordinal="6">
+<rect x="377" y="134" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="393" cy="156" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="416" cy="154" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="406" cy="175" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="385" cy="142" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="385" y="146" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<text x="404" y="211" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C2</text>
+</g>
+<text x="520" y="87" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">T confirmed as cycles</text>
+<g data-confirmed-source-t="0" data-reviewed-cycle="1" data-scope="all-c">
+<rect x="545" y="112" width="90" height="60" fill="#F5F8F8" stroke="#B8C8CE"/>
+<text x="590" y="136" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#243746" text-anchor="middle">T0</text>
+<text x="590" y="159" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">all C</text>
+<path d="M647 142 H700" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="714" y="122" width="128" height="40" fill="white" stroke="#007D83"/>
+<text x="778" y="148" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">Cycle 1</text>
+</g>
+<g data-confirmed-source-t="1" data-reviewed-cycle="2" data-scope="all-c">
+<rect x="545" y="210" width="90" height="60" fill="#F5F8F8" stroke="#B8C8CE"/>
+<text x="590" y="234" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#243746" text-anchor="middle">T1</text>
+<text x="590" y="257" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">all C</text>
+<path d="M647 240 H700" fill="none" stroke="#526773" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="714" y="220" width="128" height="40" fill="white" stroke="#356E9A"/>
+<text x="778" y="246" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="middle">Cycle 2</text>
+</g>
+<path d="M452 180 H497" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M870 180 H921" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="950" y="117" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="start">Cycle 1</text>
+<text x="950" y="145" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">T0</text>
+<g aria-label="T0 C0, source position 1" data-source-t="0" data-source-c="0" data-source-ordinal="1">
+<rect x="1050" y="96" width="54" height="54" fill="#F5F8F8" stroke="#007D83"/>
+<ellipse cx="1066" cy="118" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1089" cy="116" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1079" cy="137" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1058" cy="104" r="10" fill="white" stroke="#007D83"/>
+<text x="1058" y="108" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#007D83" text-anchor="middle">1</text>
+<text x="1077" y="173" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C0</text>
+</g>
+<g aria-label="T0 C1, source position 2" data-source-t="0" data-source-c="1" data-source-ordinal="2">
+<rect x="1127" y="96" width="54" height="54" fill="#F5F8F8" stroke="#007D83"/>
+<ellipse cx="1143" cy="118" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1166" cy="116" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1156" cy="137" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1135" cy="104" r="10" fill="white" stroke="#007D83"/>
+<text x="1135" y="108" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#007D83" text-anchor="middle">2</text>
+<text x="1154" y="173" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C1</text>
+</g>
+<g aria-label="T0 C2, source position 3" data-source-t="0" data-source-c="2" data-source-ordinal="3">
+<rect x="1204" y="96" width="54" height="54" fill="#F5F8F8" stroke="#007D83"/>
+<ellipse cx="1220" cy="118" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1243" cy="116" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1233" cy="137" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1212" cy="104" r="10" fill="white" stroke="#007D83"/>
+<text x="1212" y="108" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#007D83" text-anchor="middle">3</text>
+<text x="1231" y="173" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C2</text>
+</g>
+<text x="950" y="215" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">Cycle 2</text>
+<text x="950" y="243" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">T1</text>
+<g aria-label="T1 C0, source position 4" data-source-t="1" data-source-c="0" data-source-ordinal="4">
+<rect x="1050" y="194" width="54" height="54" fill="#F5F8F8" stroke="#356E9A"/>
+<ellipse cx="1066" cy="216" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1089" cy="214" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1079" cy="235" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1058" cy="202" r="10" fill="white" stroke="#356E9A"/>
+<text x="1058" y="206" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#356E9A" text-anchor="middle">4</text>
+<text x="1077" y="271" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C0</text>
+</g>
+<g aria-label="T1 C1, source position 5" data-source-t="1" data-source-c="1" data-source-ordinal="5">
+<rect x="1127" y="194" width="54" height="54" fill="#F5F8F8" stroke="#356E9A"/>
+<ellipse cx="1143" cy="216" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1166" cy="214" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1156" cy="235" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1135" cy="202" r="10" fill="white" stroke="#356E9A"/>
+<text x="1135" y="206" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#356E9A" text-anchor="middle">5</text>
+<text x="1154" y="271" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C1</text>
+</g>
+<g aria-label="T1 C2, source position 6" data-source-t="1" data-source-c="2" data-source-ordinal="6">
+<rect x="1204" y="194" width="54" height="54" fill="#F5F8F8" stroke="#356E9A"/>
+<ellipse cx="1220" cy="216" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1243" cy="214" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1233" cy="235" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1212" cy="202" r="10" fill="white" stroke="#356E9A"/>
+<text x="1212" y="206" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#356E9A" text-anchor="middle">6</text>
+<text x="1231" y="271" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C2</text>
+</g>
+<path d="M24 292 H1296" fill="none" stroke="#DCE5E8" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="24" y="324" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">One T position, cycles within C</text>
+<rect x="24" y="350" width="414" height="134" fill="none" stroke="#DCE5E8"/>
+<text x="231" y="375" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">T0</text>
+<g aria-label="T0 C0, source position 1" data-source-t="0" data-source-c="0" data-source-ordinal="1">
+<rect x="33" y="392" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="49" cy="414" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="72" cy="412" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="62" cy="433" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="41" cy="400" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="41" y="404" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<text x="60" y="469" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C0</text>
+</g>
+<g aria-label="T0 C1, source position 2" data-source-t="0" data-source-c="1" data-source-ordinal="2">
+<rect x="99" y="392" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="115" cy="414" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="138" cy="412" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="128" cy="433" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="107" cy="400" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="107" y="404" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<text x="126" y="469" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C1</text>
+</g>
+<g aria-label="T0 C2, source position 3" data-source-t="0" data-source-c="2" data-source-ordinal="3">
+<rect x="165" y="392" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="181" cy="414" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="204" cy="412" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="194" cy="433" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="173" cy="400" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="173" y="404" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<text x="192" y="469" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C2</text>
+</g>
+<g aria-label="T0 C3, source position 4" data-source-t="0" data-source-c="3" data-source-ordinal="4">
+<rect x="231" y="392" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="247" cy="414" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="270" cy="412" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="260" cy="433" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="239" cy="400" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="239" y="404" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<text x="258" y="469" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C3</text>
+</g>
+<g aria-label="T0 C4, source position 5" data-source-t="0" data-source-c="4" data-source-ordinal="5">
+<rect x="297" y="392" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="313" cy="414" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="336" cy="412" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="326" cy="433" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="305" cy="400" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="305" y="404" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<text x="324" y="469" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C4</text>
+</g>
+<g aria-label="T0 C5, source position 6" data-source-t="0" data-source-c="5" data-source-ordinal="6">
+<rect x="363" y="392" width="54" height="54" fill="#F5F8F8" stroke="#B8C8CE"/>
+<ellipse cx="379" cy="414" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="402" cy="412" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="392" cy="433" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="371" cy="400" r="10" fill="white" stroke="#B8C8CE"/>
+<text x="371" y="404" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<text x="390" y="469" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C5</text>
+</g>
+<text x="510" y="413" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="start">Recorded</text>
+<text x="510" y="491" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="start">Reviewed</text>
+<text x="614" y="376" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#243746" text-anchor="middle">C0</text>
+<rect x="594" y="390" width="40" height="36" fill="white" stroke="#B8C8CE" data-source-c="0" data-recorded-cycle="1"/>
+<text x="614" y="415" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M614 432 V461" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="594" y="468" width="40" height="36" fill="#E5F1EF" stroke="#007D83" stroke-width="0.8" data-source-c="0" data-reviewed-cycle="1" data-origin="recorded"/>
+<text x="614" y="493" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="middle">1</text>
+<text x="658" y="376" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#243746" text-anchor="middle">C1</text>
+<rect x="638" y="390" width="40" height="36" fill="white" stroke="#B8C8CE" data-source-c="1" data-recorded-cycle="2"/>
+<text x="658" y="415" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M658 432 V461" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="638" y="468" width="40" height="36" fill="#E8F0F5" stroke="#356E9A" stroke-width="0.8" data-source-c="1" data-reviewed-cycle="2" data-origin="recorded"/>
+<text x="658" y="493" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#356E9A" text-anchor="middle">2</text>
+<text x="702" y="376" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#243746" text-anchor="middle">C2</text>
+<rect x="682" y="390" width="40" height="36" fill="white" stroke="#B8C8CE" data-source-c="2" data-recorded-cycle="1"/>
+<text x="702" y="415" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M702 432 V461" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="682" y="468" width="40" height="36" fill="#E5F1EF" stroke="#007D83" stroke-width="0.8" data-source-c="2" data-reviewed-cycle="1" data-origin="recorded"/>
+<text x="702" y="493" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="middle">1</text>
+<text x="746" y="376" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#243746" text-anchor="middle">C3</text>
+<rect x="726" y="390" width="40" height="36" fill="white" stroke="#B8C8CE" data-source-c="3" data-recorded-cycle="unknown"/>
+<text x="746" y="415" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">?</text>
+<path d="M746 432 V461" fill="none" stroke="#356E9A" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="726" y="468" width="40" height="36" fill="white" stroke="#356E9A" stroke-width="2" data-source-c="3" data-reviewed-cycle="2" data-origin="manual"/>
+<text x="746" y="493" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#356E9A" text-anchor="middle">2</text>
+<path d="M754 477 V496" fill="none" stroke="#356E9A" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="746" y="530" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#356E9A" text-anchor="middle">Manual</text>
+<text x="790" y="376" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#243746" text-anchor="middle">C4</text>
+<rect x="770" y="390" width="40" height="36" fill="white" stroke="#B8C8CE" data-source-c="4" data-recorded-cycle="1"/>
+<text x="790" y="415" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M790 432 V461" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="770" y="468" width="40" height="36" fill="#E5F1EF" stroke="#007D83" stroke-width="0.8" data-source-c="4" data-reviewed-cycle="1" data-origin="recorded"/>
+<text x="790" y="493" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#007D83" text-anchor="middle">1</text>
+<text x="834" y="376" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#243746" text-anchor="middle">C5</text>
+<rect x="814" y="390" width="40" height="36" fill="white" stroke="#B8C8CE" data-source-c="5" data-recorded-cycle="2"/>
+<text x="834" y="415" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M834 432 V461" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="814" y="468" width="40" height="36" fill="#E8F0F5" stroke="#356E9A" stroke-width="0.8" data-source-c="5" data-reviewed-cycle="2" data-origin="recorded"/>
+<text x="834" y="493" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#356E9A" text-anchor="middle">2</text>
+<path d="M452 440 H497" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M870 440 H921" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="950" y="386" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="start">Cycle 1</text>
+<text x="950" y="414" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">T0</text>
+<g aria-label="T0 C0, source position 1" data-source-t="0" data-source-c="0" data-source-ordinal="1">
+<rect x="1050" y="365" width="54" height="54" fill="#F5F8F8" stroke="#007D83"/>
+<ellipse cx="1066" cy="387" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1089" cy="385" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1079" cy="406" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1058" cy="373" r="10" fill="white" stroke="#007D83"/>
+<text x="1058" y="377" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#007D83" text-anchor="middle">1</text>
+<text x="1077" y="442" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C0</text>
+</g>
+<g aria-label="T0 C2, source position 3" data-source-t="0" data-source-c="2" data-source-ordinal="3">
+<rect x="1127" y="365" width="54" height="54" fill="#F5F8F8" stroke="#007D83"/>
+<ellipse cx="1143" cy="387" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1166" cy="385" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1156" cy="406" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1135" cy="373" r="10" fill="white" stroke="#007D83"/>
+<text x="1135" y="377" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#007D83" text-anchor="middle">3</text>
+<text x="1154" y="442" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C2</text>
+</g>
+<g aria-label="T0 C4, source position 5" data-source-t="0" data-source-c="4" data-source-ordinal="5">
+<rect x="1204" y="365" width="54" height="54" fill="#F5F8F8" stroke="#007D83"/>
+<ellipse cx="1220" cy="387" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1243" cy="385" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1233" cy="406" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1212" cy="373" r="10" fill="white" stroke="#007D83"/>
+<text x="1212" y="377" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#007D83" text-anchor="middle">5</text>
+<text x="1231" y="442" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C4</text>
+</g>
+<text x="950" y="484" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">Cycle 2</text>
+<text x="950" y="512" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">T0</text>
+<g aria-label="T0 C1, source position 2" data-source-t="0" data-source-c="1" data-source-ordinal="2">
+<rect x="1050" y="463" width="54" height="54" fill="#F5F8F8" stroke="#356E9A"/>
+<ellipse cx="1066" cy="485" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1089" cy="483" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1079" cy="504" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1058" cy="471" r="10" fill="white" stroke="#356E9A"/>
+<text x="1058" y="475" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#356E9A" text-anchor="middle">2</text>
+<text x="1077" y="540" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C1</text>
+</g>
+<g aria-label="T0 C3, source position 4" data-source-t="0" data-source-c="3" data-source-ordinal="4">
+<rect x="1127" y="463" width="54" height="54" fill="#F5F8F8" stroke="#356E9A"/>
+<ellipse cx="1143" cy="485" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1166" cy="483" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1156" cy="504" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1135" cy="471" r="10" fill="white" stroke="#356E9A"/>
+<text x="1135" y="475" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#356E9A" text-anchor="middle">4</text>
+<text x="1154" y="540" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C3</text>
+</g>
+<g aria-label="T0 C5, source position 6" data-source-t="0" data-source-c="5" data-source-ordinal="6">
+<rect x="1204" y="463" width="54" height="54" fill="#F5F8F8" stroke="#356E9A"/>
+<ellipse cx="1220" cy="485" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1243" cy="483" rx="7" ry="5" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<ellipse cx="1233" cy="504" rx="5" ry="7" fill="none" stroke="#91A7AD" stroke-width="1.3"/>
+<circle cx="1212" cy="471" r="10" fill="white" stroke="#356E9A"/>
+<text x="1212" y="475" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#356E9A" text-anchor="middle">6</text>
+<text x="1231" y="540" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">C5</text>
+</g>
+</svg>

@@ -1,0 +1,4 @@
+# CPU scoring runtime. Upstream inference code is pinned separately.
+-r nimbus-dependencies.in
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.7.1+cpu

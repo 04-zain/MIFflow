@@ -1,0 +1,28 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "cellpose",
+  "version": "cpsam-7c61431b",
+  "code_version": "4.0.9",
+  "code_license": "BSD-3-Clause",
+  "model_license": "BSD-3-Clause",
+  "files": [
+    {
+      "filename": "cpsam",
+      "url": "https://huggingface.co/mouseland/cellpose-sam/resolve/7c61431b5fbb078f3296754bd15d9f51b320f837/cpsam",
+      "size_bytes": 1233587898,
+      "sha256": "e1440429eb384f95afe32bcba6510f90d518eaedc917ede549bed6804004abe2"
+    },
+    {
+      "filename": "LICENSE-code.txt",
+      "url": "https://raw.githubusercontent.com/MouseLand/cellpose/v4.0.9/LICENSE",
+      "size_bytes": 1454,
+      "sha256": "fa908286fef07e1e8acd05adcdcd7bbb8c7ca4c02f563a4722dad28b94ce0b49"
+    },
+    {
+      "filename": "MODEL-CARD.md",
+      "url": "https://huggingface.co/mouseland/cellpose-sam/raw/7c61431b5fbb078f3296754bd15d9f51b320f837/README.md",
+      "size_bytes": 33,
+      "sha256": "f867f249d3c734f8f9386af9ca0ae3bd426852d6d1a003e807e82f8989deff5f"
+    }
+  ]
+}

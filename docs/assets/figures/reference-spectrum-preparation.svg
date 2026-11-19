@@ -1,0 +1,286 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1005" viewBox="0 0 1000 1005" role="img" aria-labelledby="title description">
+<title id="title">Preparing one fluorophore reference spectrum from image regions</title>
+<desc id="description">Schematic numerical example with six acquired bands. Selected stained and matched unstained control regions supply intensity-corrected mean spectra m and u. Separate image background regions supply b_stain and b_control, here 0.2 and 0.1 in every band. Subtraction gives z equal to 2, 4, 7, 9, 4, 3 and the control profile a equal to 1, 2, 3, 2, 1, 1.5. Reviewed dark bands 1, 2 and 6, shaded in both plots, determine alpha equal to 2. Subtraction of alpha times a in all six bands gives the fluorophore profile 0, 0, 1, 5, 2, 0. Three included ROI profiles, each normalized to unit L2 norm, receive equal weights. Their mean is L1-normalized to one stored fluorophore column of reference S. Other component columns are muted and are not derived here. Image marks and all spectra are constructed examples, not measured results.</desc>
+<rect width="1000" height="1005" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<circle cx="45" cy="32" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="45" y="38" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">1</text>
+<text x="75" y="38" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Sample regions and subtract each image&#x27;s background</text>
+<text x="40" y="79" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Stained reference</text>
+<rect x="40" y="102" width="183" height="144" rx="0" fill="#F7F9F9" stroke="#B8C8CE" stroke-width="1.2"/>
+<path d="M47 113 L110 108 L165 139 L191 171 L161 209 L125 236 L60 215 Z" fill="#356E9A" opacity="0.10"/>
+<circle cx="68" cy="137" r="10" fill="#356E9A" opacity="0.18"/>
+<circle cx="98" cy="128" r="7" fill="#356E9A" opacity="0.18"/>
+<circle cx="129" cy="145" r="13" fill="#356E9A" opacity="0.18"/>
+<circle cx="70" cy="172" r="12" fill="#356E9A" opacity="0.18"/>
+<circle cx="104" cy="186" r="9" fill="#356E9A" opacity="0.18"/>
+<circle cx="144" cy="184" r="10" fill="#356E9A" opacity="0.18"/>
+<circle cx="93" cy="220" r="7" fill="#356E9A" opacity="0.18"/>
+<circle cx="164" cy="156" r="7" fill="#356E9A" opacity="0.18"/>
+<path d="M55 124 L110 116 L151 143 L156 185 L112 210 L61 189 Z" fill="none" stroke="#356E9A" stroke-width="2.1" stroke-linejoin="round"/>
+<circle cx="105" cy="163" r="15" fill="#FFFFFF" stroke="#FFFFFF"/>
+<text x="105" y="170" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="middle">m</text>
+<rect x="166" y="208" width="48" height="29" rx="0" fill="#FFFFFF" stroke="#526773" stroke-width="1.3"/>
+<rect x="187" y="111" width="25" height="21" rx="0" fill="#FFFFFF" stroke="#526773" stroke-width="1.3"/>
+<text x="190" y="229" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773" text-anchor="middle">b</text>
+<text x="40" y="274" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#526773">b<tspan baseline-shift="sub" font-size="12.92">stain</tspan></text>
+<path d="M120 268 L190 240" fill="none" stroke="#526773" stroke-width="1" stroke-linejoin="round"/>
+<text x="273" y="79" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Matched control</text>
+<rect x="273" y="102" width="183" height="144" rx="0" fill="#F7F9F9" stroke="#B8C8CE" stroke-width="1.2"/>
+<path d="M280 113 L343 108 L398 139 L424 171 L394 209 L358 236 L293 215 Z" fill="#946A21" opacity="0.10"/>
+<circle cx="301" cy="137" r="10" fill="#946A21" opacity="0.18"/>
+<circle cx="331" cy="128" r="7" fill="#946A21" opacity="0.18"/>
+<circle cx="362" cy="145" r="13" fill="#946A21" opacity="0.18"/>
+<circle cx="303" cy="172" r="12" fill="#946A21" opacity="0.18"/>
+<circle cx="337" cy="186" r="9" fill="#946A21" opacity="0.18"/>
+<circle cx="377" cy="184" r="10" fill="#946A21" opacity="0.18"/>
+<circle cx="326" cy="220" r="7" fill="#946A21" opacity="0.18"/>
+<circle cx="397" cy="156" r="7" fill="#946A21" opacity="0.18"/>
+<path d="M288 124 L343 116 L384 143 L389 185 L345 210 L294 189 Z" fill="none" stroke="#946A21" stroke-width="2.1" stroke-linejoin="round"/>
+<circle cx="338" cy="163" r="15" fill="#FFFFFF" stroke="#FFFFFF"/>
+<text x="338" y="170" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#946A21" text-anchor="middle">u</text>
+<rect x="399" y="208" width="48" height="29" rx="0" fill="#FFFFFF" stroke="#526773" stroke-width="1.3"/>
+<rect x="420" y="111" width="25" height="21" rx="0" fill="#FFFFFF" stroke="#526773" stroke-width="1.3"/>
+<text x="423" y="229" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773" text-anchor="middle">b</text>
+<text x="273" y="274" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#526773">b<tspan baseline-shift="sub" font-size="12.92">control</tspan></text>
+<path d="M353 268 L423 240" fill="none" stroke="#526773" stroke-width="1" stroke-linejoin="round"/>
+<path d="M472 179 L529 179" fill="none" stroke="#243746" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<text x="500" y="160" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">mean</text>
+<text x="550" y="79" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Per-band means</text>
+<text x="550" y="104" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">After intensity correction</text>
+<text x="649" y="131" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<text x="708" y="131" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<text x="767" y="131" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<text x="826" y="131" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<text x="885" y="131" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<text x="944" y="131" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<rect x="543" y="137" width="426" height="30" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="0"/>
+<text x="551" y="159" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">m</text>
+<text x="649" y="159" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">2.2</text>
+<text x="708" y="159" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">4.2</text>
+<text x="767" y="159" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">7.2</text>
+<text x="826" y="159" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">9.2</text>
+<text x="885" y="159" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">4.2</text>
+<text x="944" y="159" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="middle">3.2</text>
+<rect x="543" y="172" width="426" height="30" rx="0" fill="#F5F7F8" stroke="#F5F7F8" stroke-width="0"/>
+<text x="551" y="194" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773">b<tspan baseline-shift="sub" font-size="13.6">stain</tspan></text>
+<text x="649" y="194" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.2</text>
+<text x="708" y="194" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.2</text>
+<text x="767" y="194" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.2</text>
+<text x="826" y="194" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.2</text>
+<text x="885" y="194" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.2</text>
+<text x="944" y="194" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.2</text>
+<rect x="543" y="207" width="426" height="30" rx="0" fill="#F7F1E5" stroke="#F7F1E5" stroke-width="0"/>
+<text x="551" y="229" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="start">u</text>
+<text x="649" y="229" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#946A21" text-anchor="middle">1.1</text>
+<text x="708" y="229" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#946A21" text-anchor="middle">2.1</text>
+<text x="767" y="229" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#946A21" text-anchor="middle">3.1</text>
+<text x="826" y="229" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#946A21" text-anchor="middle">2.1</text>
+<text x="885" y="229" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#946A21" text-anchor="middle">1.1</text>
+<text x="944" y="229" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#946A21" text-anchor="middle">1.6</text>
+<rect x="543" y="242" width="426" height="30" rx="0" fill="#F5F7F8" stroke="#F5F7F8" stroke-width="0"/>
+<text x="551" y="264" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#526773">b<tspan baseline-shift="sub" font-size="13.6">control</tspan></text>
+<text x="649" y="264" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.1</text>
+<text x="708" y="264" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.1</text>
+<text x="767" y="264" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.1</text>
+<text x="826" y="264" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.1</text>
+<text x="885" y="264" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.1</text>
+<text x="944" y="264" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">0.1</text>
+<text x="549" y="304" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A">z = m − b<tspan baseline-shift="sub" font-size="13.6">stain</tspan></text>
+<text x="744" y="304" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#946A21">a = max(u − b<tspan baseline-shift="sub" font-size="12.92">control</tspan>, 0)</text>
+<path d="M30 326 L970 326" fill="none" stroke="#E8EEF0" stroke-width="1.3" stroke-linejoin="round"/>
+<circle cx="45" cy="360" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="45" y="366" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">2</text>
+<text x="75" y="366" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Scale AF using dark bands</text>
+<circle cx="566" cy="360" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="566" y="366" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">3</text>
+<text x="596" y="366" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Subtract in every band</text>
+<path d="M68 397 L97 397" fill="none" stroke="#356E9A" stroke-width="2.3" stroke-linejoin="round"/>
+<text x="106" y="403" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">z</text>
+<path d="M167 397 L196 397" fill="none" stroke="#946A21" stroke-width="2.3" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="205" y="403" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="start">a</text>
+<path d="M262 397 L291 397" fill="none" stroke="#946A21" stroke-width="2.3" stroke-linejoin="round"/>
+<text x="300" y="403" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#946A21" text-anchor="start">αa</text>
+<text x="444" y="403" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="end">α = 2</text>
+<text x="691" y="403" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="start">f = z − αa</text>
+<rect x="74.26666666666667" y="429" width="50.13333333333333" height="173" rx="0" fill="#E9EDEF" stroke="#E9EDEF" stroke-width="0"/>
+<rect x="136.93333333333334" y="429" width="50.13333333333333" height="173" rx="0" fill="#E9EDEF" stroke="#E9EDEF" stroke-width="0"/>
+<rect x="387.6" y="429" width="50.13333333333333" height="173" rx="0" fill="#E9EDEF" stroke="#E9EDEF" stroke-width="0"/>
+<path d="M68 602.0 L444 602.0" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="56" y="608.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<path d="M68 515.5 L444 515.5" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="56" y="521.5" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">5</text>
+<path d="M68 429.0 L444 429.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="56" y="435.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">10</text>
+<path d="M68 429 L68 602" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<path d="M99.33333333333333 602 L99.33333333333333 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="99.33333333333333" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M162.0 602 L162.0 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="162.0" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M224.66666666666666 602 L224.66666666666666 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="224.66666666666666" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<path d="M287.33333333333337 602 L287.33333333333337 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="287.33333333333337" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#007D83" text-anchor="middle">4</text>
+<path d="M350.0 602 L350.0 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="350.0" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<path d="M412.6666666666667 602 L412.6666666666667 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="412.6666666666667" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<rect x="594.2666666666667" y="429" width="50.13333333333333" height="173" rx="0" fill="#E9EDEF" stroke="#E9EDEF" stroke-width="0"/>
+<rect x="656.9333333333333" y="429" width="50.13333333333333" height="173" rx="0" fill="#E9EDEF" stroke="#E9EDEF" stroke-width="0"/>
+<rect x="907.6" y="429" width="50.13333333333333" height="173" rx="0" fill="#E9EDEF" stroke="#E9EDEF" stroke-width="0"/>
+<path d="M588 602.0 L964 602.0" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="576" y="608.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<path d="M588 515.5 L964 515.5" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="576" y="521.5" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">5</text>
+<path d="M588 429.0 L964 429.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="576" y="435.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">10</text>
+<path d="M588 429 L588 602" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<path d="M619.3333333333334 602 L619.3333333333334 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="619.3333333333334" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M682.0 602 L682.0 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="682.0" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M744.6666666666666 602 L744.6666666666666 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="744.6666666666666" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<path d="M807.3333333333334 602 L807.3333333333334 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="807.3333333333334" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#007D83" text-anchor="middle">4</text>
+<path d="M870.0 602 L870.0 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="870.0" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<path d="M932.6666666666667 602 L932.6666666666667 607" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="932.6666666666667" y="627" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<path d="M99.333 584.700 L162.000 567.400 L224.667 550.100 L287.333 567.400 L350.000 584.700 L412.667 576.050" fill="none" stroke="#946A21" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<path d="M99.333 567.400 L162.000 532.800 L224.667 498.200 L287.333 532.800 L350.000 567.400 L412.667 550.100" fill="none" stroke="#946A21" stroke-width="3.6" stroke-linejoin="round"/>
+<path d="M99.333 567.400 L162.000 532.800 L224.667 480.900 L287.333 446.300 L350.000 532.800 L412.667 550.100" fill="none" stroke="#356E9A" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="99.33333333333333" cy="567.4" r="3.6" fill="#356E9A" stroke="#FFFFFF"/>
+<circle cx="162.0" cy="532.8" r="3.6" fill="#356E9A" stroke="#FFFFFF"/>
+<circle cx="224.66666666666666" cy="480.9" r="3.6" fill="#356E9A" stroke="#FFFFFF"/>
+<circle cx="287.33333333333337" cy="446.3" r="3.6" fill="#356E9A" stroke="#FFFFFF"/>
+<circle cx="350.0" cy="532.8" r="3.6" fill="#356E9A" stroke="#FFFFFF"/>
+<circle cx="412.6666666666667" cy="550.1" r="3.6" fill="#356E9A" stroke="#FFFFFF"/>
+<rect x="93.83333333333333" y="561.9" width="11" height="11" rx="0" fill="none" stroke="#946A21" stroke-width="1.4"/>
+<rect x="156.5" y="527.3" width="11" height="11" rx="0" fill="none" stroke="#946A21" stroke-width="1.4"/>
+<rect x="407.1666666666667" y="544.6" width="11" height="11" rx="0" fill="none" stroke="#946A21" stroke-width="1.4"/>
+<path d="M466 511 L548 511" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="507" y="493" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">− αa</text>
+<path d="M619.3333333333334 602.0 L619.333 602.000 L682.000 602.000 L744.667 584.700 L807.333 515.500 L870.000 567.400 L932.667 602.000 L932.6666666666667 602.0 Z" fill="#EAF5F4"/>
+<path d="M619.333 602.000 L682.000 602.000 L744.667 584.700 L807.333 515.500 L870.000 567.400 L932.667 602.000" fill="none" stroke="#007D83" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="619.3333333333334" cy="602.0" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="682.0" cy="602.0" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="744.6666666666666" cy="584.7" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="807.3333333333334" cy="515.5" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="870.0" cy="567.4" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="932.6666666666667" cy="602.0" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<text x="619.3333333333334" y="590.0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">0</text>
+<text x="682.0" y="590.0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">0</text>
+<text x="744.6666666666666" y="572.7" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">1</text>
+<text x="807.3333333333334" y="503.5" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">5</text>
+<text x="870.0" y="555.4" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">2</text>
+<text x="932.6666666666667" y="590.0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">0</text>
+<text x="68" y="420" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="start">Intensity</text>
+<text x="588" y="420" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="start">Intensity</text>
+<text x="256" y="657" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Acquired band</text>
+<text x="776" y="657" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Acquired band</text>
+<rect x="69" y="674" width="20" height="18" rx="0" fill="#E9EDEF" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="99" y="689" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="start">D = {1, 2, 6}</text>
+<text x="260" y="689" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">Negligible fluorophore signal</text>
+<text x="588" y="689" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="start">ROI 1; reviewed signal band 4</text>
+<path d="M30 714 L970 714" fill="none" stroke="#E8EEF0" stroke-width="1.3" stroke-linejoin="round"/>
+<circle cx="45" cy="746" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="45" y="752" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">4</text>
+<text x="75" y="752" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Combine included ROI spectra</text>
+<text x="49" y="789" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Each ROI: L2 norm = 1</text>
+<path d="M50 813 L69 813" fill="none" stroke="#007D83" stroke-width="2" stroke-linejoin="round"/>
+<text x="74" y="819" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#007D83" text-anchor="start">ROI 1</text>
+<path d="M144 813 L163 813" fill="none" stroke="#769E9A" stroke-width="2" stroke-linejoin="round"/>
+<text x="168" y="819" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#769E9A" text-anchor="start">ROI 2</text>
+<path d="M239 813 L258 813" fill="none" stroke="#315D68" stroke-width="2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="263" y="819" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#315D68" text-anchor="start">ROI 3</text>
+<text x="424" y="789" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Equal ROI mean</text>
+<text x="424" y="817" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">3 included ROIs</text>
+<text x="799" y="789" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="start">Reference S</text>
+<path d="M68 956.0 L319 956.0" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="56" y="962.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<path d="M68 839.0 L319 839.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="56" y="845.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">1</text>
+<path d="M68 839 L68 956" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<path d="M88.91666666666667 956 L88.91666666666667 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="88.91666666666667" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M130.75 956 L130.75 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="130.75" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M172.58333333333331 956 L172.58333333333331 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="172.58333333333331" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<path d="M214.41666666666666 956 L214.41666666666666 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="214.41666666666666" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<path d="M256.25 956 L256.25 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="256.25" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<path d="M298.08333333333337 956 L298.08333333333337 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="298.08333333333337" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<path d="M445 956.0 L623 956.0" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="433" y="962.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<path d="M445 839.0 L623 839.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="433" y="845.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">1</text>
+<path d="M445 839 L445 956" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<path d="M459.8333333333333 956 L459.8333333333333 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="459.8333333333333" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<path d="M489.5 956 L489.5 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="489.5" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<path d="M519.1666666666666 956 L519.1666666666666 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="519.1666666666666" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<path d="M548.8333333333334 956 L548.8333333333334 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="548.8333333333334" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<path d="M578.5 956 L578.5 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="578.5" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<path d="M608.1666666666666 956 L608.1666666666666 961" fill="none" stroke="#B8C8CE" stroke-width="1" stroke-linejoin="round"/>
+<text x="608.1666666666666" y="981" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<path d="M88.917 956.000 L130.750 956.000 L172.583 925.678 L214.417 854.927 L256.250 905.464 L298.083 956.000" fill="none" stroke="#769E9A" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M88.917 956.000 L130.750 956.000 L172.583 942.792 L214.417 845.936 L256.250 918.578 L298.083 956.000" fill="none" stroke="#315D68" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<path d="M88.917 956.000 L130.750 956.000 L172.583 934.639 L214.417 849.194 L256.250 913.278 L298.083 956.000" fill="none" stroke="#007D83" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M459.833 956.000 L489.500 956.000 L519.167 934.370 L548.833 850.019 L578.500 912.440 L608.167 956.000" fill="none" stroke="#007D83" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="459.8333333333333" cy="956.0" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="489.5" cy="956.0" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="519.1666666666666" cy="934.3697725090957" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="548.8333333333334" cy="850.0190512975308" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="578.5" cy="912.4398204912627" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<circle cx="608.1666666666666" cy="956.0" r="3.6" fill="#007D83" stroke="#FFFFFF"/>
+<path d="M335 895 L416 895" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="376" y="873" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#007D83" text-anchor="middle">1/3 each</text>
+<path d="M646 895 L758 895" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="702" y="873" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">L1 normalize</text>
+<text x="328" y="981" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="start">band</text>
+<text x="632" y="981" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="start">band</text>
+<text x="818" y="817" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="870" y="817" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="middle">sⱼ</text>
+<text x="930" y="817" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<rect x="842" y="830" width="56" height="144" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1.2"/>
+<text x="773" y="848" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#526773" text-anchor="middle">1</text>
+<rect x="803" y="833" width="19" height="18" fill="#B8C8CE" opacity="0.3"/>
+<rect x="914" y="833" width="19" height="18" fill="#B8C8CE" opacity="0.22"/>
+<rect x="938" y="833" width="19" height="18" fill="#B8C8CE" opacity="0.37"/>
+<text x="870" y="848" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#007D83" text-anchor="middle">0.00</text>
+<text x="773" y="872" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#526773" text-anchor="middle">2</text>
+<rect x="803" y="857" width="19" height="18" fill="#B8C8CE" opacity="0.3"/>
+<rect x="914" y="857" width="19" height="18" fill="#B8C8CE" opacity="0.22"/>
+<rect x="938" y="857" width="19" height="18" fill="#B8C8CE" opacity="0.37"/>
+<text x="870" y="872" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#007D83" text-anchor="middle">0.00</text>
+<text x="773" y="896" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#526773" text-anchor="middle">3</text>
+<rect x="803" y="881" width="19" height="18" fill="#B8C8CE" opacity="0.3"/>
+<rect x="914" y="881" width="19" height="18" fill="#B8C8CE" opacity="0.22"/>
+<rect x="938" y="881" width="19" height="18" fill="#B8C8CE" opacity="0.37"/>
+<text x="870" y="896" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#007D83" text-anchor="middle">0.13</text>
+<text x="773" y="920" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#526773" text-anchor="middle">4</text>
+<rect x="803" y="905" width="19" height="18" fill="#B8C8CE" opacity="0.3"/>
+<rect x="914" y="905" width="19" height="18" fill="#B8C8CE" opacity="0.22"/>
+<rect x="938" y="905" width="19" height="18" fill="#B8C8CE" opacity="0.37"/>
+<text x="870" y="920" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#007D83" text-anchor="middle">0.62</text>
+<text x="773" y="944" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#526773" text-anchor="middle">5</text>
+<rect x="803" y="929" width="19" height="18" fill="#B8C8CE" opacity="0.3"/>
+<rect x="914" y="929" width="19" height="18" fill="#B8C8CE" opacity="0.22"/>
+<rect x="938" y="929" width="19" height="18" fill="#B8C8CE" opacity="0.37"/>
+<text x="870" y="944" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#007D83" text-anchor="middle">0.25</text>
+<text x="773" y="968" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#526773" text-anchor="middle">6</text>
+<rect x="803" y="953" width="19" height="18" fill="#B8C8CE" opacity="0.3"/>
+<rect x="914" y="953" width="19" height="18" fill="#B8C8CE" opacity="0.22"/>
+<rect x="938" y="953" width="19" height="18" fill="#B8C8CE" opacity="0.37"/>
+<text x="870" y="968" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#007D83" text-anchor="middle">0.00</text>
+<path d="M797 828 H788 V976 H797" fill="none" stroke="#243746" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M960 828 H969 V976 H960" fill="none" stroke="#243746" stroke-width="1.4" stroke-linejoin="round"/>
+</svg>

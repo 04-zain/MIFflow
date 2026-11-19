@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="720" height="234" viewBox="0 0 720 234" role="img" aria-labelledby="title description">
+  <title id="title">Four section images grouped by subject and by imaging conditions</title>
+  <desc id="description">Each slide has a unique sample name. Mouse07 supplied the first two slides, Mouse08 the third and Mouse09 the fourth. The first three share panel-A-run1. The fourth belongs to panel-B-run1.</desc>
+  <defs>
+    <g id="slide">
+      <rect x="0.75" y="0.75" width="101.5" height="42.5" rx="2" fill="#fff" stroke="#84969b" stroke-width="1.5"/>
+      <path d="M2 2H20V42H2Z" fill="#e6edef"/>
+      <path d="M20 1V43" stroke="#b7c6ca"/>
+      <path d="M7 11H15M7 15H13" stroke="#9aaeb3" stroke-width="1.5"/>
+    </g>
+    <path id="tissue07" d="M35 20C34 15 39 9 46 10C53 6 61 12 67 13C71 14 77 12 82 17C88 23 82 29 76 30C68 35 62 29 57 31C49 35 44 31 42 28C38 27 36 24 35 20Z"/>
+  </defs>
+  <rect width="720" height="234" fill="#fff"/>
+  <g font-family="'Source Sans 3','DejaVu Sans',sans-serif" fill="#253c47">
+    <g font-size="14" font-weight="600">
+      <text x="12" y="29">Processing</text>
+      <text x="12" y="47">group</text>
+      <text x="12" y="144">Sample name</text>
+      <text x="12" y="204">Subject ID</text>
+    </g>
+    <rect x="118" y="12" width="433" height="45" rx="3" fill="#e6f3f1"/>
+    <rect x="563" y="12" width="145" height="45" rx="3" fill="#eaf1f7"/>
+    <path d="M118 55H551" stroke="#057e79" stroke-width="3"/>
+    <path d="M563 55H708" stroke="#4a7293" stroke-width="3"/>
+    <g text-anchor="middle" font-size="16" font-weight="600">
+      <text x="334.5" y="41" fill="#145953">panel-A-run1</text>
+      <text x="635.5" y="41" fill="#335975">panel-B-run1</text>
+    </g>
+    <g transform="translate(138,76)">
+      <use xlink:href="#slide"/>
+      <use xlink:href="#tissue07" fill="#b9cdca" stroke="#758e8c"/>
+      <path d="M43 24Q52 13 61 20T78 21" stroke="#f4f7f5" stroke-width="1.8" fill="none"/>
+    </g>
+    <g transform="translate(284,76)">
+      <use xlink:href="#slide"/>
+      <use xlink:href="#tissue07" transform="translate(1,1) rotate(-5 59 21)" fill="#b9cdca" stroke="#758e8c"/>
+      <path d="M45 25Q54 15 63 21T78 20" stroke="#f4f7f5" stroke-width="1.8" fill="none"/>
+    </g>
+    <g transform="translate(430,76)">
+      <use xlink:href="#slide"/>
+      <path d="M37 22Q37 13 46 14Q54 14 60 8Q67 6 73 11Q79 15 80 23Q83 31 74 32Q66 34 60 28Q53 25 47 28Q39 31 37 22Z" fill="#b9cdca" stroke="#758e8c"/>
+      <path d="M46 21Q55 22 62 15T75 18" stroke="#f4f7f5" stroke-width="1.8" fill="none"/>
+    </g>
+    <g transform="translate(584,76)">
+      <use xlink:href="#slide"/>
+      <path d="M35 20Q37 12 47 13Q54 15 62 11Q70 8 74 15Q77 20 84 23Q88 30 80 32Q74 34 67 29Q60 24 51 27Q39 31 35 20Z" fill="#b9cdca" stroke="#758e8c"/>
+      <path d="M44 19Q53 23 64 18T78 25" stroke="#f4f7f5" stroke-width="1.8" fill="none"/>
+    </g>
+    <g text-anchor="middle" font-size="13.5">
+      <text x="189.5" y="144">Mouse07-section1</text>
+      <text x="335.5" y="144">Mouse07-section2</text>
+      <text x="481.5" y="144">Mouse08-section1</text>
+      <text x="635.5" y="144">Mouse09-section1</text>
+    </g>
+    <path d="M189.5 157V169H335.5V157M262.5 169V180M481.5 157V180M635.5 157V180"
+          stroke="#87999e" stroke-width="1.5" fill="none"/>
+    <g font-size="15" font-weight="600" text-anchor="middle">
+      <text x="262.5" y="204">Mouse07</text>
+      <text x="481.5" y="204">Mouse08</text>
+      <text x="635.5" y="204">Mouse09</text>
+    </g>
+  </g>
+</svg>

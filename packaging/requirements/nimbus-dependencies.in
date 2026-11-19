@@ -1,0 +1,5 @@
+# Shared isolated Nimbus numerical and build dependencies.
+--only-binary :all:
+numpy==1.26.4
+opencv-python-headless==4.11.0.86
+PyInstaller==6.22.2

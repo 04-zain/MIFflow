@@ -1,0 +1,354 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="title desc" viewBox="0 18 795 299" width="795" height="299" role="img">
+  <title id="title">FL6 raw spectral bands and separated components</title>
+  <desc id="desc">Columns represent the 35 detection bands grouped by filter set. The gold outline identifies the Cy3 band at 590 nm. Each row shows a component reference spectrum, shaded relative to its own peak. Seven fluorophores are paired with their staining assignments. Tissue autofluorescence is the eighth component.</desc>
+  <rect width="795" height="317" fill="white" />
+  <g font-family="DejaVu Sans, sans-serif" fill="#223d45">
+    <path d="M30 50v-7H158.92 M344.08 43H473v7" fill="none" stroke="#849a9d" stroke-width="1.35" />
+    <text x="251.5" y="48" font-size="14" font-weight="700" text-anchor="middle">35 raw spectral bands</text>
+    <path d="M537 50v-7H558.02 M763.98 43H785v7" fill="none" stroke="#849a9d" stroke-width="1.35" />
+    <text x="661.0" y="48" font-size="14" font-weight="700" text-anchor="middle">8 separated components</text>
+    <text x="70.5" y="75" font-size="13.5" font-weight="600" text-anchor="middle">DAPI</text>
+    <text x="70.5" y="91" font-size="11" fill="#48636a" text-anchor="middle">440–600 nm</text>
+    <path d="M12 99H128.45" fill="none" stroke="#809a9a" stroke-width="1.35" />
+    <text x="193.5" y="75" font-size="13.5" font-weight="600" text-anchor="middle">FITC</text>
+    <text x="193.5" y="91" font-size="11" fill="#48636a" text-anchor="middle">520–680 nm</text>
+    <path d="M135 99H251.45" fill="none" stroke="#809a9a" stroke-width="1.35" />
+    <text x="303.5" y="75" font-size="13.5" font-weight="600" text-anchor="middle">Cy3</text>
+    <text x="303.5" y="91" font-size="11" fill="#48636a" text-anchor="middle">570–690 nm</text>
+    <path d="M258 99H348.45" fill="none" stroke="#809a9a" stroke-width="1.35" />
+    <text x="400.5" y="75" font-size="13.5" font-weight="600" text-anchor="middle">Texas Red</text>
+    <text x="400.5" y="91" font-size="11" fill="#48636a" text-anchor="middle">580–700 nm</text>
+    <path d="M355 99H445.45" fill="none" stroke="#809a9a" stroke-width="1.35" />
+    <text x="471.5" y="75" font-size="13.5" font-weight="600" text-anchor="middle">Cy5</text>
+    <text x="479.5" y="91" font-size="11" fill="#48636a" text-anchor="middle">680–720 nm</text>
+    <path d="M452 99H490.45" fill="none" stroke="#809a9a" stroke-width="1.35" />
+    <text x="532" y="91" font-size="13.5" font-weight="600">Fluorophores</text>
+    <text x="649" y="91" font-size="13.5" font-weight="600">Assignment</text>
+    <path d="M529 99H785" fill="none" stroke="#789294" stroke-width="1.5" />
+    <rect x="66" y="99" width="12.45" height="20.0" fill="#7eabaa" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:440nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="79" y="99" width="12.45" height="20.0" fill="#216d6d" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:460nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="92" y="99" width="12.45" height="20.0" fill="#136464" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:480nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="105" y="99" width="12.45" height="20.0" fill="#246f6f" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:500nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="118" y="99" width="12.45" height="20.0" fill="#478686" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:520nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="131" y="99" width="12.45" height="20.0" fill="#81acac" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:540nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="144" y="99" width="12.45" height="20.0" fill="#a7c5c5" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:560nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="157" y="99" width="12.45" height="20.0" fill="#c7dad9" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:580nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="170" y="99" width="12.45" height="20.0" fill="#d9e6e5" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:600nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="189" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:520nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="202" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:540nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="215" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:560nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="228" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:580nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="241" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:600nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="254" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:620nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="267" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:640nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="280" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:660nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="293" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:680nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="312" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:570nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="325" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:590nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="338" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:610nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="351" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:630nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="364" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:650nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="377" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:670nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="390" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:690nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="409" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:580nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="422" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:600nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="435" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:620nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="448" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:640nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="461" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:660nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="474" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:680nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="487" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:700nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="506" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:680nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="519" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:700nm" data-component="DAPI" transform="translate(-54 8)" />
+    <rect x="532" y="99" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:720nm" data-component="DAPI" transform="translate(-54 8)" />
+    <text x="563" y="113" font-size="13.5" transform="translate(-31 8)">DAPI</text>
+    <text x="680" y="113" font-size="13.5" transform="translate(-31 8)">Nuclear stain</text>
+    <path d="M560 119.5H816" fill="none" stroke="#e1e9e8" stroke-width="0.65" transform="translate(-31 8)" />
+    <rect x="66" y="120" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:440nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="79" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:460nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="92" y="120" width="12.45" height="20.0" fill="#f5f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:480nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="105" y="120" width="12.45" height="20.0" fill="#eff4f3" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:500nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="118" y="120" width="12.45" height="20.0" fill="#e4edec" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:520nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="131" y="120" width="12.45" height="20.0" fill="#e3eceb" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:540nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="144" y="120" width="12.45" height="20.0" fill="#e6eeee" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:560nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="157" y="120" width="12.45" height="20.0" fill="#ebf2f1" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:580nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="170" y="120" width="12.45" height="20.0" fill="#f0f5f4" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:600nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="189" y="120" width="12.45" height="20.0" fill="#347a79" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:520nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="202" y="120" width="12.45" height="20.0" fill="#136464" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:540nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="215" y="120" width="12.45" height="20.0" fill="#4f8b8b" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:560nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="228" y="120" width="12.45" height="20.0" fill="#8fb5b5" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:580nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="241" y="120" width="12.45" height="20.0" fill="#b9d1d0" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:600nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="254" y="120" width="12.45" height="20.0" fill="#d4e3e2" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:620nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="267" y="120" width="12.45" height="20.0" fill="#e1ebea" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:640nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="280" y="120" width="12.45" height="20.0" fill="#eaf1f0" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:660nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="293" y="120" width="12.45" height="20.0" fill="#f0f5f4" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:680nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="312" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:570nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="325" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:590nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="338" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:610nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="351" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:630nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="364" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:650nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="377" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:670nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="390" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:690nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="409" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:580nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="422" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:600nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="435" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:620nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="448" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:640nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="461" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:660nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="474" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:680nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="487" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:700nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="506" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:680nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="519" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:700nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <rect x="532" y="120" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:720nm" data-component="Opal 520" transform="translate(-54 8)" />
+    <text x="563" y="134" font-size="13.5" transform="translate(-31 8)">Opal 520</text>
+    <text x="680" y="134" font-size="13.5" transform="translate(-31 8)">FOXP3</text>
+    <path d="M560 140.5H816" fill="none" stroke="#e1e9e8" stroke-width="0.65" transform="translate(-31 8)" />
+    <rect x="66" y="141" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:440nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="79" y="141" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:460nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="92" y="141" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:480nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="105" y="141" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:500nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="118" y="141" width="12.45" height="20.0" fill="#f4f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:520nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="131" y="141" width="12.45" height="20.0" fill="#e6eeed" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:540nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="144" y="141" width="12.45" height="20.0" fill="#e1ebeb" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:560nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="157" y="141" width="12.45" height="20.0" fill="#ebf2f1" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:580nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="170" y="141" width="12.45" height="20.0" fill="#eff5f4" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:600nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="189" y="141" width="12.45" height="20.0" fill="#e0ebea" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:520nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="202" y="141" width="12.45" height="20.0" fill="#6fa1a0" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:540nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="215" y="141" width="12.45" height="20.0" fill="#569090" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:560nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="228" y="141" width="12.45" height="20.0" fill="#a0c1c0" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:580nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="241" y="141" width="12.45" height="20.0" fill="#c0d5d5" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:600nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="254" y="141" width="12.45" height="20.0" fill="#dbe7e6" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:620nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="267" y="141" width="12.45" height="20.0" fill="#e7efee" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:640nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="280" y="141" width="12.45" height="20.0" fill="#eff4f3" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:660nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="293" y="141" width="12.45" height="20.0" fill="#f2f7f6" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:680nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="312" y="141" width="12.45" height="20.0" fill="#8db4b4" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:570nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="325" y="141" width="12.45" height="20.0" fill="#136464" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:590nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="338" y="141" width="12.45" height="20.0" fill="#4a8888" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:610nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="351" y="141" width="12.45" height="20.0" fill="#a5c4c3" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:630nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="364" y="141" width="12.45" height="20.0" fill="#c9dbda" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:650nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="377" y="141" width="12.45" height="20.0" fill="#dfeae9" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:670nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="390" y="141" width="12.45" height="20.0" fill="#ebf2f1" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:690nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="409" y="141" width="12.45" height="20.0" fill="#edf3f2" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:580nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="422" y="141" width="12.45" height="20.0" fill="#a3c3c2" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:600nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="435" y="141" width="12.45" height="20.0" fill="#8ab2b2" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:620nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="448" y="141" width="12.45" height="20.0" fill="#b4cecd" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:640nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="461" y="141" width="12.45" height="20.0" fill="#d6e4e3" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:660nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="474" y="141" width="12.45" height="20.0" fill="#e6efee" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:680nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="487" y="141" width="12.45" height="20.0" fill="#edf3f2" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:700nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="506" y="141" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:680nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="519" y="141" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:700nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <rect x="532" y="141" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:720nm" data-component="Opal 540" transform="translate(-54 8)" />
+    <text x="563" y="155" font-size="13.5" transform="translate(-31 8)">Opal 540</text>
+    <text x="680" y="155" font-size="13.5" transform="translate(-31 8)">CD8</text>
+    <path d="M560 161.5H816" fill="none" stroke="#e1e9e8" stroke-width="0.65" transform="translate(-31 8)" />
+    <rect x="66" y="162" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:440nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="79" y="162" width="12.45" height="20.0" fill="#f5f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:460nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="92" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:480nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="105" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:500nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="118" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:520nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="131" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:540nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="144" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:560nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="157" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:580nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="170" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:600nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="189" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:520nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="202" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:540nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="215" y="162" width="12.45" height="20.0" fill="#ecf3f2" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:560nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="228" y="162" width="12.45" height="20.0" fill="#e7efee" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:580nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="241" y="162" width="12.45" height="20.0" fill="#edf3f2" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:600nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="254" y="162" width="12.45" height="20.0" fill="#f0f5f4" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:620nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="267" y="162" width="12.45" height="20.0" fill="#f2f6f5" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:640nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="280" y="162" width="12.45" height="20.0" fill="#f4f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:660nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="293" y="162" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:680nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="312" y="162" width="12.45" height="20.0" fill="#94b9b8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:570nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="325" y="162" width="12.45" height="20.0" fill="#3c7f7f" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:590nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="338" y="162" width="12.45" height="20.0" fill="#609796" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:610nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="351" y="162" width="12.45" height="20.0" fill="#8fb6b5" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:630nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="364" y="162" width="12.45" height="20.0" fill="#b6cfce" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:650nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="377" y="162" width="12.45" height="20.0" fill="#d5e3e3" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:670nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="390" y="162" width="12.45" height="20.0" fill="#e3edec" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:690nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="409" y="162" width="12.45" height="20.0" fill="#eaf1f0" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:580nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="422" y="162" width="12.45" height="20.0" fill="#699c9c" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:600nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="435" y="162" width="12.45" height="20.0" fill="#136464" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:620nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="448" y="162" width="12.45" height="20.0" fill="#458585" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:640nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="461" y="162" width="12.45" height="20.0" fill="#9bbebd" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:660nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="474" y="162" width="12.45" height="20.0" fill="#c5d9d8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:680nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="487" y="162" width="12.45" height="20.0" fill="#d6e4e3" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:700nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="506" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:680nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="519" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:700nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <rect x="532" y="162" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:720nm" data-component="Opal 570" transform="translate(-54 8)" />
+    <text x="563" y="176" font-size="13.5" transform="translate(-31 8)">Opal 570</text>
+    <text x="680" y="176" font-size="13.5" transform="translate(-31 8)">CD21</text>
+    <path d="M560 182.5H816" fill="none" stroke="#e1e9e8" stroke-width="0.65" transform="translate(-31 8)" />
+    <rect x="66" y="183" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:440nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="79" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:460nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="92" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:480nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="105" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:500nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="118" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:520nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="131" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:540nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="144" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:560nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="157" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:580nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="170" y="183" width="12.45" height="20.0" fill="#f5f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:600nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="189" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:520nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="202" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:540nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="215" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:560nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="228" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:580nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="241" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:600nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="254" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:620nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="267" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:640nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="280" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:660nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="293" y="183" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:680nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="312" y="183" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:570nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="325" y="183" width="12.45" height="20.0" fill="#e2eceb" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:590nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="338" y="183" width="12.45" height="20.0" fill="#c5d9d8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:610nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="351" y="183" width="12.45" height="20.0" fill="#c3d7d7" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:630nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="364" y="183" width="12.45" height="20.0" fill="#d2e1e1" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:650nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="377" y="183" width="12.45" height="20.0" fill="#e3ecec" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:670nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="390" y="183" width="12.45" height="20.0" fill="#ebf1f1" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:690nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="409" y="183" width="12.45" height="20.0" fill="#edf3f2" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:580nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="422" y="183" width="12.45" height="20.0" fill="#75a5a4" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:600nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="435" y="183" width="12.45" height="20.0" fill="#136464" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:620nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="448" y="183" width="12.45" height="20.0" fill="#2d7575" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:640nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="461" y="183" width="12.45" height="20.0" fill="#84aeae" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:660nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="474" y="183" width="12.45" height="20.0" fill="#b6cfce" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:680nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="487" y="183" width="12.45" height="20.0" fill="#cadcdb" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:700nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="506" y="183" width="12.45" height="20.0" fill="#e6eeee" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:680nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="519" y="183" width="12.45" height="20.0" fill="#e8f0ef" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:700nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <rect x="532" y="183" width="12.45" height="20.0" fill="#eff4f3" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:720nm" data-component="Opal 620" transform="translate(-54 8)" />
+    <text x="563" y="197" font-size="13.5" transform="translate(-31 8)">Opal 620</text>
+    <text x="680" y="197" font-size="13.5" transform="translate(-31 8)">CD4</text>
+    <path d="M560 203.5H816" fill="none" stroke="#e1e9e8" stroke-width="0.65" transform="translate(-31 8)" />
+    <rect x="66" y="204" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:440nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="79" y="204" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:460nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="92" y="204" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:480nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="105" y="204" width="12.45" height="20.0" fill="#eef4f3" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:500nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="118" y="204" width="12.45" height="20.0" fill="#f3f7f6" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:520nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="131" y="204" width="12.45" height="20.0" fill="#eef4f3" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:540nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="144" y="204" width="12.45" height="20.0" fill="#edf3f2" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:560nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="157" y="204" width="12.45" height="20.0" fill="#edf3f2" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:580nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="170" y="204" width="12.45" height="20.0" fill="#eff4f3" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:600nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="189" y="204" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:520nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="202" y="204" width="12.45" height="20.0" fill="#f1f6f5" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:540nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="215" y="204" width="12.45" height="20.0" fill="#f2f7f6" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:560nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="228" y="204" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:580nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="241" y="204" width="12.45" height="20.0" fill="#f2f6f5" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:600nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="254" y="204" width="12.45" height="20.0" fill="#eff4f3" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:620nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="267" y="204" width="12.45" height="20.0" fill="#e4edec" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:640nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="280" y="204" width="12.45" height="20.0" fill="#dee9e9" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:660nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="293" y="204" width="12.45" height="20.0" fill="#e5eeed" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:680nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="312" y="204" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:570nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="325" y="204" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:590nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="338" y="204" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:610nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="351" y="204" width="12.45" height="20.0" fill="#e4edec" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:630nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="364" y="204" width="12.45" height="20.0" fill="#d3e2e1" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:650nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="377" y="204" width="12.45" height="20.0" fill="#d5e4e3" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:670nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="390" y="204" width="12.45" height="20.0" fill="#e2eceb" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:690nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="409" y="204" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:580nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="422" y="204" width="12.45" height="20.0" fill="#f2f6f5" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:600nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="435" y="204" width="12.45" height="20.0" fill="#c1d6d6" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:620nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="448" y="204" width="12.45" height="20.0" fill="#408181" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:640nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="461" y="204" width="12.45" height="20.0" fill="#136464" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:660nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="474" y="204" width="12.45" height="20.0" fill="#5a9292" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:680nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="487" y="204" width="12.45" height="20.0" fill="#91b7b6" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:700nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="506" y="204" width="12.45" height="20.0" fill="#3c7f7f" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:680nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="519" y="204" width="12.45" height="20.0" fill="#5b9393" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:700nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <rect x="532" y="204" width="12.45" height="20.0" fill="#abc8c7" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:720nm" data-component="Opal 650" transform="translate(-54 8)" />
+    <text x="563" y="218" font-size="13.5" transform="translate(-31 8)">Opal 650</text>
+    <text x="680" y="218" font-size="13.5" transform="translate(-31 8)">CD68</text>
+    <path d="M560 224.5H816" fill="none" stroke="#e1e9e8" stroke-width="0.65" transform="translate(-31 8)" />
+    <rect x="66" y="225" width="12.45" height="20.0" fill="#f5f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:440nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="79" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:460nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="92" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:480nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="105" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:500nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="118" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:520nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="131" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:540nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="144" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:560nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="157" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:580nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="170" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:600nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="189" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:520nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="202" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:540nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="215" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:560nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="228" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:580nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="241" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:600nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="254" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:620nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="267" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:640nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="280" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:660nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="293" y="225" width="12.45" height="20.0" fill="#f5f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:680nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="312" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:570nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="325" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:590nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="338" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:610nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="351" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:630nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="364" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:650nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="377" y="225" width="12.45" height="20.0" fill="#f0f5f4" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:670nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="390" y="225" width="12.45" height="20.0" fill="#e4edec" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:690nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="409" y="225" width="12.45" height="20.0" fill="#f6f9f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:580nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="422" y="225" width="12.45" height="20.0" fill="#f5f8f8" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:600nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="435" y="225" width="12.45" height="20.0" fill="#f5f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:620nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="448" y="225" width="12.45" height="20.0" fill="#f4f8f7" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:640nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="461" y="225" width="12.45" height="20.0" fill="#e0ebea" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:660nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="474" y="225" width="12.45" height="20.0" fill="#a2c2c1" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:680nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="487" y="225" width="12.45" height="20.0" fill="#6fa0a0" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:700nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="506" y="225" width="12.45" height="20.0" fill="#699c9c" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:680nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="519" y="225" width="12.45" height="20.0" fill="#136464" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:700nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <rect x="532" y="225" width="12.45" height="20.0" fill="#2d7575" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:720nm" data-component="Opal 690" transform="translate(-54 8)" />
+    <text x="563" y="239" font-size="13.5" transform="translate(-31 8)">Opal 690</text>
+    <text x="680" y="239" font-size="13.5" transform="translate(-31 8)">PD1</text>
+    <path d="M560 245.5H816" fill="none" stroke="#e1e9e8" stroke-width="0.65" transform="translate(-31 8)" />
+    <rect x="66" y="246" width="12.45" height="20.0" fill="#c0d6d5" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:440nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="79" y="246" width="12.45" height="20.0" fill="#81acac" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:460nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="92" y="246" width="12.45" height="20.0" fill="#599292" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:480nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="105" y="246" width="12.45" height="20.0" fill="#418282" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:500nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="118" y="246" width="12.45" height="20.0" fill="#136464" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:520nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="131" y="246" width="12.45" height="20.0" fill="#287272" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:540nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="144" y="246" width="12.45" height="20.0" fill="#438383" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:560nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="157" y="246" width="12.45" height="20.0" fill="#6e9f9f" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:580nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="170" y="246" width="12.45" height="20.0" fill="#80abab" stroke="#d1dcda" stroke-width="0.4" data-band="DAPI:600nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="189" y="246" width="12.45" height="20.0" fill="#a1c1c1" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:520nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="202" y="246" width="12.45" height="20.0" fill="#7aa7a7" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:540nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="215" y="246" width="12.45" height="20.0" fill="#72a2a2" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:560nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="228" y="246" width="12.45" height="20.0" fill="#88b1b0" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:580nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="241" y="246" width="12.45" height="20.0" fill="#92b7b7" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:600nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="254" y="246" width="12.45" height="20.0" fill="#acc8c8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:620nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="267" y="246" width="12.45" height="20.0" fill="#b9d1d0" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:640nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="280" y="246" width="12.45" height="20.0" fill="#cedfde" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:660nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="293" y="246" width="12.45" height="20.0" fill="#dde8e8" stroke="#d1dcda" stroke-width="0.4" data-band="FITC:680nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="312" y="246" width="12.45" height="20.0" fill="#d6e4e3" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:570nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="325" y="246" width="12.45" height="20.0" fill="#a4c3c3" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:590nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="338" y="246" width="12.45" height="20.0" fill="#99bcbb" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:610nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="351" y="246" width="12.45" height="20.0" fill="#a5c4c3" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:630nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="364" y="246" width="12.45" height="20.0" fill="#b0cbca" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:650nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="377" y="246" width="12.45" height="20.0" fill="#c3d8d7" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:670nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="390" y="246" width="12.45" height="20.0" fill="#d3e2e1" stroke="#d1dcda" stroke-width="0.4" data-band="Cy3:690nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="409" y="246" width="12.45" height="20.0" fill="#f1f5f4" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:580nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="422" y="246" width="12.45" height="20.0" fill="#a8c6c5" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:600nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="435" y="246" width="12.45" height="20.0" fill="#689c9b" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:620nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="448" y="246" width="12.45" height="20.0" fill="#629897" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:640nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="461" y="246" width="12.45" height="20.0" fill="#84aeae" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:660nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="474" y="246" width="12.45" height="20.0" fill="#a4c3c3" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:680nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="487" y="246" width="12.45" height="20.0" fill="#b2cccb" stroke="#d1dcda" stroke-width="0.4" data-band="Texas Red:700nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="506" y="246" width="12.45" height="20.0" fill="#ebf2f1" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:680nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="519" y="246" width="12.45" height="20.0" fill="#ebf2f1" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:700nm" data-component="AF" transform="translate(-54 8)" />
+    <rect x="532" y="246" width="12.45" height="20.0" fill="#eff5f4" stroke="#d1dcda" stroke-width="0.4" data-band="Cy5:720nm" data-component="AF" transform="translate(-54 8)" />
+    <text x="563" y="260" font-size="13.5" transform="translate(-31 8)">AF</text>
+    <text x="680" y="260" font-size="13.5" transform="translate(-31 8)">AF</text>
+    <rect x="324.5" y="98" width="13.5" height="168" fill="none" stroke="#aa7920" stroke-width="1.8" transform="translate(-54 8)" />
+    <path d="M331 266v23h10" fill="none" stroke="#997322" stroke-width="1.3" transform="translate(-54 8)" />
+    <text x="345" y="293" font-size="12" fill="#775717" transform="translate(-54 8)">Cy3 at 590 nm</text>
+    <text x="66" y="293" font-size="11.5" fill="#405e64" transform="translate(-54 8)">Relative intensity</text>
+    <text x="174" y="293" font-size="11" transform="translate(-54 8)">0</text>
+    <rect x="184.0" y="285" width="4" height="8" fill="#f6f9f8" transform="translate(-54 8)" />
+    <rect x="187.8" y="285" width="4" height="8" fill="#e7efee" transform="translate(-54 8)" />
+    <rect x="191.6" y="285" width="4" height="8" fill="#d8e5e4" transform="translate(-54 8)" />
+    <rect x="195.4" y="285" width="4" height="8" fill="#c9dbda" transform="translate(-54 8)" />
+    <rect x="199.2" y="285" width="4" height="8" fill="#b9d1d1" transform="translate(-54 8)" />
+    <rect x="203.0" y="285" width="4" height="8" fill="#aac7c7" transform="translate(-54 8)" />
+    <rect x="206.8" y="285" width="4" height="8" fill="#9bbdbd" transform="translate(-54 8)" />
+    <rect x="210.6" y="285" width="4" height="8" fill="#8cb3b3" transform="translate(-54 8)" />
+    <rect x="214.4" y="285" width="4" height="8" fill="#7daaa9" transform="translate(-54 8)" />
+    <rect x="218.2" y="285" width="4" height="8" fill="#6ea09f" transform="translate(-54 8)" />
+    <rect x="222.0" y="285" width="4" height="8" fill="#5f9695" transform="translate(-54 8)" />
+    <rect x="225.8" y="285" width="4" height="8" fill="#508c8b" transform="translate(-54 8)" />
+    <rect x="229.6" y="285" width="4" height="8" fill="#408282" transform="translate(-54 8)" />
+    <rect x="233.4" y="285" width="4" height="8" fill="#317878" transform="translate(-54 8)" />
+    <rect x="237.2" y="285" width="4" height="8" fill="#226e6e" transform="translate(-54 8)" />
+    <rect x="241.0" y="285" width="4" height="8" fill="#136464" transform="translate(-54 8)" />
+    <text x="251" y="293" font-size="11" transform="translate(-54 8)">Row peak</text>
+  </g>
+</svg>

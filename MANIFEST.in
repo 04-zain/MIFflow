@@ -1,0 +1,39 @@
+include LICENSE
+include README.md
+include pyproject.toml
+recursive-include src/python/mif_pipeline/cell_analysis/data/fonts *.ttf LICENSE NOTICE
+recursive-include docs *.md *.svg *.png *.json *.csv
+include docs/assets/results/mel02-native-selected-outlines.pdf
+recursive-include qupath/scripts *.groovy
+include scripts/build_native_extension.py
+include scripts/build_nimbus_runtime.py
+include scripts/build_native_gpu_runtime.py
+recursive-include src/java *.java
+recursive-include src/java-resources *
+recursive-include src/python/mif_containment/install_assets *
+recursive-include src *.json *.umxlib *.groovy
+recursive-include packaging *.py *.ps1 *.spec *.txt *.json *.lock *.in *.LICENSE *.whl *.h *.chromium
+recursive-include packaging/bioformats/required-notices *
+recursive-include packaging/qt/upstream *
+exclude packaging/bioformats/artifact-review.json
+exclude packaging/bioformats/acquire_payload.py
+exclude packaging/bioformats/stage_payload.py
+include scripts/build_linux.sh
+include scripts/build_windows_from_wsl.sh
+include scripts/build_windows.ps1
+include scripts/build_portable.py
+include scripts/stage_linux_gui_libraries.py
+prune docs/_agent
+prune docs/development
+recursive-exclude docs/assets/screenshots *.json
+recursive-exclude docs/data *.json *.csv
+prune docs/data/captures
+prune docs/assets/data
+recursive-exclude docs/assets/results *.json *.csv *.npz
+recursive-exclude docs/assets/figures *.json
+prune docs/assets/figures/pixel-feature-data
+prune docs/superpowers
+prune tests
+prune .sandbox
+prune .tools
+global-exclude __pycache__ *.py[cod]

@@ -1,0 +1,55 @@
+{
+  "schema": "mif-authoring-defaults/v1",
+  "sections": {
+    "tissue_detection": {
+      "resolution_um_per_px": 8.0,
+      "native_level_match_tolerance_fraction": 0.05,
+      "allow_level0_selection": false,
+      "minimum_object_area_um2": 10000.0,
+      "review_policy": "always",
+      "matching": {
+        "min_iou": 0.75,
+        "max_centroid_displacement_um": 50.0,
+        "max_relative_area_change": 0.2,
+        "min_uniqueness_margin": 0.1
+      }
+    },
+    "tissue_detection.editor": {
+      "channel_index": 0,
+      "threshold": 0.0,
+      "smoothing_sigma_px": 1.0,
+      "detector_name": "tissue-detector",
+      "max_pixels": 200000,
+      "max_trees": 100,
+      "max_depth": 12,
+      "min_sample_count": 5,
+      "active_var_count": 0,
+      "random_seed": 1729,
+      "max_pixels_per_class": 10000,
+      "c": 1.0,
+      "gamma": 0.3333333333333333,
+      "max_iterations": 1000,
+      "termination_epsilon": 1e-06,
+      "preview_opacity": 0.45,
+      "auto_update": true,
+      "update_delay_ms": 500.0,
+      "image_features_default": {
+        "include_intensity": true,
+        "scales": [
+          {
+            "sigma_px": 1.0,
+            "filters": [
+              "gaussian"
+            ]
+          },
+          {
+            "sigma_px": 3.0,
+            "filters": [
+              "gaussian"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

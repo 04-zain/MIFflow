@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1040" viewBox="0 0 1100 1040" role="img" aria-labelledby="title description">
+<title id="title">Launching and completing a cell-measurement task</title>
+<desc id="description">Python saves the selected image, cells and measurement choices, then starts QuPath through the operating system. Within the QuPath task, a DAPI image window and a cell mask produce the mean of three schematic intensities, 2, 4 and 6. The stage saves a Parquet measurement table and a result record. Python reads those files and the process outcome before recording completion. The same cell c1 and mean 4 are retained throughout.</desc>
+<rect width="1100" height="1040" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<circle cx="45" cy="36" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="45" y="42" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">1</text>
+<text x="75" y="42" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Save measurement request</text>
+<path d="M30 75 H310 L335 100 V243 H30 Z" fill="none" stroke="#B8C8CE" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M310 75 V100 H335" fill="none" stroke="#B8C8CE" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="50" y="111" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Project entry</text>
+<text x="50" y="138" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Image and accepted cells</text>
+<text x="50" y="167" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Measurement</text>
+<text x="50" y="194" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">DAPI; cell mask; mean</text>
+<circle cx="439" cy="36" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="439" y="42" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">2</text>
+<text x="469" y="42" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Launch QuPath</text>
+<path d="M335 145 L412 145" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<rect x="412" y="75" width="305" height="168" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="434" y="106" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Operating-system launch</text>
+<rect x="435" y="127" width="85" height="48" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1"/>
+<text x="477" y="157" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#356E9A" text-anchor="middle">QuPath</text>
+<path d="M521 151 L552 151" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<path d="M561 125 H660 L677 142 V181 H561 Z" fill="none" stroke="#356E9A" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="619" y="150" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#356E9A" text-anchor="middle">Stage script</text>
+<text x="619" y="172" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">+ request</text>
+<text x="434" y="217" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">CPU threads and memory allowance</text>
+<path d="M717 145 L777 145" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<rect x="777" y="75" width="293" height="168" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.4"/>
+<text x="798" y="108" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#356E9A" text-anchor="start">QuPath process</text>
+<rect x="799" y="130" width="249" height="87" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="923" y="165" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">Start JVM</text>
+<text x="923" y="193" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Load project and stage</text>
+<path d="M923 243 V280 H1060 V328" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<circle cx="45" cy="295" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="45" y="301" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">3</text>
+<text x="75" y="301" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Calculate the requested cell measurement</text>
+<rect x="30" y="328" width="1040" height="292" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.4"/>
+<text x="54" y="363" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">DAPI image window</text>
+<text x="346" y="363" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Cell c₁ mask</text>
+<text x="644" y="363" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Mean intensity</text>
+<text x="894" y="363" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Cell rows</text>
+<rect x="55" y="396" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="90" y="396" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="125" y="396" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="160" y="396" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="195" y="396" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="55" y="431" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="90" y="431" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="91" y="432" width="33" height="33" fill="#356E9A" opacity="0.16666666666666666"/>
+<text x="107.5" y="455" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">2</text>
+<rect x="125" y="431" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="126" y="432" width="33" height="33" fill="#356E9A" opacity="0.3333333333333333"/>
+<text x="142.5" y="455" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">4</text>
+<rect x="160" y="431" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="195" y="431" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="55" y="466" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="90" y="466" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="91" y="467" width="33" height="33" fill="#356E9A" opacity="0.5"/>
+<text x="107.5" y="490" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">6</text>
+<rect x="125" y="466" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="160" y="466" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="195" y="466" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="55" y="501" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="90" y="501" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="125" y="501" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="160" y="501" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="195" y="501" width="35" height="35" rx="0" fill="#EDF3F8" stroke="#B8C8CE" stroke-width="0.8"/>
+<path d="M90 431 H160 V466 H125 V501 H90 Z" fill="none" stroke="#007D83" stroke-width="2" stroke-linejoin="round"/>
+<rect x="347" y="396" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="382" y="396" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="417" y="396" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="452" y="396" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="487" y="396" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="347" y="431" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="382" y="431" width="35" height="35" rx="0" fill="#EAF5F4" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="399.5" y="455" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">2</text>
+<rect x="417" y="431" width="35" height="35" rx="0" fill="#EAF5F4" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="434.5" y="455" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">4</text>
+<rect x="452" y="431" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="487" y="431" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="347" y="466" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="382" y="466" width="35" height="35" rx="0" fill="#EAF5F4" stroke="#B8C8CE" stroke-width="0.8"/>
+<text x="399.5" y="490" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">6</text>
+<rect x="417" y="466" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="452" y="466" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="487" y="466" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="347" y="501" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="382" y="501" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="417" y="501" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="452" y="501" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<rect x="487" y="501" width="35" height="35" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="0.8"/>
+<path d="M382 431 H452 V466 H417 V501 H382 Z" fill="none" stroke="#007D83" stroke-width="2" stroke-linejoin="round"/>
+<text x="142" y="567" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Full-resolution pixels</text>
+<text x="434" y="567" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Include pixels inside c₁</text>
+<path d="M242 461 L327 461" fill="none" stroke="#243746" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M534 461 L625 461" fill="none" stroke="#243746" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<text x="721" y="438" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#007D83" text-anchor="middle">2 + 4 + 6</text>
+<path d="M649 453 L793 453" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="721" y="488" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#007D83" text-anchor="middle">3</text>
+<text x="721" y="542" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="600" fill="#007D83" text-anchor="middle">4.0</text>
+<path d="M804 461 L875 461" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<rect x="885" y="397" width="159" height="42" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="922" y="425" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Cell</text>
+<text x="1003" y="425" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#243746" text-anchor="middle">Mean</text>
+<rect x="885" y="439" width="159" height="42" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="922" y="467" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">c₁</text>
+<text x="1003" y="467" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">4.0</text>
+<text x="922" y="509" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="1003" y="509" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="964" y="567" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="middle">DAPI; cell mean</text>
+<path d="M964 620 V640 H480 V741" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="756" y="666" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">Write rows and result</text>
+<circle cx="45" cy="708" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="45" y="714" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">4</text>
+<text x="75" y="714" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Save table and result</text>
+<rect x="30" y="741" width="483" height="209" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<rect x="52" y="772" width="186" height="40" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="145" y="798" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Parquet table</text>
+<rect x="52" y="815" width="186" height="35" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1"/>
+<text x="95" y="841" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">c₁</text>
+<text x="192" y="841" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">4.0</text>
+<rect x="52" y="852" width="186" height="35" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1"/>
+<text x="95" y="878" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">⋮</text>
+<text x="192" y="878" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#007D83" text-anchor="middle">⋮</text>
+<text x="145" y="922" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Cell IDs + intensities</text>
+<path d="M278 768 H466 L486 788 V921 H278 Z" fill="none" stroke="#B8C8CE" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M466 768 V788 H486" fill="none" stroke="#B8C8CE" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="298" y="799" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Result record</text>
+<text x="298" y="835" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Image and cells</text>
+<text x="298" y="865" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Table location</text>
+<text x="298" y="895" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Measured columns</text>
+<path d="M513 838 L684 838" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="599" y="790" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#007D83" text-anchor="middle">Read saved</text>
+<text x="599" y="813" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#007D83" text-anchor="middle">result and table</text>
+<circle cx="708" cy="708" r="13" fill="#FFFFFF" stroke="#007D83"/>
+<text x="708" y="714" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#007D83" text-anchor="middle">5</text>
+<text x="738" y="714" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="start">Record completion</text>
+<rect x="684" y="741" width="386" height="209" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1.4"/>
+<text x="706" y="776" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">Python coordinator</text>
+<text x="706" y="818" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="start">✓</text>
+<text x="737" y="818" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="start">Expected image and cell identities</text>
+<text x="706" y="853" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="start">✓</text>
+<text x="737" y="853" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="start">Requested measurement columns</text>
+<path d="M707 875 L1047 875" fill="none" stroke="#B8C8CE" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="877" y="919" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">Completed step</text>
+<path d="M251 950 V1001 H480" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<rect x="480" y="978" width="158" height="46" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="559" y="1008" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#356E9A" text-anchor="middle">Task exits</text>
+<path d="M638 1001 H877 V950" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="752" y="982" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#356E9A" text-anchor="middle">Exit status + logs</text>
+</svg>

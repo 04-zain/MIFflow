@@ -1,0 +1,12 @@
+{
+  "schema": "mif-authoring-defaults/v1",
+  "sections": {
+    "segmentation": {
+      "tile_size_px": 512,
+      "padding_px": 80,
+      "workers": 2,
+      "scope": "accepted_tissue",
+      "device": "auto"
+    }
+  }
+}

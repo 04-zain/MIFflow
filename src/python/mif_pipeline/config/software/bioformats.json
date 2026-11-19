@@ -1,0 +1,788 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "bioformats",
+  "runtime_files": {
+    "jars": [
+      {
+        "coordinate": "ome:bio-formats-tools:8.5.0",
+        "relative_path": "jars/bio-formats-tools-8.5.0.jar",
+        "sha256": "69d55585e7e4a2c55974cdef1d0576cb7f8cb490ad82c0444c9805ec35e800a5"
+      },
+      {
+        "coordinate": "ch.qos.logback:logback-classic:1.3.15",
+        "relative_path": "modules/logback-classic-1.3.15.jar",
+        "sha256": "06c68fb7468143c3c6512d13bb8eb6676724b019330de3a5ab493e267dde2084"
+      },
+      {
+        "coordinate": "ome:formats-gpl:8.5.0",
+        "relative_path": "jars/formats-gpl-8.5.0.jar",
+        "sha256": "5f1fca2cb236123a03cfdefd3495afd8385894470c225c5bca350698daa83b47"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-common:6.2.1",
+        "relative_path": "jars/ome-common-6.2.1.jar",
+        "sha256": "8f0c60b8239baf3cdd28034ade4b216c7d9488e380cc391be057a33506543f0c"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-xml:6.5.3",
+        "relative_path": "jars/ome-xml-6.5.3.jar",
+        "sha256": "e2da731b8b22d953453fd198b85102a7ceba878e1ef72e5fb3c7ffcdc2364dab"
+      },
+      {
+        "coordinate": "ome:formats-api:8.5.0",
+        "relative_path": "jars/formats-api-8.5.0.jar",
+        "sha256": "5a8b0844fcad85f026f5b9bc9aaff15692d61c2dd9c9c222adc4982db70e0d8f"
+      },
+      {
+        "coordinate": "ome:formats-bsd:8.5.0",
+        "relative_path": "jars/formats-bsd-8.5.0.jar",
+        "sha256": "d5587499fda886771ceccdf63d7ce0b2f5f89d1815db35e57c31d0fcb95212a2"
+      },
+      {
+        "coordinate": "org.slf4j:slf4j-api:2.0.7",
+        "relative_path": "modules/slf4j-api-2.0.7.jar",
+        "sha256": "5d6298b93a1905c32cda6478808ac14c2d4a47e91535e53c41f7feeb85d946f4"
+      },
+      {
+        "coordinate": "xalan:serializer:2.7.3",
+        "relative_path": "jars/serializer-2.7.3.jar",
+        "sha256": "5f6804bacdfdb3ccc52d2538536fab8986696d61559b081054a420c653806667"
+      },
+      {
+        "coordinate": "xalan:xalan:2.7.3",
+        "relative_path": "jars/xalan-2.7.3.jar",
+        "sha256": "febd48bb133a96c447282213951a6b74ea7fb45c0d896121296c014316bda6b0"
+      },
+      {
+        "coordinate": "ch.qos.logback:logback-core:1.3.15",
+        "relative_path": "modules/logback-core-1.3.15.jar",
+        "sha256": "90b72ec457f30f8f42a280a409ab2bc4499fec16983005d1d91015199be7047b"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-mdbtools:5.3.4",
+        "relative_path": "jars/ome-mdbtools-5.3.4.jar",
+        "sha256": "fad80deb3662e23b7a1860ba2d8a84fcf68aff8df9ad371063a7b66c0f27e63b"
+      },
+      {
+        "coordinate": "org.openmicroscopy:metakit:5.3.10",
+        "relative_path": "jars/metakit-5.3.10.jar",
+        "sha256": "74070aa42e2144a717f6f9942b62a91858c0af39e0d639de4c4251c5c89cfc1a"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-poi:5.3.11",
+        "relative_path": "jars/ome-poi-5.3.11.jar",
+        "sha256": "d749a4fe140399664de1d3dd762bd990aa8737c73db0f806cf552d35ffde4ecd"
+      },
+      {
+        "coordinate": "edu.ucar:cdm-core:5.6.0",
+        "relative_path": "jars/cdm-core-5.6.0.jar",
+        "sha256": "4bb5af83727fe54ebe864cfec73bbeee3306debb158c7747d5750df88518c273"
+      },
+      {
+        "coordinate": "com.esotericsoftware:kryo:5.4.0",
+        "relative_path": "modules/kryo-5.4.0.jar",
+        "sha256": "0977fd9a3fe45b54f351de152e6a454a7dc0304e128080ef11c2d052d4c9edb5"
+      },
+      {
+        "coordinate": "org.xerial:sqlite-jdbc:3.49.1.0",
+        "relative_path": "modules/sqlite-jdbc-3.49.1.0.jar",
+        "sha256": "5c8609d2ca341deb8c6f71778974b5ba4995c7d32d7c7c89d9392a3e72c39291"
+      },
+      {
+        "coordinate": "io.minio:minio:5.0.2",
+        "relative_path": "jars/minio-5.0.2.jar",
+        "sha256": "5932993ea00702ae8baf0b54f6e068a81005467acf9223611006f75baa143dd1"
+      },
+      {
+        "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.14.2",
+        "relative_path": "modules/jackson-databind-2.14.2.jar",
+        "sha256": "501d3abce4d18dcc381058ec593c5b94477906bba6efbac14dae40a642f77424"
+      },
+      {
+        "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.14.2",
+        "relative_path": "modules/jackson-annotations-2.14.2.jar",
+        "sha256": "2c6869d505cf60dc066734b7d50339f975bd3adc635e26a78abb71acb4473c0d"
+      },
+      {
+        "coordinate": "joda-time:joda-time:2.12.7",
+        "relative_path": "modules/joda-time-2.12.7.jar",
+        "sha256": "385282b005818cfaccdbe8bd2429811e7e641782f2b88932a6b8ff51d668f616"
+      },
+      {
+        "coordinate": "com.google.guava:guava:32.0.1-jre",
+        "relative_path": "modules/guava-32.0.1-jre.jar",
+        "sha256": "bd7fa227591fb8509677d0d1122cf95158f3b8a9f45653f58281d879f6dc48c5"
+      },
+      {
+        "coordinate": "org.openmicroscopy:specification:6.5.3",
+        "relative_path": "jars/specification-6.5.3.jar",
+        "sha256": "a5dd60ddd9732188867435f1ec77464a95c82f95d4aa4547031e48aaa92b59ff"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-codecs:1.1.3",
+        "relative_path": "jars/ome-codecs-1.1.3.jar",
+        "sha256": "b5211fe1e97ae5535ab6edf625a0a89d4b20c842e4b8b537bd6054280b07cb1c"
+      },
+      {
+        "coordinate": "ome:turbojpeg:8.5.0",
+        "relative_path": "jars/turbojpeg-8.5.0.jar",
+        "sha256": "aac27e1ec0a2ba78a902335dd692793019ef2bd697911aa9472e0525d6c23914"
+      },
+      {
+        "coordinate": "org.scijava:native-lib-loader:2.4.0",
+        "relative_path": "modules/native-lib-loader-2.4.0.jar",
+        "sha256": "f3dcb62bfdb76b13aa012b51fc61c29b761d653913f08273749765fa580c540c"
+      },
+      {
+        "coordinate": "com.jgoodies:jgoodies-forms:1.7.2",
+        "relative_path": "jars/jgoodies-forms-1.7.2.jar",
+        "sha256": "8b45de231624622f1889c18167f2a67c3ad793daa169cac38c817a91a5f45ce4"
+      },
+      {
+        "coordinate": "org.apache.commons:commons-lang3:3.18.0",
+        "relative_path": "modules/commons-lang3-3.18.0.jar",
+        "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720"
+      },
+      {
+        "coordinate": "org.perf4j:perf4j:0.9.16",
+        "relative_path": "jars/perf4j-0.9.16.jar",
+        "sha256": "74f3cd5a0ea1cf3c150a8cfe7f76f844babbab16630ab731b805543827b83841"
+      },
+      {
+        "coordinate": "cisd:jhdf5:19.04.1",
+        "relative_path": "jars/jhdf5-19.04.1.jar",
+        "sha256": "0c20636d3388ebaa3c941f6a2c867fc0420ebbc2a5768c14f008f87069e6cecc"
+      },
+      {
+        "coordinate": "com.drewnoakes:metadata-extractor:2.18.0",
+        "relative_path": "jars/metadata-extractor-2.18.0.jar",
+        "sha256": "4789361fd0638bdb241554b7a0ccae205ed239697e2b70fa9cadaded6984b565"
+      },
+      {
+        "coordinate": "ome:jxrlib-all:0.2.4",
+        "relative_path": "jars/jxrlib-all-0.2.4.jar",
+        "sha256": "c5677ff87125def275cc996c982682a917dbef5a3bf0aa614a2081c68769a346"
+      },
+      {
+        "coordinate": "org.json:json:20231013",
+        "relative_path": "modules/json-20231013.jar",
+        "sha256": "0f18192df289114e17aa1a0d0a7f8372cc9f5c7e4f7e39adcf8906fe714fa7d3"
+      },
+      {
+        "coordinate": "xerces:xercesImpl:2.12.2",
+        "relative_path": "jars/xercesImpl-2.12.2.jar",
+        "sha256": "6fc991829af1708d15aea50c66f0beadcd2cfeb6968e0b2f55c1b0909883fe16"
+      },
+      {
+        "coordinate": "xml-apis:xml-apis:1.4.01",
+        "relative_path": "jars/xml-apis-1.4.01.jar",
+        "sha256": "a840968176645684bb01aed376e067ab39614885f9eee44abe35a5f20ebe7fad"
+      },
+      {
+        "coordinate": "org.yaml:snakeyaml:2.0",
+        "relative_path": "modules/snakeyaml-2.0.jar",
+        "sha256": "880c9d896e4b74a06c549c15ca496450165d6909fa15d7e662bee8f6a66d7afa"
+      },
+      {
+        "coordinate": "commons-logging:commons-logging:1.2",
+        "relative_path": "jars/commons-logging-1.2.jar",
+        "sha256": "daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636"
+      },
+      {
+        "coordinate": "edu.ucar:httpservices:5.6.0",
+        "relative_path": "jars/httpservices-5.6.0.jar",
+        "sha256": "2a8130e5b261adcfea052f02f84dd737b7d53dc3f497982535c8dbfbe801ea07"
+      },
+      {
+        "coordinate": "com.google.re2j:re2j:1.3",
+        "relative_path": "jars/re2j-1.3.jar",
+        "sha256": "d8040fa1c54c1ce208199015b6e599ec2ef37b7780f8f55a8b4b4b4299bade19"
+      },
+      {
+        "coordinate": "commons-math:commons-math:1.2",
+        "relative_path": "jars/commons-math-1.2.jar",
+        "sha256": "429ad6e1a650bc924a3e26fafc8ef703147375d8dd6d02b710c655071cc82270"
+      },
+      {
+        "coordinate": "com.google.code.findbugs:jsr305:3.0.2",
+        "relative_path": "jars/jsr305-3.0.2.jar",
+        "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+      },
+      {
+        "coordinate": "com.esotericsoftware:reflectasm:1.11.9",
+        "relative_path": "modules/reflectasm-1.11.9.jar",
+        "sha256": "712b44da79a5b7f47a28cbfcb3d8ecfc872fae349c48aa4d3e38a5d69956afce"
+      },
+      {
+        "coordinate": "org.objenesis:objenesis:3.3",
+        "relative_path": "modules/objenesis-3.3.jar",
+        "sha256": "02dfd0b0439a5591e35b708ed2f5474eb0948f53abf74637e959b8e4ef69bfeb"
+      },
+      {
+        "coordinate": "com.esotericsoftware:minlog:1.3.1",
+        "relative_path": "modules/minlog-1.3.1.jar",
+        "sha256": "5d4d632cfbebfe0a7644501cc303570b691406181bee65e9916b921c767d7c72"
+      },
+      {
+        "coordinate": "com.google.http-client:google-http-client-xml:1.20.0",
+        "relative_path": "jars/google-http-client-xml-1.20.0.jar",
+        "sha256": "3749fb028a7b7b15e3806686e02a18b4da0f04d51693bd8743aa849e5b9b6474"
+      },
+      {
+        "coordinate": "com.squareup.okhttp3:okhttp:3.7.0",
+        "relative_path": "jars/okhttp-3.7.0.jar",
+        "sha256": "f55abda036da75e1af45bd43b9dfa79b2a3d90905be9cb38687c6621597a8165"
+      },
+      {
+        "coordinate": "com.squareup.okio:okio:1.12.0",
+        "relative_path": "jars/okio-1.12.0.jar",
+        "sha256": "bfe7dfe483c37137966a1690f0c7d0b448ba217902c1fed202aaffdbba3291ae"
+      },
+      {
+        "coordinate": "com.fasterxml.jackson.core:jackson-core:2.14.2",
+        "relative_path": "modules/jackson-core-2.14.2.jar",
+        "sha256": "b5d37a77c88277b97e3593c8740925216c06df8e4172bbde058528df04ad3e7a"
+      },
+      {
+        "coordinate": "com.google.guava:failureaccess:1.0.1",
+        "relative_path": "jars/failureaccess-1.0.1.jar",
+        "sha256": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26"
+      },
+      {
+        "coordinate": "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava",
+        "relative_path": "jars/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+        "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99"
+      },
+      {
+        "coordinate": "org.checkerframework:checker-qual:3.33.0",
+        "relative_path": "modules/checker-qual-3.33.0.jar",
+        "sha256": "e316255bbfcd9fe50d165314b85abb2b33cb2a66a93c491db648e498a82c2de1"
+      },
+      {
+        "coordinate": "com.google.errorprone:error_prone_annotations:2.18.0",
+        "relative_path": "modules/error_prone_annotations-2.18.0.jar",
+        "sha256": "9e6814cb71816988a4fd1b07a993a8f21bb7058d522c162b1de849e19bea54ae"
+      },
+      {
+        "coordinate": "com.google.j2objc:j2objc-annotations:2.8",
+        "relative_path": "jars/j2objc-annotations-2.8.jar",
+        "sha256": "f02a95fa1a5e95edb3ed859fd0fb7df709d121a35290eff8b74dce2ab7f4d6ed"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-jai:0.1.5",
+        "relative_path": "jars/ome-jai-0.1.5.jar",
+        "sha256": "dddbc0f54ee298d2bd311ccdeaab50c77806622f249a21ec33d280f878a8bdb2"
+      },
+      {
+        "coordinate": "io.airlift:aircompressor:2.0.3",
+        "relative_path": "jars/aircompressor-2.0.3.jar",
+        "sha256": "b86bb66f610079e0bf790d62e2ff68853eb0dc4748a6d68ae28bce92b68094aa"
+      },
+      {
+        "coordinate": "com.jgoodies:jgoodies-common:1.7.0",
+        "relative_path": "jars/jgoodies-common-1.7.0.jar",
+        "sha256": "a17480c628e17dbe5fc1f5d866fa5db038a8b52359072c6076debeb07eef8bc9"
+      },
+      {
+        "coordinate": "cisd:base:18.09.0",
+        "relative_path": "jars/base-18.09.0.jar",
+        "sha256": "c73d01ffb427e5b7008003b4eaf9303c1febd883100bf81752ba71f41c701148"
+      },
+      {
+        "coordinate": "commons-io:commons-io:2.6",
+        "relative_path": "modules/commons-io-2.6.jar",
+        "sha256": "f877d304660ac2a142f3865badfc971dec7ed73c747c7f8d5d2f5139ca736513"
+      },
+      {
+        "coordinate": "com.adobe.xmp:xmpcore:6.1.11",
+        "relative_path": "jars/xmpcore-6.1.11.jar",
+        "sha256": "8f7033c579b99fa0d9d6ddcb9448875b5e4b577c350002278ce46997d678b737"
+      },
+      {
+        "coordinate": "org.apache.httpcomponents:httpclient:4.5.13",
+        "relative_path": "modules/httpclient-4.5.13.jar",
+        "sha256": "6fe9026a566c6a5001608cf3fc32196641f6c1e5e1986d1037ccdbd5f31ef743"
+      },
+      {
+        "coordinate": "org.apache.httpcomponents:httpmime:4.5.13",
+        "relative_path": "modules/httpmime-4.5.13.jar",
+        "sha256": "06e754d99245b98dcc2860dcb43d20e737d650da2bf2077a105f68accbd5c5cc"
+      },
+      {
+        "coordinate": "com.google.http-client:google-http-client:1.20.0",
+        "relative_path": "jars/google-http-client-1.20.0.jar",
+        "sha256": "345958d00cbfa69c3e93b356872abdd3ad03e9e4204b7229ccef258dd3921d4a"
+      },
+      {
+        "coordinate": "xpp3:xpp3:1.1.4c",
+        "relative_path": "jars/xpp3-1.1.4c.jar",
+        "sha256": "0341395a481bb887803957145a6a37879853dd625e9244c2ea2509d9bb7531b9"
+      },
+      {
+        "coordinate": "commons-codec:commons-codec:1.11",
+        "relative_path": "modules/commons-codec-1.11.jar",
+        "sha256": "e599d5318e97aa48f42136a2927e6dfa4e8881dff0e6c8e3109ddbbff51d7b7d"
+      }
+    ],
+    "schema_name": "bioformats-runtime-lock",
+    "schema_version": 1,
+    "supported_java_features": [
+      21
+    ]
+  },
+  "downloads": {
+    "jars": [
+      {
+        "coordinate": "ome:bio-formats-tools:8.5.0",
+        "relative_path": "jars/bio-formats-tools-8.5.0.jar",
+        "sha256": "69d55585e7e4a2c55974cdef1d0576cb7f8cb490ad82c0444c9805ec35e800a5",
+        "size": 60393,
+        "url": "https://artifacts.openmicroscopy.org/artifactory/ome.releases/ome/bio-formats-tools/8.5.0/bio-formats-tools-8.5.0.jar"
+      },
+      {
+        "coordinate": "ch.qos.logback:logback-classic:1.3.15",
+        "relative_path": "modules/logback-classic-1.3.15.jar",
+        "sha256": "06c68fb7468143c3c6512d13bb8eb6676724b019330de3a5ab493e267dde2084",
+        "size": 274470,
+        "url": "https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/1.3.15/logback-classic-1.3.15.jar"
+      },
+      {
+        "coordinate": "ome:formats-gpl:8.5.0",
+        "relative_path": "jars/formats-gpl-8.5.0.jar",
+        "sha256": "5f1fca2cb236123a03cfdefd3495afd8385894470c225c5bca350698daa83b47",
+        "size": 1570437,
+        "url": "https://artifacts.openmicroscopy.org/artifactory/ome.releases/ome/formats-gpl/8.5.0/formats-gpl-8.5.0.jar"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-common:6.2.1",
+        "relative_path": "jars/ome-common-6.2.1.jar",
+        "sha256": "8f0c60b8239baf3cdd28034ade4b216c7d9488e380cc391be057a33506543f0c",
+        "size": 143317,
+        "url": "https://repo.maven.apache.org/maven2/org/openmicroscopy/ome-common/6.2.1/ome-common-6.2.1.jar"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-xml:6.5.3",
+        "relative_path": "jars/ome-xml-6.5.3.jar",
+        "sha256": "e2da731b8b22d953453fd198b85102a7ceba878e1ef72e5fb3c7ffcdc2364dab",
+        "size": 659435,
+        "url": "https://repo.maven.apache.org/maven2/org/openmicroscopy/ome-xml/6.5.3/ome-xml-6.5.3.jar"
+      },
+      {
+        "coordinate": "ome:formats-api:8.5.0",
+        "relative_path": "jars/formats-api-8.5.0.jar",
+        "sha256": "5a8b0844fcad85f026f5b9bc9aaff15692d61c2dd9c9c222adc4982db70e0d8f",
+        "size": 148391,
+        "url": "https://artifacts.openmicroscopy.org/artifactory/ome.releases/ome/formats-api/8.5.0/formats-api-8.5.0.jar"
+      },
+      {
+        "coordinate": "ome:formats-bsd:8.5.0",
+        "relative_path": "jars/formats-bsd-8.5.0.jar",
+        "sha256": "d5587499fda886771ceccdf63d7ce0b2f5f89d1815db35e57c31d0fcb95212a2",
+        "size": 934868,
+        "url": "https://artifacts.openmicroscopy.org/artifactory/ome.releases/ome/formats-bsd/8.5.0/formats-bsd-8.5.0.jar"
+      },
+      {
+        "coordinate": "org.slf4j:slf4j-api:2.0.7",
+        "relative_path": "modules/slf4j-api-2.0.7.jar",
+        "sha256": "5d6298b93a1905c32cda6478808ac14c2d4a47e91535e53c41f7feeb85d946f4",
+        "size": 63635,
+        "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.7/slf4j-api-2.0.7.jar"
+      },
+      {
+        "coordinate": "xalan:serializer:2.7.3",
+        "relative_path": "jars/serializer-2.7.3.jar",
+        "sha256": "5f6804bacdfdb3ccc52d2538536fab8986696d61559b081054a420c653806667",
+        "size": 283536,
+        "url": "https://repo.maven.apache.org/maven2/xalan/serializer/2.7.3/serializer-2.7.3.jar"
+      },
+      {
+        "coordinate": "xalan:xalan:2.7.3",
+        "relative_path": "jars/xalan-2.7.3.jar",
+        "sha256": "febd48bb133a96c447282213951a6b74ea7fb45c0d896121296c014316bda6b0",
+        "size": 3455761,
+        "url": "https://repo.maven.apache.org/maven2/xalan/xalan/2.7.3/xalan-2.7.3.jar"
+      },
+      {
+        "coordinate": "ch.qos.logback:logback-core:1.3.15",
+        "relative_path": "modules/logback-core-1.3.15.jar",
+        "sha256": "90b72ec457f30f8f42a280a409ab2bc4499fec16983005d1d91015199be7047b",
+        "size": 571734,
+        "url": "https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/1.3.15/logback-core-1.3.15.jar"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-mdbtools:5.3.4",
+        "relative_path": "jars/ome-mdbtools-5.3.4.jar",
+        "sha256": "fad80deb3662e23b7a1860ba2d8a84fcf68aff8df9ad371063a7b66c0f27e63b",
+        "size": 91855,
+        "url": "https://repo.maven.apache.org/maven2/org/openmicroscopy/ome-mdbtools/5.3.4/ome-mdbtools-5.3.4.jar"
+      },
+      {
+        "coordinate": "org.openmicroscopy:metakit:5.3.10",
+        "relative_path": "jars/metakit-5.3.10.jar",
+        "sha256": "74070aa42e2144a717f6f9942b62a91858c0af39e0d639de4c4251c5c89cfc1a",
+        "size": 13838,
+        "url": "https://repo.maven.apache.org/maven2/org/openmicroscopy/metakit/5.3.10/metakit-5.3.10.jar"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-poi:5.3.11",
+        "relative_path": "jars/ome-poi-5.3.11.jar",
+        "sha256": "d749a4fe140399664de1d3dd762bd990aa8737c73db0f806cf552d35ffde4ecd",
+        "size": 949831,
+        "url": "https://repo.maven.apache.org/maven2/org/openmicroscopy/ome-poi/5.3.11/ome-poi-5.3.11.jar"
+      },
+      {
+        "coordinate": "edu.ucar:cdm-core:5.6.0",
+        "relative_path": "jars/cdm-core-5.6.0.jar",
+        "sha256": "4bb5af83727fe54ebe864cfec73bbeee3306debb158c7747d5750df88518c273",
+        "size": 4289635,
+        "url": "https://maven.scijava.org/content/groups/public/edu/ucar/cdm-core/5.6.0/cdm-core-5.6.0.jar"
+      },
+      {
+        "coordinate": "com.esotericsoftware:kryo:5.4.0",
+        "relative_path": "modules/kryo-5.4.0.jar",
+        "sha256": "0977fd9a3fe45b54f351de152e6a454a7dc0304e128080ef11c2d052d4c9edb5",
+        "size": 370828,
+        "url": "https://repo.maven.apache.org/maven2/com/esotericsoftware/kryo/5.4.0/kryo-5.4.0.jar"
+      },
+      {
+        "coordinate": "org.xerial:sqlite-jdbc:3.49.1.0",
+        "relative_path": "modules/sqlite-jdbc-3.49.1.0.jar",
+        "sha256": "5c8609d2ca341deb8c6f71778974b5ba4995c7d32d7c7c89d9392a3e72c39291",
+        "size": 14317659,
+        "url": "https://repo.maven.apache.org/maven2/org/xerial/sqlite-jdbc/3.49.1.0/sqlite-jdbc-3.49.1.0.jar"
+      },
+      {
+        "coordinate": "io.minio:minio:5.0.2",
+        "relative_path": "jars/minio-5.0.2.jar",
+        "sha256": "5932993ea00702ae8baf0b54f6e068a81005467acf9223611006f75baa143dd1",
+        "size": 127821,
+        "url": "https://repo.maven.apache.org/maven2/io/minio/minio/5.0.2/minio-5.0.2.jar"
+      },
+      {
+        "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.14.2",
+        "relative_path": "modules/jackson-databind-2.14.2.jar",
+        "sha256": "501d3abce4d18dcc381058ec593c5b94477906bba6efbac14dae40a642f77424",
+        "size": 1616844,
+        "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.14.2/jackson-databind-2.14.2.jar"
+      },
+      {
+        "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.14.2",
+        "relative_path": "modules/jackson-annotations-2.14.2.jar",
+        "sha256": "2c6869d505cf60dc066734b7d50339f975bd3adc635e26a78abb71acb4473c0d",
+        "size": 76636,
+        "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.14.2/jackson-annotations-2.14.2.jar"
+      },
+      {
+        "coordinate": "joda-time:joda-time:2.12.7",
+        "relative_path": "modules/joda-time-2.12.7.jar",
+        "sha256": "385282b005818cfaccdbe8bd2429811e7e641782f2b88932a6b8ff51d668f616",
+        "size": 638434,
+        "url": "https://repo.maven.apache.org/maven2/joda-time/joda-time/2.12.7/joda-time-2.12.7.jar"
+      },
+      {
+        "coordinate": "com.google.guava:guava:32.0.1-jre",
+        "relative_path": "modules/guava-32.0.1-jre.jar",
+        "sha256": "bd7fa227591fb8509677d0d1122cf95158f3b8a9f45653f58281d879f6dc48c5",
+        "size": 3037368,
+        "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/32.0.1-jre/guava-32.0.1-jre.jar"
+      },
+      {
+        "coordinate": "org.openmicroscopy:specification:6.5.3",
+        "relative_path": "jars/specification-6.5.3.jar",
+        "sha256": "a5dd60ddd9732188867435f1ec77464a95c82f95d4aa4547031e48aaa92b59ff",
+        "size": 629287,
+        "url": "https://repo.maven.apache.org/maven2/org/openmicroscopy/specification/6.5.3/specification-6.5.3.jar"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-codecs:1.1.3",
+        "relative_path": "jars/ome-codecs-1.1.3.jar",
+        "sha256": "b5211fe1e97ae5535ab6edf625a0a89d4b20c842e4b8b537bd6054280b07cb1c",
+        "size": 93029,
+        "url": "https://repo.maven.apache.org/maven2/org/openmicroscopy/ome-codecs/1.1.3/ome-codecs-1.1.3.jar"
+      },
+      {
+        "coordinate": "ome:turbojpeg:8.5.0",
+        "relative_path": "jars/turbojpeg-8.5.0.jar",
+        "sha256": "aac27e1ec0a2ba78a902335dd692793019ef2bd697911aa9472e0525d6c23914",
+        "size": 1296283,
+        "url": "https://artifacts.openmicroscopy.org/artifactory/ome.releases/ome/turbojpeg/8.5.0/turbojpeg-8.5.0.jar"
+      },
+      {
+        "coordinate": "org.scijava:native-lib-loader:2.4.0",
+        "relative_path": "modules/native-lib-loader-2.4.0.jar",
+        "sha256": "f3dcb62bfdb76b13aa012b51fc61c29b761d653913f08273749765fa580c540c",
+        "size": 20592,
+        "url": "https://repo.maven.apache.org/maven2/org/scijava/native-lib-loader/2.4.0/native-lib-loader-2.4.0.jar"
+      },
+      {
+        "coordinate": "com.jgoodies:jgoodies-forms:1.7.2",
+        "relative_path": "jars/jgoodies-forms-1.7.2.jar",
+        "sha256": "8b45de231624622f1889c18167f2a67c3ad793daa169cac38c817a91a5f45ce4",
+        "size": 117714,
+        "url": "https://repo.maven.apache.org/maven2/com/jgoodies/jgoodies-forms/1.7.2/jgoodies-forms-1.7.2.jar"
+      },
+      {
+        "coordinate": "org.apache.commons:commons-lang3:3.18.0",
+        "relative_path": "modules/commons-lang3-3.18.0.jar",
+        "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+        "size": 702952,
+        "url": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar"
+      },
+      {
+        "coordinate": "org.perf4j:perf4j:0.9.16",
+        "relative_path": "jars/perf4j-0.9.16.jar",
+        "sha256": "74f3cd5a0ea1cf3c150a8cfe7f76f844babbab16630ab731b805543827b83841",
+        "size": 123598,
+        "url": "https://repo.maven.apache.org/maven2/org/perf4j/perf4j/0.9.16/perf4j-0.9.16.jar"
+      },
+      {
+        "coordinate": "cisd:jhdf5:19.04.1",
+        "relative_path": "jars/jhdf5-19.04.1.jar",
+        "sha256": "0c20636d3388ebaa3c941f6a2c867fc0420ebbc2a5768c14f008f87069e6cecc",
+        "size": 8467645,
+        "url": "https://maven.scijava.org/content/groups/public/cisd/jhdf5/19.04.1/jhdf5-19.04.1.jar"
+      },
+      {
+        "coordinate": "com.drewnoakes:metadata-extractor:2.18.0",
+        "relative_path": "jars/metadata-extractor-2.18.0.jar",
+        "sha256": "4789361fd0638bdb241554b7a0ccae205ed239697e2b70fa9cadaded6984b565",
+        "size": 732543,
+        "url": "https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.18.0/metadata-extractor-2.18.0.jar"
+      },
+      {
+        "coordinate": "ome:jxrlib-all:0.2.4",
+        "relative_path": "jars/jxrlib-all-0.2.4.jar",
+        "sha256": "c5677ff87125def275cc996c982682a917dbef5a3bf0aa614a2081c68769a346",
+        "size": 508170,
+        "url": "https://artifacts.openmicroscopy.org/artifactory/ome.releases/ome/jxrlib-all/0.2.4/jxrlib-all-0.2.4.jar"
+      },
+      {
+        "coordinate": "org.json:json:20231013",
+        "relative_path": "modules/json-20231013.jar",
+        "sha256": "0f18192df289114e17aa1a0d0a7f8372cc9f5c7e4f7e39adcf8906fe714fa7d3",
+        "size": 74702,
+        "url": "https://repo.maven.apache.org/maven2/org/json/json/20231013/json-20231013.jar"
+      },
+      {
+        "coordinate": "xerces:xercesImpl:2.12.2",
+        "relative_path": "jars/xercesImpl-2.12.2.jar",
+        "sha256": "6fc991829af1708d15aea50c66f0beadcd2cfeb6968e0b2f55c1b0909883fe16",
+        "size": 1446149,
+        "url": "https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.12.2/xercesImpl-2.12.2.jar"
+      },
+      {
+        "coordinate": "xml-apis:xml-apis:1.4.01",
+        "relative_path": "jars/xml-apis-1.4.01.jar",
+        "sha256": "a840968176645684bb01aed376e067ab39614885f9eee44abe35a5f20ebe7fad",
+        "size": 220536,
+        "url": "https://repo.maven.apache.org/maven2/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar"
+      },
+      {
+        "coordinate": "org.yaml:snakeyaml:2.0",
+        "relative_path": "modules/snakeyaml-2.0.jar",
+        "sha256": "880c9d896e4b74a06c549c15ca496450165d6909fa15d7e662bee8f6a66d7afa",
+        "size": 334803,
+        "url": "https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/2.0/snakeyaml-2.0.jar"
+      },
+      {
+        "coordinate": "commons-logging:commons-logging:1.2",
+        "relative_path": "jars/commons-logging-1.2.jar",
+        "sha256": "daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636",
+        "size": 61829,
+        "url": "https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"
+      },
+      {
+        "coordinate": "edu.ucar:httpservices:5.6.0",
+        "relative_path": "jars/httpservices-5.6.0.jar",
+        "sha256": "2a8130e5b261adcfea052f02f84dd737b7d53dc3f497982535c8dbfbe801ea07",
+        "size": 80375,
+        "url": "https://maven.scijava.org/content/groups/public/edu/ucar/httpservices/5.6.0/httpservices-5.6.0.jar"
+      },
+      {
+        "coordinate": "com.google.re2j:re2j:1.3",
+        "relative_path": "jars/re2j-1.3.jar",
+        "sha256": "d8040fa1c54c1ce208199015b6e599ec2ef37b7780f8f55a8b4b4b4299bade19",
+        "size": 120871,
+        "url": "https://repo.maven.apache.org/maven2/com/google/re2j/re2j/1.3/re2j-1.3.jar"
+      },
+      {
+        "coordinate": "commons-math:commons-math:1.2",
+        "relative_path": "jars/commons-math-1.2.jar",
+        "sha256": "429ad6e1a650bc924a3e26fafc8ef703147375d8dd6d02b710c655071cc82270",
+        "size": 338488,
+        "url": "https://repo.maven.apache.org/maven2/commons-math/commons-math/1.2/commons-math-1.2.jar"
+      },
+      {
+        "coordinate": "com.google.code.findbugs:jsr305:3.0.2",
+        "relative_path": "jars/jsr305-3.0.2.jar",
+        "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+        "size": 19936,
+        "url": "https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+      },
+      {
+        "coordinate": "com.esotericsoftware:reflectasm:1.11.9",
+        "relative_path": "modules/reflectasm-1.11.9.jar",
+        "sha256": "712b44da79a5b7f47a28cbfcb3d8ecfc872fae349c48aa4d3e38a5d69956afce",
+        "size": 72265,
+        "url": "https://repo.maven.apache.org/maven2/com/esotericsoftware/reflectasm/1.11.9/reflectasm-1.11.9.jar"
+      },
+      {
+        "coordinate": "org.objenesis:objenesis:3.3",
+        "relative_path": "modules/objenesis-3.3.jar",
+        "sha256": "02dfd0b0439a5591e35b708ed2f5474eb0948f53abf74637e959b8e4ef69bfeb",
+        "size": 49423,
+        "url": "https://repo.maven.apache.org/maven2/org/objenesis/objenesis/3.3/objenesis-3.3.jar"
+      },
+      {
+        "coordinate": "com.esotericsoftware:minlog:1.3.1",
+        "relative_path": "modules/minlog-1.3.1.jar",
+        "sha256": "5d4d632cfbebfe0a7644501cc303570b691406181bee65e9916b921c767d7c72",
+        "size": 5923,
+        "url": "https://repo.maven.apache.org/maven2/com/esotericsoftware/minlog/1.3.1/minlog-1.3.1.jar"
+      },
+      {
+        "coordinate": "com.google.http-client:google-http-client-xml:1.20.0",
+        "relative_path": "jars/google-http-client-xml-1.20.0.jar",
+        "sha256": "3749fb028a7b7b15e3806686e02a18b4da0f04d51693bd8743aa849e5b9b6474",
+        "size": 28056,
+        "url": "https://repo.maven.apache.org/maven2/com/google/http-client/google-http-client-xml/1.20.0/google-http-client-xml-1.20.0.jar"
+      },
+      {
+        "coordinate": "com.squareup.okhttp3:okhttp:3.7.0",
+        "relative_path": "jars/okhttp-3.7.0.jar",
+        "sha256": "f55abda036da75e1af45bd43b9dfa79b2a3d90905be9cb38687c6621597a8165",
+        "size": 394987,
+        "url": "https://repo.maven.apache.org/maven2/com/squareup/okhttp3/okhttp/3.7.0/okhttp-3.7.0.jar"
+      },
+      {
+        "coordinate": "com.squareup.okio:okio:1.12.0",
+        "relative_path": "jars/okio-1.12.0.jar",
+        "sha256": "bfe7dfe483c37137966a1690f0c7d0b448ba217902c1fed202aaffdbba3291ae",
+        "size": 81088,
+        "url": "https://repo.maven.apache.org/maven2/com/squareup/okio/okio/1.12.0/okio-1.12.0.jar"
+      },
+      {
+        "coordinate": "com.fasterxml.jackson.core:jackson-core:2.14.2",
+        "relative_path": "modules/jackson-core-2.14.2.jar",
+        "sha256": "b5d37a77c88277b97e3593c8740925216c06df8e4172bbde058528df04ad3e7a",
+        "size": 458834,
+        "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.14.2/jackson-core-2.14.2.jar"
+      },
+      {
+        "coordinate": "com.google.guava:failureaccess:1.0.1",
+        "relative_path": "jars/failureaccess-1.0.1.jar",
+        "sha256": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26",
+        "size": 4617,
+        "url": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar"
+      },
+      {
+        "coordinate": "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava",
+        "relative_path": "jars/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+        "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+        "size": 2199,
+        "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"
+      },
+      {
+        "coordinate": "org.checkerframework:checker-qual:3.33.0",
+        "relative_path": "modules/checker-qual-3.33.0.jar",
+        "sha256": "e316255bbfcd9fe50d165314b85abb2b33cb2a66a93c491db648e498a82c2de1",
+        "size": 223979,
+        "url": "https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.33.0/checker-qual-3.33.0.jar"
+      },
+      {
+        "coordinate": "com.google.errorprone:error_prone_annotations:2.18.0",
+        "relative_path": "modules/error_prone_annotations-2.18.0.jar",
+        "sha256": "9e6814cb71816988a4fd1b07a993a8f21bb7058d522c162b1de849e19bea54ae",
+        "size": 16017,
+        "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.jar"
+      },
+      {
+        "coordinate": "com.google.j2objc:j2objc-annotations:2.8",
+        "relative_path": "jars/j2objc-annotations-2.8.jar",
+        "sha256": "f02a95fa1a5e95edb3ed859fd0fb7df709d121a35290eff8b74dce2ab7f4d6ed",
+        "size": 9301,
+        "url": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.jar"
+      },
+      {
+        "coordinate": "org.openmicroscopy:ome-jai:0.1.5",
+        "relative_path": "jars/ome-jai-0.1.5.jar",
+        "sha256": "dddbc0f54ee298d2bd311ccdeaab50c77806622f249a21ec33d280f878a8bdb2",
+        "size": 1049191,
+        "url": "https://repo.maven.apache.org/maven2/org/openmicroscopy/ome-jai/0.1.5/ome-jai-0.1.5.jar"
+      },
+      {
+        "coordinate": "io.airlift:aircompressor:2.0.3",
+        "relative_path": "jars/aircompressor-2.0.3.jar",
+        "sha256": "b86bb66f610079e0bf790d62e2ff68853eb0dc4748a6d68ae28bce92b68094aa",
+        "size": 255256,
+        "url": "https://repo.maven.apache.org/maven2/io/airlift/aircompressor/2.0.3/aircompressor-2.0.3.jar"
+      },
+      {
+        "coordinate": "com.jgoodies:jgoodies-common:1.7.0",
+        "relative_path": "jars/jgoodies-common-1.7.0.jar",
+        "sha256": "a17480c628e17dbe5fc1f5d866fa5db038a8b52359072c6076debeb07eef8bc9",
+        "size": 33832,
+        "url": "https://repo.maven.apache.org/maven2/com/jgoodies/jgoodies-common/1.7.0/jgoodies-common-1.7.0.jar"
+      },
+      {
+        "coordinate": "cisd:base:18.09.0",
+        "relative_path": "jars/base-18.09.0.jar",
+        "sha256": "c73d01ffb427e5b7008003b4eaf9303c1febd883100bf81752ba71f41c701148",
+        "size": 212796,
+        "url": "https://maven.scijava.org/content/groups/public/cisd/base/18.09.0/base-18.09.0.jar"
+      },
+      {
+        "coordinate": "commons-io:commons-io:2.6",
+        "relative_path": "modules/commons-io-2.6.jar",
+        "sha256": "f877d304660ac2a142f3865badfc971dec7ed73c747c7f8d5d2f5139ca736513",
+        "size": 214788,
+        "url": "https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.jar"
+      },
+      {
+        "coordinate": "com.adobe.xmp:xmpcore:6.1.11",
+        "relative_path": "jars/xmpcore-6.1.11.jar",
+        "sha256": "8f7033c579b99fa0d9d6ddcb9448875b5e4b577c350002278ce46997d678b737",
+        "size": 142953,
+        "url": "https://repo.maven.apache.org/maven2/com/adobe/xmp/xmpcore/6.1.11/xmpcore-6.1.11.jar"
+      },
+      {
+        "coordinate": "org.apache.httpcomponents:httpclient:4.5.13",
+        "relative_path": "modules/httpclient-4.5.13.jar",
+        "sha256": "6fe9026a566c6a5001608cf3fc32196641f6c1e5e1986d1037ccdbd5f31ef743",
+        "size": 780321,
+        "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar"
+      },
+      {
+        "coordinate": "org.apache.httpcomponents:httpmime:4.5.13",
+        "relative_path": "modules/httpmime-4.5.13.jar",
+        "sha256": "06e754d99245b98dcc2860dcb43d20e737d650da2bf2077a105f68accbd5c5cc",
+        "size": 41790,
+        "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar"
+      },
+      {
+        "coordinate": "com.google.http-client:google-http-client:1.20.0",
+        "relative_path": "jars/google-http-client-1.20.0.jar",
+        "sha256": "345958d00cbfa69c3e93b356872abdd3ad03e9e4204b7229ccef258dd3921d4a",
+        "size": 286717,
+        "url": "https://repo.maven.apache.org/maven2/com/google/http-client/google-http-client/1.20.0/google-http-client-1.20.0.jar"
+      },
+      {
+        "coordinate": "xpp3:xpp3:1.1.4c",
+        "relative_path": "jars/xpp3-1.1.4c.jar",
+        "sha256": "0341395a481bb887803957145a6a37879853dd625e9244c2ea2509d9bb7531b9",
+        "size": 120069,
+        "url": "https://repo.maven.apache.org/maven2/xpp3/xpp3/1.1.4c/xpp3-1.1.4c.jar"
+      },
+      {
+        "coordinate": "commons-codec:commons-codec:1.11",
+        "relative_path": "modules/commons-codec-1.11.jar",
+        "sha256": "e599d5318e97aa48f42136a2927e6dfa4e8881dff0e6c8e3109ddbbff51d7b7d",
+        "size": 335042,
+        "url": "https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.11/commons-codec-1.11.jar"
+      }
+    ],
+    "runtime_lock_sha256": "e9c62c6448bc6480c35394b9d22d5421291cd64fe9c3cef401f567a9cc94cab1",
+    "schema_name": "bioformats-runtime-download",
+    "schema_version": 1
+  }
+}

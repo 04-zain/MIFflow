@@ -1,0 +1,53 @@
+{
+  "schema": "mif-authoring-defaults/v1",
+  "sections": {
+    "unmixing": {
+      "solver": "nnls",
+      "af_behavior": "retain",
+      "chunk_size": [
+        1024,
+        1024
+      ],
+      "output_dtype": "float32",
+      "nnls_tolerance": 1e-08,
+      "nnls_max_iterations": 500,
+      "overwrite": false
+    },
+    "unmixing.reference_preparation": {
+      "sampling_policy": {
+        "saturation_fraction": 1.0,
+        "near_zero_l2_threshold": 0.0
+      },
+      "background_policy": {
+        "per_band_absolute_tolerance": 0.0,
+        "per_band_relative_tolerance": 0.0,
+        "l2_absolute_tolerance": 0.0,
+        "l2_relative_tolerance": 0.0,
+        "scale_floor": 1e-8,
+        "maximum_relative_roi_heterogeneity": 0.0
+      }
+    },
+    "unmixing.reference_purification": {
+      "denominator_tolerance": 0.0,
+      "af_minimum_l2_norm": 0.0,
+      "scale_floor": 1e-8,
+      "purified_minimum_l2_norm": 0.0
+    },
+    "unmixing.reference_consensus": {
+      "outlier_review_angle_degrees": 5.0
+    },
+    "unmixing.reference_quality": {
+      "svd_absolute_tolerance": 1e-12,
+      "svd_relative_tolerance": 1e-12,
+      "cosine_review_threshold": 0.99,
+      "cosine_fail_threshold": 0.999,
+      "condition_review_threshold": 30.0,
+      "condition_fail_threshold": 100.0
+    },
+    "unmixing.execution": {
+      "max_workers": 2,
+      "max_inflight_regions": 2,
+      "working_array_budget_bytes": 2147483648
+    }
+  }
+}

@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mif-pipeline"
+version = "0.1.0"
+description = "Multiplex immunofluorescence whole-slide image analysis pipeline"
+requires-python = ">=3.12"
+readme = "README.md"
+license = {file = "LICENSE"}
+
+dependencies = [
+    "numpy",
+    "scipy",
+    "threadpoolctl==3.6.0",
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+    "cellpose==4.0.9",
+    "segment_anything==1.0",
+    "transformers==4.56.0",
+    "omegaconf==2.3.0",
+    "psutil>=5.9",
+    "pandas",
+    "pyarrow",
+    "tifffile",
+    "zarr==3.1.3",
+    "numcodecs==0.16.3",
+    "imagecodecs",
+    "scikit-image",
+    "PyYAML",
+    "matplotlib",
+    "bffile==0.1.1",
+    "ome-types[lxml,pint]==0.6.3",
+    "igraph>=1.0,<2",
+    "leidenalg>=0.12,<0.13",
+    "umap-learn>=0.5,<0.6",
+    "flowsom==0.2.2",
+    "phenograph==1.5.7",
+]
+
+[project.scripts]
+mif-desktop = "mif_pipeline.gui.qt.frozen_bootstrap:main"
+mif-batch = "mif_pipeline.orchestration.batch_cli:main"
+mif-remote = "mif_pipeline.orchestration.remote_compute:main"
+mif-kernel-worker = "mif_pipeline.orchestration.remote_kernel_worker:main"
+
+[project.optional-dependencies]
+# The base package includes all ordinary scientific processing libraries.
+# The desktop extra adds the Qt interface.
+desktop = ["PySide6>=6.8,<7"]
+
+[tool.setuptools.packages.find]
+where = ["src/python"]
+include = ["mif_pipeline*", "mif_containment*"]
+
+[tool.setuptools.package-data]
+"mif_containment" = ["install_assets/*"]
+"mif_pipeline" = ["config/defaults/*.json", "config/software/*.json"]
+"mif_pipeline.gui.qt" = ["assets/*.svg"]
+"mif_pipeline.cell_analysis" = ["data/fonts/*.ttf", "data/fonts/LICENSE", "data/fonts/NOTICE"]
+"mif_pipeline.pipeline_core" = ["data/*.json"]
+"mif_pipeline.preprocessing.unmixing" = ["data/*.umxlib"]
+"mif_pipeline.qupath_runtime.assets" = [
+    "native/*.jar",
+    "native/*.json",
+    "preprocessing/*.groovy",
+    "general/*.groovy",
+    "tissue_detection/*.groovy",
+    "analysis_domain/*.groovy",
+    "compartment_analysis/*.groovy",
+    "cell_analysis/*.groovy",
+    "roi_validation/*.groovy",
+    "registration/*.groovy",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]

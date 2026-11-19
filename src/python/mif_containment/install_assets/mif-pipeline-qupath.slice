@@ -1,0 +1,7 @@
+[Unit]
+Description=mIF pipeline QuPath containment slice
+
+[Slice]
+CPUAccounting=yes
+MemoryAccounting=yes
+TasksAccounting=yes

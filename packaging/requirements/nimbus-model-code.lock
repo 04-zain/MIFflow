@@ -1,0 +1,4 @@
+# Only nimbus_inference.unet is used by the bounded production adapter.
+# Its executed dependency closure is pinned in the platform runtime lock.
+Nimbus-Inference==0.0.5 \
+    --hash=sha256:251b46195120ebb9950b46db457129149288b856fdbfde0bf1dfd74372319a7f

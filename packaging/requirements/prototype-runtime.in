@@ -1,0 +1,33 @@
+# Shared application and build dependencies. Torch and Torchvision are selected by platform and accelerator.
+--only-binary :all:
+--no-binary antlr4-python3-runtime
+--no-binary flowio
+numpy
+scipy
+threadpoolctl==3.6.0
+transformers==4.56.0
+cellpose==4.0.9
+segment_anything==1.0
+omegaconf==2.3.0
+psutil>=5.9
+pandas
+pyarrow
+tifffile
+zarr==3.1.3
+numcodecs==0.16.3
+imagecodecs
+scikit-image
+PyYAML
+matplotlib
+bffile==0.1.1
+ome-types[lxml,pint]==0.6.3
+PySide6>=6.8,<7
+igraph>=1.0,<2
+leidenalg>=0.12,<0.13
+umap-learn>=0.5,<0.6
+flowsom==0.2.2
+phenograph==1.5.7
+build>=1.3,<2
+setuptools>=80,<81
+wheel>=0.45,<1
+PyInstaller>=6.16,<7

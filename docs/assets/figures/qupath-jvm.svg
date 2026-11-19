@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="675" viewBox="0 0 1100 675" role="img" aria-labelledby="title description">
+<title id="title">Stage calls and calculations inside the QuPath JVM</title>
+<desc id="description">Groovy source compiles when QuPath runs the stage. The application build compiles Java processing classes into the extension JAR. Inside one JVM, Groovy obtains the project image through QuPath and calls compiled calculation methods. Those methods use QuPath image and ROI objects to prepare feature rows and call native OpenCV for RF or SVM fitting. The displayed feature matrix and random-forest tree are schematic.</desc>
+<rect width="1100" height="675" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="50" y="36" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Groovy stage source</text>
+<path d="M50 57 H302 L320 75 V126 H50 Z" fill="none" stroke="#B8C8CE" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="68" y="86" font-family="DejaVu Sans Mono, monospace" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">stage.groovy</text>
+<text x="68" y="113" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">Stage request and review</text>
+<text x="457" y="36" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Application build</text>
+<rect x="455" y="57" width="176" height="69" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<text x="543" y="98" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#243746" text-anchor="middle">Java source</text>
+<path d="M631 90 L699 90" fill="none" stroke="#356E9A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="665" y="73" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#356E9A" text-anchor="middle">compile</text>
+<rect x="708" y="57" width="130" height="69" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="773" y="98" font-family="DejaVu Sans Mono, monospace" font-size="21" font-weight="600" fill="#356E9A" text-anchor="middle">.class</text>
+<path d="M838 90 L889 90" fill="none" stroke="#356E9A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<rect x="900" y="57" width="150" height="69" rx="0" fill="#EDF3F8" stroke="#356E9A" stroke-width="1"/>
+<text x="975" y="98" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#356E9A" text-anchor="middle">Extension JAR</text>
+<rect x="30" y="177" width="1040" height="474" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.5"/>
+<text x="550" y="211" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="middle">QuPath process: one JVM</text>
+<path d="M185 126 L185 245" fill="none" stroke="#243746" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<text x="200" y="159" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">Compile stage to bytecode</text>
+<path d="M975 126 V245" fill="none" stroke="#356E9A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="995" y="159" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#356E9A" text-anchor="start">load</text>
+<rect x="55" y="245" width="285" height="101" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="76" y="280" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Groovy stage</text>
+<text x="76" y="316" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="start">Call loaded Java methods</text>
+<path d="M340 290 L730 290" fill="none" stroke="#243746" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<text x="535" y="274" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">Direct method call</text>
+<rect x="730" y="245" width="313" height="101" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="751" y="280" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">mIF Java methods</text>
+<text x="751" y="310" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">Feature preparation; prediction</text>
+<text x="751" y="334" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#526773" text-anchor="start">Model fitting, saving and loading</text>
+<path d="M175 346 L175 423" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="190" y="390" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="start">Get project image</text>
+<path d="M806 346 V384 H432 V423" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="468" y="376" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="start">Call image / ROI methods</text>
+<rect x="55" y="423" width="446" height="204" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1"/>
+<text x="74" y="455" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">QuPath image and ROI objects</text>
+<rect x="108" y="478" width="107" height="72" rx="0" fill="#FFFFFF" stroke="#946A21" stroke-width="1.3"/>
+<rect x="108.0" y="478.0" width="21.4" height="18.0" fill="#946A21" opacity="0.25"/>
+<rect x="129.4" y="478.0" width="21.4" height="18.0" fill="#946A21" opacity="0.12"/>
+<rect x="150.8" y="478.0" width="21.4" height="18.0" fill="#946A21" opacity="0.2"/>
+<rect x="172.2" y="478.0" width="21.4" height="18.0" fill="#946A21" opacity="0.06"/>
+<rect x="193.6" y="478.0" width="21.4" height="18.0" fill="#946A21" opacity="0.14"/>
+<rect x="108.0" y="496.0" width="21.4" height="18.0" fill="#946A21" opacity="0.06"/>
+<rect x="129.4" y="496.0" width="21.4" height="18.0" fill="#946A21" opacity="0.14"/>
+<rect x="150.8" y="496.0" width="21.4" height="18.0" fill="#946A21" opacity="0.25"/>
+<rect x="172.2" y="496.0" width="21.4" height="18.0" fill="#946A21" opacity="0.12"/>
+<rect x="193.6" y="496.0" width="21.4" height="18.0" fill="#946A21" opacity="0.2"/>
+<rect x="108.0" y="514.0" width="21.4" height="18.0" fill="#946A21" opacity="0.12"/>
+<rect x="129.4" y="514.0" width="21.4" height="18.0" fill="#946A21" opacity="0.2"/>
+<rect x="150.8" y="514.0" width="21.4" height="18.0" fill="#946A21" opacity="0.06"/>
+<rect x="172.2" y="514.0" width="21.4" height="18.0" fill="#946A21" opacity="0.14"/>
+<rect x="193.6" y="514.0" width="21.4" height="18.0" fill="#946A21" opacity="0.25"/>
+<rect x="108.0" y="532.0" width="21.4" height="18.0" fill="#946A21" opacity="0.14"/>
+<rect x="129.4" y="532.0" width="21.4" height="18.0" fill="#946A21" opacity="0.25"/>
+<rect x="150.8" y="532.0" width="21.4" height="18.0" fill="#946A21" opacity="0.12"/>
+<rect x="172.2" y="532.0" width="21.4" height="18.0" fill="#946A21" opacity="0.2"/>
+<rect x="193.6" y="532.0" width="21.4" height="18.0" fill="#946A21" opacity="0.06"/>
+<rect x="129.4" y="496.0" width="42.800000000000004" height="36.0" rx="0" fill="none" stroke="#243746" stroke-width="1.8"/>
+<rect x="150.8" y="514.0" width="21.400000000000002" height="18.0" rx="0" fill="#946A21" stroke="#946A21" stroke-width="1"/>
+<rect x="95" y="491" width="107" height="72" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1.3"/>
+<rect x="95.0" y="491.0" width="21.4" height="18.0" fill="#007D83" opacity="0.14"/>
+<rect x="116.4" y="491.0" width="21.4" height="18.0" fill="#007D83" opacity="0.25"/>
+<rect x="137.8" y="491.0" width="21.4" height="18.0" fill="#007D83" opacity="0.12"/>
+<rect x="159.2" y="491.0" width="21.4" height="18.0" fill="#007D83" opacity="0.2"/>
+<rect x="180.6" y="491.0" width="21.4" height="18.0" fill="#007D83" opacity="0.06"/>
+<rect x="95.0" y="509.0" width="21.4" height="18.0" fill="#007D83" opacity="0.2"/>
+<rect x="116.4" y="509.0" width="21.4" height="18.0" fill="#007D83" opacity="0.06"/>
+<rect x="137.8" y="509.0" width="21.4" height="18.0" fill="#007D83" opacity="0.14"/>
+<rect x="159.2" y="509.0" width="21.4" height="18.0" fill="#007D83" opacity="0.25"/>
+<rect x="180.6" y="509.0" width="21.4" height="18.0" fill="#007D83" opacity="0.12"/>
+<rect x="95.0" y="527.0" width="21.4" height="18.0" fill="#007D83" opacity="0.25"/>
+<rect x="116.4" y="527.0" width="21.4" height="18.0" fill="#007D83" opacity="0.12"/>
+<rect x="137.8" y="527.0" width="21.4" height="18.0" fill="#007D83" opacity="0.2"/>
+<rect x="159.2" y="527.0" width="21.4" height="18.0" fill="#007D83" opacity="0.06"/>
+<rect x="180.6" y="527.0" width="21.4" height="18.0" fill="#007D83" opacity="0.14"/>
+<rect x="95.0" y="545.0" width="21.4" height="18.0" fill="#007D83" opacity="0.06"/>
+<rect x="116.4" y="545.0" width="21.4" height="18.0" fill="#007D83" opacity="0.14"/>
+<rect x="137.8" y="545.0" width="21.4" height="18.0" fill="#007D83" opacity="0.25"/>
+<rect x="159.2" y="545.0" width="21.4" height="18.0" fill="#007D83" opacity="0.12"/>
+<rect x="180.6" y="545.0" width="21.4" height="18.0" fill="#007D83" opacity="0.2"/>
+<rect x="116.4" y="509.0" width="42.800000000000004" height="36.0" rx="0" fill="none" stroke="#243746" stroke-width="1.8"/>
+<rect x="137.8" y="527.0" width="21.400000000000002" height="18.0" rx="0" fill="#007D83" stroke="#007D83" stroke-width="1"/>
+<rect x="82" y="504" width="107" height="72" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.3"/>
+<rect x="82.0" y="504.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.06"/>
+<rect x="103.4" y="504.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.14"/>
+<rect x="124.8" y="504.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.25"/>
+<rect x="146.2" y="504.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.12"/>
+<rect x="167.6" y="504.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.2"/>
+<rect x="82.0" y="522.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.12"/>
+<rect x="103.4" y="522.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.2"/>
+<rect x="124.8" y="522.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.06"/>
+<rect x="146.2" y="522.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.14"/>
+<rect x="167.6" y="522.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.25"/>
+<rect x="82.0" y="540.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.14"/>
+<rect x="103.4" y="540.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.25"/>
+<rect x="124.8" y="540.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.12"/>
+<rect x="146.2" y="540.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.2"/>
+<rect x="167.6" y="540.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.06"/>
+<rect x="82.0" y="558.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.2"/>
+<rect x="103.4" y="558.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.06"/>
+<rect x="124.8" y="558.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.14"/>
+<rect x="146.2" y="558.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.25"/>
+<rect x="167.6" y="558.0" width="21.4" height="18.0" fill="#356E9A" opacity="0.12"/>
+<rect x="103.4" y="522.0" width="42.800000000000004" height="36.0" rx="0" fill="none" stroke="#243746" stroke-width="1.8"/>
+<rect x="124.80000000000001" y="540.0" width="21.400000000000002" height="18.0" rx="0" fill="#356E9A" stroke="#356E9A" stroke-width="1"/>
+<text x="136" y="608" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">ImageServer</text>
+<path d="M312 513 L362 490 L409 516 L398 564 L345 578 L313 549 Z" fill="none" stroke="#007D83" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M343 526 L365 516 L382 536 L374 554 L351 553 Z" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="362" y="608" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="middle">ROI geometry</text>
+<path d="M501 526 L641 526" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="572" y="508" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#007D83" text-anchor="middle">Prepare rows</text>
+<path d="M943 346 L943 423" fill="none" stroke="#356E9A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="960" y="384" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#356E9A" text-anchor="start">Fit model</text>
+<rect x="641" y="423" width="402" height="204" rx="0" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="1"/>
+<text x="661" y="455" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#243746" text-anchor="start">Native OpenCV fitting</text>
+<rect x="668.0" y="490.0" width="15.0" height="15.25" fill="#356E9A" opacity="0.1"/>
+<rect x="687.0" y="490.0" width="15.0" height="15.25" fill="#356E9A" opacity="0.17"/>
+<rect x="706.0" y="490.0" width="15.0" height="15.25" fill="#356E9A" opacity="0.24000000000000002"/>
+<rect x="725.0" y="490.0" width="15.0" height="15.25" fill="#356E9A" opacity="0.31000000000000005"/>
+<rect x="763.0" y="490.0" width="15.0" height="15.25" fill="#356E9A" opacity="0.17"/>
+<rect x="668.0" y="509.25" width="15.0" height="15.25" fill="#356E9A" opacity="0.24000000000000002"/>
+<rect x="687.0" y="509.25" width="15.0" height="15.25" fill="#356E9A" opacity="0.31000000000000005"/>
+<rect x="706.0" y="509.25" width="15.0" height="15.25" fill="#356E9A" opacity="0.1"/>
+<rect x="725.0" y="509.25" width="15.0" height="15.25" fill="#356E9A" opacity="0.17"/>
+<rect x="763.0" y="509.25" width="15.0" height="15.25" fill="#356E9A" opacity="0.31000000000000005"/>
+<rect x="668.0" y="547.75" width="15.0" height="15.25" fill="#356E9A" opacity="0.24000000000000002"/>
+<rect x="687.0" y="547.75" width="15.0" height="15.25" fill="#356E9A" opacity="0.31000000000000005"/>
+<rect x="706.0" y="547.75" width="15.0" height="15.25" fill="#356E9A" opacity="0.1"/>
+<rect x="725.0" y="547.75" width="15.0" height="15.25" fill="#356E9A" opacity="0.17"/>
+<rect x="763.0" y="547.75" width="15.0" height="15.25" fill="#356E9A" opacity="0.31000000000000005"/>
+<text x="751.5" y="502.625" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="751.5" y="521.875" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="751.5" y="560.375" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#526773" text-anchor="middle">⋯</text>
+<text x="675.5" y="542.125" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="694.5" y="542.125" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="713.5" y="542.125" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="732.5" y="542.125" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<text x="770.5" y="542.125" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#526773" text-anchor="middle">⋮</text>
+<path d="M670 484 H661 V569 H670" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M776 484 H785 V569 H776" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="723" y="608" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Training rows</text>
+<path d="M794 526 L855 526" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="824" y="508" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#356E9A" text-anchor="middle">train</text>
+<path d="M942 488 L909 521" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M942 488 L975 521" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M909 521 L887 555" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M909 521 L931 555" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M975 521 L957 555" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M975 521 L994 555" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<circle cx="942" cy="488" r="6" fill="#356E9A" stroke="#356E9A"/>
+<circle cx="909" cy="521" r="6" fill="#356E9A" stroke="#356E9A"/>
+<circle cx="975" cy="521" r="6" fill="#356E9A" stroke="#356E9A"/>
+<rect x="880" y="549" width="14" height="14" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<rect x="924" y="549" width="14" height="14" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<rect x="950" y="549" width="14" height="14" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<rect x="987" y="549" width="14" height="14" rx="0" fill="#EAF5F4" stroke="#007D83" stroke-width="1"/>
+<text x="944" y="608" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#243746" text-anchor="middle">Fitted classifier</text>
+</svg>

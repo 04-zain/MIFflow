@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="375" viewBox="0 0 1000 375" role="img" aria-labelledby="title description">
+<title id="title">Spatial two-by-two averaging at odd image edges</title>
+<desc id="description">A mathematical example for one channel. A three by three array with rows one two three, four five six, seven eight nine reduces to three and four-point-five, seven-point-five and nine. Interior groups contribute four pixels, right and bottom edge groups two and the corner one. Each output divides by its actual contributor count. This operation is repeated independently for every channel.</desc>
+<rect width="1000" height="375" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<rect x="45" y="60" width="76" height="76" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="2"/>
+<text x="83" y="107" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#007D83" text-anchor="middle">1</text>
+<rect x="121" y="60" width="76" height="76" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="2"/>
+<text x="159" y="107" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#007D83" text-anchor="middle">2</text>
+<rect x="197" y="60" width="76" height="76" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="2"/>
+<text x="235" y="107" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#356E9A" text-anchor="middle">3</text>
+<rect x="45" y="136" width="76" height="76" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="2"/>
+<text x="83" y="183" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#007D83" text-anchor="middle">4</text>
+<rect x="121" y="136" width="76" height="76" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="2"/>
+<text x="159" y="183" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#007D83" text-anchor="middle">5</text>
+<rect x="197" y="136" width="76" height="76" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="2"/>
+<text x="235" y="183" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#356E9A" text-anchor="middle">6</text>
+<rect x="45" y="212" width="76" height="76" rx="0" fill="#F8F0DF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="83" y="259" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#946A21" text-anchor="middle">7</text>
+<rect x="121" y="212" width="76" height="76" rx="0" fill="#F8F0DF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="159" y="259" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#946A21" text-anchor="middle">8</text>
+<rect x="197" y="212" width="76" height="76" rx="0" fill="#F6E9E7" stroke="#FFFFFF" stroke-width="2"/>
+<text x="235" y="259" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" fill="#A74740" text-anchor="middle">9</text>
+<text x="159" y="334" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">3 × 3 pixels</text>
+<circle cx="386" cy="80" r="7" fill="#007D83" stroke="#007D83"/>
+<text x="518" y="73" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#007D83" text-anchor="middle">1 + 2 + 4 + 5</text>
+<path d="M425 83 L611 83" fill="none" stroke="#007D83" stroke-width="1" stroke-linejoin="round"/>
+<text x="518" y="107" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#007D83" text-anchor="middle">4</text>
+<circle cx="386" cy="147" r="7" fill="#356E9A" stroke="#356E9A"/>
+<text x="518" y="140" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#356E9A" text-anchor="middle">3 + 6</text>
+<path d="M425 150 L611 150" fill="none" stroke="#356E9A" stroke-width="1" stroke-linejoin="round"/>
+<text x="518" y="174" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#356E9A" text-anchor="middle">2</text>
+<circle cx="386" cy="214" r="7" fill="#946A21" stroke="#946A21"/>
+<text x="518" y="207" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#946A21" text-anchor="middle">7 + 8</text>
+<path d="M425 217 L611 217" fill="none" stroke="#946A21" stroke-width="1" stroke-linejoin="round"/>
+<text x="518" y="241" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#946A21" text-anchor="middle">2</text>
+<circle cx="386" cy="281" r="7" fill="#A74740" stroke="#A74740"/>
+<text x="518" y="274" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#A74740" text-anchor="middle">9</text>
+<path d="M425 284 L611 284" fill="none" stroke="#A74740" stroke-width="1" stroke-linejoin="round"/>
+<text x="518" y="308" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#A74740" text-anchor="middle">1</text>
+<path d="M287 174 L352 174" fill="none" stroke="#243746" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<path d="M653 174 L718 174" fill="none" stroke="#243746" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-ink)"/>
+<rect x="748" y="93" width="80" height="80" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="2"/>
+<text x="788" y="142" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#007D83" text-anchor="middle">3</text>
+<rect x="828" y="93" width="80" height="80" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="2"/>
+<text x="868" y="142" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#356E9A" text-anchor="middle">4.5</text>
+<rect x="748" y="173" width="80" height="80" rx="0" fill="#F8F0DF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="788" y="222" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#946A21" text-anchor="middle">7.5</text>
+<rect x="828" y="173" width="80" height="80" rx="0" fill="#F6E9E7" stroke="#FFFFFF" stroke-width="2"/>
+<text x="868" y="222" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#A74740" text-anchor="middle">9</text>
+<text x="828" y="334" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#243746" text-anchor="middle">2 × 2 pixels</text>
+</svg>

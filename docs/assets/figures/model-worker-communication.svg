@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="330" viewBox="0 0 1100 330" role="img" aria-labelledby="title description">
+<title id="title">KRONOS process pipes and framed messages</title>
+<desc id="description">The Groovy client in QuPath starts a separate Python process with ProcessBuilder. Standard-input requests and standard-output replies each carry a four-byte JSON length, JSON metadata with request ID and binary byte count, and optional binary bytes. Diagnostics go to a separate worker log. The worker reads a complete frame, dispatches its operation and writes the corresponding framed response. Block widths show message parts rather than byte proportions.</desc>
+<rect width="1100" height="330" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<g transform="translate(0 -711)">
+<rect x="30" y="736" width="247" height="278" rx="0" fill="#FFFFFF" stroke="#356E9A" stroke-width="1.5"/>
+<text x="50" y="770" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#356E9A" text-anchor="start">QuPath JVM</text>
+<text x="50" y="812" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="start">Groovy worker client</text>
+<text x="50" y="847" font-family="DejaVu Sans Mono, monospace" font-size="17" font-weight="400" fill="#526773" text-anchor="start">ProcessBuilder.start()</text>
+<text x="50" y="901" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="start">Send request</text>
+<text x="50" y="937" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#243746" text-anchor="start">Read matching replies</text>
+<rect x="791" y="736" width="279" height="278" rx="0" fill="#FFFFFF" stroke="#007D83" stroke-width="1.5"/>
+<text x="811" y="770" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#007D83" text-anchor="start">Python process</text>
+<rect x="811" y="797" width="239" height="44" rx="0" fill="#EAF5F4" stroke="#EAF5F4" stroke-width="1"/>
+<text x="930.5" y="826" font-family="DejaVu Sans Mono, monospace" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">read_frame</text>
+<rect x="811" y="865" width="239" height="44" rx="0" fill="#EAF5F4" stroke="#EAF5F4" stroke-width="1"/>
+<text x="930.5" y="894" font-family="DejaVu Sans Mono, monospace" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">dispatch</text>
+<rect x="811" y="933" width="239" height="44" rx="0" fill="#EAF5F4" stroke="#EAF5F4" stroke-width="1"/>
+<text x="930.5" y="962" font-family="DejaVu Sans Mono, monospace" font-size="20" font-weight="600" fill="#007D83" text-anchor="middle">write_frame</text>
+<path d="M930.5 841 L930.5 865" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M930.5 909 L930.5 933" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M791 824 L811 824" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M811 946 L791 946" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M277 755 L791 755" fill="none" stroke="#356E9A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="534" y="748" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#356E9A" text-anchor="middle">Start worker process</text>
+<text x="532" y="784" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">Standard input: request</text>
+<rect x="327" y="802" width="78" height="45" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1.2"/>
+<text x="366.0" y="831" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">4 B</text>
+<rect x="405" y="802" width="144" height="45" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1.2"/>
+<text x="477.0" y="831" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">JSON</text>
+<rect x="549" y="802" width="187" height="45" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1.2"/>
+<text x="642.5" y="831" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">Binary bytes</text>
+<path d="M277 824 L327 824" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M736 824 L791 824" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="532" y="906" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#007D83" text-anchor="middle">Standard output: progress or result</text>
+<rect x="327" y="924" width="78" height="45" rx="0" fill="#EDF3F8" stroke="#FFFFFF" stroke-width="1.2"/>
+<text x="366.0" y="953" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">4 B</text>
+<rect x="405" y="924" width="144" height="45" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1.2"/>
+<text x="477.0" y="953" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">JSON</text>
+<rect x="549" y="924" width="187" height="45" rx="0" fill="#EAF5F4" stroke="#FFFFFF" stroke-width="1.2"/>
+<text x="642.5" y="953" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#007D83" text-anchor="middle">Binary bytes</text>
+<path d="M791 946 L736 946" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M327 946 L277 946" fill="none" stroke="#007D83" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="366" y="874" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">JSON length</text>
+<text x="570" y="874" font-family="DejaVu Sans Mono, monospace" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">op; request_id; byte_count</text>
+<text x="534" y="1001" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#526773" text-anchor="middle">Diagnostics → separate worker log</text>
+</g>
+</svg>

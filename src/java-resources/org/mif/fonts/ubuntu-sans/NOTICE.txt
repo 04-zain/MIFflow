@@ -1,0 +1,11 @@
+Ubuntu Sans v1.006
+
+Copyright 2011 Canonical Ltd. Licensed under the Ubuntu Font Licence 1.0.
+The unmodified Regular, SemiBold and Bold static TTF files are redistributed with their
+original names, COPYRIGHT.txt and LICENCE.txt. No endorsement is implied.
+
+Source: https://github.com/canonical/Ubuntu-Sans-fonts/releases/tag/v1.006
+Archive: UbuntuSans-fonts-1.006.zip
+
+These static faces let JavaFX display the same font family with real regular
+semibold and bold weights when the host provides only variable Ubuntu Sans fonts.

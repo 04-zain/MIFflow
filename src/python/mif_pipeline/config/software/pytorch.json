@@ -1,0 +1,97 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "pytorch",
+  "version": "2.7.1",
+  "java_engine_version": "0.36.0",
+  "jni_archive": {
+    "url": "https://repo.maven.apache.org/maven2/ai/djl/pytorch/pytorch-jni/2.7.1-0.36.0/pytorch-jni-2.7.1-0.36.0.jar",
+    "size_bytes": 3361870,
+    "sha256": "c1808aaf5109505923bd2a813d7ad1020a0c028f023f08ff5572c1cf42322dc3"
+  },
+  "platforms": {
+    "linux-x86_64": {
+      "archive": {
+        "url": "https://repo.maven.apache.org/maven2/ai/djl/pytorch/pytorch-native-cpu/2.7.1/pytorch-native-cpu-2.7.1-linux-x86_64.jar",
+        "size_bytes": 111597418,
+        "sha256": "1769928feaaa2389b4aa68390e7787ce1707290258b167d016a200fced4b8c39"
+      },
+      "files": [
+        {
+          "path": "libtorch.so",
+          "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+        },
+        {
+          "path": "libtorch_cpu.so",
+          "sha256": "8c4834a51853d0ee8cb7a8179709358bb3e8cb4c6a69994657486d46270a9d7d"
+        },
+        {
+          "path": "libc10.so",
+          "sha256": "7c3bdb50fe83ab0041492ff747d948b52f26ece5e1102593f75e969210b0a34c"
+        },
+        {
+          "path": "libgomp-98b21ff3.so.1",
+          "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+        },
+        {
+          "path": "libdjl_torch.so",
+          "sha256": "a5dcc6d0209c57ade7ff6f067a6eb13bb700b9ab316613c01b70b3d74776c9b8"
+        }
+      ]
+    },
+    "win-x86_64": {
+      "archive": {
+        "url": "https://repo.maven.apache.org/maven2/ai/djl/pytorch/pytorch-native-cpu/2.7.1/pytorch-native-cpu-2.7.1-win-x86_64.jar",
+        "size_bytes": 75502000,
+        "sha256": "f70603e9b03cf7df1690c2b1f8edd99fcfdc4e38d639db1d3604ce22b13a38df"
+      },
+      "files": [
+        {
+          "path": "c10.dll",
+          "sha256": "f2a179dce1b14f69fc9bb29afa6f6ba1094d48cb9094147fab236874c4f4e6ac"
+        },
+        {
+          "path": "fbgemm.dll",
+          "sha256": "72e264eed2f65b8e6f70e7e6ad04cf27de8514d155176366279d45a335c77b55"
+        },
+        {
+          "path": "libiomp5md.dll",
+          "sha256": "15e6f874a53cb54a8e266099c8da92484c6f50301d117f9a5443846e9ece90b5"
+        },
+        {
+          "path": "asmjit.dll",
+          "sha256": "23ad2336956015513bda565e1b6877f076d44f312b4dccac8aa74962cf156700"
+        },
+        {
+          "path": "torch.dll",
+          "sha256": "33a18e1959001b9c4beff11502d2bf42ee24ea325ced280905e541e1a4169780"
+        },
+        {
+          "path": "torch_cpu.dll",
+          "sha256": "ff93fd9716af6418908415eda9d9919b89b2c28f084805db7e8f0d7f002acbe7"
+        },
+        {
+          "path": "libiompstubs5md.dll",
+          "sha256": "92be85f03b359588d69d68b090880551c222e4a3837b1d2dedede767c3b6be2f"
+        },
+        {
+          "path": "uv.dll",
+          "sha256": "d6e517084425092066d4b26678320eb60edf2c79ade855bd67b829113f999da6"
+        },
+        {
+          "path": "djl_torch.dll",
+          "sha256": "c8754b4342a260527942e087be2f75f6929d3fd05ecf6b4e4337d44f418c1150"
+        }
+      ]
+    }
+  },
+  "cuda_jni": {
+    "linux-x86_64": {
+      "path": "libdjl_torch.so",
+      "sha256": "430f667ceffae0dda7fe266b85c2bd70ca1038643a04894c8289207826bf79a2"
+    },
+    "win-x86_64": {
+      "path": "djl_torch.dll",
+      "sha256": "b186a0f9a9e810da6b3c854f75f3d0ad81f4cc69af64e8e9f0d0a2dda16e7534"
+    }
+  }
+}

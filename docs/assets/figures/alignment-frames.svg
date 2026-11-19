@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="931" viewBox="0 0 1000 931" role="img" aria-labelledby="title description">
+<title id="title">Calibrated point transfer and reverse image sampling</title>
+<desc id="description">A mathematical translation example compares a moving image at 0.25 micrometres per pixel with a fixed mIF image at 0.5 micrometres per pixel. Both grid steps represent 50 micrometres. The physical fixed-to-moving map E(u)=u+(100,50) micrometres maps fixed physical (100,50) to moving physical (200,100). Annotation transfer therefore maps moving pixel (800,400) to fixed pixel (200,100) through D_m, E inverse and D_f inverse. Overlay sampling starts at that fixed pixel and applies D_f, E and D_m inverse to recover the moving position. The polygon and grids are schematic, not a fitted registration or observed tissue image. The image axes point right and down.</desc>
+<rect width="1000" height="931" fill="#FFFFFF"/>
+<defs><marker id="arrow-ink" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#243746" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/></marker><marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#526773" stroke-width="1.5" stroke-linejoin="round"/></marker></defs>
+<text x="35" y="37" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600" fill="#356E9A" text-anchor="start">Moving image</text>
+<text x="35" y="73" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#526773" text-anchor="start">0.25 µm / pixel</text>
+<text x="598" y="37" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600" fill="#007D83" text-anchor="start">Fixed mIF image</text>
+<text x="598" y="73" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#526773" text-anchor="start">0.5 µm / pixel</text>
+<rect x="70" y="115" width="315.0" height="210.0" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<path d="M122.5 115 L122.5 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M175.0 115 L175.0 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M227.5 115 L227.5 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M280.0 115 L280.0 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M332.5 115 L332.5 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M70 167.5 L385.0 167.5" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M70 220.0 L385.0 220.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M70 272.5 L385.0 272.5" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="70.0" y="353.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">0</text>
+<text x="175.0" y="353.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">400</text>
+<text x="280.0" y="353.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">800</text>
+<text x="385.0" y="353.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">1200</text>
+<text x="56" y="121.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<text x="56" y="226.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">400</text>
+<text x="56" y="331.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">800</text>
+<text x="227.5" y="379.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">x (px)</text>
+<text x="15" y="220.0" transform="rotate(-90 15 220.0)" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#526773" text-anchor="middle">y (px)</text>
+<rect x="620" y="115" width="315.0" height="210.0" rx="0" fill="#FFFFFF" stroke="#B8C8CE" stroke-width="1"/>
+<path d="M672.5 115 L672.5 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M725.0 115 L725.0 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M777.5 115 L777.5 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M830.0 115 L830.0 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M882.5 115 L882.5 325.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M620 167.5 L935.0 167.5" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M620 220.0 L935.0 220.0" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<path d="M620 272.5 L935.0 272.5" fill="none" stroke="#E8EEF0" stroke-width="1" stroke-linejoin="round"/>
+<text x="620.0" y="353.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">0</text>
+<text x="725.0" y="353.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">200</text>
+<text x="830.0" y="353.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">400</text>
+<text x="935.0" y="353.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">600</text>
+<text x="606" y="121.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">0</text>
+<text x="606" y="226.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">200</text>
+<text x="606" y="331.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="end">400</text>
+<text x="777.5" y="379.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#526773" text-anchor="middle">x (px)</text>
+<text x="565" y="220.0" transform="rotate(-90 565 220.0)" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#526773" text-anchor="middle">y (px)</text>
+<path d="M238.0 199.0 L301.0 178.0 L353.5 220.0 L332.5 283.0 L259.0 272.5 Z" fill="#356E9A" fill-opacity=".07" stroke="#356E9A" stroke-width="1.7"/>
+<path d="M683.0 146.5 L746.0 125.5 L798.5 167.5 L777.5 230.5 L704.0 220.0 Z" fill="#007D83" fill-opacity=".07" stroke="#007D83" stroke-width="1.7"/>
+<path d="M287 220 C428 220, 576 167.5, 718 167.5" fill="none" stroke="#007D83" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<path d="M725 174.5 C725 315, 280 355, 280 227" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<circle cx="280" cy="220" r="7" fill="#FFFFFF" stroke="#356E9A"/>
+<circle cx="280" cy="220" r="2.5" fill="#356E9A" stroke="#356E9A"/>
+<circle cx="725" cy="167.5" r="7" fill="#FFFFFF" stroke="#007D83"/>
+<circle cx="725" cy="167.5" r="2.5" fill="#007D83" stroke="#007D83"/>
+<text x="227.5" y="409" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="middle">(800, 400) px</text>
+<text x="777.5" y="409" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="middle">(200, 100) px</text>
+<text x="35" y="470" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#007D83" text-anchor="start">Annotation transfer</text>
+<text x="35" y="725" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" fill="#356E9A" text-anchor="start">Overlay sampling</text>
+<text x="120" y="501" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Moving pixels</text>
+<path d="M77 521 H65 V618 H77" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M163 521 H175 V618 H163" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="120" y="557" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#007D83" text-anchor="middle">800</text>
+<text x="120" y="600" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#007D83" text-anchor="middle">400</text>
+<text x="380" y="501" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Moving µm</text>
+<path d="M337 521 H325 V618 H337" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M423 521 H435 V618 H423" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="380" y="557" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#007D83" text-anchor="middle">200</text>
+<text x="380" y="600" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#007D83" text-anchor="middle">100</text>
+<text x="640" y="501" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Fixed µm</text>
+<path d="M597 521 H585 V618 H597" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M683 521 H695 V618 H683" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="640" y="557" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#007D83" text-anchor="middle">100</text>
+<text x="640" y="600" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#007D83" text-anchor="middle">50</text>
+<text x="900" y="501" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Fixed pixels</text>
+<path d="M857 521 H845 V618 H857" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M943 521 H955 V618 H943" fill="none" stroke="#007D83" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="900" y="557" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#007D83" text-anchor="middle">200</text>
+<text x="900" y="600" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#007D83" text-anchor="middle">100</text>
+<text x="120" y="756" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Moving pixels</text>
+<path d="M77 776 H65 V873 H77" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M163 776 H175 V873 H163" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="120" y="812" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#356E9A" text-anchor="middle">800</text>
+<text x="120" y="855" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#356E9A" text-anchor="middle">400</text>
+<text x="380" y="756" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Moving µm</text>
+<path d="M337 776 H325 V873 H337" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M423 776 H435 V873 H423" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="380" y="812" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#356E9A" text-anchor="middle">200</text>
+<text x="380" y="855" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#356E9A" text-anchor="middle">100</text>
+<text x="640" y="756" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Fixed µm</text>
+<path d="M597 776 H585 V873 H597" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M683 776 H695 V873 H683" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="640" y="812" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#356E9A" text-anchor="middle">100</text>
+<text x="640" y="855" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#356E9A" text-anchor="middle">50</text>
+<text x="900" y="756" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" fill="#243746" text-anchor="middle">Fixed pixels</text>
+<path d="M857 776 H845 V873 H857" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M943 776 H955 V873 H943" fill="none" stroke="#356E9A" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="900" y="812" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#356E9A" text-anchor="middle">200</text>
+<text x="900" y="855" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="500" fill="#356E9A" text-anchor="middle">100</text>
+<path d="M175 570 L325 570" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="250.0" y="548" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#007D83" text-anchor="middle">× 0.25</text>
+<text x="250.0" y="607" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#526773" text-anchor="middle"><tspan>D</tspan><tspan dy="5" font-size="15">m</tspan><tspan dy="-5" font-size="21"></tspan></text>
+<path d="M435 570 L585 570" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="510.0" y="548" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#007D83" text-anchor="middle">− (100, 50)</text>
+<text x="510.0" y="607" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#526773" text-anchor="middle">E⁻¹</text>
+<path d="M695 570 L845 570" fill="none" stroke="#007D83" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+<text x="770.0" y="548" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#007D83" text-anchor="middle">÷ 0.5</text>
+<text x="770.0" y="607" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#526773" text-anchor="middle"><tspan>D</tspan><tspan dy="5" font-size="15">f</tspan><tspan dy="-5" font-size="21">⁻¹</tspan></text>
+<path d="M325 825 L175 825" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="250.0" y="803" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#356E9A" text-anchor="middle">÷ 0.25</text>
+<text x="250.0" y="862" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#526773" text-anchor="middle"><tspan>D</tspan><tspan dy="5" font-size="15">m</tspan><tspan dy="-5" font-size="21">⁻¹</tspan></text>
+<path d="M585 825 L435 825" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="510.0" y="803" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#356E9A" text-anchor="middle">+ (100, 50)</text>
+<text x="510.0" y="862" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#526773" text-anchor="middle">E</text>
+<path d="M845 825 L695 825" fill="none" stroke="#356E9A" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<text x="770.0" y="803" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#356E9A" text-anchor="middle">× 0.5</text>
+<text x="770.0" y="862" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#526773" text-anchor="middle"><tspan>D</tspan><tspan dy="5" font-size="15">f</tspan><tspan dy="-5" font-size="21"></tspan></text>
+</svg>

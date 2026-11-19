@@ -1,0 +1,29 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "java",
+  "release": {
+    "distribution": "Eclipse Temurin",
+    "license_url": "https://raw.githubusercontent.com/adoptium/jdk21u/jdk-21.0.12.1%2B1_adopt/LICENSE",
+    "platforms": {
+      "linux-x86_64": {
+        "sha256": "2413149700df0f7d440500a84a8f764c535f21e5a5e87d38328b64eec2c5b500",
+        "size": 52059408,
+        "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jre_x64_linux_hotspot_21.0.12.1_1.tar.gz"
+      },
+      "win-x86_64": {
+        "sha256": "d35f31e712f0fcf6ac5a093edc90204fbff22f720ba3950bd09d331d5e621636",
+        "size": 48999141,
+        "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.zip"
+      }
+    },
+    "release_url": "https://github.com/adoptium/temurin21-binaries/releases/tag/jdk-21.0.12.1%2B1",
+    "schema_name": "java-runtime-download",
+    "schema_version": 1,
+    "source": {
+      "sha256": "573057d03584ae793fb7ec9a14c76d826d9187a53efeefd99da47403a5308234",
+      "size": 115126841,
+      "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk-sources_21.0.12.1_1.tar.gz"
+    },
+    "version": "21.0.12.1+1"
+  }
+}

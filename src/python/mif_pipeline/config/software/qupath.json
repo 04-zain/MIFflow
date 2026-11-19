@@ -1,0 +1,17 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "qupath",
+  "version": "0.7.0",
+  "libraries": {
+    "djl": {
+      "version": "0.4.2",
+      "path": "qupath-extension-djl-0.4.2.jar",
+      "sha256": "81d31e0ca0e370715ec30a5fec70393f5011d9fa82086ea708fe615242339290"
+    },
+    "pytorch_engine": {
+      "version": "0.36.0",
+      "path": "pytorch-engine-0.36.0.jar",
+      "sha256": "e572e2d22db54093d7aa8339d45547088444748e7cb60d74a4a2b60b732a8b7b"
+    }
+  }
+}

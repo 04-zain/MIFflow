@@ -1,0 +1,34 @@
+{
+  "schema": "mif-software-installation/v1",
+  "program": "stardist",
+  "version": "dsb2018-727c9590",
+  "code_version": "0.6.0",
+  "code_license": "Apache-2.0",
+  "model_license": "BSD-3-Clause",
+  "files": [
+    {
+      "filename": "dsb2018_heavy_augment.pb",
+      "url": "https://raw.githubusercontent.com/qupath/models/727c9590cb607ef05f201f24e389aec1f492ed7c/stardist/dsb2018_heavy_augment.pb",
+      "size_bytes": 5719933,
+      "sha256": "fc1f1148f22180bf2874346d14926e7baf8486088cb66277e13cb22ddccfe01b"
+    },
+    {
+      "filename": "qupath-extension-stardist-0.6.0.jar",
+      "url": "https://github.com/qupath/qupath-extension-stardist/releases/download/v0.6.0/qupath-extension-stardist-0.6.0.jar",
+      "size_bytes": 56885,
+      "sha256": "8c8be80fc9169802a5ef58f7d73f8c0474f7dbbfd13709d24e18d3cc445ff73b"
+    },
+    {
+      "filename": "LICENSE-code.txt",
+      "url": "https://raw.githubusercontent.com/qupath/qupath-extension-stardist/v0.6.0/LICENSE",
+      "size_bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "filename": "LICENSE-model.txt",
+      "url": "https://raw.githubusercontent.com/qupath/models/727c9590cb607ef05f201f24e389aec1f492ed7c/stardist/LICENSE.txt",
+      "size_bytes": 1526,
+      "sha256": "20952c673a19558112c7f9ae30617f9c467267cb003f98295d3c7f02b0eb74f3"
+    }
+  ]
+}

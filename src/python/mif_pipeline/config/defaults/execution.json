@@ -1,0 +1,10 @@
+{
+  "schema": "mif-authoring-defaults/v1",
+  "sections": {
+    "execution": {
+      "max_workers": 1,
+      "max_in_flight": 1,
+      "resource_capacity": 1
+    }
+  }
+}

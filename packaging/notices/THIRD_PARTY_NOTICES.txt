@@ -1,0 +1,520 @@
+MIF Pipeline prototype third-party notices
+==========================================
+
+PROJECT AND INCLUDED COMPONENTS
+
+Original project code: Copyright © 2026 Zain S. Ali (Queen's University).
+The project's original code is licensed GPL-3.0-or-later. The applicable
+license requires corresponding source code and build materials to be
+available to recipients of distributed copies.
+
+The app archive includes the expanded InstanSeg model. Bio-Formats 8.5.0 and
+its 64 Java archive (JAR) files are installed separately through explicit
+setup or selected from a compatible local installation. QuPath 0.7.0 includes the DJL 0.4.2
+extension and PyTorch engine 0.36.0. The InstanSeg 0.1.7 extension is installed
+separately in QuPath. These three JARs remain outside the app archive.
+Compiled CPU libraries, including Java Native Interface (JNI) files, are
+installed during explicit setup and remain outside the CPU app archive.
+The NVIDIA edition includes the CUDA Java bridge from pytorch-jni
+2.7.1-0.36.0 and Torch 2.7.1 CUDA 12.8 libraries for native QuPath models in
+runtimes/torch-native. This package is configured independently of the Nimbus
+worker. DJL's Apache-2.0 license and copyright notice are retained under
+runtimes/torch-native/licenses/DJL. Matching source: https://github.com/deepjavalibrary/djl/tree/v0.36.0
+The host NVIDIA driver is supplied separately.
+
+BUNDLED MODEL RUNTIME
+
+The runtimes/nimbus directory contains an independent Python 3.12 worker with
+Nimbus-Inference 0.0.5, NumPy 1.26.4, PyTorch 2.7.1 (CPU or CUDA, according to the edition) and
+opencv-python-headless 4.11.0.86. Its runtime.json records the exact dependency
+locks, numerical versions and worker source hashes. Distribution license and
+notice files are retained under runtimes/nimbus/licenses, including notices for
+native libraries supplied by these wheels. The corresponding pinned build
+requirements and worker sources are included in the application source archive.
+The optional Nimbus V1 model is downloaded or selected separately in setup.
+
+APPLICATION MODEL DEPENDENCIES
+
+The application environment is separate from the Nimbus worker above. Its
+current source pins Torch 2.6.0 and torchvision 0.21.0 (BSD-style licences),
+Cellpose 4.0.9 (BSD-3-Clause), segment-anything 1.0 (Apache-2.0),
+Transformers 4.56.0 (Apache-2.0) and OmegaConf 2.3.0 (BSD-3-Clause).
+Original distribution licence files and notices, including separately
+licensed code supplied by these packages, remain applicable. The desktop
+build selects these distributions' metadata; final archive verification
+must confirm the included licence files as well as executable libraries.
+https://github.com/pytorch/pytorch/blob/v2.6.0/LICENSE
+https://github.com/pytorch/vision/blob/v0.21.0/LICENSE
+https://github.com/MouseLand/cellpose/blob/v4.0.9/LICENSE
+https://github.com/facebookresearch/segment-anything/blob/main/LICENSE
+https://github.com/huggingface/transformers/blob/v4.56.0/LICENSE
+https://github.com/omry/omegaconf/blob/v2.3.0/LICENSE
+
+Cellpose's outline-processing dependencies include fastremap 1.17.7 and
+fill-voids 2.1.2 (LGPL-3.0), roifile 2025.5.10 (BSD-3-Clause), and
+opencv-python-headless 4.11.0.86 (Apache-2.0 OpenCV with separately licensed
+wheel packaging and bundled components). Their original distribution
+licences, author notices and OpenCV third-party notices are retained with
+their metadata in the desktop archive. Corresponding upstream source:
+https://github.com/seung-lab/fastremap
+https://github.com/seung-lab/fill_voids
+https://github.com/cgohlke/roifile
+https://github.com/opencv/opencv-python
+https://github.com/opencv/opencv/tree/4.11.0
+
+Cellpose's original cpsam checkpoint is selected or downloaded separately
+under BSD-3-Clause. Its supported revision and terms are recorded at:
+https://huggingface.co/mouseland/cellpose-sam/blob/7c61431b5fbb078f3296754bd15d9f51b320f837/README.md
+
+The StarDist QuPath extension and converted model are also installed separately;
+their Apache-2.0 extension and BSD-3-Clause model notices are retained beside
+those downloaded assets. The supported versions, sources and checksums are
+recorded in the application's cellpose.json and stardist.json software records.
+https://github.com/qupath/qupath-extension-stardist/blob/v0.6.0/LICENSE
+https://github.com/qupath/models/blob/727c9590cb607ef05f201f24e389aec1f492ed7c/stardist/LICENSE.txt
+
+JAVA FOR IMAGE READING
+
+Eclipse Temurin 21.0.12.1+1 (OpenJDK 21), Windows and Linux x86-64.
+Java is installed separately through optional setup or selected from a
+compatible local installation. It is not included in the app archive.
+OpenJDK uses GPL version 2 with the Classpath exception for designated files.
+Other included components have their own terms. The installed runtime's
+legal directory contains the applicable license texts, copyright notices
+and third-party credits.
+
+Release, matching upstream source archive and license:
+https://github.com/adoptium/temurin21-binaries/releases/tag/jdk-21.0.12.1%2B1
+https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk-sources_21.0.12.1_1.tar.gz
+https://raw.githubusercontent.com/adoptium/jdk21u/jdk-21.0.12.1%2B1_adopt/LICENSE
+
+PYSIDE6 AND QT
+
+PySide6 and Qt include LGPL-covered shared libraries. Applicable LGPL terms
+require access to matching source code, notices of changes, and the ability
+for recipients to replace or relink those libraries. Recipients may reverse
+engineer to debug modifications to LGPL-covered libraries. Some Qt modules
+are GPL-only, and Qt includes separately licensed code.
+
+Qt for Python packages: PySide6, PySide6-Addons, PySide6-Essentials and
+shiboken6, version 6.11.2. Their versioned package records list
+"LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only". Individual Qt modules and
+included third-party components retain their own licenses. PySide6 is an
+alias package that depends on the other Qt for Python packages.
+
+Full license texts and upstream third-party credits are in licenses/qt/.
+Each source-package folder retains its original file layout and notices.
+Qt 6.11.2 source archives:
+https://download.qt.io/archive/qt/6.11/6.11.2/submodules/qtbase-everywhere-src-6.11.2.tar.xz
+https://download.qt.io/archive/qt/6.11/6.11.2/submodules/qtdeclarative-everywhere-src-6.11.2.tar.xz
+https://download.qt.io/archive/qt/6.11/6.11.2/submodules/qtimageformats-everywhere-src-6.11.2.tar.xz
+https://download.qt.io/archive/qt/6.11/6.11.2/submodules/qtsvg-everywhere-src-6.11.2.tar.xz
+https://download.qt.io/archive/qt/6.11/6.11.2/submodules/qtwayland-everywhere-src-6.11.2.tar.xz
+https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.11.2-src/pyside-setup-everywhere-src-6.11.2.tar.xz
+
+Official sources:
+https://pypi.org/project/PySide6/6.11.2/
+https://pypi.org/project/PySide6-Addons/6.11.2/
+https://pypi.org/project/PySide6-Essentials/6.11.2/
+https://pypi.org/project/shiboken6/6.11.2/
+https://doc.qt.io/qtforpython-6/licenses.html
+https://doc.qt.io/qt-6/licensing.html
+https://doc.qt.io/qt-6/qtcore-index.html
+https://doc.qt.io/qt-6/qtgui-index.html
+https://doc.qt.io/qt-6/licenses-used-in-qt.html
+https://doc.qt.io/qt-6/lgpl.html
+https://www.gnu.org/licenses/lgpl-3.0.html
+
+OTHER COMPONENT LICENSES
+
+Python: Python Software Foundation License Version 2. Additional software
+included in Python has its own license terms.
+https://docs.python.org/3/license.html
+
+PyInstaller: GPL 2.0 with its bootloader exception, plus Apache-2.0 for
+identified files. The bootloader exception permits generated bundles under
+another license; their included dependencies retain their own license terms.
+https://pyinstaller.org/en/stable/license.html
+
+Bio-Formats: the full distribution uses GPL-2.0 or later; some components
+use other licenses. GPL-covered JARs require applicable license and copyright
+notices and matching source code under their terms.
+https://github.com/ome/bioformats
+
+ome:formats-gpl:8.5.0 has GPL-v2-or-later source headers. The upstream source
+archive's root and components/formats-gpl/LICENSE.txt have SHA-256
+ab15fd526bd8dd18a9e77ebc139656bf4d33e97fc7238cd11bf60e2b9b8666c6.
+The license text and source-file copyright notices apply to redistributed
+copies.
+https://downloads.openmicroscopy.org/bio-formats/8.5.0/artifacts/bioformats-8.5.0.tar.xz
+
+Metakit 5.3.10: GPL-v2-or-later.
+ome-mdbtools 5.3.4: LGPL-v2.1-or-later.
+
+OkHttp 3.7.0: Apache License 2.0. Its Public Suffix List is covered by the
+Mozilla Public License 2.0. The complete list, including its original notices,
+is supplied in licenses/bioformats/okhttp-3.7.0-public-suffix-list.txt.
+The full MPL text is in
+licenses/bioformats/okhttp-3.7.0-public-suffix-list-MPL-2.0.txt.
+The list corresponds to upstream revision
+03089bfe4aa5b7a2e291f33e07a28d20f875cb83.
+https://github.com/square/okhttp/tree/parent-3.7.0
+https://raw.githubusercontent.com/publicsuffix/list/03089bfe4aa5b7a2e291f33e07a28d20f875cb83/public_suffix_list.dat
+https://www.mozilla.org/en-US/MPL/2.0/
+
+RE2/J 1.3 uses the Go BSD-style license. Its versioned license and original
+Go Authors, Google Inc. and generated-table copyright notices are retained
+in packaging/bioformats/required-notices/re2j-1.3-*.txt in the source tree.
+https://raw.githubusercontent.com/google/re2j/222899bc5e058380935311eba419a722f00b3d69/LICENSE
+
+XPP3 1.1.4c includes code under the Indiana University Extreme! Lab
+licenses, the XMLPULL API public-domain terms, and Apache Software License 1.1.
+The applicable texts and copyright notices are in licenses/bioformats/xpp3-*.txt.
+This product includes software developed by the Indiana University
+Extreme! Lab (http://www.extreme.indiana.edu/).
+This product includes software developed by the
+Apache Software Foundation (http://www.apache.org/).
+
+QUPATH-INSTALLED INSTANSEG AND BUNDLED FLUORESCENCE MODEL
+
+The separately installed QuPath InstanSeg 0.1.7 extension file is
+qupath-extension-instanseg-0.1.7.jar, 118,833 bytes, SHA-256
+6a03786ad9cfd4ca8391793129b57a53164c07f90ac38960b329a3a7af333ade.
+It contains InstanSeg code and resources, package metadata, and
+licenses/LICENSE with Apache License 2.0 text. The tagged build declares
+Apache-2.0 in its publication POM. The prototype archive does not ship this
+extension, DJL, or the PyTorch engine.
+https://github.com/qupath/qupath-extension-instanseg/releases/tag/v0.1.7
+https://github.com/qupath/qupath-extension-instanseg/tree/v0.1.7
+https://github.com/qupath/qupath-extension-instanseg/blob/v0.1.7/build.gradle.kts
+
+The fluorescence_nuclei_and_cells.zip model archive is
+19,173,946 bytes, SHA-256
+d5289ce1c74bc33e72b60551782210a3842d23c820dee86103c9a4fae5f0526e.
+Its rdf.yaml declares model version 0.1.1, Apache-2.0, author Thibaut
+Goldsborough, and TorchScript weight SHA-256
+636833d26b5afcc03bde1357b3e669cf015e91dd1edda863aa51c19eee986562.
+The original model README and rdf.yaml accompany the model. The Apache-2.0
+license text appears below. The model README credits CPDMI_2023 as training
+data under CC BY 4.0; the dataset publication and license are linked below.
+The bundled macros instanseg_preprocess.ijm and instanseg_postprocess.ijm
+carry Pete Bankhead CC0 1.0 notices and are licensed separately under CC0 1.0.
+https://github.com/instanseg/instanseg/releases/tag/instanseg_models_v0.1.1
+https://github.com/instanseg/instanseg/tree/instanseg_models_v0.1.1
+https://www.nature.com/articles/s41597-023-02108-z
+https://creativecommons.org/licenses/by/4.0/
+
+For fluorescence use, upstream requests citation of Goldsborough et al.,
+"A novel channel invariant architecture for the segmentation of cells and
+nuclei in multiplexed images using InstanSeg" (2024), DOI
+10.1101/2024.09.04.611150. The model metadata also lists the general
+InstanSeg method paper, DOI 10.48550/arXiv.2408.15954. Citation requests
+are separate from the Apache-2.0 rules for sharing the model.
+
+bffile: GPL-2.0-or-later.
+https://github.com/imaging-formats/bffile
+
+OME: the ome-types package provides OME data-model support under the MIT
+license. OME specifications and trademarks are not relicensed by this notice.
+https://github.com/imaging-formats/ome-types
+
+tifffile: BSD-3-Clause. Image codecs have their own license terms.
+https://github.com/cgohlke/tifffile/blob/master/LICENSE
+
+zarr: MIT.
+https://github.com/zarr-developers/zarr-python/blob/main/LICENSE.txt
+
+numcodecs 0.16.3: MIT. Included codec implementations retain their own
+licences and copyright notices in the distribution.
+https://github.com/zarr-developers/numcodecs/blob/main/LICENSE.txt
+
+psutil: BSD-3-Clause.
+https://github.com/giampaolo/psutil/blob/master/LICENSE
+
+threadpoolctl 3.6.0: BSD-3-Clause.
+Copyright (c) 2019, threadpoolctl contributors.
+https://pypi.org/project/threadpoolctl/3.6.0/
+
+PyYAML: MIT.
+https://github.com/yaml/pyyaml/blob/main/LICENSE
+
+NumPy: BSD-3-Clause. Bundled code has additional license terms.
+https://numpy.org/doc/stable/license.html
+
+SciPy: BSD-3-Clause. Bundled BLAS, LAPACK and compiler libraries have
+additional license terms.
+https://github.com/scipy/scipy/blob/main/LICENSE.txt
+
+pandas: BSD-3-Clause.
+https://github.com/pandas-dev/pandas/blob/main/LICENSE
+
+PyArrow: Apache License 2.0. Arrow's LICENSE and NOTICE files also identify
+separately licensed components.
+https://github.com/apache/arrow/blob/main/LICENSE.txt
+https://github.com/apache/arrow/blob/main/NOTICE.txt
+
+imagecodecs: BSD-3-Clause. Bundled codec libraries have their own licenses.
+https://github.com/cgohlke/imagecodecs/blob/master/LICENSE
+
+Pillow 12.3.0: MIT-CMU. Bundled image libraries have their own licenses.
+https://pypi.org/project/pillow/12.3.0/
+
+scikit-image: BSD-3-Clause.
+https://github.com/scikit-image/scikit-image/blob/main/LICENSE.txt
+
+scikit-learn: BSD-3-Clause. Included third-party components retain their
+individual notices.
+https://github.com/scikit-learn/scikit-learn/blob/main/COPYING
+
+matplotlib: PSF-based Matplotlib license. Included data, fonts and bundled
+code have additional license terms.
+https://matplotlib.org/stable/project/license.html
+
+igraph: python-igraph and its bundled igraph library use GPL version 2 or later.
+https://github.com/igraph/python-igraph/blob/main/LICENSE
+
+Leiden: leidenalg 0.12.0 uses GPL version 3 or later.
+https://pypi.org/project/leidenalg/0.12.0/
+https://github.com/vtraag/leidenalg/blob/main/LICENSE
+
+UMAP: umap-learn uses BSD-3-Clause.
+https://github.com/lmcinnes/umap/blob/master/LICENSE.txt
+
+FlowSOM Python 0.2.2: GPL version 3. Its ConsensusCluster source retains
+the MIT notice of Žiga Sajovic, XLAB 2019. The application uses the official
+SOM and average-linkage metaclustering implementation with bounded prediction.
+https://github.com/saeyslab/FlowSOM_Python/tree/e13e1d2b1d11e3c4540c444131967b4dc6d05871
+
+PhenoGraph Python 1.5.7: MIT. The application uses its neighbour graph and
+Leiden functions, with stable application cluster names. This is distinct
+from the R FastPG implementation.
+https://github.com/dpeerlab/PhenoGraph
+
+MIT LICENSE FOR THE CONSENSUSCLUSTER SOURCE INCLUDED IN FLOWSOM
+
+Source: https://github.com/ZigaSajovic/Consensus_Clustering/blob/master/LICENCE
+
+MIT License
+
+Copyright (c) 2019 Žiga Sajovic
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+APACHE LICENSE 2.0 TEXT FOR BUNDLED INSTANSEG MODEL
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
