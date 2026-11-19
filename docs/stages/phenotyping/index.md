@@ -27,7 +27,7 @@ On **Run → Cell phenotyping → Open review**, choose how to identify phenotyp
 
 ## How the methods use cell measurements and images
 
-The cell ID links each row in the measurement table to the corresponding segmented outline in the marker images.
+The cell ID links each row in the measurement table to the corresponding segmented outline in the marker images (see schematic).
 
 **Saved cell measurements.** Marker thresholds and unsupervised phenotyping use the mean or median marker intensity measured within the selected part of each cell, such as its nucleus or whole-cell outline. Supervised classifiers can also use other intensity statistics and measurements of cell or nuclear shape. If a measurement you want to use is missing, calculate it in [Cell measurements](../cell-measurements/index.md#choose-cell-measurements) before fitting.
 
